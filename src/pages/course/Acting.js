@@ -177,25 +177,28 @@ const Acting = () => {
         </div>
 
         <section>
-      <div className="font-playfair relative w-full">
-        <div className="slider-container">
-          <Slider {...setting}>
-            {banners.map((banner) => (
-              <div key={banner.id}>
-                <img
-                  src={banner.url}
-                  alt={banner.title || "CF_banner"}
-                  title={banner.title || "Virtual Production And VFX Courses In India"}
-                  className="w-full object-cover"
-                  loading="lazy"
-                  fetchpriority="high"
-                />
-              </div>
-            ))}
-          </Slider>
-        </div>
-      </div>
-    </section>
+          <div className="font-playfair relative w-full">
+            <div className="slider-container">
+              <Slider {...setting}>
+                {banners.map((banner) => (
+                  <div key={banner.id}>
+                    <img
+                      src={banner.url}
+                      alt={banner.title || "CF_banner"}
+                      title={
+                        banner.title ||
+                        "Virtual Production And VFX Courses In India"
+                      }
+                      className="w-full object-cover"
+                      loading="lazy"
+                      fetchpriority="high"
+                    />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+          </div>
+        </section>
 
         {/* -------------- Syllabus ----------------- */}
 
