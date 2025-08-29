@@ -56,17 +56,12 @@ const Acting = () => {
     }
   };
 
-useEffect(() => {
-  const fetchBanners = async () => {
-    try {
-      const res = await axios.get("http://localhost:5000/actingbanner");
-      setBanners(res.data);
-    } catch (err) {
-      console.error("Error fetching banners:", err);
-    }
-  };
-  fetchBanners();
-}, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/actingbanner")
+      .then((res) => setBanners(res.data))
+      .catch((err) => console.log("Error fetching banners:", err));
+  }, []);
 
   const setting = {
     dots: false,
@@ -83,68 +78,6 @@ useEffect(() => {
   function topPage() {
     window.scroll(0, 0);
   }
-
-  const settings = {
-    infinite: true,
-    autoplay: true,
-    slidesToScroll: 1,
-    centerPadding: "60px",
-    slidesToShow: 3,
-    speed: 4000,
-    autoplaySpeed: 2000,
-    cssEase: "linear",
-    swipeToSlide: true,
-    afterChange: function (index) {
-      console.log(
-        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-      );
-    },
-    responsive: [
-      {
-        breakpoint: 2500,
-        settings: {
-          slidesToShow: 4,
-          centerPadding: "30px",
-        },
-      },
-      {
-        breakpoint: 2000,
-        settings: {
-          slidesToShow: 4,
-          centerPadding: "30px",
-        },
-      },
-      {
-        breakpoint: 1280,
-        settings: {
-          slidesToShow: 4,
-          centerPadding: "30px",
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          centerPadding: "30px",
-        },
-      },
-
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          centerPadding: "20px",
-        },
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          centerPadding: "15px",
-        },
-      },
-    ],
-  };
 
   return (
     <>
@@ -179,19 +112,19 @@ useEffect(() => {
           <div className="font-playfair relative w-full">
             <div className="slider-container">
               <Slider {...setting}>
-  {banners.map((banner) => (
-    <div key={banner.id}>
-      <img
-        src={banner.url} // <-- must be HTTPS Cloudinary URL
-        alt={banner.title || "CF_banner"}
-        title={banner.title || "Virtual Production And VFX Courses In India"}
-        className="w-full object-cover"
-        loading="lazy"
-        fetchpriority="high"
-      />
-    </div>
-  ))}
-</Slider>
+                {banners.map((banner) => (
+                  <div key={banner.id || banner.fileName}>
+                    <img
+                      src={banner.url}
+                      className="w-full object-cover"
+                      alt="CF_banner"
+                      title="Virtual Production And VFX Courses In India"
+                      loading="lazy"
+                      fetchpriority="high"
+                    />
+                  </div>
+                ))}
+              </Slider>
             </div>
           </div>
         </section>
