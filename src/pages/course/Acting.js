@@ -57,10 +57,16 @@ const Acting = () => {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/actingbanner")
-      .then((res) => setBanners(res.data))
-      .catch((err) => console.log("Error fetching banners:", err));
+    const fetchBanners = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/actingbanner");
+        setBanners(res.data);
+      } catch (err) {
+        console.error("Error fetching banners:", err);
+      }
+    };
+
+    fetchBanners();
   }, []);
 
   const setting = {
@@ -171,25 +177,25 @@ const Acting = () => {
         </div>
 
         <section>
-          <div className="font-playfair relative w-full">
-            <div className="slider-container">
-              <Slider {...setting}>
-                {banners.map((banner) => (
-                  <div key={banner.id || banner.fileName}>
-                    <img
-                      src={banner.url}
-                      className="w-full object-cover"
-                      alt="CF_banner"
-                      title="Virtual Production And VFX Courses In India"
-                      loading="lazy"
-                      fetchpriority="high"
-                    />
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          </div>
-        </section>
+      <div className="font-playfair relative w-full">
+        <div className="slider-container">
+          <Slider {...setting}>
+            {banners.map((banner) => (
+              <div key={banner.id}>
+                <img
+                  src={banner.url}
+                  alt={banner.title || "CF_banner"}
+                  title={banner.title || "Virtual Production And VFX Courses In India"}
+                  className="w-full object-cover"
+                  loading="lazy"
+                  fetchpriority="high"
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </div>
+    </section>
 
         {/* -------------- Syllabus ----------------- */}
 
