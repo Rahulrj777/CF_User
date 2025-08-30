@@ -308,6 +308,7 @@ const DI = () => {
         </section>
 
         {/* ------------------ Mentors ------------------ */}
+        
         <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
           <div className="px-4 w-full md:w-[80%] mx-auto font-kumbh">
             <div className="flex items-center justify-center mb-6 md:mb-10">
