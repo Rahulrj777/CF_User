@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 
 import banner from "../../images/course/banner/pattern.jpg";
 
-//icons
 import { RiWhatsappLine } from "react-icons/ri";
 import { FaComputer } from "react-icons/fa6";
 
