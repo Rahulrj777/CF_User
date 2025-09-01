@@ -136,7 +136,7 @@ axios.get("http://localhost:5000/directiondiploma")
                 {banners.map((banner) => (
                   <div key={banner.id || banner.fileName}>
                     <img
-                      src={banner.url}
+                      src={banner.imageUrl}
                       className="w-full object-cover"
                       alt="CF_banner"
                       title="Virtual Production And VFX Courses In India"
