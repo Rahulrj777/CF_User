@@ -155,7 +155,7 @@ const Direction = () => {
                     className="flex flex-col items-center gap-3"
                   >
                     <img
-                      src={`${API_URL}${item.image}`}
+                      src={item.imageUrl}
                       alt={item.titleLine}
                       className="w-16 md:w-20 object-contain"
                     />
@@ -228,7 +228,7 @@ const Direction = () => {
                 {mentors.map((mentor) => (
                   <div key={mentor._id} className="flex flex-col items-center">
                     <img
-                      src={`${API_URL}${mentor.url}`}
+                      src={mentor.imageUrl}
                       alt="mentor"
                       className="w-4/5 md:w-full rounded-md object-cover"
                     />
@@ -253,7 +253,7 @@ const Direction = () => {
                 {filmography.map((item) => (
                   <div key={item._id} className="px-2">
                     <img
-                      src={`${API_URL}${item.image}`}
+                      src={item.imageUrl}
                       alt="Filmography"
                       className="w-full object-cover"
                       loading="lazy"
