@@ -317,7 +317,7 @@ const settings = {
               playsInline
               controls
             >
-              <source src="/public/vfx.mp4" type="video/mp4" />
+              <source src="/vfx.mp4" type="video/mp4" />
             </video>
           </div>
         </section>
