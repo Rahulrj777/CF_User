@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
-const API_BASE = import.meta.env.VITE_API_BASE || "https://cf-server-tr24.onrender.com";
+import API_BASE from "../config.js"; // ✅ already imported, no need to redeclare
 
 const Mentors = () => {
   const [mentors, setMentors] = useState([]);
@@ -11,14 +10,14 @@ const Mentors = () => {
     fetchMentors();
   }, []);
 
-const fetchMentors = async () => {
-  try {
-    const res = await axios.get(`${API_BASE}/mentors`);
-    setMentors(res.data);
-  } catch (err) {
-    console.error("Error fetching mentors:", err);
-  }
-};
+  const fetchMentors = async () => {
+    try {
+      const res = await axios.get(`${API_BASE}/mentors`);
+      setMentors(res.data);
+    } catch (err) {
+      console.error("Error fetching mentors:", err);
+    }
+  };
 
   function topPage() {
     window.scroll(0, 0);
@@ -34,14 +33,14 @@ const fetchMentors = async () => {
             </p>
           ) : (
             mentors.map((mentor) => (
-              <div key={mentor.id}>
+              <div key={mentor._id || mentor.id}> {/* ✅ safer key */}
                 <div className="flex justify-center items-center">
-                  {/* <Link to={`/mentor/${mentor.id}`} onClick={topPage}> */}
+                  {/* <Link to={`/mentor/${mentor._id}`} onClick={topPage}> */}
                   <img
-                    src={mentor.imageUrl} // ✅ comes from backend
+                    src={mentor.imageUrl} // ✅ backend field
                     className="w-[88%] object-cover rounded-xl border border-gray-400 hover:scale-95 duration-300"
-                    alt={mentor.name}
-                    title={mentor.name}
+                    alt={mentor.name || "Mentor"}
+                    title={mentor.name || "Mentor"}
                     loading="lazy"
                     fetchpriority="auto"
                   />
@@ -57,8 +56,6 @@ const fetchMentors = async () => {
 };
 
 export default Mentors;
-
-
 
 
 
