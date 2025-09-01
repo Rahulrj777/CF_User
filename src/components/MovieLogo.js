@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import axios from "axios";
+import API_BASE from "../config.js"
 
 const MovieLogo = () => {
   const [logos, setLogos] = useState([]);
@@ -9,7 +10,7 @@ const MovieLogo = () => {
   useEffect(() => {
     const fetchLogos = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/homefilmography");
+        const res = await axios.get(`${API_BASE}/mentors`);
         setLogos(res.data); // backend should return [{ id, image }]
       } catch (err) {
         console.error("Error fetching filmography:", err);

@@ -37,7 +37,6 @@ import VideoGallery from "./VideoGallery";
 import API_BASE from "../config.js";
 
 const Home = () => {
-  const text = "what's stopping you?";
   const [banners, setBanners] = useState([]);
   const [exclusive, setExclusive] = useState([]);
 

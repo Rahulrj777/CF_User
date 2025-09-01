@@ -19,10 +19,6 @@ const Mentors = () => {
     }
   };
 
-  function topPage() {
-    window.scroll(0, 0);
-  }
-
   return (
     <div>
       <div className="flex justify-center items-center">
