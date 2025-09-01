@@ -108,6 +108,10 @@ const Direction = () => {
     ],
   };
 
+  function topPage() {
+    window.scroll(0, 0);
+  }
+
   return (
     <>
       <div className="font-kumbh overflow-hidden">
