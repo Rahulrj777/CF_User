@@ -12,7 +12,6 @@ import "swiper/css/pagination";
 import axios from "axios";
 
 import Clients from "../components/Clients";
-import videoBanner from "../images/banner/vfx.mp4";
 import stop from "../images/stop.jpg";
 
 import rajesh_sir from "../images/about/RAJESH.png";
