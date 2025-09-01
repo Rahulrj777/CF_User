@@ -63,7 +63,7 @@ const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplay: true,          // ✅ force autoplay
-  autoplaySpeed: 3000,     // 3s interval
+  autoplaySpeed: 4000,     // 3s interval
   speed: 1000,             // slide animation speed
   cssEase: "ease-in-out",
   pauseOnHover: false,
@@ -317,7 +317,7 @@ const settings = {
               playsInline
               controls
             >
-              <source src={videoBanner} type="video/mp4" />
+              <source src="/public/vfx.mp4" type="video/mp4" />
             </video>
           </div>
         </section>
