@@ -68,9 +68,9 @@ const VideoGallery = () => {
           <>
             {/* Video Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-              {videos.map((video, index) => (
+              {videos.map((video) => (
                 <div
-                  key={video.fileName || index}
+                  key={video._id}
                   className="bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105"
                   onClick={() => setSelectedVideo(video)}
                 >
@@ -85,7 +85,7 @@ const VideoGallery = () => {
                       }}
                     >
                       <source
-                        src={`${API_BASE}${video.url}`}
+                        src={video.videoUrl} // fixed capitalization
                         type="video/mp4"
                       />
                     </video>
@@ -121,11 +121,7 @@ const VideoGallery = () => {
 
                   <div className="p-4">
                     <h3 className="font-semibold truncate text-lg">
-                      {video.title
-                        ? video.title
-                            .replace(/^\d+-/, "")
-                            .replace(/\.[^/.]+$/, "")
-                        : "Unknown Video"}
+                      {video.title || "Unknown Video"}
                     </h3>
                     <p className="text-gray-400 text-sm mt-1">
                       Click to watch full video
@@ -141,11 +137,7 @@ const VideoGallery = () => {
                 <div className="bg-gray-900 rounded-xl max-w-5xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
                   <div className="flex justify-between items-center p-6 border-b border-gray-700">
                     <h3 className="text-xl font-semibold">
-                      {selectedVideo.fileName
-                        ? selectedVideo.fileName
-                            .replace(/^\d+-/, "")
-                            .replace(/\.[^/.]+$/, "")
-                        : "Unknown Video"}
+                      {selectedVideo.title || "Unknown Video"}
                     </h3>
                     <button
                       onClick={() => setSelectedVideo(null)}
@@ -168,7 +160,7 @@ const VideoGallery = () => {
                         );
                       }}
                     >
-                      <source src={selectedVideo.url} type="video/mp4" />
+                      <source src={selectedVideo.videoUrl} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   </div>
