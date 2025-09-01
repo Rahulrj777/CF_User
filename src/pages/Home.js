@@ -8,6 +8,8 @@ import "aos/dist/aos.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import axios from "axios";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 import Clients from "../components/Clients";
 import videoBanner from "../images/banner/vfx.mp4";
