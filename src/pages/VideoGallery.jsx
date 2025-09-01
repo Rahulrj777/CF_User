@@ -1,28 +1,29 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import API_BASE from "../config.js";
 
 const VideoGallery = () => {
-  const [videos, setVideos] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [selectedVideo, setSelectedVideo] = useState(null)
+  const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        setLoading(true)
-        const res = await axios.get("http://localhost:5000/videos")
-        setVideos(res.data)
-        setError(null)
+        setLoading(true);
+        const res = await axios.get(`${API_BASE}/videos`);
+        setVideos(res.data);
+        setError(null);
       } catch (err) {
-        console.error("Error fetching videos:", err)
-        setError("Failed to load videos")
+        console.error("Error fetching videos:", err);
+        setError("Failed to load videos");
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
-    fetchVideos()
-  }, [])
+    };
+    fetchVideos();
+  }, []);
 
   if (loading) {
     return (
@@ -32,7 +33,7 @@ const VideoGallery = () => {
           <p className="text-gray-300">Loading videos...</p>
         </div>
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -43,7 +44,7 @@ const VideoGallery = () => {
           <p className="text-red-400 text-lg">{error}</p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -59,7 +60,9 @@ const VideoGallery = () => {
           <div className="bg-gray-900 rounded-xl shadow-lg p-12 text-center">
             <div className="text-6xl mb-4">📹</div>
             <h2 className="text-2xl font-semibold mb-2">No Videos Available</h2>
-            <p className="text-gray-400">Videos will appear here once uploaded by admin</p>
+            <p className="text-gray-400">
+              Videos will appear here once uploaded by admin
+            </p>
           </div>
         ) : (
           <>
@@ -77,11 +80,14 @@ const VideoGallery = () => {
                       preload="metadata"
                       muted
                       onError={(e) => {
-                        e.target.style.display = "none"
-                        e.target.nextSibling.style.display = "flex"
+                        e.target.style.display = "none";
+                        e.target.nextSibling.style.display = "flex";
                       }}
                     >
-                      <source src={video.url} type="video/mp4" />
+                      <source
+                        src={`${API_BASE}${video.url}`}
+                        type="video/mp4"
+                      />
                     </video>
 
                     {/* Fallback */}
@@ -98,7 +104,11 @@ const VideoGallery = () => {
                     {/* Play overlay */}
                     <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
                       <div className="bg-white rounded-full p-4 shadow-lg">
-                        <svg className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 20 20">
+                        <svg
+                          className="w-8 h-8 text-black"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
                           <path
                             fillRule="evenodd"
                             d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
@@ -111,9 +121,15 @@ const VideoGallery = () => {
 
                   <div className="p-4">
                     <h3 className="font-semibold truncate text-lg">
-                      {video.title ? video.title.replace(/^\d+-/, "").replace(/\.[^/.]+$/, "") : "Unknown Video"}
+                      {video.title
+                        ? video.title
+                            .replace(/^\d+-/, "")
+                            .replace(/\.[^/.]+$/, "")
+                        : "Unknown Video"}
                     </h3>
-                    <p className="text-gray-400 text-sm mt-1">Click to watch full video</p>
+                    <p className="text-gray-400 text-sm mt-1">
+                      Click to watch full video
+                    </p>
                   </div>
                 </div>
               ))}
@@ -126,7 +142,9 @@ const VideoGallery = () => {
                   <div className="flex justify-between items-center p-6 border-b border-gray-700">
                     <h3 className="text-xl font-semibold">
                       {selectedVideo.fileName
-                        ? selectedVideo.fileName.replace(/^\d+-/, "").replace(/\.[^/.]+$/, "")
+                        ? selectedVideo.fileName
+                            .replace(/^\d+-/, "")
+                            .replace(/\.[^/.]+$/, "")
                         : "Unknown Video"}
                     </h3>
                     <button
@@ -144,13 +162,13 @@ const VideoGallery = () => {
                       autoPlay
                       controlsList="nodownload"
                       onError={(e) => {
-                        console.error("Video playback error:", e)
-                        alert("Error playing video. Please try again or contact admin.")
+                        console.error("Video playback error:", e);
+                        alert(
+                          "Error playing video. Please try again or contact admin."
+                        );
                       }}
                     >
                       <source src={selectedVideo.url} type="video/mp4" />
-                      <source src={selectedVideo.url} type="video/webm" />
-                      <source src={selectedVideo.url} type="video/ogg" />
                       Your browser does not support the video tag.
                     </video>
                   </div>
@@ -161,7 +179,7 @@ const VideoGallery = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default VideoGallery
+export default VideoGallery;

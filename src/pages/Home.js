@@ -32,6 +32,7 @@ import { MdOutlinePhoneAndroid } from "react-icons/md";
 
 import Affiliated from "../components/Affiliated";
 import VideoGallery from "./VideoGallery";
+import API_BASE from "../config.js";
 
 const Home = () => {
   const text = "what's stopping you?";
@@ -40,7 +41,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/homebanner")
+      .get(`${API_BASE}/homebanner`)
       .then((res) => setBanners(res.data))
       .catch((err) => console.log("Error fetching banners:", err));
   }, []);
@@ -59,7 +60,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/exclusive")
+      .get(`${API_BASE}/exclusive`)
       .then((res) => setExclusive(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -248,7 +249,7 @@ const Home = () => {
                             <div className="flex flex-col items-center gap-y-3">
                               {/* Image */}
                               <img
-                                src={`http://localhost:5000${item.image}`}
+                                src={`${API_BASE}${item.image}`}
                                 className="w-14 md:w-20 object-contain mb-2 filter brightness-0"
                                 alt={item.titleLine}
                                 loading="lazy"
