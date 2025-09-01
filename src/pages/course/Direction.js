@@ -6,51 +6,68 @@ import "../text.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-//icons
+// Icons
 import { RiWhatsappLine } from "react-icons/ri";
 import { PiFilmSlateDuotone } from "react-icons/pi";
 
-import API_URL from "../../config.js"
+import API_URL from "../../config.js";
 
 const Direction = () => {
   const [banners, setBanners] = useState([]);
   const [highlights, setHighlights] = useState([]);
-  const [data, setData] = useState([]);
+  const [diplomas, setDiplomas] = useState([]);
   const [mentors, setMentors] = useState([]);
-  const [items, setItems] = useState([]);
+  const [filmography, setFilmography] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-
-useEffect(() => {
-  axios
-    .get(`${API_URL}/directionbanner`)
-    .then((res) => {
-      console.log("Banners API response:", res.data);
-      // if backend sends { banners: [] } use that
-      if (Array.isArray(res.data)) {
-        setBanners(res.data);
-      } else if (Array.isArray(res.data.banners)) {
-        setBanners(res.data.banners);
-      } else {
-        setBanners([]); // fallback
-      }
-    })
-    .catch((err) => console.log("Error fetching banners:", err));
-}, []);
-
-      useEffect(() => {
-    fetchMentors();
+  // Fetch banners
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/directionbanner`)
+      .then((res) => {
+        setBanners(Array.isArray(res.data) ? res.data : []);
+      })
+      .catch((err) => console.error("Error fetching banners:", err));
   }, []);
 
-  const fetchMentors = async () => {
-    try {
-      const res = await axios.get(API_URL);
-      setMentors(res.data);
-    } catch (err) {
-      console.error("Error fetching mentors:", err);
-    }
-  };
-  
-  const setting = {
+  // Fetch highlights
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/directionhighlights`)
+      .then((res) => setHighlights(Array.isArray(res.data) ? res.data : []))
+      .catch((err) => console.error("Error fetching highlights:", err));
+  }, []);
+
+  // Fetch diplomas
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/directiondiploma`)
+      .then((res) => setDiplomas(Array.isArray(res.data) ? res.data : []))
+      .catch((err) => console.error("Error fetching diplomas:", err));
+  }, []);
+
+  // Fetch mentors
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/directionmentor`)
+      .then((res) => setMentors(Array.isArray(res.data) ? res.data : []))
+      .catch((err) => console.error("Error fetching mentors:", err));
+  }, []);
+
+  // Fetch filmography
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/directionfilmography`)
+      .then((res) => setFilmography(Array.isArray(res.data) ? res.data : []))
+      .catch((err) => console.error("Error fetching filmography:", err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading)
+    return <p className="text-white text-center mt-20">Loading...</p>;
+
+  // Slider settings
+  const bannerSliderSettings = {
     dots: false,
     infinite: banners.length > 1,
     slidesToShow: 1,
@@ -62,279 +79,189 @@ useEffect(() => {
     pauseOnHover: false,
   };
 
-  function topPage() {
-    window.scroll(0, 0);
-  }
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/directionfilmography")
-      .then((res) => setItems(res.data))
-      .catch((err) => console.error("Error fetching filmography:", err));
-  }, []);
-
-const settings = {
-  className: "center",
-  infinite: true,
-  autoplay: true,
-  speed: 3000,             // slow continuous movement
-  autoplaySpeed: 0,        // no delay between slides
-  cssEase: "linear",       // makes it smooth like water
-  slidesToShow: 4,         // default visible items
-  slidesToScroll: 1,
-  swipeToSlide: true,
-  arrows: false,           // optional: hides prev/next arrows
-  responsive: [
-    { breakpoint: 2500, settings: { slidesToShow: 5, centerPadding: "30px" } },
-    { breakpoint: 2000, settings: { slidesToShow: 5, centerPadding: "30px" } },
-    { breakpoint: 1280, settings: { slidesToShow: 4, centerPadding: "30px" } },
-    { breakpoint: 1024, settings: { slidesToShow: 3, centerPadding: "30px" } },
-    { breakpoint: 768, settings: { slidesToShow: 2, centerPadding: "20px" } },
-    { breakpoint: 640, settings: { slidesToShow: 1, centerPadding: "15px" } },
-  ],
-};
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/directionhighlights")
-      .then((res) => setHighlights(res.data))
-      .catch((err) => console.error(err));
-  }, []);
-
-axios.get("http://localhost:5000/directiondiploma")
-  .then((res) => {
-    const diplomaData = Array.isArray(res.data) ? res.data : [res.data];
-    setData(diplomaData);
-  })
-  .catch(err => console.error(err));
-
-  if (!data) return <p className="text-white">Loading...</p>;
+  const filmographySliderSettings = {
+    className: "center",
+    infinite: true,
+    autoplay: true,
+    speed: 3000,
+    autoplaySpeed: 0,
+    cssEase: "linear",
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 2500,
+        settings: { slidesToShow: 5, centerPadding: "30px" },
+      },
+      {
+        breakpoint: 1280,
+        settings: { slidesToShow: 4, centerPadding: "30px" },
+      },
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 3, centerPadding: "20px" },
+      },
+      { breakpoint: 768, settings: { slidesToShow: 2, centerPadding: "15px" } },
+      { breakpoint: 640, settings: { slidesToShow: 1, centerPadding: "10px" } },
+    ],
+  };
 
   return (
     <>
-      <div className="font-kumbh overflow-hidden ">
+      <div className="font-kumbh overflow-hidden">
         <Helmet>
-          <title>
-            Top Direction & Screenplay Courses | Learn Direction Courses
-          </title>
+          <title>Top Direction & Screenplay Courses | Cinema Factory</title>
           <meta
             name="description"
-            content="Master the art of direction and screenplay at Cinema Factory Academy. Learn from industry experts with hands-on training and 100% placement assistance. Join now"
+            content="Master direction & screenplay at Cinema Factory Academy. Learn from experts with hands-on training."
           />
-          <meta
-            name="keywords"
-            content="Learn Direction courses | Direction Training Institute | Direction courses | Direction courses In India | Direction Institute In India | Film direction classes | Film Director courses | Film Director jobs | Assistant Director courses (AD) | Assistant Director (AD) jobs | Degree in Direction courses | Diploma in Direction course | Degree in film making courses | Film making certification courses | Filmmaking masterclasses | Diploma in fim making courses | Film making course fees | Career in film making | Learn film making Online | Direction Jobs | Direction salary"
-          />
-          <meta name="author" content="Cinema Factory Academy" />
-          <meta charSet="utf-8" />
         </Helmet>
 
-        <section>
-          <div className="font-playfair relative w-full">
-            <div className="slider-container">
-              <Slider {...setting}>
-                {banners.map((banner) => (
-                  <div key={banner.id || banner.fileName}>
+        {/* Banner Slider */}
+        {banners.length > 0 && (
+          <section className="slider-container">
+            <Slider {...bannerSliderSettings}>
+              {banners.map((banner) => (
+                <div key={banner._id}>
+                  <img
+                    src={banner.imageUrl}
+                    alt="Direction Banner"
+                    className="w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </Slider>
+          </section>
+        )}
+
+        {/* Highlights */}
+        {highlights.length > 0 && (
+          <section className="pt-20 pb-20 bg-white">
+            <div className="w-full md:w-[90%] mx-auto text-center">
+              <h2 className="font-bold text-3xl md:text-5xl mb-10">
+                Course Highlights
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {highlights.map((item) => (
+                  <div
+                    key={item._id}
+                    className="flex flex-col items-center gap-3"
+                  >
                     <img
-                      src={banner.imageUrl}
+                      src={`${API_URL}${item.image}`}
+                      alt={item.titleLine}
+                      className="w-16 md:w-20 object-contain"
+                    />
+                    <h3 className="text-center font-semibold text-sm md:text-base">
+                      {item.titleLine}
+                    </h3>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Diploma / Syllabus */}
+        {diplomas.length > 0 &&
+          diplomas.map((diploma) => (
+            <section
+              key={diploma._id}
+              className="border-t-4 border-orange-500 bg-gray-950 pt-16 pb-20"
+            >
+              <div className="w-full md:w-[85%] mx-auto">
+                <h3 className="text-center text-white text-3xl md:text-5xl font-bold mb-2">
+                  {diploma.title}
+                </h3>
+                <p className="text-center text-red-600 text-lg md:text-2xl mb-10">
+                  {diploma.subtitle}
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                  {["semester1", "semester2"].map((sem, i) => (
+                    <div key={i}>
+                      <h4 className="text-white text-xl md:text-3xl font-bold mb-4">
+                        Semester {i + 1}
+                      </h4>
+                      <ul className="text-gray-200 space-y-3">
+                        {(diploma[sem] || []).map((line, idx) => (
+                          <li key={idx} className="flex items-center gap-3">
+                            <PiFilmSlateDuotone className="text-white text-xl" />
+                            {line}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+                {diploma.pdf && (
+                  <div className="flex justify-center mt-10">
+                    <a
+                      href={`${API_URL}${diploma.pdf}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <button className="bg-red-600 text-white px-6 py-3 rounded-md hover:scale-105 transition">
+                        Download Detailed Syllabus
+                      </button>
+                    </a>
+                  </div>
+                )}
+              </div>
+            </section>
+          ))}
+
+        {/* Mentors */}
+        {mentors.length > 0 && (
+          <section className="pt-20 pb-20 bg-white">
+            <div className="w-full md:w-[80%] mx-auto text-center">
+              <h2 className="text-3xl md:text-5xl font-bold mb-10">
+                FilmMaker As Mentor
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
+                {mentors.map((mentor) => (
+                  <div key={mentor._id} className="flex flex-col items-center">
+                    <img
+                      src={`${API_URL}${mentor.url}`}
+                      alt="mentor"
+                      className="w-4/5 md:w-full rounded-md object-cover"
+                    />
+                    <p className="mt-4 text-center text-gray-800">
+                      {mentor.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Filmography Slider */}
+        {filmography.length > 0 && (
+          <section className="bg-black py-14">
+            <div className="w-full md:w-[90%] mx-auto">
+              <h3 className="text-center text-white text-3xl md:text-4xl font-bold mb-10">
+                Mentor's Filmography
+              </h3>
+              <Slider {...filmographySliderSettings}>
+                {filmography.map((item) => (
+                  <div key={item._id} className="px-2">
+                    <img
+                      src={`${API_URL}${item.image}`}
+                      alt="Filmography"
                       className="w-full object-cover"
-                      alt="CF_banner"
-                      title="Virtual Production And VFX Courses In India"
                       loading="lazy"
-                      fetchpriority="high"
                     />
                   </div>
                 ))}
               </Slider>
             </div>
-          </div>
-        </section>
-
-        <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
-          <div className="w-full md:w-[90%] mx-auto">
-            <div className="font-[Prata]">
-              <div>
-                <div className="flex justify-center items-center w-[90%] mx-auto">
-                  <div>
-                    {/* Title */}
-                    <div className="mb-10 md:mb-20">
-                      <h1 className="font-bold text-[24px] md:text-[40px] uppercase font-[poppins] text-black text-center">
-                        Course Highlights
-                      </h1>
-                    </div>
-
-                    {/* Grid */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-x-3 md:gap-x-16 gap-y-8 md:gap-y-14 mt-1 font-kumbh">
-                      {highlights.length > 0 ? (
-                        highlights.map((item) => (
-                          <div key={item.id}>
-                            <div className="flex flex-col items-center gap-y-3">
-                              {/* Image */}
-                              <img
-                                src={`http://localhost:5000${item.image}`}
-                                className="w-14 md:w-20 object-contain mb-2 filter brightness-0"
-                                alt={item.titleLine}
-                                loading="lazy"
-                              />
-
-                              {/* Text */}
-                              <div className="flex flex-col items-center">
-                                <h3 className="uppercase font-semibold text-center text-[10px] md:text-[14px] text-black tracking-[1px] leading-snug">
-                                  {item.titleLine}
-                                </h3>
-                              </div>
-                            </div>
-                          </div>
-                        ))
-                      ) : (
-                        <p className="text-gray-500 col-span-2 md:col-span-4 text-center">
-                          No highlights items available
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* -------------- Syllabus ----------------- */}
-
-        {Array.isArray(data) && data.map((diploma) => (
-          <section key={diploma._id} className="border-t-4 border-orange-500 pt-16 pb-10 md:pt-20 md:pb-20 bg-gray-950">
-            <div className="px-4 w-full md:w-[85%] mx-auto">
-              {/* Heading */}
-              <div className="flex flex-col gap-y-2 justify-center items-center mb-6 md:mb-16">
-                <h3 className="font-bold text-center text-[24px] md:text-[40px] text-white font-kumbh uppercase">
-                  1 Year Diploma
-                </h3>
-                <p className="font-semibold text-[18px] md:text-[24px] text-[#ff0000] font-[roboto] uppercase tracking-[1px]">
-                  in Direction & Screenplay
-                </p>
-              </div>
-
-              {/* Semester Blocks */}
-              <div className="flex justify-center items-center font-[poppins]">
-                <div className="grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-60">
-                  {/* Semester 1 */}
-                  <div className="flex flex-col gap-y-5 items-start">
-                    <h3 className="font-bold text-white text-[18px] md:text-[28px]">Semester 1</h3>
-                    <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
-                      {(diploma.semester1 || []).map((line, i) => (
-                        <li key={i} className="flex items-center gap-x-3 md:gap-x-5">
-                          <PiFilmSlateDuotone className="text-gray-100 text-[16px] md:text-[20px]" />
-                          {line}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Semester 2 */}
-                  <div className="flex flex-col gap-y-5 items-start">
-                    <h3 className="font-bold text-white text-[18px] md:text-[28px]">Semester 2</h3>
-                    <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
-                      {(diploma.semester2 || []).map((line, i) => (
-                        <li key={i} className="flex items-center gap-x-3 md:gap-x-5">
-                          <PiFilmSlateDuotone className="text-gray-100 text-[16px] md:text-[20px]" />
-                          {line}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* PDF Button */}
-              {diploma.pdf && (
-                <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
-                  <a href={`http://localhost:5000${diploma.pdf}`} target="_blank" rel="noopener noreferrer">
-                    <button className="uppercase hover:scale-105 group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]">
-                      Download Detailed Syllabus
-                    </button>
-                  </a>
-                </div>
-              )}
-            </div>
           </section>
-        ))}
+        )}
 
-        {/* ------------------ Mentors ------------------ */}
-
-            <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
-      <div className="px-4 w-full md:w-[80%] mx-auto font-kumbh">
-        <div className="flex items-center justify-center mb-6 md:mb-10">
-          <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase md:tracking-[2px]">
-            FilmMaker As Mentor
-          </h2>
-        </div>
-
-        <div className="flex justify-center items-center">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-            {mentors.map((mentor) => (
-              <div
-                key={mentor.id}
-                className="flex flex-col items-center justify-center"
-              >
-                <div className="flex justify-center items-center">
-                  <img
-                    src={mentor.url}
-                    className="w-[80%] rounded-md object-cover"
-                    alt="mentor"
-                    title="Learn Direction Courses"
-                    loading="lazy"
-                    fetchpriority="auto"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-y-5 items-center justify-center mt-5">
-                  <div className="w-full md:w-[70%] mx-auto">
-                    <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                      {mentor.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-        {/* -------------- Our Mentors have Worked In ------------------------ */}
-
-    <section className="bg-black overflow-hidden flex justify-center items-center pt-8 md:pt-14 pb-6 md:pb-10">
-      <div className="w-full mx-auto">
-        <div className="flex justify-center items-center mb-8 md:mb-12">
-          <h3 className="font-bold uppercase text-[20px] md:text-[28px] text-white">
-            Mentor's Filmography
-          </h3>
-        </div>
-
-        <div className="slider-container">
-          <Slider {...settings}>
-            {items.length > 0 ? (
-              items.map((item) => (
-                <div key={item.id} className="px-2">
-                  <div>
-                    <img
-                      src={`http://localhost:5000${item.image}`}
-                      className="w-full object-cover"
-                      alt="mentor work"
-                      loading="lazy"
-                      fetchpriority="auto"
-                    />
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p className="text-white text-center">No filmography uploaded yet.</p>
-            )}
-          </Slider>
-        </div>
-      </div>
-    </section>
-
-            {/* <section className="bg-black overflow-hidden flex justify-center items-center pt-8 md:pt-14  pb-6 md:pb-10 ">
+        {/* <section className="bg-black overflow-hidden flex justify-center items-center pt-8 md:pt-14  pb-6 md:pb-10 ">
           <div className="w-full mx-auto">
             <div className="flex justify-center items-center  mb-8 md:mb-12">
               <h3 className="font-bold uppercase text-[20px] md:text-[28px] text-white">
