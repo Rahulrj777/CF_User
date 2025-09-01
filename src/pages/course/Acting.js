@@ -12,24 +12,34 @@ import { RiWhatsappLine } from "react-icons/ri";
 const Acting = () => {
   const [banners, setBanners] = useState([]);
   const [mentors, setMentors] = useState([]);
-  const [Diplomas, setDiplomas] = useState([]);
   const [contents, setContents] = useState([]);
   const [globalPdf, setGlobalPdf] = useState(null);
 
-  // Fetch diplomas
+  const API_BASE =
+    (typeof process !== "undefined" &&
+      process.env &&
+      process.env.NEXT_PUBLIC_API_BASE) ||
+    (typeof window !== "undefined" &&
+    window.location &&
+    window.location.port === "5173"
+      ? "http://localhost:5000"
+      : "http://localhost:5000");
+
+  const API = `${API_BASE}/actingdiploma`;
+
   useEffect(() => {
-    axios
-      .get(`${API_URL}/actingdiploma`)
-      .then((res) => setDiplomas(Array.isArray(res.data) ? res.data : []))
-      .catch((err) => console.error("Error fetching diplomas:", err));
+    fetchData();
   }, []);
-    // Fetch mentors
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/actingmentor`)
-      .then((res) => setMentors(Array.isArray(res.data) ? res.data : []))
-      .catch((err) => console.error("Error fetching mentors:", err));
-  }, []);
+
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(API);
+      setContents(res.data.items || res.data); // support both formats
+      setGlobalPdf(res.data.pdf || null);
+    } catch (err) {
+      console.error("fetchData error:", err);
+    }
+  };
 
   useEffect(() => {
     fetchMentors();
@@ -106,7 +116,7 @@ const Acting = () => {
                 <div key={banner._id}>
                   <img
                     src={banner.imageUrl}
-                    alt="Acting Banner"
+                    alt="Direction Banner"
                     className="w-full object-cover"
                     loading="lazy"
                   />
@@ -168,7 +178,7 @@ const Acting = () => {
             <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
               {globalPdf ? (
                 <a
-                  href={`${API_URL}${globalPdf}`}
+                  href={`${API_BASE}${globalPdf}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
