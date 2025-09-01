@@ -10,22 +10,32 @@ import { useState, useEffect } from "react";
 import { RiWhatsappLine } from "react-icons/ri";
 import { PiFilmSlateDuotone } from "react-icons/pi";
 
-const API_URL = "http://localhost:5000/directionmentor"; // backend API
+import API_URL from "../../config.js"
 
 const Direction = () => {
   const [banners, setBanners] = useState([]);
   const [highlights, setHighlights] = useState([]);
   const [data, setData] = useState([]);
   const [mentors, setMentors] = useState([]);
-    const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]);
 
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/directionbanner")
-      .then((res) => setBanners(res.data))
-      .catch((err) => console.log("Error fetching banners:", err));
-  }, []);
+useEffect(() => {
+  axios
+    .get(`${API_BASE}/directionbanner`)
+    .then((res) => {
+      console.log("Banners API response:", res.data);
+      // if backend sends { banners: [] } use that
+      if (Array.isArray(res.data)) {
+        setBanners(res.data);
+      } else if (Array.isArray(res.data.banners)) {
+        setBanners(res.data.banners);
+      } else {
+        setBanners([]); // fallback
+      }
+    })
+    .catch((err) => console.log("Error fetching banners:", err));
+}, []);
 
       useEffect(() => {
     fetchMentors();
