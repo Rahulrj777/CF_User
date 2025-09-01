@@ -57,17 +57,18 @@ useEffect(() => {
     .catch((err) => console.log("Error fetching banners:", err));
 }, []);
 
-  const settings = {
-    dots: true,
-    infinite: banners.length > 1, // only loop if more than 1 image
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: banners.length > 1, // only autoplay if more than 1
-    speed: 1000,
-    autoplaySpeed: 5000,
-    cssEase: "ease-in-out",
-    pauseOnHover: false,
-  };
+const settings = {
+  dots: true,
+  infinite: banners.length > 1,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,          // ✅ force autoplay
+  autoplaySpeed: 3000,     // 3s interval
+  speed: 1000,             // slide animation speed
+  cssEase: "ease-in-out",
+  pauseOnHover: false,
+  arrows: false            // ✅ optional, hides prev/next arrows
+};
 
   useEffect(() => {
     axios
@@ -160,7 +161,7 @@ useEffect(() => {
         <section>
           <div className="font-playfair relative w-full">
             <div className="slider-container">
-              <Slider {...settings}>
+              <Slider key={banners.length} {...settings}>
                 {banners.map((banner) => (
                   <div key={banner.id || banner.fileName}>
                     <img
