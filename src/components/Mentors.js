@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/mentors"; // backend route
+const API_BASE = import.meta.env.VITE_API_BASE || "https://cf-server-tr24.onrender.com";
 
 const Mentors = () => {
   const [mentors, setMentors] = useState([]);
@@ -11,14 +11,14 @@ const Mentors = () => {
     fetchMentors();
   }, []);
 
-  const fetchMentors = async () => {
-    try {
-      const res = await axios.get(API_URL);
-      setMentors(res.data);
-    } catch (err) {
-      console.error("Error fetching mentors:", err);
-    }
-  };
+const fetchMentors = async () => {
+  try {
+    const res = await axios.get(`${API_BASE}/mentors`);
+    setMentors(res.data);
+  } catch (err) {
+    console.error("Error fetching mentors:", err);
+  }
+};
 
   function topPage() {
     window.scroll(0, 0);
@@ -38,7 +38,7 @@ const Mentors = () => {
                 <div className="flex justify-center items-center">
                   {/* <Link to={`/mentor/${mentor.id}`} onClick={topPage}> */}
                   <img
-                    src={mentor.url} // ✅ comes from backend
+                    src={mentor.imageUrl} // ✅ comes from backend
                     className="w-[88%] object-cover rounded-xl border border-gray-400 hover:scale-95 duration-300"
                     alt={mentor.name}
                     title={mentor.name}
