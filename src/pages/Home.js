@@ -260,7 +260,7 @@ const settings = {
                             <div className="flex flex-col items-center gap-y-3">
                               {/* Image */}
                               <img
-                                src={`${API_BASE}${item.image}`}
+                                src={item.imageUrl}
                                 className="w-14 md:w-20 object-contain mb-2 filter brightness-0"
                                 alt={item.titleLine}
                                 loading="lazy"
