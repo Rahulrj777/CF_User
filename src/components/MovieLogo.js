@@ -10,7 +10,7 @@ const MovieLogo = () => {
   useEffect(() => {
     const fetchLogos = async () => {
       try {
-        const res = await axios.get(`${API_BASE}/mentors`);
+        const res = await axios.get(`${API_BASE}/homefilmography  `);
         setLogos(res.data); // backend should return [{ id, image }]
       } catch (err) {
         console.error("Error fetching filmography:", err);
@@ -47,7 +47,7 @@ const MovieLogo = () => {
         {logos.map((item) => (
           <div key={item.id} className="px-4">
             <img
-              src={`http://localhost:5000${item.image}`} // serve from backend uploads
+              src={item.imageUrl} // serve from backend uploads
               alt="mentor works"
               title="Mentor's Filmography"
               className="w-24 md:w-36 object-cover"
