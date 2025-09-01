@@ -6,12 +6,14 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { PiMaskHappyBold } from "react-icons/pi";
 import banner from "../../images/course/banner/pattern.jpg";
-import API_URL from "../../config.js";
-import { RiWhatsappLine } from "react-icons/ri";
 
+//icons
+import { RiWhatsappLine } from "react-icons/ri";
+const API_URL = "http://localhost:5000/actingmentor";
 const Acting = () => {
   const [banners, setBanners] = useState([]);
   const [mentors, setMentors] = useState([]);
+
   const [contents, setContents] = useState([]);
   const [globalPdf, setGlobalPdf] = useState(null);
 
@@ -54,18 +56,14 @@ const Acting = () => {
     }
   };
 
-  // Fetch banners
   useEffect(() => {
     axios
-      .get(`${API_URL}/actingbanner`)
-      .then((res) => {
-        setBanners(Array.isArray(res.data) ? res.data : []);
-      })
-      .catch((err) => console.error("Error fetching banners:", err));
+      .get("http://localhost:5000/actingbanner")
+      .then((res) => setBanners(res.data))
+      .catch((err) => console.log("Error fetching banners:", err));
   }, []);
 
-  // Slider settings
-  const bannerSliderSettings = {
+  const setting = {
     dots: false,
     infinite: banners.length > 1,
     slidesToShow: 1,
@@ -76,6 +74,7 @@ const Acting = () => {
     cssEase: "ease-in-out",
     pauseOnHover: false,
   };
+
   function topPage() {
     window.scroll(0, 0);
   }
@@ -109,22 +108,26 @@ const Acting = () => {
           />
         </div>
 
- {banners.length > 0 && (
-          <section className="slider-container">
-            <Slider {...bannerSliderSettings}>
-              {banners.map((banner) => (
-                <div key={banner._id}>
-                  <img
-                    src={banner.imageUrl}
-                    alt="Direction Banner"
-                    className="w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </Slider>
-          </section>
-        )}
+        <section>
+          <div className="font-playfair relative w-full">
+            <div className="slider-container">
+              <Slider {...setting}>
+                {banners.map((banner) => (
+                  <div key={banner.id || banner.fileName}>
+                    <img
+                      src={banner.url}
+                      className="w-full object-cover"
+                      alt="CF_banner"
+                      title="Virtual Production And VFX Courses In India"
+                      loading="lazy"
+                      fetchpriority="high"
+                    />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+          </div>
+        </section>
 
         {/* -------------- Syllabus ----------------- */}
 
