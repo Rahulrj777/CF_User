@@ -22,7 +22,7 @@ const Direction = () => {
 
 useEffect(() => {
   axios
-    .get(`${API_BASE}/directionbanner`)
+    .get(`${API_URL}/directionbanner`)
     .then((res) => {
       console.log("Banners API response:", res.data);
       // if backend sends { banners: [] } use that
