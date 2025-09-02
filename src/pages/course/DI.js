@@ -381,7 +381,7 @@ const DI = () => {
 
               <div className="flex items-center gap-x-4 md:gap-x-10 mt-4 md:mt-10 font-[poppins] text-[12px] md:text-[14px]">
                 <div>
-                  <Link to="/apply" onClick={topPage}>
+                  <Link to="/apply">
                     <button className="uppercase  group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500">
                       <div className="translate-y-0 transition group-hover:-translate-y-[150%]">
                         Apply now
