@@ -54,7 +54,8 @@ useEffect(() => {
   axios
     .get(`${API_URL}/directionmentor`)
     .then((res) => {
-      const mentorData = res.data?.direction?.mentor || []; // ✅ correct path
+      console.log("Mentor API response:", res.data); // 👈 add this
+      const mentorData = res.data?.direction?.mentor || [];
       setMentors(Array.isArray(mentorData) ? mentorData : []);
     })
     .catch((err) => console.error("Error fetching mentors:", err));
