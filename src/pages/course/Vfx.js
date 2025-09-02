@@ -158,17 +158,20 @@ const Vfx = () => {
           {/* Add other meta tags here if needed */}
         </Helmet>
 
-<Slider {...bannerSliderSettings}>
-  {Array.isArray(banners) && banners.length > 0 ? (
-    banners.map((banner, idx) => (
-      <div key={banner._id || idx}>
-        <img src={banner.imageUrl} alt={`Vfx Banner ${idx + 1}`} />
-      </div>
-    ))
-  ) : (
-    <p>No banners available</p>
-  )}
-</Slider>
+        <Slider {...bannerSliderSettings}>
+          {Array.isArray(banners) && banners.length > 0 ? (
+            banners.map((banner, idx) => (
+              <div key={banner._id || idx}>
+                <img
+                  src={banner?.imageUrl || ""}
+                  alt={`Vfx Banner ${idx + 1}`}
+                />
+              </div>
+            ))
+          ) : (
+            <p className="text-center text-white">No banners available</p>
+          )}
+        </Slider>
 
         {/* -------------- Highlinghts ----------------- */}
 
@@ -187,7 +190,7 @@ const Vfx = () => {
 
                     {/* Grid */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-x-3 md:gap-x-16 gap-y-8 md:gap-y-14 mt-1 font-kumbh">
-                      {highlights.length > 0 ? (
+                      {Array.isArray(highlights) && highlights.length > 0 ? (
                         highlights.map((item) => (
                           <div key={item.id}>
                             <div className="flex flex-col items-center gap-y-3">
@@ -246,7 +249,7 @@ const Vfx = () => {
                   </div>
 
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-x-4 md:gap-x-14 gap-y-6 md:gap-y-10">
-                    {images.length > 0 ? (
+                    {Array.isArray(images) && images.length > 0 ? (
                       images.map((img) => (
                         <div
                           key={img.id}
@@ -305,31 +308,37 @@ const Vfx = () => {
 
             <div className="flex justify-center items-center">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-                {mentors.map((mentor) => (
-                  <div
-                    key={mentor.id}
-                    className="flex flex-col items-center justify-center"
-                  >
-                    <div className="flex justify-center items-center">
-                      <img
-                        src={mentor.url}
-                        className="w-[80%] rounded-md object-cover"
-                        alt="mentor"
-                        title="Learn cinematography Courses"
-                        loading="lazy"
-                        fetchpriority="auto"
-                      />
-                    </div>
+                {Array.isArray(mentors) && mentors.length > 0 ? (
+                  mentors.map((mentor) => (
+                    <div
+                      key={mentor.id || mentor._id} // use _id if id is missing
+                      className="flex flex-col items-center justify-center"
+                    >
+                      <div className="flex justify-center items-center">
+                        <img
+                          src={mentor.url || ""}
+                          className="w-[80%] rounded-md object-cover"
+                          alt="mentor"
+                          title="Learn cinematography Courses"
+                          loading="lazy"
+                          fetchpriority="auto"
+                        />
+                      </div>
 
-                    <div className="flex flex-col gap-y-5 items-center justify-center mt-5">
-                      <div className="w-full md:w-[70%] mx-auto">
-                        <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                          {mentor.description}
-                        </p>
+                      <div className="flex flex-col gap-y-5 items-center justify-center mt-5">
+                        <div className="w-full md:w-[70%] mx-auto">
+                          <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
+                            {mentor.description || "No description available"}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p className="col-span-full text-center text-gray-500">
+                    No mentors available
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -347,7 +356,7 @@ const Vfx = () => {
 
             <div className="slider-container">
               <Slider {...settings}>
-                {items.length > 0 ? (
+                {Array.isArray(items) && items.length > 0 ? (
                   items.map((item) => (
                     <div key={item.id} className="px-2">
                       <div>
