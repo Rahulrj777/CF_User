@@ -42,7 +42,10 @@ const Direction = () => {
   useEffect(() => {
     axios
       .get(`${API_URL}/directiondiploma`)
-      .then((res) => setDiplomas(Array.isArray(res.data) ? res.data : []))
+      .then((res) => {
+        // res.data is a single object, not an array
+        setDiplomas(res.data || {});
+      })
       .catch((err) => console.error("Error fetching diplomas:", err));
   }, []);
 
