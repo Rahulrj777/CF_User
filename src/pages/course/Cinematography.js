@@ -6,14 +6,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 import banner from "../../images/course/banner/pattern.jpg";
-
 import { VscDeviceCameraVideo } from "react-icons/vsc";
-
-//icons
 import { RiWhatsappLine } from "react-icons/ri";
-
 import CinematographyFAQ from "../../components/Cinematography_FAQ";
-
 import API_URL from "../../config.js";
 
 const Cinematography = () => {
@@ -30,13 +25,6 @@ const Cinematography = () => {
         setBanners(Array.isArray(res.data) ? res.data : []);
       })
       .catch((err) => console.error("Error fetching banners:", err));
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/cinematographybanner")
-      .then((res) => setBanners(res.data))
-      .catch((err) => console.log("Error fetching banners:", err));
   }, []);
 
   useEffect(() => {
@@ -58,7 +46,7 @@ const Cinematography = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/cinematographyfilmography")
+      .get(`${API_URL}/cinematographyfilmography`)
       .then((res) => setItems(res.data))
       .catch((err) => console.error("Error fetching filmography:", err));
   }, []);
@@ -110,13 +98,13 @@ const Cinematography = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/cinematographyhighlights")
+      .get(`${API_URL}`/cinematographyhighlights")
       .then((res) => setHighlights(res.data))
       .catch((err) => console.error(err));
   }, []);
 
   axios
-    .get("http://localhost:5000/cinematographydiploma")
+    .get(`${API_URL}/cinematographydiploma`)
     .then((res) => {
       const diplomaData = Array.isArray(res.data) ? res.data : [res.data];
       setData(diplomaData);
