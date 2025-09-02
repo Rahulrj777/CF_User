@@ -19,7 +19,8 @@ const Direction = () => {
   const [mentors, setMentors] = useState([]);
   const [filmography, setFilmography] = useState([]);
   const [loading, setLoading] = useState(true);
-  const whatsappLink = "https://wa.me/919XXXXXXXXX?text=Hi!%20I%20want%20to%20know%20about%20the%20Direction%20Diploma%20syllabus";
+  const whatsappLink =
+    "https://wa.me/919XXXXXXXXX?text=Hi!%20I%20want%20to%20know%20about%20the%20Direction%20Diploma%20syllabus";
 
   // Fetch banners
   useEffect(() => {
@@ -44,8 +45,8 @@ const Direction = () => {
     axios
       .get(`${API_URL}/directiondiploma`)
       .then((res) => {
-        // res.data is a single object, not an array
-        setDiplomas(res.data || {});
+        const diplomaData = res.data.direction?.diploma?.[0] || null;
+        setDiplomas(diplomaData); // save the first diploma object directly
       })
       .catch((err) => console.error("Error fetching diplomas:", err));
   }, []);
@@ -174,86 +175,82 @@ const Direction = () => {
         )}
 
         {/* Diploma / Syllabus */}
-        {diplomas.direction?.diploma?.[0] &&
-          (() => {
-            const diploma = diplomas.direction.diploma[0];
-            return (
-              <section className="border-t-4 border-orange-500 pt-16 pb-10 md:pt-20 md:pb-20 bg-gray-950">
-                <div className="px-4 w-full md:w-[85%] mx-auto">
-                  {/* Heading */}
-                  <div className="flex flex-col gap-y-2 justify-center items-center mb-6 md:mb-16">
-                    <h3 className="font-bold text-center text-[24px] md:text-[40px] text-white font-kumbh uppercase">
-                      1 Year Diploma
+        {diplomas && (
+          <section className="border-t-4 border-orange-500 pt-16 pb-10 md:pt-20 md:pb-20 bg-gray-950">
+            <div className="px-4 w-full md:w-[85%] mx-auto">
+              {/* Heading */}
+              <div className="flex flex-col gap-y-2 justify-center items-center mb-6 md:mb-16">
+                <h3 className="font-bold text-center text-[24px] md:text-[40px] text-white font-kumbh uppercase">
+                  1 Year Diploma
+                </h3>
+                <p className="font-semibold text-[18px] md:text-[24px] text-[#ff0000] font-[roboto] uppercase tracking-[1px]">
+                  in Direction & Screenplay
+                </p>
+              </div>
+
+              {/* Semester Blocks */}
+              <div className="flex justify-center items-center font-[poppins]">
+                <div className="grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-60">
+                  {/* Semester 1 */}
+                  <div className="flex flex-col gap-y-5 items-start">
+                    <h3 className="font-bold text-white text-[18px] md:text-[28px]">
+                      Semester 1
                     </h3>
-                    <p className="font-semibold text-[18px] md:text-[24px] text-[#ff0000] font-[roboto] uppercase tracking-[1px]">
-                      in Direction & Screenplay
-                    </p>
+                    <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
+                      {diplomas.semester1.map((line, i) => (
+                        <li
+                          key={i}
+                          className="flex items-center gap-x-3 md:gap-x-5"
+                        >
+                          <PiFilmSlateDuotone className="text-gray-100 text-[16px] md:text-[20px]" />
+                          {line.title}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  {/* Semester Blocks */}
-                  <div className="flex justify-center items-center font-[poppins]">
-                    <div className="grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-60">
-                      {/* Semester 1 */}
-                      <div className="flex flex-col gap-y-5 items-start">
-                        <h3 className="font-bold text-white text-[18px] md:text-[28px]">
-                          Semester 1
-                        </h3>
-                        <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
-                          {diploma.semester1.map((line, i) => (
-                            <li
-                              key={i}
-                              className="flex items-center gap-x-3 md:gap-x-5"
-                            >
-                              <PiFilmSlateDuotone className="text-gray-100 text-[16px] md:text-[20px]" />
-                              {line.title}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Semester 2 */}
-                      <div className="flex flex-col gap-y-5 items-start">
-                        <h3 className="font-bold text-white text-[18px] md:text-[28px]">
-                          Semester 2
-                        </h3>
-                        <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
-                          {diploma.semester2.map((line, i) => (
-                            <li
-                              key={i}
-                              className="flex items-center gap-x-3 md:gap-x-5"
-                            >
-                              <PiFilmSlateDuotone className="text-gray-100 text-[16px] md:text-[20px]" />
-                              {line.title}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
+                  {/* Semester 2 */}
+                  <div className="flex flex-col gap-y-5 items-start">
+                    <h3 className="font-bold text-white text-[18px] md:text-[28px]">
+                      Semester 2
+                    </h3>
+                    <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
+                      {diplomas.semester2.map((line, i) => (
+                        <li
+                          key={i}
+                          className="flex items-center gap-x-3 md:gap-x-5"
+                        >
+                          <PiFilmSlateDuotone className="text-gray-100 text-[16px] md:text-[20px]" />
+                          {line.title}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-
-                  {/* PDF Button */}
-                  {diploma.pdfUrl && (
-                    <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
-                      <button
-                        onClick={() => {
-                          if (diploma.pdfUrl) {
-                            // Open PDF in new tab
-                            window.open(diploma.pdfUrl, "_blank");
-                          } else {
-                            // Redirect to WhatsApp
-                            window.open(whatsappLink, "_blank");
-                          }
-                        }}
-                        className="uppercase hover:scale-105 group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]"
-                      >
-                        Download Detailed Syllabus
-                      </button>
-                    </div>
-                  )}
                 </div>
-              </section>
-            );
-          })()}
+              </div>
+
+              {/* PDF Button */}
+              <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
+                <button
+                  onClick={() => {
+                    if (diplomas.pdfUrl) {
+                      // Open PDF in new tab
+                      window.open(diplomas.pdfUrl, "_blank");
+                    } else {
+                      // Redirect to WhatsApp
+                      const whatsappLink =
+                        "https://wa.me/919XXXXXXXXX?text=Hi!%20I%20want%20to%20know%20about%20the%20Direction%20Diploma%20syllabus";
+                      window.open(whatsappLink, "_blank");
+                    }
+                  }}
+                  className="uppercase hover:scale-105 group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]"
+                >
+                  Download Detailed Syllabus
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Mentors */}
         {mentors.length > 0 && (
