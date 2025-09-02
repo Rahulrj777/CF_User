@@ -18,10 +18,11 @@ const Cinematography = () => {
   const [mentors, setMentors] = useState([]);
   const [items, setItems] = useState([]);
 
-    useEffect(() => {
+  useEffect(() => {
     axios
       .get(`${API_URL}/cinematographybanner`)
       .then((res) => {
+        console.log("API response:", res.data); // 👈 check this
         setBanners(Array.isArray(res.data) ? res.data : []);
       })
       .catch((err) => console.error("Error fetching banners:", err));
@@ -146,7 +147,7 @@ const Cinematography = () => {
 
         {/* ------- Banner ------- */}
 
-        {banners.length > 0 && (
+        {Array.isArray(banners) && banners.length > 0 && (
           <section className="slider-container">
             <Slider {...bannerSliderSettings}>
               {banners.map((banner) => (
