@@ -1,4 +1,3 @@
-import React from "react";
 import Slider from "react-slick";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
@@ -161,16 +160,15 @@ const Vfx = () => {
 
         <section className="slider-container">
           <Slider {...bannerSliderSettings}>
-            {banners.map((banner, idx) => (
-              <div key={banner._id || idx}>
-                <img
-                  src={banner.imageUrl}
-                  alt={`Vfx Banner ${idx + 1}`}
-                  className="w-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            ))}
+            {Array.isArray(banners) && banners.length > 0 ? (
+              banners.map((banner, idx) => (
+                <div key={banner._id || idx}>
+                  <img src={banner.imageUrl} alt={`Vfx Banner ${idx + 1}`} />
+                </div>
+              ))
+            ) : (
+              <p>No banners available</p>
+            )}
           </Slider>
         </section>
 
