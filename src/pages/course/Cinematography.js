@@ -20,7 +20,7 @@ const Cinematography = () => {
   // Fetch Banners
   useEffect(() => {
     axios
-      .get(`${API_BASE}/cinematographybanner`)
+      .get(`${API_URL}/cinematographybanner`)
       .then((res) => setBanners(Array.isArray(res.data) ? res.data : []))
       .catch((err) => console.log("Error fetching banners:", err));
   }, []);
@@ -29,7 +29,7 @@ const Cinematography = () => {
   useEffect(() => {
     const fetchMentors = async () => {
       try {
-        const res = await axios.get(`${API_BASE}/mentors`); // make sure /mentors endpoint exists
+        const res = await axios.get(`${API_URL}/mentors`); // make sure /mentors endpoint exists
         setMentors(Array.isArray(res.data) ? res.data : []);
       } catch (err) {
         console.error("Error fetching mentors:", err);
@@ -41,7 +41,7 @@ const Cinematography = () => {
   // Fetch Filmography
   useEffect(() => {
     axios
-      .get(`${API_BASE}/cinematographyfilmography`)
+      .get(`${API_URL}/cinematographyfilmography`)
       .then((res) => setItems(Array.isArray(res.data) ? res.data : []))
       .catch((err) => console.error("Error fetching filmography:", err));
   }, []);
@@ -49,7 +49,7 @@ const Cinematography = () => {
   // Fetch Highlights
   useEffect(() => {
     axios
-      .get(`${API_BASE}/cinematographyhighlights`)
+      .get(`${API_URL}/cinematographyhighlights`)
       .then((res) => setHighlights(Array.isArray(res.data) ? res.data : []))
       .catch((err) => console.error("Error fetching highlights:", err));
   }, []);
@@ -57,7 +57,7 @@ const Cinematography = () => {
   // Fetch Diploma
   useEffect(() => {
     axios
-      .get(`${API_BASE}/cinematographydiploma`)
+      .get(`${API_URL}/cinematographydiploma`)
       .then((res) => {
         const diplomaData = Array.isArray(res.data) ? res.data : [res.data];
         setData(diplomaData);
@@ -424,7 +424,7 @@ const Cinematography = () => {
 
               <div className="flex items-center gap-x-4 md:gap-x-10 mt-4 md:mt-10 font-[poppins] text-[12px] md:text-[14px]">
                 <div>
-                  <Link to="/apply" onClick={topPage}>
+                  <Link to="/apply">
                     <button className="uppercase  group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500">
                       <div className="translate-y-0 transition group-hover:-translate-y-[150%]">
                         Apply now
