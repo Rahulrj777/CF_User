@@ -33,30 +33,6 @@ const Cinematography = () => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}/cinematographyfilmography`)
-      .then((res) => setItems(res.data))
-      .catch((err) => console.error("Error fetching filmography:", err));
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/cinematographyhighlights`)
-      .then((res) => setHighlights(res.data))
-      .catch((err) => console.error("Error fetching highlights:", err));
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/cinematographydiploma`)
-      .then((res) => {
-        const diplomaData = Array.isArray(res.data) ? res.data : [res.data];
-        setData(diplomaData);
-      })
-      .catch((err) => console.error("Error fetching diploma:", err));
-  }, []);
-
-  useEffect(() => {
     fetchMentors();
   }, []);
 
@@ -84,6 +60,13 @@ const Cinematography = () => {
   function topPage() {
     window.scroll(0, 0);
   }
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/cinematographyfilmography")
+      .then((res) => setItems(res.data))
+      .catch((err) => console.error("Error fetching filmography:", err));
+  }, []);
 
   const settings = {
     className: "center",
@@ -117,6 +100,21 @@ const Cinematography = () => {
       { breakpoint: 640, settings: { slidesToShow: 1, centerPadding: "15px" } },
     ],
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/cinematographyhighlights")
+      .then((res) => setHighlights(res.data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  axios
+    .get("http://localhost:5000/cinematographydiploma")
+    .then((res) => {
+      const diplomaData = Array.isArray(res.data) ? res.data : [res.data];
+      setData(diplomaData);
+    })
+    .catch((err) => console.error(err));
 
   if (!data) return <p className="text-white">Loading...</p>;
 
@@ -193,7 +191,7 @@ const Cinematography = () => {
                             <div className="flex flex-col items-center gap-y-3">
                               {/* Image */}
                               <img
-                                src={`${API_URL}${item.image}`}
+                                src={`http://localhost:5000${item.image}`}
                                 className="w-14 md:w-20 object-contain mb-2 filter"
                                 alt={item.titleLine}
                                 loading="lazy"
@@ -285,7 +283,7 @@ const Cinematography = () => {
                 {diploma.pdf && (
                   <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
                     <a
-                      href={`${API_URL}${diploma.pdf}`}
+                      href={`http://localhost:5000${diploma.pdf}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -358,7 +356,7 @@ const Cinematography = () => {
                     <div key={item.id} className="px-2">
                       <div>
                         <img
-                          src={`${API_URL}${item.image}`}
+                          src={`http://localhost:5000${item.image}`}
                           className="w-full object-cover"
                           alt="mentor work"
                           loading="lazy"
