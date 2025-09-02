@@ -144,7 +144,7 @@ const Editing = () => {
           {/* Add other meta tags here if needed */}
         </Helmet>
 
-        <section className="slider-container -top-10">
+        <section className="slider-container -top-8">
           <Slider {...bannerSliderSettings}>
             {banners.map((banner, idx) => (
               <div key={banner._id || idx}>

@@ -111,7 +111,7 @@ const VirtualProduction = () => {
 
         {/* ---------- Banner Slider ---------- */}
         <section>
-          <div className="slider-container -top-10">
+          <div className="slider-container -top-8">
             <Slider {...bannerSettings}>
               {banners.length > 0 ? (
                 banners.map((banner, idx) => (

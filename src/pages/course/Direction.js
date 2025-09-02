@@ -132,7 +132,7 @@ useEffect(() => {
 
         {/* Banner Slider */}
         {banners.length > 0 && (
-          <section className="slider-container -top-10">
+          <section className="slider-container -top-8">
             <Slider {...bannerSliderSettings}>
               {banners.map((banner) => (
                 <div key={banner._id}>

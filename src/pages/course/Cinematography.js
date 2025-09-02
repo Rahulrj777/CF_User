@@ -129,7 +129,7 @@ const Cinematography = () => {
 
         {/* Banner Section */}
         {Array.isArray(banners) && banners.length > 0 && (
-          <section className="slider-container -top-10">
+          <section className="slider-container -top-8">
             <Slider {...bannerSliderSettings}>
               {banners.map((banner, idx) => (
                 <div key={banner._id || idx}>
