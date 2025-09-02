@@ -186,7 +186,7 @@ const Cinematography = () => {
                             <div className="flex flex-col items-center gap-y-3">
                               {/* Image */}
                               <img
-                                src={`http://localhost:5000${item.image}`}
+                                src={`${API_URL}${item.image}`}
                                 className="w-14 md:w-20 object-contain mb-2 filter"
                                 alt={item.titleLine}
                                 loading="lazy"
@@ -311,7 +311,7 @@ const Cinematography = () => {
                   >
                     <div className="flex justify-center items-center">
                       <img
-                        src={mentor.url}
+                        src={mentor.imageUrl}
                         className="w-[80%] rounded-md object-cover"
                         alt="mentor"
                         title="Learn cinematography Courses"
@@ -351,7 +351,7 @@ const Cinematography = () => {
                     <div key={item.id} className="px-2">
                       <div>
                         <img
-                          src={`http://localhost:5000${item.image}`}
+                          src={`${API_URL}${item.image}`}
                           className="w-full object-cover"
                           alt="mentor work"
                           loading="lazy"
