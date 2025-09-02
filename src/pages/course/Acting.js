@@ -6,64 +6,56 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { PiMaskHappyBold } from "react-icons/pi";
 import banner from "../../images/course/banner/pattern.jpg";
-
-//icons
+import API_URL from "../../config.js";
 import { RiWhatsappLine } from "react-icons/ri";
-const API_URL = "http://localhost:5000/actingmentor";
+
 const Acting = () => {
   const [banners, setBanners] = useState([]);
   const [mentors, setMentors] = useState([]);
-
   const [contents, setContents] = useState([]);
   const [globalPdf, setGlobalPdf] = useState(null);
 
-  const API_BASE =
-    (typeof process !== "undefined" &&
-      process.env &&
-      process.env.NEXT_PUBLIC_API_BASE) ||
-    (typeof window !== "undefined" &&
-    window.location &&
-    window.location.port === "5173"
-      ? "http://localhost:5000"
-      : "http://localhost:5000");
-
-  const API = `${API_BASE}/actingdiploma`;
-
+  // Fetch syllabus/content
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/actingdiploma`);
+        setContents(res.data.items || res.data); // support both formats
+        setGlobalPdf(res.data.pdf || null);
+      } catch (err) {
+        console.error("Error fetching acting syllabus:", err);
+      }
+    };
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    try {
-      const res = await axios.get(API);
-      setContents(res.data.items || res.data); // support both formats
-      setGlobalPdf(res.data.pdf || null);
-    } catch (err) {
-      console.error("fetchData error:", err);
-    }
-  };
-
+  // Fetch mentors
   useEffect(() => {
+    const fetchMentors = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/actingmentor`);
+        setMentors(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        console.error("Error fetching mentors:", err);
+      }
+    };
     fetchMentors();
   }, []);
 
-  const fetchMentors = async () => {
-    try {
-      const res = await axios.get(API_URL);
-      setMentors(res.data);
-    } catch (err) {
-      console.error("Error fetching mentors:", err);
-    }
-  };
-
+  // Fetch banners
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/actingbanner")
-      .then((res) => setBanners(res.data))
-      .catch((err) => console.log("Error fetching banners:", err));
+    const fetchBanners = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/actingbanner`);
+        setBanners(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        console.error("Error fetching banners:", err);
+      }
+    };
+    fetchBanners();
   }, []);
 
-  const setting = {
+  const bannerSettings = {
     dots: false,
     infinite: banners.length > 1,
     slidesToShow: 1,
@@ -81,7 +73,7 @@ const Acting = () => {
 
   return (
     <>
-      <div className="font-kumbh overflow-hidden ">
+      <div className="font-kumbh overflow-hidden">
         <Helmet>
           <title>Learn Acting Courses In India | Acting Institute India</title>
           <meta
@@ -94,46 +86,47 @@ const Acting = () => {
           />
           <meta name="author" content="Cinema Factory Academy" />
           <meta charSet="utf-8" />
-          {/* Add other meta tags here if needed */}
         </Helmet>
 
-        <div className="  ">
+        {/* ---------- Background Banner ---------- */}
+        <div>
           <img
             src={banner}
-            className=" blur-[2px] w-full fixed top-0 object-cover h-screen -z-30"
+            className="blur-[2px] w-full fixed top-0 object-cover h-screen -z-30"
             alt="main banner"
-            title="Learn Acting Courses In India "
+            title="Learn Acting Courses In India"
             loading="lazy"
             fetchpriority="auto"
           />
         </div>
 
+        {/* ---------- Banner Slider ---------- */}
         <section>
-          <div className="font-playfair relative w-full">
-            <div className="slider-container">
-              <Slider {...setting}>
-                {banners.map((banner) => (
-                  <div key={banner.id || banner.fileName}>
+          <div className="slider-container">
+            <Slider {...bannerSettings}>
+              {banners.length > 0 ? (
+                banners.map((bannerItem, idx) => (
+                  <div key={bannerItem.id || idx}>
                     <img
-                      src={banner.url}
+                      src={bannerItem.url}
                       className="w-full object-cover"
-                      alt="CF_banner"
-                      title="Virtual Production And VFX Courses In India"
+                      alt={`Banner ${idx + 1}`}
+                      title="Acting Courses In India"
                       loading="lazy"
                       fetchpriority="high"
                     />
                   </div>
-                ))}
-              </Slider>
-            </div>
+                ))
+              ) : (
+                <p className="text-center text-white">No banners available</p>
+              )}
+            </Slider>
           </div>
         </section>
 
-        {/* -------------- Syllabus ----------------- */}
-
+        {/* ---------- Syllabus / Courses ---------- */}
         <section className="border-t-4 border-orange-500 pt-10 pb-16 md:pt-20 md:pb-20 bg-gray-950 -mt-6">
           <div className="w-full px-4 md:w-[80%] mx-auto">
-            {/* Heading */}
             <div className="flex flex-col gap-y-2 justify-center items-center mb-6 md:mb-16">
               <h3 className="font-bold text-center text-[24px] md:text-[40px] text-white font-kumbh uppercase">
                 {contents.length} Month Course
@@ -143,45 +136,36 @@ const Acting = () => {
               </p>
             </div>
 
-            {/* Content */}
             <div className="flex justify-center items-center font-[poppins]">
               <div className="grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-60 w-full">
                 {contents.map((month, index) => (
-                  <div key={month.id} className="flex flex-col gap-y-6">
-                    <div className="flex flex-col gap-y-4 items-start">
-                      <div className="flex flex-col gap-y-2 items-start">
-                        <div>
-                          <h3 className="font-bold text-white text-[18px] md:text-[28px]">
-                            {month.title || `Month ${index + 1}`}
-                          </h3>
-                        </div>
-                        <div>
-                          <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
-                            {month.children?.map((child, idx) => (
-                              <li
-                                key={idx}
-                                className="flex items-center gap-x-3 md:gap-x-5"
-                              >
-                                <span>
-                                  <PiMaskHappyBold className="text-gray-100 text-[16px] md:text-[20px]" />
-                                </span>
-                                {child}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
+                  <div
+                    key={month.id || index}
+                    className="flex flex-col gap-y-6"
+                  >
+                    <h3 className="font-bold text-white text-[18px] md:text-[28px]">
+                      {month.title || `Month ${index + 1}`}
+                    </h3>
+                    <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
+                      {month.children?.map((child, idx) => (
+                        <li
+                          key={idx}
+                          className="flex items-center gap-x-3 md:gap-x-5"
+                        >
+                          <PiMaskHappyBold className="text-gray-100 text-[16px] md:text-[20px]" />
+                          {child}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Global PDF link OR WhatsApp fallback */}
             <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
               {globalPdf ? (
                 <a
-                  href={`${API_BASE}${globalPdf}`}
+                  href={`${API_URL}${globalPdf}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -204,44 +188,34 @@ const Acting = () => {
           </div>
         </section>
 
-        {/* ------------------ Mentors ------------------ */}
-
+        {/* ---------- Mentors ---------- */}
         <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
           <div className="px-4 w-full md:w-[80%] mx-auto font-kumbh">
-            <div className="flex items-center justify-center mb-6 md:mb-10">
-              <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase md:tracking-[2px]">
-                FilmMaker As Mentor
-              </h2>
-            </div>
-
-            <div className="flex justify-center items-center">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-                {mentors.map((mentor) => (
+            <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase md:tracking-[2px] mb-10">
+              FilmMaker As Mentor
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
+              {mentors.length > 0 ? (
+                mentors.map((mentor, idx) => (
                   <div
-                    key={mentor.id}
-                    className="flex flex-col items-center justify-center"
+                    key={mentor.id || idx}
+                    className="flex flex-col items-center gap-y-5"
                   >
-                    <div className="flex justify-center items-center">
-                      <img
-                        src={mentor.url}
-                        className="w-[80%] rounded-md object-cover"
-                        alt="mentor"
-                        title="Learn cinematography Courses"
-                        loading="lazy"
-                        fetchpriority="auto"
-                      />
-                    </div>
-
-                    <div className="flex flex-col gap-y-5 items-center justify-center mt-5">
-                      <div className="w-full md:w-[70%] mx-auto">
-                        <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                          {mentor.description}
-                        </p>
-                      </div>
-                    </div>
+                    <img
+                      src={mentor.url}
+                      alt="mentor"
+                      className="w-[80%] rounded-md object-cover"
+                    />
+                    <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
+                      {mentor.description}
+                    </p>
                   </div>
-                ))}
-              </div>
+                ))
+              ) : (
+                <p className="text-center text-gray-400 col-span-full">
+                  No mentors available
+                </p>
+              )}
             </div>
           </div>
         </section>
