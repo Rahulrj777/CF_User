@@ -49,13 +49,16 @@ const Direction = () => {
       .catch((err) => console.error("Error fetching diplomas:", err));
   }, []);
 
-  // Fetch mentors
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/directionmentor`)
-      .then((res) => setMentors(Array.isArray(res.data) ? res.data : []))
-      .catch((err) => console.error("Error fetching mentors:", err));
-  }, []);
+// Fetch mentors
+useEffect(() => {
+  axios
+    .get(`${API_URL}/directionmentor`)
+    .then((res) => {
+      const mentorData = res.data?.mentor || []; // extract the array
+      setMentors(Array.isArray(mentorData) ? mentorData : []);
+    })
+    .catch((err) => console.error("Error fetching mentors:", err));
+}, []);
 
   // Fetch filmography
   useEffect(() => {
@@ -269,7 +272,7 @@ const Direction = () => {
                       className="w-4/5 md:w-full rounded-md object-cover"
                     />
                     <p className="mt-4 text-center text-gray-800">
-                      {mentor.description}
+                      {mentor.designation}
                     </p>
                   </div>
                 ))}
