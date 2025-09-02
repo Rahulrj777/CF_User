@@ -6,37 +6,8 @@ import VfxFAQ from "../../components/VfxFAQ";
 import "../text.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
-
-import aravindOne from "../../images/poster/aravind/1.png";
-import aravindTwo from "../../images/poster/aravind/2.png";
-import aravindThree from "../../images/poster/aravind/3.png";
-import aravindFour from "../../images/poster/aravind/4.png";
-import aravindFive from "../../images/poster/aravind/5.png";
-import aravindSix from "../../images/poster/aravind/6.png";
-import aravindSeven from "../../images/poster/aravind/7.png";
-import aravindNine from "../../images/poster/aravind/9.png";
-import aravindTen from "../../images/poster/aravind/10.png";
-import aravindTwele from "../../images/poster/aravind/11.png";
-import aravindElven from "../../images/poster/aravind/12.png";
-import aravindThrtieen from "../../images/poster/aravind/13.png";
-import aravindFourteen from "../../images/poster/aravind/14.png";
-
-import munirajOne from "../../images/poster/muniraj/1.png";
-import munirajTwo from "../../images/poster/muniraj/2.png";
-import munirajThree from "../../images/poster/muniraj/3.png";
-import munirajFour from "../../images/poster/muniraj/4.png";
-import munirajFive from "../../images/poster/muniraj/5.png";
-
-import shivOne from "../../images/poster/shiv/1.png";
-import shivTwo from "../../images/poster/shiv/2.png";
-import shivThree from "../../images/poster/shiv/3.png";
-import shivFour from "../../images/poster/shiv/4.png";
-import shivFive from "../../images/poster/shiv/5.png";
-import shivSix from "../../images/poster/shiv/6.png";
-
-//icons
+import API_URL from "../../config.js";
 import { RiWhatsappLine } from "react-icons/ri";
-const API_URL = "http://localhost:5000/vfxmentor";
 
 const Vfx = () => {
   const [banners, setBanners] = useState([]);
@@ -77,13 +48,23 @@ const Vfx = () => {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/vfxbanner")
-      .then((res) => setBanners(res.data))
-      .catch((err) => console.log("Error fetching banners:", err));
+    const fetchBanners = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/editingbanner`);
+        // Ensure we always set an array
+        const data = Array.isArray(res.data) ? res.data : [];
+        setBanners(data);
+        console.log("Banners fetched:", data);
+      } catch (err) {
+        console.error("Error fetching banners:", err);
+        setBanners([]); // fallback to empty array
+      }
+    };
+
+    fetchBanners();
   }, []);
 
-  const setting = {
+  const bannerSliderSettings = {
     dots: false,
     infinite: banners.length > 1,
     slidesToShow: 1,
@@ -178,25 +159,19 @@ const Vfx = () => {
           {/* Add other meta tags here if needed */}
         </Helmet>
 
-        <section>
-          <div className="font-playfair relative w-full">
-            <div className="slider-container">
-              <Slider {...setting}>
-                {banners.map((banner) => (
-                  <div key={banner.id || banner.fileName}>
-                    <img
-                      src={banner.url}
-                      className="w-full object-cover"
-                      alt="CF_banner"
-                      title="Virtual Production And VFX Courses In India"
-                      loading="lazy"
-                      fetchpriority="high"
-                    />
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          </div>
+        <section className="slider-container">
+          <Slider {...bannerSliderSettings}>
+            {banners.map((banner, idx) => (
+              <div key={banner._id || idx}>
+                <img
+                  src={banner.imageUrl}
+                  alt={`Editing Banner ${idx + 1}`}
+                  className="w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </Slider>
         </section>
 
         {/* -------------- Highlinghts ----------------- */}
