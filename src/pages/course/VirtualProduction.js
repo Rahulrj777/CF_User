@@ -117,7 +117,7 @@ const VirtualProduction = () => {
                 banners.map((banner, idx) => (
                   <div key={banner.id || idx}>
                     <img
-                      src={banner.url}
+                      src={banner.imageUrl}
                       alt={`Banner ${idx + 1}`}
                       className="w-full object-cover"
                     />
