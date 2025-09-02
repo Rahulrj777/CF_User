@@ -50,7 +50,7 @@ const Vfx = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const res = await axios.get(`${API_URL}/editingbanner`);
+        const res = await axios.get(`${API_URL}/vfxbanner`);
         // Ensure we always set an array
         const data = Array.isArray(res.data) ? res.data : [];
         setBanners(data);
@@ -165,7 +165,7 @@ const Vfx = () => {
               <div key={banner._id || idx}>
                 <img
                   src={banner.imageUrl}
-                  alt={`Editing Banner ${idx + 1}`}
+                  alt={`Vfx Banner ${idx + 1}`}
                   className="w-full object-cover"
                   loading="lazy"
                 />
