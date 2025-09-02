@@ -193,7 +193,7 @@ const Cinematography = () => {
                             <div className="flex flex-col items-center gap-y-3">
                               {/* Image */}
                               <img
-                                src={`http://localhost:5000${item.image}`}
+                                src={`${API_URL}${item.image}`}
                                 className="w-14 md:w-20 object-contain mb-2 filter"
                                 alt={item.titleLine}
                                 loading="lazy"
@@ -285,7 +285,7 @@ const Cinematography = () => {
                 {diploma.pdf && (
                   <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
                     <a
-                      href={`http://localhost:5000${diploma.pdf}`}
+                      href={`${API_URL}${diploma.pdf}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -358,7 +358,7 @@ const Cinematography = () => {
                     <div key={item.id} className="px-2">
                       <div>
                         <img
-                          src={`http://localhost:5000${item.image}`}
+                          src={`${API_URL}${item.image}`}
                           className="w-full object-cover"
                           alt="mentor work"
                           loading="lazy"
