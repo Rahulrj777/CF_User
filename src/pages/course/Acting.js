@@ -108,7 +108,7 @@ const Acting = () => {
                 banners.map((bannerItem, idx) => (
                   <div key={bannerItem.id || idx}>
                     <img
-                      src={bannerItem.url}
+                      src={bannerItem.imageUrl}
                       className="w-full object-cover"
                       alt={`Banner ${idx + 1}`}
                       title="Acting Courses In India"
