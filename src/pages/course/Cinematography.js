@@ -116,6 +116,17 @@ const Cinematography = () => {
           <meta charSet="utf-8" />
         </Helmet>
 
+        <div className="  ">
+          <img
+            src={banner}
+            className=" blur-[2px] w-full fixed top-0 object-cover h-screen -z-30"
+            alt="banner"
+            title="Diploma in Cinematography"
+            loading="lazy"
+            fetchpriority="auto"
+          />
+        </div>
+
         {/* Banner Section */}
         {Array.isArray(banners) && banners.length > 0 && (
           <section className="slider-container top-0">
