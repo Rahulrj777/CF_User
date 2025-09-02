@@ -137,7 +137,7 @@ const StillPhotography = () => {
         </Helmet>
 
         {/* Banner Slider */}
-        <section className="font-playfair relative w-full">
+        <section className="font-playfair relative w-full -top-10">
           <div className="slider-container">
             <Slider {...bannerSettings}>
               {banners.length > 0 ? (
