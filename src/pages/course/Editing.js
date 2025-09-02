@@ -12,7 +12,7 @@ import { GiFilmSpool } from "react-icons/gi";
 
 import EditingFAQ from "../../components/EditingFAQ";
 
-const API_URL = "http://localhost:5000/editingmentor";
+import API_URL from "../../config.js";
 
 const Editing = () => {
   const [banners, setBanners] = useState([]);
@@ -23,7 +23,7 @@ const Editing = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/editingbanner")
+      .get(`${API_URL}/editingbanner`)
       .then((res) => setBanners(res.data))
       .catch((err) => console.log("Error fetching banners:", err));
   }, []);
@@ -44,7 +44,7 @@ const Editing = () => {
   useEffect(() => {
     const fetchDiploma = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/editingdiploma");
+        const res = await axios.get(`${API_URL}/editingdiploma`);
         setDiploma(res.data);
       } catch (err) {
         console.error("Error fetching diploma data:", err);
@@ -72,7 +72,7 @@ const Editing = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/editingfilmography")
+      .get(`${API_URL}/editingfilmography`)
       .then((res) => setItems(res.data))
       .catch((err) => console.error("Error fetching filmography:", err));
   }, []);
@@ -112,14 +112,14 @@ const Editing = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/editinghighlights")
+      .get(`${API_URL}/editinghighlights`)
       .then((res) => setHighlights(res.data))
       .catch((err) => console.error(err));
   }, []);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/editingdiploma")
+      .get(`${API_URL}/editingdiploma`)
       .then((res) => setDiploma(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -196,7 +196,7 @@ const Editing = () => {
                             <div className="flex flex-col items-center gap-y-3">
                               {/* Image */}
                               <img
-                                src={`http://localhost:5000${item.image}`}
+                                src={`${API_URL}${item.image}`}
                                 className="w-14 md:w-20 object-contain mb-2 filter brightness-0"
                                 alt={item.titleLine}
                                 loading="lazy"
@@ -260,7 +260,7 @@ const Editing = () => {
                               <span>{item.title}</span>
                               {item.pdf && (
                                 <a
-                                  href={`http://localhost:5000${item.pdf}`}
+                                  href={`${API_URL}${item.pdf}`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="ml-2 text-blue-400 underline"
@@ -286,7 +286,7 @@ const Editing = () => {
             {diploma.pdf && (
               <div className="mt-10 flex justify-center">
                 <a
-                  href={`http://localhost:5000${diploma.pdf}`}
+                  href={`${API_URL}${diploma.pdf}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -838,7 +838,7 @@ const Editing = () => {
                     <div key={item.id} className="px-2">
                       <div>
                         <img
-                          src={`http://localhost:5000${item.image}`}
+                          src={`${API_URL}${item.image}`}
                           className="w-full object-cover"
                           alt="mentor work"
                           loading="lazy"

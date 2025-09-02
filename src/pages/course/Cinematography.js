@@ -279,7 +279,7 @@ const Cinematography = () => {
                 {diploma.pdf && (
                   <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
                     <a
-                      href={`http://localhost:5000${diploma.pdf}`}
+                      href={`${API_URL}${diploma.pdf}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
