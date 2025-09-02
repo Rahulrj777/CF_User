@@ -4,13 +4,10 @@ import { Helmet } from "react-helmet-async";
 import "../text.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
-
 import banner from "../../images/course/banner/pattern.jpg";
-
 import { RiWhatsappLine } from "react-icons/ri";
 import { FaComputer } from "react-icons/fa6";
-
-const API_URL = "http://localhost:5000/dimentor";
+import API_URL from "../../config.js";
 
 const DI = () => {
   const [banners, setBanners] = useState([]);
@@ -20,53 +17,76 @@ const DI = () => {
   const [contents, setContents] = useState([]);
   const [globalPdf, setGlobalPdf] = useState(null);
 
-  const API_BASE =
-    (typeof process !== "undefined" &&
-      process.env &&
-      process.env.NEXT_PUBLIC_API_BASE) ||
-    (typeof window !== "undefined" &&
-    window.location &&
-    window.location.port === "5173"
-      ? "http://localhost:5000"
-      : "http://localhost:5000");
-
-  const API = `${API_BASE}/didiploma`;
-
+  // Fetch course content
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/didiploma`);
+        setContents(res.data.items || res.data);
+        setGlobalPdf(res.data.pdf || null);
+      } catch (err) {
+        console.error("fetchData error:", err);
+      }
+    };
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    try {
-      const res = await axios.get(API);
-      setContents(res.data.items || res.data); // support both formats
-      setGlobalPdf(res.data.pdf || null);
-    } catch (err) {
-      console.error("fetchData error:", err);
-    }
-  };
-
+  // Fetch mentors
   useEffect(() => {
+    const fetchMentors = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/dimentor`);
+        setMentors(res.data);
+      } catch (err) {
+        console.error("Error fetching mentors:", err);
+      }
+    };
     fetchMentors();
   }, []);
 
-  const fetchMentors = async () => {
-    try {
-      const res = await axios.get(API_URL);
-      setMentors(res.data);
-    } catch (err) {
-      console.error("Error fetching mentors:", err);
-    }
-  };
-
+  // Fetch banners
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/dibanner")
-      .then((res) => setBanners(res.data))
-      .catch((err) => console.log("Error fetching banners:", err));
+    const fetchBanners = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/dibanner`);
+        setBanners(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        console.error("Error fetching banners:", err);
+        setBanners([]);
+      }
+    };
+    fetchBanners();
   }, []);
 
-  const setting = {
+  // Fetch highlights
+  useEffect(() => {
+    const fetchHighlights = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/dihighlights`);
+        setHighlights(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        console.error("Error fetching highlights:", err);
+        setHighlights([]);
+      }
+    };
+    fetchHighlights();
+  }, []);
+
+  // Fetch filmography
+  useEffect(() => {
+    const fetchFilmography = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/difilmography`);
+        setItems(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        console.error("Error fetching filmography:", err);
+        setItems([]);
+      }
+    };
+    fetchFilmography();
+  }, []);
+
+  const bannerSliderSettings = {
     dots: false,
     infinite: banners.length > 1,
     slidesToShow: 1,
@@ -78,28 +98,17 @@ const DI = () => {
     pauseOnHover: false,
   };
 
-  function topPage() {
-    window.scroll(0, 0);
-  }
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/difilmography")
-      .then((res) => setItems(res.data))
-      .catch((err) => console.error("Error fetching filmography:", err));
-  }, []);
-
-  const settings = {
+  const filmographySliderSettings = {
     className: "center",
     infinite: true,
     autoplay: true,
-    speed: 3000, // slow continuous movement
-    autoplaySpeed: 0, // no delay between slides
-    cssEase: "linear", // makes it smooth like water
-    slidesToShow: 4, // default visible items
+    speed: 3000,
+    autoplaySpeed: 0,
+    cssEase: "linear",
+    slidesToShow: 4,
     slidesToScroll: 1,
     swipeToSlide: true,
-    arrows: false, // optional: hides prev/next arrows
+    arrows: false,
     responsive: [
       {
         breakpoint: 2500,
@@ -122,16 +131,9 @@ const DI = () => {
     ],
   };
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/dihighlights")
-      .then((res) => setHighlights(res.data))
-      .catch((err) => console.error(err));
-  }, []);
-
   return (
     <>
-      <div className="font-kumbh overflow-hidden ">
+      <div className="font-kumbh overflow-hidden">
         <Helmet>
           <title>
             Color Grading Courses India | Color Grading Institute India
@@ -142,101 +144,82 @@ const DI = () => {
           />
           <meta
             name="keywords"
-            content="Digital Imaging courses | Color Grading courses | Best Digital Imaging courses | Best Color Grading courses | Digital Imaging Institute | Color Grading Institute | Best Multimedia Animation Institute | Film editing Courses | film institute in india | film training courses in India | Multimedia training institute | multimedia courses | Digital Media courses | Multimedia Institute In India"
+            content="Digital Imaging courses | Color Grading courses | Best Digital Imaging courses | Best Color Grading courses | Digital Imaging Institute | Color Grading Institute | Film editing Courses | film institute in india"
           />
           <meta name="author" content="Cinema Factory Academy" />
           <meta charSet="utf-8" />
-          {/* Add other meta tags here if needed */}
         </Helmet>
 
-        <div className="  ">
-          <img
-            src={banner}
-            className=" blur-[2px] w-full fixed top-0 object-cover h-screen -z-30"
-            alt="banner"
-            title="Color Grading Courses India"
-            loading="lazy"
-            fetchpriority="auto"
-          />
-        </div>
+        {/* Background banner */}
+        <img
+          src={banner}
+          className="blur-[2px] w-full fixed top-0 object-cover h-screen -z-30"
+          alt="banner"
+          title="Color Grading Courses India"
+          loading="lazy"
+        />
 
+        {/* Banner Slider */}
         <section>
           <div className="font-playfair relative w-full">
             <div className="slider-container">
-              <Slider {...setting}>
-                {banners.map((banner) => (
-                  <div key={banner.id || banner.fileName}>
-                    <img
-                      src={banner.url}
-                      className="w-full object-cover"
-                      alt="CF_banner"
-                      title="Virtual Production And VFX Courses In India"
-                      loading="lazy"
-                      fetchpriority="high"
-                    />
-                  </div>
-                ))}
+              <Slider {...bannerSliderSettings}>
+                {Array.isArray(banners) && banners.length > 0 ? (
+                  banners.map((bannerItem, idx) => (
+                    <div key={bannerItem.id || bannerItem._id || idx}>
+                      <img
+                        src={bannerItem.imageUrl || ""}
+                        className="w-full object-cover"
+                        alt={`CF_banner_${idx + 1}`}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-center text-white">No banners available</p>
+                )}
               </Slider>
             </div>
           </div>
         </section>
 
-        {/* -------------- course highligts ----------------- */}
-
+        {/* Highlights */}
         <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
           <div className="w-full md:w-[90%] mx-auto">
-            <div className="font-[Prata]">
-              <div>
-                <div className="flex justify-center items-center w-[90%] mx-auto">
-                  <div>
-                    {/* Title */}
-                    <div className="mb-10 md:mb-20">
-                      <h1 className="font-bold text-[24px] md:text-[40px] uppercase font-[poppins] text-black text-center">
-                        Course Highlights
-                      </h1>
-                    </div>
+            <div className="font-[Prata] flex flex-col items-center">
+              <h1 className="font-bold text-[24px] md:text-[40px] uppercase font-[poppins] text-black text-center mb-10 md:mb-20">
+                Course Highlights
+              </h1>
 
-                    {/* Grid */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-x-3 md:gap-x-16 gap-y-8 md:gap-y-14 mt-1 font-kumbh">
-                      {highlights.length > 0 ? (
-                        highlights.map((item) => (
-                          <div key={item.id}>
-                            <div className="flex flex-col items-center gap-y-3">
-                              {/* Image */}
-                              <img
-                                src={`http://localhost:5000${item.image}`}
-                                className="w-14 md:w-20 object-contain mb-2 filter brightness-0"
-                                alt={item.titleLine}
-                                loading="lazy"
-                              />
-
-                              {/* Text */}
-                              <div className="flex flex-col items-center">
-                                <h3 className="uppercase font-semibold text-center text-[10px] md:text-[14px] text-black tracking-[1px] leading-snug">
-                                  {item.titleLine}
-                                </h3>
-                              </div>
-                            </div>
-                          </div>
-                        ))
-                      ) : (
-                        <p className="text-gray-500 col-span-2 md:col-span-4 text-center">
-                          No highlights items available
-                        </p>
-                      )}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-x-3 md:gap-x-16 gap-y-8 md:gap-y-14 mt-1 font-kumbh">
+                {Array.isArray(highlights) && highlights.length > 0 ? (
+                  highlights.map((item) => (
+                    <div key={item.id || item._id}>
+                      <div className="flex flex-col items-center gap-y-3">
+                        <img
+                          src={`${API_URL}${item.image}`}
+                          className="w-14 md:w-20 object-contain mb-2 filter brightness-0"
+                          alt={item.titleLine || "Highlight"}
+                          loading="lazy"
+                        />
+                        <h3 className="uppercase font-semibold text-center text-[10px] md:text-[14px] text-black tracking-[1px] leading-snug">
+                          {item.titleLine || "N/A"}
+                        </h3>
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  ))
+                ) : (
+                  <p className="text-gray-500 col-span-2 md:col-span-4 text-center">
+                    No highlights items available
+                  </p>
+                )}
               </div>
             </div>
           </div>
         </section>
 
-        {/* -------------- Syllabus ----------------- */}
-
+        {/* Syllabus */}
         <section className="border-t-4 border-orange-500 pt-10 pb-16 md:pt-20 md:pb-20 bg-gray-950 -mt-6">
           <div className="w-full px-4 md:w-[80%] mx-auto">
-            {/* Heading */}
             <div className="flex flex-col gap-y-2 justify-center items-center mb-6 md:mb-16">
               <h3 className="font-bold text-center text-[24px] md:text-[40px] text-white font-kumbh uppercase">
                 3 Month Course
@@ -249,42 +232,42 @@ const DI = () => {
             {/* Content */}
             <div className="flex justify-center items-center font-[poppins]">
               <div className="grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-60 w-full">
-                {contents.map((month, index) => (
-                  <div key={month.id} className="flex flex-col gap-y-6">
-                    <div className="flex flex-col gap-y-4 items-start">
-                      <div className="flex flex-col gap-y-2 items-start">
-                        <div>
-                          <h3 className="font-bold text-white text-[18px] md:text-[28px]">
-                            {month.title || `Month ${index + 1}`}
-                          </h3>
-                        </div>
-                        <div>
-                          <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
-                            {month.children?.map((child, idx) => (
-                              <li
-                                key={idx}
-                                className="flex items-center gap-x-3 md:gap-x-5"
-                              >
-                                <span>
-                                  <FaComputer className="text-gray-100 text-[16px] md:text-[20px]" />
-                                </span>
-                                {child}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
+                {Array.isArray(contents) && contents.length > 0 ? (
+                  contents.map((month, idx) => (
+                    <div
+                      key={month.id || month._id || idx}
+                      className="flex flex-col gap-y-6"
+                    >
+                      <h3 className="font-bold text-white text-[18px] md:text-[28px]">
+                        {month.title || `Month ${idx + 1}`}
+                      </h3>
+                      <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
+                        {Array.isArray(month.children) &&
+                          month.children.map((child, i) => (
+                            <li
+                              key={i}
+                              className="flex items-center gap-x-3 md:gap-x-5"
+                            >
+                              <FaComputer className="text-gray-100 text-[16px] md:text-[20px]" />
+                              {child}
+                            </li>
+                          ))}
+                      </ul>
                     </div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p className="text-gray-400 text-center">
+                    No syllabus content available
+                  </p>
+                )}
               </div>
             </div>
 
-            {/* Global PDF link OR WhatsApp fallback */}
+            {/* PDF / WhatsApp CTA */}
             <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
               {globalPdf ? (
                 <a
-                  href={`${API_BASE}${globalPdf}`}
+                  href={`${API_URL}${globalPdf}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -307,72 +290,58 @@ const DI = () => {
           </div>
         </section>
 
-        {/* ------------------ Mentors ------------------ */}
-        
+        {/* Mentors */}
         <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
           <div className="px-4 w-full md:w-[80%] mx-auto font-kumbh">
-            <div className="flex items-center justify-center mb-6 md:mb-10">
-              <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase md:tracking-[2px]">
-                FilmMaker As Mentor
-              </h2>
-            </div>
-
+            <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase md:tracking-[2px] mb-6 md:mb-10">
+              FilmMaker As Mentor
+            </h2>
             <div className="flex justify-center items-center">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-                {mentors.map((mentor) => (
-                  <div
-                    key={mentor.id}
-                    className="flex flex-col items-center justify-center"
-                  >
-                    <div className="flex justify-center items-center">
+                {Array.isArray(mentors) && mentors.length > 0 ? (
+                  mentors.map((mentor) => (
+                    <div
+                      key={mentor.id || mentor._id}
+                      className="flex flex-col items-center justify-center"
+                    >
                       <img
-                        src={mentor.url}
+                        src={mentor.url || ""}
                         className="w-[80%] rounded-md object-cover"
                         alt="mentor"
-                        title="Learn cinematography Courses"
                         loading="lazy"
-                        fetchpriority="auto"
                       />
+                      <p className="mt-5 text-[13px] md:text-[14px] text-gray-900 text-center">
+                        {mentor.description || "No description available"}
+                      </p>
                     </div>
-
-                    <div className="flex flex-col gap-y-5 items-center justify-center mt-5">
-                      <div className="w-full md:w-[70%] mx-auto">
-                        <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                          {mentor.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p className="col-span-full text-center text-gray-500">
+                    No mentors available
+                  </p>
+                )}
               </div>
             </div>
           </div>
         </section>
 
-        {/* -------------- Our Mentors have Worked In ------------------------ */}
-
+        {/* Filmography */}
         <section className="bg-black overflow-hidden flex justify-center items-center pt-8 md:pt-14 pb-6 md:pb-10">
           <div className="w-full mx-auto">
-            <div className="flex justify-center items-center mb-8 md:mb-12">
-              <h3 className="font-bold uppercase text-[20px] md:text-[28px] text-white">
-                Mentor's Filmography
-              </h3>
-            </div>
-
+            <h3 className="font-bold uppercase text-[20px] md:text-[28px] text-white text-center mb-8 md:mb-12">
+              Mentor's Filmography
+            </h3>
             <div className="slider-container">
-              <Slider {...settings}>
-                {items.length > 0 ? (
-                  items.map((item) => (
-                    <div key={item.id} className="px-2">
-                      <div>
-                        <img
-                          src={`http://localhost:5000${item.image}`}
-                          className="w-full object-cover"
-                          alt="mentor work"
-                          loading="lazy"
-                          fetchpriority="auto"
-                        />
-                      </div>
+              <Slider {...filmographySliderSettings}>
+                {Array.isArray(items) && items.length > 0 ? (
+                  items.map((item, idx) => (
+                    <div key={item.id || item._id || idx} className="px-2">
+                      <img
+                        src={`${API_URL}${item.image}`}
+                        className="w-full object-cover"
+                        alt="mentor work"
+                        loading="lazy"
+                      />
                     </div>
                   ))
                 ) : (
