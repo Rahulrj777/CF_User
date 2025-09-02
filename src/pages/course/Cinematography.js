@@ -98,7 +98,7 @@ const Cinematography = () => {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}`/cinematographyhighlights")
+      .get(`${API_URL}/cinematographyhighlights`)
       .then((res) => setHighlights(res.data))
       .catch((err) => console.error(err));
   }, []);
