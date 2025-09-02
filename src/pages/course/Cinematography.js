@@ -13,72 +13,25 @@ import API_URL from "../../config.js";
 const Cinematography = () => {
   const [banners, setBanners] = useState([]);
   const [highlights, setHighlights] = useState([]);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]); // diploma array
   const [mentors, setMentors] = useState([]);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]); // filmography
+  const [loading, setLoading] = useState(true);
 
-  // Fetch Banners
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/cinematographybanner`)
-      .then((res) => setBanners(Array.isArray(res.data) ? res.data : []))
-      .catch((err) => console.log("Error fetching banners:", err));
-  }, []);
-
-  // Fetch Mentors
-  useEffect(() => {
-    const fetchMentors = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/mentors`); // make sure /mentors endpoint exists
-        setMentors(Array.isArray(res.data) ? res.data : []);
-      } catch (err) {
-        console.error("Error fetching mentors:", err);
-      }
-    };
-    fetchMentors();
-  }, []);
-
-  // Fetch Filmography
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/cinematographyfilmography`)
-      .then((res) => setItems(Array.isArray(res.data) ? res.data : []))
-      .catch((err) => console.error("Error fetching filmography:", err));
-  }, []);
-
-  // Fetch Highlights
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/cinematographyhighlights`)
-      .then((res) => setHighlights(Array.isArray(res.data) ? res.data : []))
-      .catch((err) => console.error("Error fetching highlights:", err));
-  }, []);
-
-  // Fetch Diploma
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/cinematographydiploma`)
-      .then((res) => {
-        const diplomaData = Array.isArray(res.data) ? res.data : [res.data];
-        setData(diplomaData);
-      })
-      .catch((err) => console.error("Error fetching diploma:", err));
-  }, []);
-
-  // Banner Slider Settings
+  // Banner slider settings
   const bannerSliderSettings = {
     dots: false,
-    infinite: Array.isArray(banners) && banners.length > 1,
+    infinite: banners.length > 1,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: Array.isArray(banners) && banners.length > 1,
+    autoplay: banners.length > 1,
     speed: 1000,
     autoplaySpeed: 5000,
     cssEase: "ease-in-out",
     pauseOnHover: false,
   };
 
-  // Filmography Slider Settings
+  // Filmography slider settings
   const settings = {
     className: "center",
     infinite: true,
@@ -91,20 +44,62 @@ const Cinematography = () => {
     swipeToSlide: true,
     arrows: false,
     responsive: [
-      { breakpoint: 2500, settings: { slidesToShow: 5, centerPadding: "30px" } },
-      { breakpoint: 2000, settings: { slidesToShow: 5, centerPadding: "30px" } },
-      { breakpoint: 1280, settings: { slidesToShow: 4, centerPadding: "30px" } },
-      { breakpoint: 1024, settings: { slidesToShow: 3, centerPadding: "30px" } },
-      { breakpoint: 768, settings: { slidesToShow: 2, centerPadding: "20px" } },
-      { breakpoint: 640, settings: { slidesToShow: 1, centerPadding: "15px" } },
+      {
+        breakpoint: 2500,
+        settings: { slidesToShow: 5, centerPadding: "30px" },
+      },
+      {
+        breakpoint: 1280,
+        settings: { slidesToShow: 4, centerPadding: "30px" },
+      },
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 3, centerPadding: "20px" },
+      },
+      { breakpoint: 768, settings: { slidesToShow: 2, centerPadding: "15px" } },
+      { breakpoint: 640, settings: { slidesToShow: 1, centerPadding: "10px" } },
     ],
   };
 
-  if (!data) return <p className="text-white">Loading...</p>;
+  useEffect(() => {
+    // Fetch banners
+    axios
+      .get(`${API_URL}/cinematographybanner`)
+      .then((res) => setBanners(Array.isArray(res.data) ? res.data : []))
+      .catch((err) => console.error("Error fetching banners:", err));
+
+    // Fetch highlights
+    axios
+      .get(`${API_URL}/cinematographyhighlights`)
+      .then((res) => setHighlights(Array.isArray(res.data) ? res.data : []))
+      .catch((err) => console.error("Error fetching highlights:", err));
+
+    // Fetch diploma
+    axios
+      .get(`${API_URL}/cinematographydiploma`)
+      .then((res) => setData(Array.isArray(res.data) ? res.data : []))
+      .catch((err) => console.error("Error fetching diploma:", err));
+
+    // Fetch mentors
+    axios
+      .get(`${API_URL}/cinematographymentor`)
+      .then((res) => setMentors(res.data?.cinematography?.mentor || []))
+      .catch((err) => console.error("Error fetching mentors:", err));
+
+    // Fetch filmography
+    axios
+      .get(`${API_URL}/cinematographyfilmography`)
+      .then((res) => setItems(Array.isArray(res.data) ? res.data : []))
+      .catch((err) => console.error("Error fetching filmography:", err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading)
+    return <p className="text-white text-center mt-20">Loading...</p>;
 
   return (
     <>
-      <div className="font-kumbh overflow-hidden ">
+      <div className="font-kumbh overflow-hidden">
         <Helmet>
           <title>
             Cinematography Courses | Best Cinematography Institute In India!
@@ -119,22 +114,9 @@ const Cinematography = () => {
           />
           <meta name="author" content="Cinema Factory Academy" />
           <meta charSet="utf-8" />
-          {/* Add other meta tags here if needed */}
         </Helmet>
 
-        <div className="  ">
-          <img
-            src={banner}
-            className=" blur-[2px] w-full fixed top-0 object-cover h-screen -z-30"
-            alt="banner"
-            title="Diploma in Cinematography"
-            loading="lazy"
-            fetchpriority="auto"
-          />
-        </div>
-
-        {/* ------- Banner ------- */}
-
+        {/* Banner Section */}
         {Array.isArray(banners) && banners.length > 0 && (
           <section className="slider-container">
             <Slider {...bannerSliderSettings}>
@@ -152,59 +134,40 @@ const Cinematography = () => {
           </section>
         )}
 
-        {/* ------------------- Course ------------------ */}
-
+        {/* Highlights Section */}
         <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
           <div className="w-full md:w-[90%] mx-auto">
-            <div className="font-[Prata]">
-              <div>
-                <div className="flex justify-center items-center w-[90%] mx-auto">
-                  <div>
-                    {/* Title */}
-                    <div className="mb-10 md:mb-20">
-                      <h1 className="font-bold text-[24px] md:text-[40px] uppercase font-[poppins] text-black text-center">
-                        Course Highlights
-                      </h1>
-                    </div>
-
-                    {/* Grid */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-x-3 md:gap-x-16 gap-y-8 md:gap-y-14 mt-1 font-kumbh">
-                      {highlights.length > 0 ? (
-                        highlights.map((item) => (
-                          <div key={item.id}>
-                            <div className="flex flex-col items-center gap-y-3">
-                              {/* Image */}
-                              <img
-                                src={`${API_URL}${item.image}`}
-                                className="w-14 md:w-20 object-contain mb-2 filter"
-                                alt={item.titleLine}
-                                loading="lazy"
-                              />
-
-                              {/* Text */}
-                              <div className="flex flex-col items-center">
-                                <h3 className="uppercase font-semibold text-center text-[10px] md:text-[14px] text-black tracking-[1px] leading-snug">
-                                  {item.titleLine}
-                                </h3>
-                              </div>
-                            </div>
-                          </div>
-                        ))
-                      ) : (
-                        <p className="text-gray-500 col-span-2 md:col-span-4 text-center">
-                          No highlights items available
-                        </p>
-                      )}
-                    </div>
+            <h1 className="font-bold text-[24px] md:text-[40px] uppercase text-black text-center mb-14">
+              Course Highlights
+            </h1>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-x-3 md:gap-x-16 gap-y-8 md:gap-y-14">
+              {highlights.length > 0 ? (
+                highlights.map((item, idx) => (
+                  <div
+                    key={item.id || idx}
+                    className="flex flex-col items-center gap-y-3"
+                  >
+                    <img
+                      src={`${API_URL}${item.image}`}
+                      alt={item.titleLine}
+                      className="w-14 md:w-20 object-contain mb-2"
+                      loading="lazy"
+                    />
+                    <h3 className="uppercase font-semibold text-center text-[10px] md:text-[14px] text-black tracking-[1px] leading-snug">
+                      {item.titleLine}
+                    </h3>
                   </div>
-                </div>
-              </div>
+                ))
+              ) : (
+                <p className="text-gray-500 col-span-2 md:col-span-4 text-center">
+                  No highlights items available
+                </p>
+              )}
             </div>
           </div>
         </section>
 
-        {/* -------------- Syllabus ----------------- */}
-
+        {/* Diploma Section */}
         {Array.isArray(data) &&
           data.map((diploma) => (
             <section
@@ -212,60 +175,56 @@ const Cinematography = () => {
               className="border-t-4 border-orange-500 pt-16 pb-10 md:pt-20 md:pb-20 bg-gray-950"
             >
               <div className="px-4 w-full md:w-[85%] mx-auto">
-                {/* Heading */}
                 <div className="flex flex-col gap-y-2 justify-center items-center mb-6 md:mb-16">
-                  <h3 className="font-bold text-center text-[24px] md:text-[40px] text-white font-kumbh uppercase">
+                  <h3 className="font-bold text-center text-[24px] md:text-[40px] text-white uppercase">
                     1 Year Diploma
                   </h3>
-                  <p className="font-semibold text-[18px] md:text-[24px] text-[#ff0000] font-[roboto] uppercase tracking-[1px]">
+                  <p className="font-semibold text-[18px] md:text-[24px] text-[#ff0000] uppercase tracking-[1px]">
                     in Cinematography
                   </p>
                 </div>
 
-                {/* Semester Blocks */}
-                <div className="flex justify-center items-center font-[poppins]">
-                  <div className="grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-60">
-                    {/* Semester 1 */}
-                    <div className="flex flex-col gap-y-5 items-start">
-                      <h3 className="font-bold text-white text-[18px] md:text-[28px]">
-                        Semester 1
-                      </h3>
-                      <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
-                        {(diploma.semester1 || []).map((line, i) => (
-                          <li
-                            key={i}
-                            className="flex items-center gap-x-3 md:gap-x-5"
-                          >
-                            <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px]" />
-                            {line}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                <div className="grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-60">
+                  {/* Semester 1 */}
+                  <div className="flex flex-col gap-y-5 items-start">
+                    <h3 className="font-bold text-white text-[18px] md:text-[28px]">
+                      Semester 1
+                    </h3>
+                    <ul className="text-[13px] md:text-[14px] flex flex-col gap-y-4 text-gray-200">
+                      {(diploma.semester1 || []).map((line, i) => (
+                        <li
+                          key={i}
+                          className="flex items-center gap-x-3 md:gap-x-5"
+                        >
+                          <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px]" />
+                          {line}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-                    {/* Semester 2 */}
-                    <div className="flex flex-col gap-y-5 items-start">
-                      <h3 className="font-bold text-white text-[18px] md:text-[28px]">
-                        Semester 2
-                      </h3>
-                      <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
-                        {(diploma.semester2 || []).map((line, i) => (
-                          <li
-                            key={i}
-                            className="flex items-center gap-x-3 md:gap-x-5"
-                          >
-                            <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px]" />
-                            {line}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                  {/* Semester 2 */}
+                  <div className="flex flex-col gap-y-5 items-start">
+                    <h3 className="font-bold text-white text-[18px] md:text-[28px]">
+                      Semester 2
+                    </h3>
+                    <ul className="text-[13px] md:text-[14px] flex flex-col gap-y-4 text-gray-200">
+                      {(diploma.semester2 || []).map((line, i) => (
+                        <li
+                          key={i}
+                          className="flex items-center gap-x-3 md:gap-x-5"
+                        >
+                          <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px]" />
+                          {line}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
 
                 {/* PDF Button */}
                 {diploma.pdf && (
-                  <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
+                  <div className="flex justify-center items-center mt-8 md:mt-20">
                     <a
                       href={`${API_URL}${diploma.pdf}`}
                       target="_blank"
@@ -281,72 +240,47 @@ const Cinematography = () => {
             </section>
           ))}
 
-        {/* ------------------ Mentors ------------------ */}
-
+        {/* Mentors Section */}
         <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
-          <div className="px-4 w-full md:w-[80%] mx-auto font-kumbh">
-            <div className="flex items-center justify-center mb-6 md:mb-10">
-              <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase md:tracking-[2px]">
-                FilmMaker As Mentor
-              </h2>
-            </div>
-
-            <div className="flex justify-center items-center">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-                {mentors.map((mentor) => (
-                  <div
-                    key={mentor.id}
-                    className="flex flex-col items-center justify-center"
-                  >
-                    <div className="flex justify-center items-center">
-                      <img
-                        src={mentor.url}
-                        className="w-[80%] rounded-md object-cover"
-                        alt="mentor"
-                        title="Learn cinematography Courses"
-                        loading="lazy"
-                        fetchpriority="auto"
-                      />
-                    </div>
-
-                    <div className="flex flex-col gap-y-5 items-center justify-center mt-5">
-                      <div className="w-full md:w-[70%] mx-auto">
-                        <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                          {mentor.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+          <div className="px-4 w-full md:w-[80%] mx-auto">
+            <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase mb-10">
+              FilmMaker As Mentor
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
+              {mentors.map((mentor) => (
+                <div key={mentor.id} className="flex flex-col items-center">
+                  <img
+                    src={mentor.url}
+                    className="w-[80%] rounded-md object-cover"
+                    alt="mentor"
+                    loading="lazy"
+                  />
+                  <p className="mt-5 text-center text-gray-900 text-[13px] md:text-[14px]">
+                    {mentor.description}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* -------------- Our Mentors have Worked In ------------------------ */}
-
+        {/* Filmography Section */}
         <section className="bg-black overflow-hidden flex justify-center items-center pt-8 md:pt-14 pb-6 md:pb-10">
           <div className="w-full mx-auto">
-            <div className="flex justify-center items-center mb-8 md:mb-12">
-              <h3 className="font-bold uppercase text-[20px] md:text-[28px] text-white">
-                Mentor's Filmography
-              </h3>
-            </div>
-
+            <h3 className="font-bold uppercase text-[20px] md:text-[28px] text-white text-center mb-8 md:mb-12">
+              Mentor's Filmography
+            </h3>
             <div className="slider-container">
               <Slider {...settings}>
                 {items.length > 0 ? (
                   items.map((item) => (
                     <div key={item.id} className="px-2">
-                      <div>
-                        <img
-                          src={`${API_URL}${item.image}`}
-                          className="w-full object-cover"
-                          alt="mentor work"
-                          loading="lazy"
-                          fetchpriority="auto"
-                        />
-                      </div>
+                      <img
+                        src={`${API_URL}${item.image}`}
+                        className="w-full object-cover"
+                        alt="mentor work"
+                        loading="lazy"
+                      />
                     </div>
                   ))
                 ) : (
