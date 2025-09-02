@@ -197,15 +197,19 @@ const Direction = () => {
                       Semester 1
                     </h3>
                     <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
-                      {diplomas.semester1.map((line, i) => (
-                        <li
-                          key={i}
-                          className="flex items-center gap-x-3 md:gap-x-5"
-                        >
-                          <PiFilmSlateDuotone className="text-gray-100 text-[16px] md:text-[20px]" />
-                          {line.title}
-                        </li>
-                      ))}
+                      {diplomas?.semester1?.length > 0 ? (
+                        diplomas.semester1.map((line, i) => (
+                          <li
+                            key={i}
+                            className="flex items-center gap-x-3 md:gap-x-5"
+                          >
+                            <PiFilmSlateDuotone className="text-gray-100 text-[16px] md:text-[20px]" />
+                            {line.title}
+                          </li>
+                        ))
+                      ) : (
+                        <li className="text-gray-400">No items yet</li>
+                      )}
                     </ul>
                   </div>
 
@@ -215,15 +219,19 @@ const Direction = () => {
                       Semester 2
                     </h3>
                     <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
-                      {diplomas.semester2.map((line, i) => (
-                        <li
-                          key={i}
-                          className="flex items-center gap-x-3 md:gap-x-5"
-                        >
-                          <PiFilmSlateDuotone className="text-gray-100 text-[16px] md:text-[20px]" />
-                          {line.title}
-                        </li>
-                      ))}
+                      {diplomas?.semester2?.length > 0 ? (
+                        diplomas.semester2.map((line, i) => (
+                          <li
+                            key={i}
+                            className="flex items-center gap-x-3 md:gap-x-5"
+                          >
+                            <PiFilmSlateDuotone className="text-gray-100 text-[16px] md:text-[20px]" />
+                            {line.title}
+                          </li>
+                        ))
+                      ) : (
+                        <li className="text-gray-400">No items yet</li>
+                      )}
                     </ul>
                   </div>
                 </div>
