@@ -35,7 +35,7 @@ const Vfx = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/vfxdiploma");
+      const res = await axios.get(`${API_URL}/vfxdiploma`);
       const allFiles = res.data;
 
       // Safety check for type
@@ -81,7 +81,7 @@ const Vfx = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/vfxfilmography")
+      .get(`${API_URL}/vfxfilmography`)
       .then((res) => setItems(res.data))
       .catch((err) => console.error("Error fetching filmography:", err));
   }, []);
@@ -121,7 +121,7 @@ const Vfx = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/vfxhighlights")
+      .get(`${API_URL}/vfxhighlights`)
       .then((res) => setHighlights(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -129,7 +129,7 @@ const Vfx = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/vfxdiploma");
+        const res = await axios.get(`${API_URL}/vfxdiploma`);
         setImages(res.data);
       } catch (err) {
         console.error("Error fetching images", err);
@@ -195,7 +195,7 @@ const Vfx = () => {
                             <div className="flex flex-col items-center gap-y-3">
                               {/* Image */}
                               <img
-                                src={`http://localhost:5000${item.image}`}
+                                src={`${API_URL}${item.image}`}
                                 className="w-14 md:w-20 object-contain mb-2 filter brightness-0"
                                 alt={item.titleLine}
                                 loading="lazy"
@@ -255,7 +255,7 @@ const Vfx = () => {
                           className="flex justify-center items-center"
                         >
                           <img
-                            src={`http://localhost:5000${img.url}`}
+                            src={`${API_URL}${img.url}`}
                             className="w-16 md:w-28 object-cover"
                             alt="software"
                             title="Best Visual Effects Institute"
@@ -278,7 +278,7 @@ const Vfx = () => {
             {pdf ? (
               <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
                 <a
-                  href={`http://localhost:5000${pdf.url}`}
+                  href={`${API_URL}${pdf.url}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -354,7 +354,7 @@ const Vfx = () => {
                     <div key={item.id} className="px-2">
                       <div>
                         <img
-                          src={`http://localhost:5000${item.image}`}
+                          src={`${API_URL}${item.image}`}
                           className="w-full object-cover"
                           alt="mentor work"
                           loading="lazy"
