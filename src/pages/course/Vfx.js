@@ -158,19 +158,17 @@ const Vfx = () => {
           {/* Add other meta tags here if needed */}
         </Helmet>
 
-        <section className="slider-container">
-          <Slider {...bannerSliderSettings}>
-            {Array.isArray(banners) && banners.length > 0 ? (
-              banners.map((banner, idx) => (
-                <div key={banner._id || idx}>
-                  <img src={banner.imageUrl} alt={`Vfx Banner ${idx + 1}`} />
-                </div>
-              ))
-            ) : (
-              <p>No banners available</p>
-            )}
-          </Slider>
-        </section>
+<Slider {...bannerSliderSettings}>
+  {Array.isArray(banners) && banners.length > 0 ? (
+    banners.map((banner, idx) => (
+      <div key={banner._id || idx}>
+        <img src={banner.imageUrl} alt={`Vfx Banner ${idx + 1}`} />
+      </div>
+    ))
+  ) : (
+    <p>No banners available</p>
+  )}
+</Slider>
 
         {/* -------------- Highlinghts ----------------- */}
 
