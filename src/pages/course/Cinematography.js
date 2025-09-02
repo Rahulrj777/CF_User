@@ -9,67 +9,28 @@ import banner from "../../images/course/banner/pattern.jpg";
 
 import { VscDeviceCameraVideo } from "react-icons/vsc";
 
-import posterOne from "../../images/poster/manoj/mv1.png";
-import posterTwo from "../../images/poster/manoj/mv2.png";
-import posterThree from "../../images/poster/manoj/mv3.png";
-import posterFour from "../../images/poster/manoj/mv4.png";
-import posterFive from "../../images/poster/manoj/mv5.png";
-import posterSix from "../../images/poster/manoj/mv6.png";
-import posterSeven from "../../images/poster/manoj/mv7.png";
-import posterEight from "../../images/poster/manoj/mv8.png";
-
-import madhuOne from "../../images/poster/madhu/mv1.png";
-import madhuTwo from "../../images/poster/madhu/mv2.png";
-import madhuThree from "../../images/poster/madhu/mv3.png";
-import madhuFour from "../../images/poster/madhu/mv4.png";
-import madhuFive from "../../images/poster/madhu/mv5.png";
-import madhuSix from "../../images/poster/madhu/mv6.png";
-import madhuSeven from "../../images/poster/madhu/mv7.png";
-import madhuEight from "../../images/poster/madhu/mv8.png";
-import madhuNine from "../../images/poster/madhu/mv9.png";
-import madhuTen from "../../images/poster/madhu/mv10.png";
-import madhuElven from "../../images/poster/madhu/mv11.png";
-import madhuTwel from "../../images/poster/madhu/mv12.png";
-
-import rajkumarOne from "../../images/poster/rajkumar/mv1.png";
-import rajKumarTwo from "../../images/poster/rajkumar/mv2.png";
-import rajkumarThree from "../../images/poster/rajkumar/mv3.png";
-import rajkumarFour from "../../images/poster/rajkumar/mv4.png";
-import rajkumarFive from "../../images/poster/rajkumar/mv5.png";
-import rajkumarSix from "../../images/poster/rajkumar/mv6.png";
-
-import rameshOne from "../../images/poster/ramesh/mv1.png";
-import rameshTwo from "../../images/poster/ramesh/mv2.png";
-import rameshThree from "../../images/poster/ramesh/mv3.png";
-import rameshFour from "../../images/poster/ramesh/mv4.png";
-import rameshFive from "../../images/poster/ramesh/mv5.png";
-
-import prasannaOne from "../../images/poster/prasanna/mv1.png";
-import prasannaTwo from "../../images/poster/prasanna/mv2.png";
-import prasannaThree from "../../images/poster/prasanna/mv3.png";
-import prasannaFour from "../../images/poster/prasanna/mv4.png";
-import prasannaFive from "../../images/poster/prasanna/mv5.png";
-import prasannaSix from "../../images/poster/prasanna/mv6.png";
-import prasannaSeven from "../../images/poster/prasanna/mv7.png";
-import prasannaEight from "../../images/poster/prasanna/mv8.png";
-import prasannaNine from "../../images/poster/prasanna/mv9.png";
-import prasannaTen from "../../images/poster/prasanna/mv10.png";
-
 //icons
 import { RiWhatsappLine } from "react-icons/ri";
 
 import CinematographyFAQ from "../../components/Cinematography_FAQ";
 
-const API_URL = "http://localhost:5000/cinematographymentor"; 
-
+import API_URL from "../../config.js";
 
 const Cinematography = () => {
   const [banners, setBanners] = useState([]);
   const [highlights, setHighlights] = useState([]);
   const [data, setData] = useState([]);
   const [mentors, setMentors] = useState([]);
-      const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]);
 
+    useEffect(() => {
+    axios
+      .get(`${API_URL}/cinematographybanner`)
+      .then((res) => {
+        setBanners(Array.isArray(res.data) ? res.data : []);
+      })
+      .catch((err) => console.error("Error fetching banners:", err));
+  }, []);
 
   useEffect(() => {
     axios
@@ -78,7 +39,7 @@ const Cinematography = () => {
       .catch((err) => console.log("Error fetching banners:", err));
   }, []);
 
-        useEffect(() => {
+  useEffect(() => {
     fetchMentors();
   }, []);
 
@@ -89,18 +50,6 @@ const Cinematography = () => {
     } catch (err) {
       console.error("Error fetching mentors:", err);
     }
-  };
-
-  const setting = {
-    dots: false,
-    infinite: banners.length > 1,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: banners.length > 1,
-    speed: 1000,
-    autoplaySpeed: 5000,
-    cssEase: "ease-in-out",
-    pauseOnHover: false,
   };
 
   function topPage() {
@@ -114,26 +63,50 @@ const Cinematography = () => {
       .catch((err) => console.error("Error fetching filmography:", err));
   }, []);
 
-const settings = {
-  className: "center",
-  infinite: true,
-  autoplay: true,
-  speed: 3000,             // slow continuous movement
-  autoplaySpeed: 0,        // no delay between slides
-  cssEase: "linear",       // makes it smooth like water
-  slidesToShow: 4,         // default visible items
-  slidesToScroll: 1,
-  swipeToSlide: true,
-  arrows: false,           // optional: hides prev/next arrows
-  responsive: [
-    { breakpoint: 2500, settings: { slidesToShow: 5, centerPadding: "30px" } },
-    { breakpoint: 2000, settings: { slidesToShow: 5, centerPadding: "30px" } },
-    { breakpoint: 1280, settings: { slidesToShow: 4, centerPadding: "30px" } },
-    { breakpoint: 1024, settings: { slidesToShow: 3, centerPadding: "30px" } },
-    { breakpoint: 768, settings: { slidesToShow: 2, centerPadding: "20px" } },
-    { breakpoint: 640, settings: { slidesToShow: 1, centerPadding: "15px" } },
-  ],
-};
+  const bannerSliderSettings = {
+    dots: false,
+    infinite: banners.length > 1,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: banners.length > 1,
+    speed: 1000,
+    autoplaySpeed: 5000,
+    cssEase: "ease-in-out",
+    pauseOnHover: false,
+  };
+
+  const settings = {
+    className: "center",
+    infinite: true,
+    autoplay: true,
+    speed: 3000, // slow continuous movement
+    autoplaySpeed: 0, // no delay between slides
+    cssEase: "linear", // makes it smooth like water
+    slidesToShow: 4, // default visible items
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    arrows: false, // optional: hides prev/next arrows
+    responsive: [
+      {
+        breakpoint: 2500,
+        settings: { slidesToShow: 5, centerPadding: "30px" },
+      },
+      {
+        breakpoint: 2000,
+        settings: { slidesToShow: 5, centerPadding: "30px" },
+      },
+      {
+        breakpoint: 1280,
+        settings: { slidesToShow: 4, centerPadding: "30px" },
+      },
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 3, centerPadding: "30px" },
+      },
+      { breakpoint: 768, settings: { slidesToShow: 2, centerPadding: "20px" } },
+      { breakpoint: 640, settings: { slidesToShow: 1, centerPadding: "15px" } },
+    ],
+  };
 
   useEffect(() => {
     axios
@@ -142,12 +115,13 @@ const settings = {
       .catch((err) => console.error(err));
   }, []);
 
-  axios.get("http://localhost:5000/cinematographydiploma")
-  .then((res) => {
-    const diplomaData = Array.isArray(res.data) ? res.data : [res.data];
-    setData(diplomaData);
-  })
-  .catch(err => console.error(err));
+  axios
+    .get("http://localhost:5000/cinematographydiploma")
+    .then((res) => {
+      const diplomaData = Array.isArray(res.data) ? res.data : [res.data];
+      setData(diplomaData);
+    })
+    .catch((err) => console.error(err));
 
   if (!data) return <p className="text-white">Loading...</p>;
 
@@ -184,26 +158,22 @@ const settings = {
 
         {/* ------- Banner ------- */}
 
-        <section>
-          <div className="font-playfair relative w-full">
-            <div className="slider-container">
-              <Slider {...setting}>
-                {banners.map((banner) => (
-                  <div key={banner.id || banner.fileName}>
-                    <img
-                      src={banner.url}
-                      className="w-full object-cover"
-                      alt="CF_banner"
-                      title="Virtual Production And VFX Courses In India"
-                      loading="lazy"
-                      fetchpriority="high"
-                    />
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          </div>
-        </section>
+        {banners.length > 0 && (
+          <section className="slider-container">
+            <Slider {...bannerSliderSettings}>
+              {banners.map((banner) => (
+                <div key={banner._id}>
+                  <img
+                    src={banner.imageUrl}
+                    alt="Cinematography Banner"
+                    className="w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </Slider>
+          </section>
+        )}
 
         {/* ------------------- Course ------------------ */}
 
@@ -258,139 +228,159 @@ const settings = {
 
         {/* -------------- Syllabus ----------------- */}
 
-        {Array.isArray(data) && data.map((diploma) => (
-          <section key={diploma._id} className="border-t-4 border-orange-500 pt-16 pb-10 md:pt-20 md:pb-20 bg-gray-950">
-            <div className="px-4 w-full md:w-[85%] mx-auto">
-              {/* Heading */}
-              <div className="flex flex-col gap-y-2 justify-center items-center mb-6 md:mb-16">
-                <h3 className="font-bold text-center text-[24px] md:text-[40px] text-white font-kumbh uppercase">
-                  1 Year Diploma
-                </h3>
-                <p className="font-semibold text-[18px] md:text-[24px] text-[#ff0000] font-[roboto] uppercase tracking-[1px]">
-                  in Cinematography
-                </p>
-              </div>
+        {Array.isArray(data) &&
+          data.map((diploma) => (
+            <section
+              key={diploma._id}
+              className="border-t-4 border-orange-500 pt-16 pb-10 md:pt-20 md:pb-20 bg-gray-950"
+            >
+              <div className="px-4 w-full md:w-[85%] mx-auto">
+                {/* Heading */}
+                <div className="flex flex-col gap-y-2 justify-center items-center mb-6 md:mb-16">
+                  <h3 className="font-bold text-center text-[24px] md:text-[40px] text-white font-kumbh uppercase">
+                    1 Year Diploma
+                  </h3>
+                  <p className="font-semibold text-[18px] md:text-[24px] text-[#ff0000] font-[roboto] uppercase tracking-[1px]">
+                    in Cinematography
+                  </p>
+                </div>
 
-              {/* Semester Blocks */}
-              <div className="flex justify-center items-center font-[poppins]">
-                <div className="grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-60">
-                  {/* Semester 1 */}
-                  <div className="flex flex-col gap-y-5 items-start">
-                    <h3 className="font-bold text-white text-[18px] md:text-[28px]">Semester 1</h3>
-                    <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
-                      {(diploma.semester1 || []).map((line, i) => (
-                        <li key={i} className="flex items-center gap-x-3 md:gap-x-5">
-                          <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px]" />
-                          {line}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                {/* Semester Blocks */}
+                <div className="flex justify-center items-center font-[poppins]">
+                  <div className="grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-60">
+                    {/* Semester 1 */}
+                    <div className="flex flex-col gap-y-5 items-start">
+                      <h3 className="font-bold text-white text-[18px] md:text-[28px]">
+                        Semester 1
+                      </h3>
+                      <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
+                        {(diploma.semester1 || []).map((line, i) => (
+                          <li
+                            key={i}
+                            className="flex items-center gap-x-3 md:gap-x-5"
+                          >
+                            <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px]" />
+                            {line}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-                  {/* Semester 2 */}
-                  <div className="flex flex-col gap-y-5 items-start">
-                    <h3 className="font-bold text-white text-[18px] md:text-[28px]">Semester 2</h3>
-                    <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
-                      {(diploma.semester2 || []).map((line, i) => (
-                        <li key={i} className="flex items-center gap-x-3 md:gap-x-5">
-                          <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px]" />
-                          {line}
-                        </li>
-                      ))}
-                    </ul>
+                    {/* Semester 2 */}
+                    <div className="flex flex-col gap-y-5 items-start">
+                      <h3 className="font-bold text-white text-[18px] md:text-[28px]">
+                        Semester 2
+                      </h3>
+                      <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
+                        {(diploma.semester2 || []).map((line, i) => (
+                          <li
+                            key={i}
+                            className="flex items-center gap-x-3 md:gap-x-5"
+                          >
+                            <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px]" />
+                            {line}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* PDF Button */}
-              {diploma.pdf && (
-                <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
-                  <a href={`http://localhost:5000${diploma.pdf}`} target="_blank" rel="noopener noreferrer">
-                    <button className="uppercase hover:scale-105 group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]">
-                      Download Detailed Syllabus
-                    </button>
-                  </a>
-                </div>
-              )}
-            </div>
-          </section>
-        ))}
+                {/* PDF Button */}
+                {diploma.pdf && (
+                  <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
+                    <a
+                      href={`http://localhost:5000${diploma.pdf}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <button className="uppercase hover:scale-105 group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]">
+                        Download Detailed Syllabus
+                      </button>
+                    </a>
+                  </div>
+                )}
+              </div>
+            </section>
+          ))}
 
         {/* ------------------ Mentors ------------------ */}
 
-   <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
-      <div className="px-4 w-full md:w-[80%] mx-auto font-kumbh">
-        <div className="flex items-center justify-center mb-6 md:mb-10">
-          <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase md:tracking-[2px]">
-            FilmMaker As Mentor
-          </h2>
-        </div>
+        <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
+          <div className="px-4 w-full md:w-[80%] mx-auto font-kumbh">
+            <div className="flex items-center justify-center mb-6 md:mb-10">
+              <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase md:tracking-[2px]">
+                FilmMaker As Mentor
+              </h2>
+            </div>
 
-        <div className="flex justify-center items-center">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-            {mentors.map((mentor) => (
-              <div
-                key={mentor.id}
-                className="flex flex-col items-center justify-center"
-              >
-                <div className="flex justify-center items-center">
-                  <img
-                    src={mentor.url}
-                    className="w-[80%] rounded-md object-cover"
-                    alt="mentor"
-                    title="Learn cinematography Courses"
-                    loading="lazy"
-                    fetchpriority="auto"
-                  />
-                </div>
+            <div className="flex justify-center items-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
+                {mentors.map((mentor) => (
+                  <div
+                    key={mentor.id}
+                    className="flex flex-col items-center justify-center"
+                  >
+                    <div className="flex justify-center items-center">
+                      <img
+                        src={mentor.url}
+                        className="w-[80%] rounded-md object-cover"
+                        alt="mentor"
+                        title="Learn cinematography Courses"
+                        loading="lazy"
+                        fetchpriority="auto"
+                      />
+                    </div>
 
-                <div className="flex flex-col gap-y-5 items-center justify-center mt-5">
-                  <div className="w-full md:w-[70%] mx-auto">
-                    <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                      {mentor.description}
-                    </p>
+                    <div className="flex flex-col gap-y-5 items-center justify-center mt-5">
+                      <div className="w-full md:w-[70%] mx-auto">
+                        <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
+                          {mentor.description}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
         {/* -------------- Our Mentors have Worked In ------------------------ */}
 
-    <section className="bg-black overflow-hidden flex justify-center items-center pt-8 md:pt-14 pb-6 md:pb-10">
-      <div className="w-full mx-auto">
-        <div className="flex justify-center items-center mb-8 md:mb-12">
-          <h3 className="font-bold uppercase text-[20px] md:text-[28px] text-white">
-            Mentor's Filmography
-          </h3>
-        </div>
+        <section className="bg-black overflow-hidden flex justify-center items-center pt-8 md:pt-14 pb-6 md:pb-10">
+          <div className="w-full mx-auto">
+            <div className="flex justify-center items-center mb-8 md:mb-12">
+              <h3 className="font-bold uppercase text-[20px] md:text-[28px] text-white">
+                Mentor's Filmography
+              </h3>
+            </div>
 
-        <div className="slider-container">
-          <Slider {...settings}>
-            {items.length > 0 ? (
-              items.map((item) => (
-                <div key={item.id} className="px-2">
-                  <div>
-                    <img
-                      src={`http://localhost:5000${item.image}`}
-                      className="w-full object-cover"
-                      alt="mentor work"
-                      loading="lazy"
-                      fetchpriority="auto"
-                    />
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p className="text-white text-center">No filmography uploaded yet.</p>
-            )}
-          </Slider>
-        </div>
-      </div>
-    </section>
+            <div className="slider-container">
+              <Slider {...settings}>
+                {items.length > 0 ? (
+                  items.map((item) => (
+                    <div key={item.id} className="px-2">
+                      <div>
+                        <img
+                          src={`http://localhost:5000${item.image}`}
+                          className="w-full object-cover"
+                          alt="mentor work"
+                          loading="lazy"
+                          fetchpriority="auto"
+                        />
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-white text-center">
+                    No filmography uploaded yet.
+                  </p>
+                )}
+              </Slider>
+            </div>
+          </div>
+        </section>
 
         {/* ------------------------------ FAQ ----------------------- */}
 
