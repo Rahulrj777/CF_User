@@ -54,10 +54,10 @@ const Cinematography = () => {
 
   const bannerSliderSettings = {
     dots: false,
-    infinite: banners.length > 1,
+    infinite: Array.isArray(banners) && banners.length > 1,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: banners.length > 1,
+    autoplay: Array.isArray(banners) && banners.length > 1,
     speed: 1000,
     autoplaySpeed: 5000,
     cssEase: "ease-in-out",
@@ -150,8 +150,8 @@ const Cinematography = () => {
         {Array.isArray(banners) && banners.length > 0 && (
           <section className="slider-container">
             <Slider {...bannerSliderSettings}>
-              {banners.map((banner) => (
-                <div key={banner._id}>
+              {banners.map((banner, idx) => (
+                <div key={banner._id || idx}>
                   <img
                     src={banner.imageUrl}
                     alt="Cinematography Banner"
