@@ -4,16 +4,10 @@ import { Link } from "react-router-dom";
 import "../text.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
-
 import banner from "../../images/course/banner/pattern.jpg";
-
 import { VscDeviceCameraVideo } from "react-icons/vsc";
-
-//icons
 import { RiWhatsappLine } from "react-icons/ri";
-
 import CinematographyFAQ from "../../components/Cinematography_FAQ";
-
 import API_URL from "../../config.js";
 
 const Cinematography = () => {
@@ -23,28 +17,55 @@ const Cinematography = () => {
   const [mentors, setMentors] = useState([]);
   const [items, setItems] = useState([]);
 
+  // Fetch Banners
   useEffect(() => {
     axios
-      .get(`${API_URL}/cinematographybanner`)
-      .then((res) => {
-        setBanners(Array.isArray(res.data) ? res.data : []);
-      })
+      .get(`${API_BASE}/cinematographybanner`)
+      .then((res) => setBanners(Array.isArray(res.data) ? res.data : []))
       .catch((err) => console.log("Error fetching banners:", err));
   }, []);
 
+  // Fetch Mentors
   useEffect(() => {
+    const fetchMentors = async () => {
+      try {
+        const res = await axios.get(`${API_BASE}/mentors`); // make sure /mentors endpoint exists
+        setMentors(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        console.error("Error fetching mentors:", err);
+      }
+    };
     fetchMentors();
   }, []);
 
-  const fetchMentors = async () => {
-    try {
-      const res = await axios.get(API_URL);
-      setMentors(res.data);
-    } catch (err) {
-      console.error("Error fetching mentors:", err);
-    }
-  };
+  // Fetch Filmography
+  useEffect(() => {
+    axios
+      .get(`${API_BASE}/cinematographyfilmography`)
+      .then((res) => setItems(Array.isArray(res.data) ? res.data : []))
+      .catch((err) => console.error("Error fetching filmography:", err));
+  }, []);
 
+  // Fetch Highlights
+  useEffect(() => {
+    axios
+      .get(`${API_BASE}/cinematographyhighlights`)
+      .then((res) => setHighlights(Array.isArray(res.data) ? res.data : []))
+      .catch((err) => console.error("Error fetching highlights:", err));
+  }, []);
+
+  // Fetch Diploma
+  useEffect(() => {
+    axios
+      .get(`${API_BASE}/cinematographydiploma`)
+      .then((res) => {
+        const diplomaData = Array.isArray(res.data) ? res.data : [res.data];
+        setData(diplomaData);
+      })
+      .catch((err) => console.error("Error fetching diploma:", err));
+  }, []);
+
+  // Banner Slider Settings
   const bannerSliderSettings = {
     dots: false,
     infinite: Array.isArray(banners) && banners.length > 1,
@@ -57,64 +78,27 @@ const Cinematography = () => {
     pauseOnHover: false,
   };
 
-  function topPage() {
-    window.scroll(0, 0);
-  }
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/cinematographyfilmography")
-      .then((res) => setItems(res.data))
-      .catch((err) => console.error("Error fetching filmography:", err));
-  }, []);
-
+  // Filmography Slider Settings
   const settings = {
     className: "center",
     infinite: true,
     autoplay: true,
-    speed: 3000, // slow continuous movement
-    autoplaySpeed: 0, // no delay between slides
-    cssEase: "linear", // makes it smooth like water
-    slidesToShow: 4, // default visible items
+    speed: 3000,
+    autoplaySpeed: 0,
+    cssEase: "linear",
+    slidesToShow: 4,
     slidesToScroll: 1,
     swipeToSlide: true,
-    arrows: false, // optional: hides prev/next arrows
+    arrows: false,
     responsive: [
-      {
-        breakpoint: 2500,
-        settings: { slidesToShow: 5, centerPadding: "30px" },
-      },
-      {
-        breakpoint: 2000,
-        settings: { slidesToShow: 5, centerPadding: "30px" },
-      },
-      {
-        breakpoint: 1280,
-        settings: { slidesToShow: 4, centerPadding: "30px" },
-      },
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 3, centerPadding: "30px" },
-      },
+      { breakpoint: 2500, settings: { slidesToShow: 5, centerPadding: "30px" } },
+      { breakpoint: 2000, settings: { slidesToShow: 5, centerPadding: "30px" } },
+      { breakpoint: 1280, settings: { slidesToShow: 4, centerPadding: "30px" } },
+      { breakpoint: 1024, settings: { slidesToShow: 3, centerPadding: "30px" } },
       { breakpoint: 768, settings: { slidesToShow: 2, centerPadding: "20px" } },
       { breakpoint: 640, settings: { slidesToShow: 1, centerPadding: "15px" } },
     ],
   };
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/cinematographyhighlights")
-      .then((res) => setHighlights(res.data))
-      .catch((err) => console.error(err));
-  }, []);
-
-  axios
-    .get("http://localhost:5000/cinematographydiploma")
-    .then((res) => {
-      const diplomaData = Array.isArray(res.data) ? res.data : [res.data];
-      setData(diplomaData);
-    })
-    .catch((err) => console.error(err));
 
   if (!data) return <p className="text-white">Loading...</p>;
 
@@ -191,7 +175,7 @@ const Cinematography = () => {
                             <div className="flex flex-col items-center gap-y-3">
                               {/* Image */}
                               <img
-                                src={`http://localhost:5000${item.image}`}
+                                src={`${API_URL}${item.image}`}
                                 className="w-14 md:w-20 object-contain mb-2 filter"
                                 alt={item.titleLine}
                                 loading="lazy"
@@ -283,7 +267,7 @@ const Cinematography = () => {
                 {diploma.pdf && (
                   <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
                     <a
-                      href={`http://localhost:5000${diploma.pdf}`}
+                      href={`${API_URL}${diploma.pdf}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -356,7 +340,7 @@ const Cinematography = () => {
                     <div key={item.id} className="px-2">
                       <div>
                         <img
-                          src={`http://localhost:5000${item.image}`}
+                          src={`${API_URL}${item.image}`}
                           className="w-full object-cover"
                           alt="mentor work"
                           loading="lazy"
