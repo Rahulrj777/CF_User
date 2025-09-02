@@ -17,7 +17,6 @@ const API_URL = "http://localhost:5000/editingmentor";
 const Editing = () => {
   const [banners, setBanners] = useState([]);
   const [highlights, setHighlights] = useState([]);
-  const [data, setData] = useState([]);
   const [mentors, setMentors] = useState([]);
   const [items, setItems] = useState([]);
   const [diploma, setDiploma] = useState({ months: [] });

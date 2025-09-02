@@ -19,8 +19,6 @@ const Direction = () => {
   const [mentors, setMentors] = useState([]);
   const [filmography, setFilmography] = useState([]);
   const [loading, setLoading] = useState(true);
-  const whatsappLink =
-    "https://wa.me/919XXXXXXXXX?text=Hi!%20I%20want%20to%20know%20about%20the%20Direction%20Diploma%20syllabus";
 
   // Fetch banners
   useEffect(() => {
@@ -238,24 +236,19 @@ const Direction = () => {
               </div>
 
               {/* PDF Button */}
-              <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
-                <button
-                  onClick={() => {
-                    if (diplomas.pdfUrl) {
-                      // Open PDF in new tab
-                      window.open(diplomas.pdfUrl, "_blank");
-                    } else {
-                      // Redirect to WhatsApp
-                      const whatsappLink =
-                        "https://wa.me/919XXXXXXXXX?text=Hi!%20I%20want%20to%20know%20about%20the%20Direction%20Diploma%20syllabus";
-                      window.open(whatsappLink, "_blank");
-                    }
-                  }}
-                  className="uppercase hover:scale-105 group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]"
-                >
-                  Download Detailed Syllabus
-                </button>
-              </div>
+              {diplomas.pdfUrl && (
+                <div className="mt-10 flex justify-center">
+                  <a
+                    href={diplomas.pdfUrl} // Use the full Cloudinary URL
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <button className="uppercase group relative inline-flex h-10 text-[14px] items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-10 font-medium text-neutral-200 duration-500 hover:bg-red-700">
+                      View Detailed Syllabus
+                    </button>
+                  </a>
+                </div>
+              )}
             </div>
           </section>
         )}
