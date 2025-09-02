@@ -161,7 +161,7 @@ const DI = () => {
 
         {/* Banner Slider */}
         <section>
-          <div className="font-playfair relative w-full">
+          <div className="font-playfair relative w-full -top-10">
             <div className="slider-container">
               <Slider {...bannerSliderSettings}>
                 {Array.isArray(banners) && banners.length > 0 ? (
