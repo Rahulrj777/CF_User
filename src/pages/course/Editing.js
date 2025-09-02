@@ -24,8 +24,8 @@ const Editing = () => {
   useEffect(() => {
     axios
       .get(`${API_URL}/editingbanner`)
-      .then((res) => setBanners(res.data))
-      .catch((err) => console.log("Error fetching banners:", err));
+      .then((res) => setBanners(Array.isArray(res.data) ? res.data : []))
+      .catch((err) => console.error("Error fetching banners:", err));
   }, []);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const Editing = () => {
     fetchDiploma();
   }, []);
 
-  const setting = {
+  const bannerSliderSettings = {
     dots: false,
     infinite: banners.length > 1,
     slidesToShow: 1,
@@ -152,26 +152,23 @@ const Editing = () => {
           {/* Add other meta tags here if needed */}
         </Helmet>
 
-        <section>
-          <div className="font-playfair relative w-full">
-            <div className="slider-container">
-              <Slider {...setting}>
-                {banners.map((banner) => (
-                  <div key={banner.id || banner.fileName}>
-                    <img
-                      src={banner.url}
-                      className="w-full object-cover"
-                      alt="CF_banner"
-                      title="Virtual Production And VFX Courses In India"
-                      loading="lazy"
-                      fetchpriority="high"
-                    />
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          </div>
-        </section>
+        {/* Banner Section */}
+        {Array.isArray(banners) && banners.length > 0 && (
+          <section className="slider-container">
+            <Slider {...bannerSliderSettings}>
+              {banners.map((banner, idx) => (
+                <div key={banner._id || idx}>
+                  <img
+                    src={banner.imageUrl}
+                    alt="Editing Banner"
+                    className="w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </Slider>
+          </section>
+        )}
 
         {/* -------------- course highligts ----------------- */}
 
