@@ -203,9 +203,9 @@ useEffect(() => {
                         diplomas.semester1.map((line, i) => (
                           <li
                             key={i}
-                            className="flex items-center gap-x-3 md:gap-x-5"
+                            className="flex items-start gap-x-3 md:gap-x-5"
                           >
-                            <PiFilmSlateDuotone className="text-gray-100 text-[16px] md:text-[20px]" />
+                            <PiFilmSlateDuotone className="text-gray-100 text-[16px] md:text-[20px] flex-shrink-0 mt-2" />
                             {line.title}
                           </li>
                         ))
@@ -225,9 +225,9 @@ useEffect(() => {
                         diplomas.semester2.map((line, i) => (
                           <li
                             key={i}
-                            className="flex items-center gap-x-3 md:gap-x-5"
+                            className="flex items-start gap-x-3 md:gap-x-5"
                           >
-                            <PiFilmSlateDuotone className="text-gray-100 text-[16px] md:text-[20px]" />
+                            <PiFilmSlateDuotone className="text-gray-100 text-[16px] md:text-[20px] flex-shrink-0 mt-2" />
                             {line.title}
                           </li>
                         ))
