@@ -244,9 +244,9 @@ const Editing = () => {
                           {section.items.map((item, k) => (
                             <li
                               key={k}
-                              className="flex items-center gap-x-3 md:gap-x-5"
+                              className="flex items-start gap-x-3 md:gap-x-5"
                             >
-                              <GiFilmSpool className="text-gray-100 text-[16px] md:text-[20px]" />
+                              <GiFilmSpool className="text-gray-100 text-[16px] md:text-[20px] flex-shrink-0" />
                               <span>{item.title}</span>
                               {item.pdf && (
                                 <a
