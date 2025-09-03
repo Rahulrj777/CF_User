@@ -264,7 +264,7 @@ useEffect(() => {
               <h2 className="text-3xl md:text-5xl font-bold mb-10">
                 FilmMaker As Mentor
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mt-5">
                 {mentors.map((mentor) => (
                   <div key={mentor._id} className="flex flex-col items-center">
                     <img
