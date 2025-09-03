@@ -20,9 +20,13 @@ const Editing = () => {
     const fetchDiploma = async () => {
       try {
         const res = await axios.get(`${API_URL}/editingdiploma`);
-        setDiploma(res.data);
+        setDiploma({
+          months: res.data.diploma || [], // map backend `diploma` to `months`
+          pdf: res.data.diplomaPdf?.url || "", // map backend `diplomaPdf` to `pdf`
+        });
       } catch (err) {
         console.error("Error fetching diploma data:", err);
+        setDiploma({ months: [], pdf: "" }); // fallback if error occurs
       }
     };
 
@@ -57,10 +61,6 @@ const Editing = () => {
     cssEase: "ease-in-out",
     pauseOnHover: false,
   };
-
-  function topPage() {
-    window.scroll(0, 0);
-  }
 
   useEffect(() => {
     axios
@@ -122,6 +122,10 @@ const Editing = () => {
         Loading diploma syllabus...
       </p>
     );
+  }
+
+  function topPage() {
+    window.scroll(0, 0);
   }
 
   return (
