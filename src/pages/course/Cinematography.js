@@ -261,13 +261,13 @@ const Cinematography = () => {
               {mentors.map((mentor) => (
                 <div key={mentor.id} className="flex flex-col items-center">
                   <img
-                    src={mentor.url}
+                    src={mentor.imageUrl}
                     className="w-[80%] rounded-md object-cover"
                     alt="mentor"
                     loading="lazy"
                   />
                   <p className="mt-5 text-center text-gray-900 text-[13px] md:text-[14px]">
-                    {mentor.description}
+                    {mentor.designation}
                   </p>
                 </div>
               ))}
