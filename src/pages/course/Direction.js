@@ -270,7 +270,7 @@ useEffect(() => {
                     <img
                       src={mentor.imageUrl}
                       alt="mentor"
-                      className="w-4/5 md:w-full rounded-md object-cover"
+                      className="w-3/5 md:w-full rounded-md object-cover"
                     />
                     <p className="mt-4 text-center text-gray-800">
                       {mentor.designation}
