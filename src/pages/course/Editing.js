@@ -246,7 +246,7 @@ const Editing = () => {
                               key={k}
                               className="flex items-start gap-x-3 md:gap-x-5"
                             >
-                              <GiFilmSpool className="text-gray-100 text-[16px] md:text-[20px] flex-shrink-0 mt-2" />
+                              <GiFilmSpool className="text-gray-100 text-[16px] md:text-[20px] flex-shrink-0 mt-1" />
                               <span>{item.title}</span>
                               {item.pdf && (
                                 <a
@@ -276,7 +276,7 @@ const Editing = () => {
             {diploma.pdf && (
               <div className="mt-10 flex justify-center">
                 <a
-                  href={`${API_URL}${diploma.pdf}`}
+                  href={diploma.pdfUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

@@ -232,7 +232,7 @@ const Cinematography = () => {
                             key={i}
                             className="flex items-start gap-x-3 md:gap-x-5"
                           >
-                            <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px] flex-shrink-0 mt-2" />
+                            <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px] flex-shrink-0 mt-1" />
                             {line.title}
                           </li>
                         ))

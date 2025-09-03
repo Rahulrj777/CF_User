@@ -196,7 +196,7 @@ const Vfx = () => {
                             <div className="flex flex-col items-center gap-y-3">
                               {/* Image */}
                               <img
-                                src={`${API_URL}${item.image}`}
+                                src={item.imageUrl}
                                 className="w-14 md:w-20 object-contain mb-2 filter brightness-0"
                                 alt={item.titleLine}
                                 loading="lazy"
@@ -256,7 +256,7 @@ const Vfx = () => {
                           className="flex justify-center items-center"
                         >
                           <img
-                            src={`${API_URL}${img.url}`}
+                            src={img.imageUrl}
                             className="w-16 md:w-28 object-cover"
                             alt="software"
                             title="Best Visual Effects Institute"
@@ -279,7 +279,7 @@ const Vfx = () => {
             {pdf ? (
               <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
                 <a
-                  href={`${API_URL}${pdf.url}`}
+                  href={pdf.pdfUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
