@@ -185,7 +185,7 @@ const VirtualProduction = () => {
                     className="flex flex-col items-center gap-y-5"
                   >
                     <img
-                      src={mentor.url}
+                      src={mentor.imageUrl}
                       alt="mentor"
                       className="w-[80%] rounded-md object-cover"
                     />

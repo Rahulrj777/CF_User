@@ -239,9 +239,9 @@ const StillPhotography = () => {
                     className="flex flex-col items-center gap-y-5"
                   >
                     <img
-                      src={mentor.url}
+                      src={mentor.imageUrl}
                       alt="mentor"
-                      className="w-[80%] rounded-md object-cover"
+                      className="w-3/5 md:w-2/3 rounded-md object-cover"
                     />
                     <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
                       {mentor.description}

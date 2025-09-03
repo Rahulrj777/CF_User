@@ -262,7 +262,7 @@ const Cinematography = () => {
                 <div key={mentor.id} className="flex flex-col items-center">
                   <img
                     src={mentor.imageUrl}
-                    className="w-[80%] rounded-md object-cover"
+                    className="w-3/5 md:w-2/3 rounded-md object-cover"
                     alt="mentor"
                     loading="lazy"
                   />

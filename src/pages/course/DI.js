@@ -305,8 +305,8 @@ const DI = () => {
                       className="flex flex-col items-center justify-center"
                     >
                       <img
-                        src={mentor.url || ""}
-                        className="w-[80%] rounded-md object-cover"
+                        src={mentor.imageUrl}
+                        className="w-3/5 md:w-2/3 rounded-md object-cover"
                         alt="mentor"
                         loading="lazy"
                       />
