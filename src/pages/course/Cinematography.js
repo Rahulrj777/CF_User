@@ -179,7 +179,8 @@ const Cinematography = () => {
         </section>
 
         {/* Diploma Section */}
-        {Array.isArray(data) && data.map((diploma) => (
+        {Array.isArray(data) &&
+          data.map((diploma) => (
             <section
               key={diploma._id}
               className="border-t-4 border-orange-500 pt-16 pb-10 md:pt-20 md:pb-20 bg-gray-950"
@@ -207,7 +208,7 @@ const Cinematography = () => {
                           className="flex items-center gap-x-3 md:gap-x-5"
                         >
                           <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px]" />
-                          {line}
+                          {line.title}
                         </li>
                       ))}
                     </ul>
@@ -225,7 +226,7 @@ const Cinematography = () => {
                           className="flex items-center gap-x-3 md:gap-x-5"
                         >
                           <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px]" />
-                          {line}
+                          {line.title}
                         </li>
                       ))}
                     </ul>
@@ -233,10 +234,10 @@ const Cinematography = () => {
                 </div>
 
                 {/* PDF Button */}
-                {diploma.pdf && (
+                {diploma.pdfUrl && (
                   <div className="flex justify-center items-center mt-8 md:mt-20">
                     <a
-                      href={`${API_URL}${diploma.pdf}`}
+                      href={diploma.pdfUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
