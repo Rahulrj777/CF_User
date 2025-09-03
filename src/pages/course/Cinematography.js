@@ -179,8 +179,7 @@ const Cinematography = () => {
         </section>
 
         {/* Diploma Section */}
-        {Array.isArray(data) &&
-          data.map((diploma) => (
+        {Array.isArray(data) && data.map((diploma) => (
             <section
               key={diploma._id}
               className="border-t-4 border-orange-500 pt-16 pb-10 md:pt-20 md:pb-20 bg-gray-950"
