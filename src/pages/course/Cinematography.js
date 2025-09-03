@@ -287,7 +287,7 @@ const Cinematography = () => {
                   items.map((item) => (
                     <div key={item.id} className="px-2">
                       <img
-                        src={`${API_URL}${item.image}`}
+                        src={item.imageUrl}
                         className="w-full object-cover"
                         alt="mentor work"
                         loading="lazy"
