@@ -159,7 +159,7 @@ const Cinematography = () => {
                     className="flex flex-col items-center gap-y-3"
                   >
                     <img
-                      src={`${API_URL}${item.image}`}
+                      src={item.imageUrl}
                       alt={item.titleLine}
                       className="w-14 md:w-20 object-contain mb-2"
                       loading="lazy"
