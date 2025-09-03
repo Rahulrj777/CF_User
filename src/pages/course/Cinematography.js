@@ -77,8 +77,11 @@ const Cinematography = () => {
     // Fetch diploma
     axios
       .get(`${API_URL}/cinematographydiploma`)
-      .then((res) => setData(Array.isArray(res.data) ? res.data : []))
-      .catch((err) => console.error("Error fetching diploma:", err));
+      .then((res) => {
+        const diplomaData = res.data.cinematography?.diploma?.[0] || null;
+        setDiplomas(diplomaData); 
+      })
+      .catch((err) => console.error("Error fetching diplomas:", err));
 
     // Fetch mentors
     axios
