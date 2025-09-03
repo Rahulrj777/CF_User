@@ -191,7 +191,7 @@ const Cinematography = () => {
                   1 Year Diploma
                 </h3>
                 <p className="font-semibold text-[18px] md:text-[24px] text-[#ff0000] font-[roboto] uppercase tracking-[1px]">
-                  in Direction & Screenplay
+                  in Cinematography
                 </p>
               </div>
 
