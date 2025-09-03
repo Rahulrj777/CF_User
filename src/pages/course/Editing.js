@@ -111,8 +111,8 @@ const Editing = () => {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/cinematographymentor`)
-      .then((res) => setMentors(res.data?.cinematography?.mentor || []))
+      .get(`${API_URL}/editingmentor`)
+      .then((res) => setMentors(res.data?.editing?.mentor || []))
       .catch((err) => console.error("Error fetching mentors:", err));
   }, []);
 
@@ -288,7 +288,7 @@ const Editing = () => {
         {/* ------------------ Mentors ------------------ */}
 
         <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
-          <div className="px-4 w-full md:w-[80%] mx-auto font-kumbh">
+          <div className="px-4 w-full md:w-[80%] mx-auto font-kumbh gap-5">
             <div className="flex items-center justify-center mb-6 md:mb-10">
               <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase md:tracking-[2px]">
                 FilmMaker As Mentor
@@ -307,7 +307,7 @@ const Editing = () => {
                         src={mentor.imageUrl}
                         className="w-3/5 md:w-2/3 rounded-md object-cover"
                         alt="mentor"
-                        title="Learn cinematography Courses"
+                        title="Learn Editing Courses"
                         loading="lazy"
                         fetchpriority="auto"
                       />
