@@ -17,6 +17,7 @@ const Cinematography = () => {
   const [mentors, setMentors] = useState([]);
   const [items, setItems] = useState([]); // filmography
   const [loading, setLoading] = useState(true);
+  const [diplomas, setDiplomas] = useState([]);
 
   // Banner slider settings
   const bannerSliderSettings = {
@@ -77,8 +78,10 @@ const Cinematography = () => {
     // Fetch diploma
     axios
       .get(`${API_URL}/cinematographydiploma`)
-      .then((res) => setData(Array.isArray(res.data) ? res.data : []))
-      .catch((err) => console.error("Error fetching diploma:", err));
+      .then((res) => {
+        const diplomaData = res.data.direction?.diploma?.[0] || null;
+        setDiplomas(diplomaData);
+      })
 
     // Fetch mentors
     axios
@@ -178,38 +181,42 @@ const Cinematography = () => {
           </div>
         </section>
 
-        {/* Diploma Section */}
-        {Array.isArray(data) && data.map((diploma) => (
-            <section
-              key={diploma._id}
-              className="border-t-4 border-orange-500 pt-16 pb-10 md:pt-20 md:pb-20 bg-gray-950"
-            >
-              <div className="px-4 w-full md:w-[85%] mx-auto">
-                <div className="flex flex-col gap-y-2 justify-center items-center mb-6 md:mb-16">
-                  <h3 className="font-bold text-center text-[24px] md:text-[40px] text-white uppercase">
-                    1 Year Diploma
-                  </h3>
-                  <p className="font-semibold text-[18px] md:text-[24px] text-[#ff0000] uppercase tracking-[1px]">
-                    in Cinematography
-                  </p>
-                </div>
+        {/* Diploma / Syllabus */}
+        {diplomas && (
+          <section className="border-t-4 border-orange-500 pt-16 pb-10 md:pt-20 md:pb-20 bg-gray-950">
+            <div className="px-4 w-full md:w-[85%] mx-auto">
+              {/* Heading */}
+              <div className="flex flex-col gap-y-2 justify-center items-center mb-6 md:mb-16">
+                <h3 className="font-bold text-center text-[24px] md:text-[40px] text-white font-kumbh uppercase">
+                  1 Year Diploma
+                </h3>
+                <p className="font-semibold text-[18px] md:text-[24px] text-[#ff0000] font-[roboto] uppercase tracking-[1px]">
+                  in Direction & Screenplay
+                </p>
+              </div>
 
+              {/* Semester Blocks */}
+              <div className="flex justify-center items-center font-[poppins]">
                 <div className="grid grid-cols-1 gap-y-8 md:grid-cols-2 md:gap-x-60">
                   {/* Semester 1 */}
                   <div className="flex flex-col gap-y-5 items-start">
                     <h3 className="font-bold text-white text-[18px] md:text-[28px]">
                       Semester 1
                     </h3>
-                    <ul className="text-[13px] md:text-[14px] flex flex-col gap-y-4 text-gray-200">
-                      {(diploma.semester1 || []).map((line, i) => (
-                        <li
-                          key={i}
-                          className="flex items-center gap-x-3 md:gap-x-5"
-                        >
-                          <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px]" />
-                          {line}
-                        </li>
-                      ))}
+                    <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
+                      {diplomas?.semester1?.length > 0 ? (
+                        diplomas.semester1.map((line, i) => (
+                          <li
+                            key={i}
+                            className="flex items-center gap-x-3 md:gap-x-5"
+                          >
+                            <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px]" />
+                            {line.title}
+                          </li>
+                        ))
+                      ) : (
+                        <li className="text-gray-400">No items yet</li>
+                      )}
                     </ul>
                   </div>
 
@@ -218,37 +225,42 @@ const Cinematography = () => {
                     <h3 className="font-bold text-white text-[18px] md:text-[28px]">
                       Semester 2
                     </h3>
-                    <ul className="text-[13px] md:text-[14px] flex flex-col gap-y-4 text-gray-200">
-                      {(diploma.semester2 || []).map((line, i) => (
-                        <li
-                          key={i}
-                          className="flex items-center gap-x-3 md:gap-x-5"
-                        >
-                          <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px]" />
-                          {line}
-                        </li>
-                      ))}
+                    <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-4 text-gray-200">
+                      {diplomas?.semester2?.length > 0 ? (
+                        diplomas.semester2.map((line, i) => (
+                          <li
+                            key={i}
+                            className="flex items-center gap-x-3 md:gap-x-5"
+                          >
+                            <VscDeviceCameraVideo className="text-gray-100 text-[16px] md:text-[20px]" />
+                            {line.title}
+                          </li>
+                        ))
+                      ) : (
+                        <li className="text-gray-400">No items yet</li>
+                      )}
                     </ul>
                   </div>
                 </div>
-
-                {/* PDF Button */}
-                {diploma.pdf && (
-                  <div className="flex justify-center items-center mt-8 md:mt-20">
-                    <a
-                      href={`${API_URL}${diploma.pdf}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <button className="uppercase hover:scale-105 group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]">
-                        Download Detailed Syllabus
-                      </button>
-                    </a>
-                  </div>
-                )}
               </div>
-            </section>
-          ))}
+
+              {/* PDF Button */}
+              {diplomas.pdfUrl && (
+                <div className="mt-10 flex justify-center">
+                  <a
+                    href={diplomas.pdfUrl} // Use the full Cloudinary URL
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <button className="uppercase group relative inline-flex h-10 text-[14px] items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-10 font-medium text-neutral-200 duration-500 hover:bg-red-700">
+                      View Detailed Syllabus
+                    </button>
+                  </a>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* Mentors Section */}
         <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
