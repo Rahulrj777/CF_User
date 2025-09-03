@@ -111,9 +111,9 @@ const Editing = () => {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/editingdiploma`)
-      .then((res) => setDiploma(res.data))
-      .catch((err) => console.error(err));
+      .get(`${API_URL}/cinematographymentor`)
+      .then((res) => setMentors(res.data?.cinematography?.mentor || []))
+      .catch((err) => console.error("Error fetching mentors:", err));
   }, []);
 
   if (!diploma || !diploma.months || diploma.months.length === 0) {
@@ -344,7 +344,7 @@ const Editing = () => {
                     <div key={item.id} className="px-2">
                       <div>
                         <img
-                          src={`${API_URL}${item.image}`}
+                          src={item.imageUrl}
                           className="w-full object-cover"
                           alt="mentor work"
                           loading="lazy"
