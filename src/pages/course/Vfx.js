@@ -13,7 +13,7 @@ const Vfx = () => {
   const [highlights, setHighlights] = useState([]);
   const [images, setImages] = useState([]);
   const [pdf, setPdf] = useState(null);
-  const [mentors, setMentors] = useState([]);
+  const [mentor, setmentor] = useState([]);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -21,16 +21,16 @@ const Vfx = () => {
   }, []);
 
   useEffect(() => {
-    fetchMentors();
+    fetchmentor();
   }, []);
 
-  const fetchMentors = async () => {
+  const fetchmentor = async () => {
     try {
-      const res = await axios.get(`${API_URL}/vfxmentors`);
-      setMentors(Array.isArray(res.data) ? res.data : []);
+      const res = await axios.get(`${API_URL}/vfxmentor`);
+      setmentor(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
-      console.error("Error fetching mentors:", err);
-      setMentors([]);
+      console.error("Error fetching mentor:", err);
+      setmentor([]);
     }
   };
 
@@ -295,7 +295,7 @@ const Vfx = () => {
           </div>
         </section>
 
-        {/* ------------------ Mentors ------------------ */}
+        {/* ------------------ mentor ------------------ */}
 
         <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
           <div className="px-4 w-full md:w-[80%] mx-auto font-kumbh">
@@ -307,8 +307,8 @@ const Vfx = () => {
 
             <div className="flex justify-center items-center">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-                {Array.isArray(mentors) && mentors.length > 0 ? (
-                  mentors.map((mentor) => (
+                {Array.isArray(mentor) && mentor.length > 0 ? (
+                  mentor.map((mentor) => (
                     <div
                       key={mentor.id || mentor._id} // use _id if id is missing
                       className="flex flex-col items-center justify-center"
@@ -335,7 +335,7 @@ const Vfx = () => {
                   ))
                 ) : (
                   <p className="col-span-full text-center text-gray-500">
-                    No mentors available
+                    No mentor available
                   </p>
                 )}
               </div>
@@ -343,7 +343,7 @@ const Vfx = () => {
           </div>
         </section>
 
-        {/* -------------- Our Mentors have Worked In ------------------------ */}
+        {/* -------------- Our mentor have Worked In ------------------------ */}
 
         <section className="bg-black overflow-hidden flex justify-center items-center pt-8 md:pt-14 pb-6 md:pb-10">
           <div className="w-full mx-auto">
