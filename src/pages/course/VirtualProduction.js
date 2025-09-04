@@ -18,8 +18,7 @@ const VirtualProduction = () => {
     axios
       .get(`${API_URL}/virtualproductiondiploma`)
       .then((res) => {
-        const diplomaData = res.data?.virtualProduction?.diploma?.images || [];
-        setCourses(Array.isArray(diplomaData) ? diplomaData : []);
+        setCourses(Array.isArray(res.data) ? res.data : []);
       })
       .catch((err) => console.error("Error fetching courses:", err));
   }, []);
@@ -138,26 +137,26 @@ const VirtualProduction = () => {
 
         {/* ---------- Courses / Syllabus ---------- */}
         <section className="border-t-4 border-orange-500 pt-16 pb-10 bg-gray-950">
-          <div className="w-full px-4 md:w-[85%] mx-auto grid md:grid-cols-2 gap-12">
+          <div className="w-full px-4 md:w-[85%] mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-12">
             {courses.length > 0 ? (
               courses.map((course) => (
                 <div
-                  key={course.id}
-                  className="flex flex-col items-center gap-y-4"
+                  key={course._id}
+                  className="flex flex-col items-center gap-y-4 bg-gray-900 p-6 rounded-xl shadow-lg"
                 >
                   <img
-                    src={`${API_URL}${course.image}`}
-                    className="w-28 md:w-32 object-cover"
-                    alt={course.courseTitle}
+                    src={course.imageUrl}
+                    className="w-28 md:w-32 object-cover rounded-md shadow"
+                    alt={course.course}
                   />
                   <h3 className="text-white font-bold uppercase">
-                    {course.courseTitle}
+                    {course.course}
                   </h3>
                   <h3 className="text-[#ff0000] font-semibold uppercase">
-                    {course.timeline}
+                    {course.time}
                   </h3>
                   <h3 className="text-gray-200 font-semibold uppercase">
-                    {course.detailTitle}
+                    {course.title}
                   </h3>
                   <p className="text-gray-200 text-sm text-center">
                     {course.description}
