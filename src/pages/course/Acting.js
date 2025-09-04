@@ -11,7 +11,7 @@ import { RiWhatsappLine } from "react-icons/ri";
 
 const Acting = () => {
   const [banners, setBanners] = useState([]);
-  const [mentors, setMentors] = useState([]);
+  const [mentor, setmentor] = useState([]);
   const [contents, setContents] = useState([]);
   const [globalPdf, setGlobalPdf] = useState(null);
 
@@ -29,17 +29,17 @@ const Acting = () => {
     fetchData();
   }, []);
 
-  // Fetch mentors
+  // Fetch mentor
   useEffect(() => {
-    const fetchMentors = async () => {
+    const fetchmentor = async () => {
       try {
         const res = await axios.get(`${API_URL}/actingmentor`);
-        setMentors(Array.isArray(res.data) ? res.data : []);
+        setmentor(Array.isArray(res.data) ? res.data : []);
       } catch (err) {
-        console.error("Error fetching mentors:", err);
+        console.error("Error fetching mentor:", err);
       }
     };
-    fetchMentors();
+    fetchmentor();
   }, []);
 
   // Fetch banners
@@ -195,19 +195,19 @@ const Acting = () => {
               FilmMaker As Mentor
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-              {mentors.length > 0 ? (
-                mentors.map((mentor, idx) => (
+              {mentor.length > 0 ? (
+                mentor.map((mentor, idx) => (
                   <div
                     key={mentor.id || idx}
                     className="flex flex-col items-center gap-y-5"
                   >
                     <img
-                      src={mentor.imageUrl}
+                      src={mentor.imageUrl || ""}
                       alt="mentor"
                       className="w-3/5 md:w-2/3 rounded-md object-cover"
                     />
                     <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                      {mentor.description}
+                      {mentor.designation}
                     </p>
                   </div>
                 ))
