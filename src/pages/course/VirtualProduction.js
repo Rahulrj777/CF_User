@@ -137,7 +137,7 @@ const VirtualProduction = () => {
 
         {/* ---------- Courses / Syllabus ---------- */}
         <section className="border-t-4 border-orange-500 pt-16 pb-10">
-          <div className="w-full px-4 md:w-[85%] mx-auto grid md:grid-cols-2 lg:grid-cols-2 gap-12">
+          <div className="w-full px-4 md:w-[85%] mx-auto grid md:grid-cols-2 lg:grid-cols-2 gap-12 bg-black">
             {courses.length > 0 ? (
               courses.map((course) => (
                 <div
