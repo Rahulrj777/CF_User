@@ -4,12 +4,9 @@ import { Helmet } from "react-helmet-async";
 import "../text.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
-
 import banner from "../../images/course/banner/pattern.jpg";
-//icons
 import { RiWhatsappLine } from "react-icons/ri";
-
-const API_URL = "http://localhost:5000/cfamentor";
+import API_URL from "../../config.js"
 
 const CFA = () => {
   const [banners, setBanners] = useState([]);
@@ -20,22 +17,10 @@ const CFA = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/cfafilmography")
+      .get(`${API_URL}/cfafilmography`)
       .then((res) => setItems(res.data))
       .catch((err) => console.error("Error fetching filmography:", err));
   }, []);
-
-  const API_BASE =
-    (typeof process !== "undefined" &&
-      process.env &&
-      process.env.NEXT_PUBLIC_API_BASE) ||
-    (typeof window !== "undefined" &&
-    window.location &&
-    window.location.port === "5173"
-      ? "http://localhost:5000"
-      : "http://localhost:5000");
-
-  const API = `${API_BASE}/cfadiploma`;
 
   useEffect(() => {
     fetchData();
@@ -51,18 +36,27 @@ const CFA = () => {
     }
   };
 
+  // Fetch courses
   useEffect(() => {
-    fetchMentors();
+    axios
+      .get(`${API_URL}/cfadiploma`)
+      .then((res) => {
+        const diplomaData = res.data?.virtualProduction?.diploma?.images || [];
+        setCourses(Array.isArray(diplomaData) ? diplomaData : []);
+      })
+      .catch((err) => console.error("Error fetching courses:", err));
   }, []);
 
-  const fetchMentors = async () => {
-    try {
-      const res = await axios.get(API_URL);
-      setMentors(res.data);
-    } catch (err) {
-      console.error("Error fetching mentors:", err);
-    }
-  };
+  // Fetch mentors
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/cfamentor`)
+      .then((res) => {
+        const mentorData = res.data?.virtualProduction?.mentor || [];
+        setMentors(Array.isArray(mentorData) ? mentorData : []);
+      })
+      .catch((err) => console.error("Error fetching mentors:", err));
+  }, []);
 
   function topPage() {
     window.scroll(0, 0);
@@ -70,7 +64,7 @@ const CFA = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/cfabanner")
+      .get(`${API_URL}/cfabanner`)
       .then((res) => setBanners(res.data))
       .catch((err) => console.log("Error fetching banners:", err));
   }, []);

@@ -4,13 +4,10 @@ import Slider from "react-slick";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import "../text.css";
-
 import cflogo from "../../images/head_logo.png";
 import unreal from "../../images/unreal.png";
-
 import { RiWhatsappLine } from "react-icons/ri";
-
-const API_URL = "http://localhost:5000/stageunrealmentor";
+import API_URL from "../../config.js";
 
 const StageUnreal = () => {
   const [mentors, setMentors] = useState([]);
@@ -18,18 +15,6 @@ const StageUnreal = () => {
   const [contents, setContents] = useState([]);
   const [globalPdf, setGlobalPdf] = useState(null);
   const [items, setItems] = useState([]);
-
-  const API_BASE =
-    (typeof process !== "undefined" &&
-      process.env &&
-      process.env.NEXT_PUBLIC_API_BASE) ||
-    (typeof window !== "undefined" &&
-    window.location &&
-    window.location.port === "5173"
-      ? "http://localhost:5000"
-      : "http://localhost:5000");
-
-  const API = `${API_BASE}/stageunrealdiploma`;
 
   useEffect(() => {
     fetchData();
@@ -47,16 +32,38 @@ const StageUnreal = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/stageunrealfilmography")
+      .get(`${API_URL}/stageunrealfilmography`)
       .then((res) => setItems(res.data))
       .catch((err) => console.error("Error fetching filmography:", err));
   }, []);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/stageunrealbanner")
+      .get(`${API_URL}/stageunrealbanner`)
       .then((res) => setBanners(res.data))
       .catch((err) => console.log("Error fetching banners:", err));
+  }, []);
+
+    // Fetch courses
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/virtualproductiondiploma`)
+      .then((res) => {
+        const diplomaData = res.data?.virtualProduction?.diploma?.images || [];
+        setCourses(Array.isArray(diplomaData) ? diplomaData : []);
+      })
+      .catch((err) => console.error("Error fetching courses:", err));
+  }, []);
+
+  // Fetch mentors
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/virtualproductionmentor`)
+      .then((res) => {
+        const mentorData = res.data?.virtualProduction?.mentor || [];
+        setMentors(Array.isArray(mentorData) ? mentorData : []);
+      })
+      .catch((err) => console.error("Error fetching mentors:", err));
   }, []);
 
   const setting = {

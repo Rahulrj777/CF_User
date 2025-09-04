@@ -196,7 +196,7 @@ const DI = () => {
                     <div key={item.id || item._id}>
                       <div className="flex flex-col items-center gap-y-3">
                         <img
-                          src={`${API_URL}${item.image}`}
+                          src={item.imageUrl}
                           className="w-14 md:w-20 object-contain mb-2 filter brightness-0"
                           alt={item.titleLine || "Highlight"}
                           loading="lazy"
@@ -337,7 +337,7 @@ const DI = () => {
                   items.map((item, idx) => (
                     <div key={item.id || item._id || idx} className="px-2">
                       <img
-                        src={`${API_URL}${item.image}`}
+                        src={item.imageUrl}
                         className="w-full object-cover"
                         alt="mentor work"
                         loading="lazy"

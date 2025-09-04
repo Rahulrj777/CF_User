@@ -11,7 +11,7 @@ import { RiWhatsappLine } from "react-icons/ri";
 
 const Acting = () => {
   const [banners, setBanners] = useState([]);
-  const [mentor, setmentor] = useState([]);
+  const [mentor, setMentor] = useState([]);
   const [contents, setContents] = useState([]);
   const [globalPdf, setGlobalPdf] = useState(null);
 
@@ -33,8 +33,9 @@ const Acting = () => {
   useEffect(() => {
     const fetchmentor = async () => {
       try {
-        const res = await axios.get(`${API_URL}/actingmentor`);
-        setmentor(Array.isArray(res.data) ? res.data : []);
+        const res = await axios.get(`${API_BASE}/actingmentor`);
+        const mentorData = res.data?.mentor || [];
+        setMentor(Array.isArray(mentorData) ? mentorData : []);
       } catch (err) {
         console.error("Error fetching mentor:", err);
       }
