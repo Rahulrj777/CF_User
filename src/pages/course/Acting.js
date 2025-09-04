@@ -11,7 +11,7 @@ import { RiWhatsappLine } from "react-icons/ri";
 
 const Acting = () => {
   const [banners, setBanners] = useState([]);
-  const [mentors, setMentors] = useState([]);
+  const [mentor, setMentor] = useState([]);
   const [contents, setContents] = useState([]);
   const [globalPdf, setGlobalPdf] = useState(null);
 
@@ -29,21 +29,19 @@ const Acting = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    fetchMentors();
-  }, []);
-
   // Fetch mentor
-    const fetchMentors = async () => {
+  useEffect(() => {
+    const fetchmentor = async () => {
       try {
-        const res = await axios.get(`${API_BASE}/actingmentor`);
+        const res = await axios.get(`${API_URL}/actingmentor`);
         const mentorData = res.data?.acting?.mentor || [];
-        setMentors(Array.isArray(mentorData) ? mentorData : []);
+        setMentor(Array.isArray(mentorData) ? mentorData : []);
       } catch (err) {
-        console.error("Error fetching mentors:", err);
-        setMentors([]);
+        console.error("Error fetching mentor:", err);
       }
     };
+    fetchmentor();
+  }, []);
 
   // Fetch banners
   useEffect(() => {
@@ -198,19 +196,19 @@ const Acting = () => {
               FilmMaker As Mentor
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-              {mentors.length > 0 ? (
-                mentors.map((mentors, idx) => (
+              {mentor.length > 0 ? (
+                mentor.map((mentor, idx) => (
                   <div
-                    key={mentors.id || idx}
+                    key={mentor.id || idx}
                     className="flex flex-col items-center gap-y-5"
                   >
                     <img
-                      src={mentors.imageUrl || ""}
-                      alt="mentors"
+                      src={mentor.imageUrl || ""}
+                      alt="mentor"
                       className="w-3/5 md:w-2/3 rounded-md object-cover"
                     />
                     <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                      {mentors.designation}
+                      {mentor.designation}
                     </p>
                   </div>
                 ))
