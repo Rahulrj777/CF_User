@@ -36,12 +36,14 @@ const DI = () => {
     const fetchMentors = async () => {
       try {
         const res = await axios.get(`${API_URL}/actingmentor`);
-        const mentorData = res.data?.di?.mentor || [];
+        const mentorData = res.data?.mentor || []; // <-- correct
         setMentors(Array.isArray(mentorData) ? mentorData : []);
       } catch (err) {
         console.error("Error fetching mentors:", err);
+        setMentors([]);
       }
     };
+
     fetchMentors();
   }, []);
 
@@ -301,18 +303,15 @@ const DI = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
                 {Array.isArray(mentors) && mentors.length > 0 ? (
                   mentors.map((mentor) => (
-                    <div
-                      key={mentor.id || mentor._id}
-                      className="flex flex-col items-center justify-center"
-                    >
+                    <div key={mentor._id || mentor.publicId}>
                       <img
                         src={mentor.imageUrl}
+                        alt={mentor.designation || "mentor"}
                         className="w-3/5 md:w-2/3 rounded-md object-cover"
-                        alt="mentor"
                         loading="lazy"
                       />
                       <p className="mt-5 text-[13px] md:text-[14px] text-gray-900 text-center">
-                        {mentor.description || "No description available"}
+                        {mentor.designation || "No description available"}
                       </p>
                     </div>
                   ))
