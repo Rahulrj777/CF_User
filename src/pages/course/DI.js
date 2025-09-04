@@ -36,7 +36,7 @@ const DI = () => {
     const fetchMentors = async () => {
       try {
         const res = await axios.get(`${API_BASE}/dimentor`);
-        console.log("Fetched mentors:", res.data); // check console
+        console.log("Fetched mentors:", res.data); // check console to see array
         setMentors(Array.isArray(res.data) ? res.data : []);
       } catch (err) {
         console.error("Error fetching mentors:", err);
