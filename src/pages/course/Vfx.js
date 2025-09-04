@@ -130,18 +130,6 @@ const fetchmentor = async () => {
       .catch((err) => console.error(err));
   }, []);
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/vfxdiploma`);
-        setImages(res.data);
-      } catch (err) {
-        console.error("Error fetching images", err);
-      }
-    };
-    fetchImages();
-  }, []);
-
   return (
     <>
       <div className="font-kumbh overflow-hidden ">
