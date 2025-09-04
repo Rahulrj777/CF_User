@@ -328,7 +328,7 @@ const Vfx = () => {
                       <div className="flex flex-col gap-y-5 items-center justify-center mt-5">
                         <div className="w-full md:w-[70%] mx-auto">
                           <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                            {mentor.description || "No description available"}
+                            {mentor.designation || "No description available"}
                           </p>
                         </div>
                       </div>
@@ -361,7 +361,7 @@ const Vfx = () => {
                     <div key={item.id} className="px-2">
                       <div>
                         <img
-                          src={`${API_URL}${item.image}`}
+                          src={item.imageUrl}
                           className="w-full object-cover"
                           alt="mentor work"
                           loading="lazy"
