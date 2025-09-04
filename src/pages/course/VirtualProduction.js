@@ -142,7 +142,7 @@ const VirtualProduction = () => {
               courses.map((course) => (
                 <div
                   key={course._id}
-                  className="flex flex-col items-center gap-y-4 bg-gray-900 p-6 rounded-xl shadow-lg"
+                  className="flex flex-col items-center gap-y-4 p-6 rounded-xl shadow-lg"
                 >
                   <img
                     src={course.imageUrl}
