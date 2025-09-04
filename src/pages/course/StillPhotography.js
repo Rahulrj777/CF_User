@@ -269,7 +269,7 @@ const StillPhotography = () => {
                   items.map((item, idx) => (
                     <div key={item.id || idx} className="px-2">
                       <img
-                        src={`${API_URL}${item.image}`}
+                        src={item.imageUrl}
                         className="w-full object-cover"
                         alt="mentor work"
                         loading="lazy"
