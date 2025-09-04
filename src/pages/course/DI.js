@@ -35,7 +35,7 @@ const DI = () => {
   useEffect(() => {
     const fetchMentors = async () => {
       try {
-        const res = await axios.get(`${API_BASE}/dimentor`);
+        const res = await axios.get(`${API_URL}/dimentor`);
         console.log("Fetched mentors:", res.data); // check console to see array
         setMentors(Array.isArray(res.data) ? res.data : []);
       } catch (err) {
