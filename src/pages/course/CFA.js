@@ -6,11 +6,13 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import banner from "../../images/course/banner/pattern.jpg";
 import { RiWhatsappLine } from "react-icons/ri";
-import API_URL from "../../config.js"
+import API_URL from "../../config.js";
 
 const CFA = () => {
   const [banners, setBanners] = useState([]);
   const [contents, setContents] = useState([]);
+  const [Courses, setCourses] = useState([]);
+
   const [globalPdf, setGlobalPdf] = useState(null);
   const [mentors, setMentors] = useState([]);
   const [items, setItems] = useState([]);
@@ -28,7 +30,7 @@ const CFA = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(API);
+      const res = await axios.get(API_URL);
       setContents(res.data.items || res.data); // support both formats
       setGlobalPdf(res.data.pdf || null);
     } catch (err) {
@@ -237,11 +239,7 @@ const CFA = () => {
             {/* Global PDF link OR WhatsApp fallback */}
             <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
               {globalPdf ? (
-                <a
-                  href={`${API_BASE}${globalPdf}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={globalPdf} target="_blank" rel="noopener noreferrer">
                   <button className="uppercase hover:scale-105 group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]">
                     View Detailed Syllabus
                   </button>

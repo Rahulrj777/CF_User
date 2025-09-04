@@ -33,7 +33,7 @@ const Acting = () => {
   useEffect(() => {
     const fetchmentor = async () => {
       try {
-        const res = await axios.get(`${API_BASE}/actingmentor`);
+        const res = await axios.get(`${API_URL}/actingmentor`);
         const mentorData = res.data?.mentor || [];
         setMentor(Array.isArray(mentorData) ? mentorData : []);
       } catch (err) {

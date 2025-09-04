@@ -13,6 +13,7 @@ const StageUnreal = () => {
   const [mentors, setMentors] = useState([]);
   const [banners, setBanners] = useState([]);
   const [contents, setContents] = useState([]);
+  const [Courses, setCourses] = useState([]);
   const [globalPdf, setGlobalPdf] = useState(null);
   const [items, setItems] = useState([]);
 
@@ -22,7 +23,7 @@ const StageUnreal = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(API);
+      const res = await axios.get(API_URL);
       setContents(res.data.items || res.data); // support both formats
       setGlobalPdf(res.data.pdf || null);
     } catch (err) {
@@ -270,7 +271,7 @@ const StageUnreal = () => {
               <div className="flex justify-center items-center mt-8 md:mt-16 font-[poppins]">
                 {globalPdf ? (
                   <a
-                    href={`${API_BASE}${globalPdf}`}
+                    href={globalPdf}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
