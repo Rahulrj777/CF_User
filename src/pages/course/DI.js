@@ -35,9 +35,9 @@ const DI = () => {
   useEffect(() => {
     const fetchMentors = async () => {
       try {
-        const res = await axios.get(`${API_URL}/actingmentor`);
-        const mentorData = res.data?.di?.mentor || [];
-        setMentors(Array.isArray(mentorData) ? mentorData : []);
+        const res = await axios.get(`${API_BASE}/dimentor`);
+        console.log("Fetched mentors:", res.data); // check console
+        setMentors(Array.isArray(res.data) ? res.data : []);
       } catch (err) {
         console.error("Error fetching mentors:", err);
         setMentors([]);
@@ -300,9 +300,9 @@ const DI = () => {
             </h2>
             <div className="flex justify-center items-center">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-                {Array.isArray(mentors) && mentors.length > 0 ? (
+                {mentors.length > 0 ? (
                   mentors.map((mentor) => (
-                    <div key={mentor._id || mentor.publicId}>
+                    <div key={mentor.publicId}>
                       <img
                         src={mentor.imageUrl}
                         alt={mentor.designation || "mentor"}
