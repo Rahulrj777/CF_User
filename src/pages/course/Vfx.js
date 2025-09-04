@@ -360,7 +360,7 @@ const Vfx = () => {
                     <div key={item.id} className="px-2">
                       <div>
                         <img
-                          src={mentor.imageUrl || ""}
+                          src={item.imageUrl || ""}
                           className="w-full max-w-xs rounded-md object-cover object-top"
                           alt="mentor"
                           title="Learn cinematography Courses"
