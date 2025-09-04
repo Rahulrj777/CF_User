@@ -22,12 +22,16 @@ const VirtualProduction = () => {
   }, []);
 
   // Fetch mentors
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/virtualproductionmentor`)
-      .then((res) => setMentors(Array.isArray(res.data) ? res.data : []))
-      .catch((err) => console.error("Error fetching mentors:", err));
-  }, []);
+useEffect(() => {
+  axios
+    .get(`${API_URL}/directionmentor`)
+    .then((res) => {
+      console.log("Mentor API response:", res.data);
+      const mentorData = res.data?.direction?.mentor || [];
+      setMentors(Array.isArray(mentorData) ? mentorData : []);
+    })
+    .catch((err) => console.error("Error fetching mentors:", err));
+}, []);
 
   // Fetch banners
   useEffect(() => {
@@ -171,37 +175,30 @@ const VirtualProduction = () => {
           </div>
         </section>
 
-        {/* ---------- Mentors ---------- */}
-        <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
-          <div className="px-4 w-full md:w-[80%] mx-auto font-kumbh">
-            <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase mb-10">
-              FilmMaker As Mentor
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-              {mentors.length > 0 ? (
-                mentors.map((mentor, idx) => (
-                  <div
-                    key={mentor.id || idx}
-                    className="flex flex-col items-center gap-y-5"
-                  >
+        {/* Mentors */}
+        {mentors.length > 0 && (
+          <section className="pt-20 pb-20 bg-white">
+            <div className="w-full md:w-[80%] mx-auto text-center">
+              <h2 className="text-3xl md:text-5xl font-bold mb-10">
+                FilmMaker As Mentor
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mt-5">
+                {mentors.map((mentor) => (
+                  <div key={mentor._id} className="flex flex-col items-center">
                     <img
                       src={mentor.imageUrl}
                       alt="mentor"
-                      className="w-[80%] rounded-md object-cover"
+                      className="w-3/5 md:w-2/3 rounded-md object-cover"
                     />
-                    <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                      {mentor.description}
+                    <p className="mt-4 text-center text-gray-800">
+                      {mentor.designation}
                     </p>
                   </div>
-                ))
-              ) : (
-                <p className="text-center text-gray-400 col-span-full">
-                  No mentors available
-                </p>
-              )}
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* ---------- Filmography Slider ---------- */}
         <section className="bg-black overflow-hidden flex justify-center items-center pt-8 md:pt-14 pb-6 md:pb-10">
