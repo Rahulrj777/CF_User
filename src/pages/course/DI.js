@@ -302,7 +302,10 @@ const DI = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
                 {mentors.length > 0 ? (
                   mentors.map((mentor) => (
-                    <div key={mentor.publicId}>
+                    <div
+                      key={mentor.publicId}
+                      className="flex flex-col items-center"
+                    >
                       <img
                         src={mentor.imageUrl}
                         alt={mentor.designation || "mentor"}
