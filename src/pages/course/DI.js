@@ -35,8 +35,9 @@ const DI = () => {
   useEffect(() => {
     const fetchMentors = async () => {
       try {
-        const res = await axios.get(`${API_URL}/dimentor`);
-        setMentors(res.data);
+        const res = await axios.get(`${API_URL}/actingmentor`);
+        const mentorData = res.data?.di?.mentor || [];
+        setMentors(Array.isArray(mentorData) ? mentorData : []);
       } catch (err) {
         console.error("Error fetching mentors:", err);
       }

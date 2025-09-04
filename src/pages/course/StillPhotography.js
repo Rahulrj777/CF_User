@@ -33,8 +33,9 @@ const StillPhotography = () => {
   useEffect(() => {
     const fetchMentors = async () => {
       try {
-        const res = await axios.get(`${API_URL}/photographymentor`);
-        setMentors(Array.isArray(res.data) ? res.data : []);
+        const res = await axios.get(`${API_URL}/actingmentor`);
+        const mentorData = res.data?.acting?.mentor || [];
+        setMentors(Array.isArray(mentorData) ? mentorData : []);
       } catch (err) {
         console.error("Error fetching mentors:", err);
       }
