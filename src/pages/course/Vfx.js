@@ -26,27 +26,28 @@ const Vfx = () => {
 
   const fetchMentors = async () => {
     try {
-      const res = await axios.get(API_URL);
-      setMentors(res.data);
+      const res = await axios.get(`${API_URL}/vfxmentors`);
+      setMentors(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error("Error fetching mentors:", err);
+      setMentors([]);
     }
   };
 
-const fetchData = async () => {
-  try {
-    const res = await axios.get(`${API_URL}/vfxdiploma`);
-    const data = res.data;
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/vfxdiploma`);
+      const data = res.data;
 
-    // Expecting { images: [...], pdf: {...} }
-    setImages(Array.isArray(data.images) ? data.images : []);
-    setPdf(data.pdf || null);
-  } catch (err) {
-    console.error("Error fetching diploma files", err);
-    setImages([]);
-    setPdf(null);
-  }
-};
+      // Expecting { images: [...], pdf: {...} }
+      setImages(Array.isArray(data.images) ? data.images : []);
+      setPdf(data.pdf || null);
+    } catch (err) {
+      console.error("Error fetching diploma files", err);
+      setImages([]);
+      setPdf(null);
+    }
+  };
 
   useEffect(() => {
     const fetchBanners = async () => {
@@ -254,7 +255,7 @@ const fetchData = async () => {
                     {Array.isArray(images) && images.length > 0 ? (
                       images.map((img) => (
                         <div
-                          key={img.id}
+                          key={img._id || img.id}
                           className="flex justify-center items-center"
                         >
                           <img
@@ -280,11 +281,7 @@ const fetchData = async () => {
             {/* CTA Button (PDF Download) */}
             {pdf ? (
               <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
-                <a
-                  href={pdf.pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={pdf.pdfUrl} target="_blank" rel="noopener noreferrer">
                   <button className="uppercase hover:scale-105 group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]">
                     Download Detailed Syllabus
                   </button>
@@ -363,11 +360,11 @@ const fetchData = async () => {
                     <div key={item.id} className="px-2">
                       <div>
                         <img
-                          src={item.imageUrl}
-                          className="w-full object-cover"
-                          alt="mentor work"
+                          src={mentor.imageUrl || ""}
+                          className="w-full max-w-xs rounded-md object-cover object-top"
+                          alt="mentor"
+                          title="Learn cinematography Courses"
                           loading="lazy"
-                          fetchpriority="auto"
                         />
                       </div>
                     </div>
