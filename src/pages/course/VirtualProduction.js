@@ -214,7 +214,7 @@ const VirtualProduction = () => {
                   filmography.map((item, idx) => (
                     <div key={item.id || idx} className="px-2">
                       <img
-                        src={item.imageUel}
+                        src={item.imageUrl}
                         className="w-full object-cover"
                         alt="mentor work"
                       />
