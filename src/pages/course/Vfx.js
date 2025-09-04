@@ -33,18 +33,20 @@ const Vfx = () => {
     }
   };
 
-  const fetchData = async () => {
-    try {
-      const res = await axios.get(`${API_URL}/vfxdiploma`);
-      const allFiles = res.data;
+const fetchData = async () => {
+  try {
+    const res = await axios.get(`${API_URL}/vfxdiploma`);
+    const data = res.data;
 
-      // Safety check for type
-      setImages(allFiles.filter((f) => f?.type?.startsWith("image/")));
-      setPdf(allFiles.find((f) => f?.type === "pdf") || null);
-    } catch (err) {
-      console.error("Error fetching diploma files", err);
-    }
-  };
+    // Expecting { images: [...], pdf: {...} }
+    setImages(Array.isArray(data.images) ? data.images : []);
+    setPdf(data.pdf || null);
+  } catch (err) {
+    console.error("Error fetching diploma files", err);
+    setImages([]);
+    setPdf(null);
+  }
+};
 
   useEffect(() => {
     const fetchBanners = async () => {
