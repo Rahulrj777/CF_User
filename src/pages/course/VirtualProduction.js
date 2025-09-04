@@ -17,21 +17,23 @@ const VirtualProduction = () => {
   useEffect(() => {
     axios
       .get(`${API_URL}/virtualproductiondiploma`)
-      .then((res) => setCourses(Array.isArray(res.data) ? res.data : []))
+      .then((res) => {
+        const diplomaData = res.data?.virtualProduction?.diploma?.images || [];
+        setCourses(Array.isArray(diplomaData) ? diplomaData : []);
+      })
       .catch((err) => console.error("Error fetching courses:", err));
   }, []);
 
   // Fetch mentors
-useEffect(() => {
-  axios
-    .get(`${API_URL}/directionmentor`)
-    .then((res) => {
-      console.log("Mentor API response:", res.data);
-      const mentorData = res.data?.direction?.mentor || [];
-      setMentors(Array.isArray(mentorData) ? mentorData : []);
-    })
-    .catch((err) => console.error("Error fetching mentors:", err));
-}, []);
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/virtualproductionmentor`)
+      .then((res) => {
+        const mentorData = res.data?.virtualProduction?.mentor || [];
+        setMentors(Array.isArray(mentorData) ? mentorData : []);
+      })
+      .catch((err) => console.error("Error fetching mentors:", err));
+  }, []);
 
   // Fetch banners
   useEffect(() => {
