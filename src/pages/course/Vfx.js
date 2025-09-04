@@ -24,15 +24,16 @@ const Vfx = () => {
     fetchmentor();
   }, []);
 
-  const fetchmentor = async () => {
-    try {
-      const res = await axios.get(`${API_URL}/vfxmentor`);
-      setmentor(Array.isArray(res.data) ? res.data : []);
-    } catch (err) {
-      console.error("Error fetching mentor:", err);
-      setmentor([]);
-    }
-  };
+const fetchmentor = async () => {
+  try {
+    const res = await axios.get(`${API_URL}/vfxmentor`);
+    const mentorData = res.data?.vfx?.mentor || []; // ✅ match backend
+    setmentor(Array.isArray(mentorData) ? mentorData : []);
+  } catch (err) {
+    console.error("Error fetching mentor:", err);
+    setmentor([]);
+  }
+};
 
   const fetchData = async () => {
     try {
