@@ -36,14 +36,13 @@ const DI = () => {
     const fetchMentors = async () => {
       try {
         const res = await axios.get(`${API_URL}/actingmentor`);
-        const mentorData = res.data?.mentor || []; // <-- correct
+        const mentorData = res.data?.di?.mentor || [];
         setMentors(Array.isArray(mentorData) ? mentorData : []);
       } catch (err) {
         console.error("Error fetching mentors:", err);
         setMentors([]);
       }
     };
-
     fetchMentors();
   }, []);
 
