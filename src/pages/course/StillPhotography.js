@@ -15,58 +15,34 @@ const StillPhotography = () => {
   const [items, setItems] = useState([]);
   const [contents, setContents] = useState([]);
   const [globalPdf, setGlobalPdf] = useState(null);
-  // Fetch diploma contents
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/photographydiploma`);
-        setContents(res.data.items || res.data);
-        setGlobalPdf(res.data.pdf || null);
-      } catch (err) {
-        console.error("Error fetching photography syllabus:", err);
-      }
-    };
-    fetchData();
-  }, []);
 
-  // Fetch mentors
   useEffect(() => {
-    const fetchMentors = async () => {
+    const fetchAll = async () => {
       try {
-        const res = await axios.get(`${API_URL}/actingmentor`);
-        const mentorData = res.data?.acting?.mentor || [];
-        setMentors(Array.isArray(mentorData) ? mentorData : []);
-      } catch (err) {
-        console.error("Error fetching mentors:", err);
-      }
-    };
-    fetchMentors();
-  }, []);
+        // Diploma
+        const diplomaRes = await axios.get(`${API_URL}/photographydiploma`);
+        setContents(diplomaRes.data.items || []);
+        setGlobalPdf(diplomaRes.data.pdf || null);
 
-  // Fetch banners
-  useEffect(() => {
-    const fetchBanners = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/photographybanner`);
-        setBanners(Array.isArray(res.data) ? res.data : []);
-      } catch (err) {
-        console.error("Error fetching banners:", err);
-      }
-    };
-    fetchBanners();
-  }, []);
+        // Mentors
+        const mentorRes = await axios.get(`${API_URL}/photographymentor`);
+        setMentors(mentorRes.data.photography?.mentor || []);
 
-  // Fetch filmography
-  useEffect(() => {
-    const fetchFilmography = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/photographyfilmography`);
-        setItems(Array.isArray(res.data) ? res.data : []);
+        // Filmography (if needed)
+        const filmographyRes = await axios.get(
+          `${API_URL}/photographyfilmography`
+        );
+        setItems(Array.isArray(filmographyRes.data) ? filmographyRes.data : []);
+
+        // Banners
+        const bannerRes = await axios.get(`${API_URL}/photographybanner`);
+        setBanners(Array.isArray(bannerRes.data) ? bannerRes.data : []);
       } catch (err) {
-        console.error("Error fetching filmography:", err);
+        console.error("Error fetching photography data:", err);
       }
     };
-    fetchFilmography();
+
+    fetchAll();
   }, []);
 
   const bannerSettings = {
