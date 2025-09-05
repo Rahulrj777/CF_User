@@ -26,9 +26,8 @@ const DI = () => {
         setGlobalPdf(diplomaRes.data.pdf || null);
 
         // Mentors
-        const mentorRes = await axios.get(`${API_URL}/photographymentor`);
-        console.log("Mentor API response:", mentorRes.data);
-        setMentors(mentorRes.data.items || []);
+        const mentorRes = await axios.get(`${API_URL}/dimentor`);
+        setMentors(mentorRes.data.di?.mentor || []);
 
         // Highlights
         const highlightsRes = await axios.get(`${API_URL}/dihighlights`);
@@ -263,7 +262,7 @@ const DI = () => {
               {mentors.length > 0 ? (
                 mentors.map((mentor) => (
                   <div
-                    key={mentor._id}
+                    key={mentor._id || month.id || idk}
                     className="flex flex-col items-center gap-y-5"
                   >
                     <img
