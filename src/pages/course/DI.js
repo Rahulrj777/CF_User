@@ -31,7 +31,7 @@ const DI = () => {
 
         // highlights
         const highlightsRes = await axios.get(`${API_URL}/dihighlights`);
-        setMentors(highlightsRes.data.di?.highlights || []);
+        setHighlights(highlightsRes.data.di?.highlights || []);
 
         // Filmography (if needed)
         const filmographyRes = await axios.get(
