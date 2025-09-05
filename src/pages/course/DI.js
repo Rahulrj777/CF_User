@@ -262,7 +262,7 @@ const DI = () => {
               {mentors.length > 0 ? (
                 mentors.map((mentor) => (
                   <div
-                    key={mentor._id || month.id || idk}
+                    key={mentor._id || mentor.id}
                     className="flex flex-col items-center gap-y-5"
                   >
                     <img
