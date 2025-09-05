@@ -255,7 +255,7 @@ const DI = () => {
         {/* Mentors */}
         <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
           <div className="px-4 w-full md:w-[80%] mx-auto font-kumbh">
-            <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase md:tracking-[2px] mb-6 md:mb-10">
+            <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase md:tracking-[2px] mb-10">
               FilmMaker As Mentor
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
