@@ -27,7 +27,7 @@ const DI = () => {
 
         // Mentors
         const mentorRes = await axios.get(`${API_URL}/dimentor`);
-        setMentors(mentorRes.data.photography?.mentor || []);
+        setMentors(mentorRes.data.di?.mentor || []);
 
         // Highlights
         const highlightsRes = await axios.get(`${API_URL}/dihighlights`);
