@@ -210,9 +210,9 @@ const DI = () => {
                           month.children.map((child, i) => (
                             <li
                               key={i}
-                              className="flex items-center gap-x-3 md:gap-x-5"
+                              className="flex items-start gap-x-3 md:gap-x-5"
                             >
-                              <FaComputer className="text-gray-100 text-[16px] md:text-[20px]" />
+                              <FaComputer className="text-gray-100 text-[16px] md:text-[20px] flex-shrink-0 mt-1" />
                               {child}
                             </li>
                           ))}

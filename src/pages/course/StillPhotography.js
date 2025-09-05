@@ -163,9 +163,9 @@ const StillPhotography = () => {
                       {month.children?.map((child, idx) => (
                         <li
                           key={idx}
-                          className="flex items-center gap-x-3 md:gap-x-5"
+                          className="flex items-start gap-x-3 md:gap-x-5"
                         >
-                          <MdOutlinePhotoCamera className="text-gray-100 text-[16px] md:text-[20px]" />
+                          <MdOutlinePhotoCamera className="text-gray-100 text-[16px] md:text-[20px] flex-shrink-0 mt-1" />
                           {child}
                         </li>
                       ))}
