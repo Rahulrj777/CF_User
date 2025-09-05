@@ -167,7 +167,7 @@ useEffect(() => {
         {/* -------------- Syllabus ----------------- */}
 
         <section className="border-t-4 border-orange-500 pt-10 pb-16 md:pt-20 md:pb-20 bg-gray-950 -mt-6">
-          <div className="w-full px-4 md:w-[80%] mx-auto">
+          <div className="w-full px-4 md:w-[85%] mx-auto">
             {/* Heading */}
             <div className="flex flex-col gap-y-2 justify-center items-center mb-6 md:mb-16">
               <h3 className="font-bold text-center text-[24px] md:text-[40px] text-white font-kumbh uppercase">
