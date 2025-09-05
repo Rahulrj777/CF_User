@@ -260,12 +260,12 @@ const StageUnreal = () => {
                           </h3>
                           <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-2 text-gray-400">
                             {Array.isArray(month.children) &&
-                              month.children.map((child, idx) => (
+                              month.children.map((children, idx) => (
                                 <li
                                   key={idx}
                                   className="flex items-center gap-x-2"
                                 >
-                                  {child}
+                                  {children}
                                 </li>
                               ))}
                           </ul>
@@ -283,7 +283,7 @@ const StageUnreal = () => {
               {/* Global PDF link */}
               <div className="flex justify-center items-center mt-8 md:mt-16 font-[poppins]">
                 {globalPdf ? (
-                  <a href={globalPdf} target="_blank" rel="noopener noreferrer">
+                  <a href={pdfUrl} target="_blank" rel="noopener noreferrer">
                     <button className="uppercase hover:scale-105 group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]">
                       View Detailed Syllabus
                     </button>
