@@ -16,32 +16,34 @@ const StageUnreal = () => {
   const [globalPdf, setGlobalPdf] = useState(null);
   const [items, setItems] = useState([]);
 
-useEffect(() => {
-  const fetchAll = async () => {
-    try {
-      // Diploma
-      const diplomaRes = await axios.get(`${API_URL}/stageunrealdiploma`);
-      setContents(diplomaRes.data.items || []);
-      setGlobalPdf(diplomaRes.data.pdf || null);
+  useEffect(() => {
+    const fetchAll = async () => {
+      try {
+        // Diploma
+        const diplomaRes = await axios.get(`${API_URL}/stageunrealdiploma`);
+        setContents(diplomaRes.data.items || []);
+        setGlobalPdf(diplomaRes.data.pdf || null);
 
-      // Mentors
-      const mentorRes = await axios.get(`${API_URL}/stageunrealmentor`);
-      setMentors(mentorRes.data.stageunreal?.mentor || []);
+        // Mentors
+        const mentorRes = await axios.get(`${API_URL}/stageunrealmentor`);
+        setMentors(mentorRes.data.stageunreal?.mentor || []);
 
-      // Filmography (if needed)
-      const filmographyRes = await axios.get(`${API_URL}/stageunrealfilmography`);
-      setItems(Array.isArray(filmographyRes.data) ? filmographyRes.data : []);
+        // Filmography (if needed)
+        const filmographyRes = await axios.get(
+          `${API_URL}/stageunrealfilmography`
+        );
+        setItems(Array.isArray(filmographyRes.data) ? filmographyRes.data : []);
 
-      // Banners
-      const bannerRes = await axios.get(`${API_URL}/stageunrealbanner`);
-      setBanners(Array.isArray(bannerRes.data) ? bannerRes.data : []);
-    } catch (err) {
-      console.error("Error fetching StageUnreal data:", err);
-    }
-  };
+        // Banners
+        const bannerRes = await axios.get(`${API_URL}/stageunrealbanner`);
+        setBanners(Array.isArray(bannerRes.data) ? bannerRes.data : []);
+      } catch (err) {
+        console.error("Error fetching StageUnreal data:", err);
+      }
+    };
 
-  fetchAll();
-}, []);
+    fetchAll();
+  }, []);
 
   const setting = {
     dots: false,
@@ -283,6 +285,9 @@ useEffect(() => {
                           fetchpriority="auto"
                         />
                       </div>
+                      <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
+                        {mentor.description}
+                      </p>
 
                       <div className="flex flex-col gap-y-5 items-center justify-center mt-5">
                         <div className="w-full md:w-[70%] mx-auto">
