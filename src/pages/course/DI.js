@@ -308,12 +308,12 @@ const DI = () => {
                     >
                       <img
                         src={mentor.imageUrl}
-                        alt={mentor.designation || "mentor"}
+                        alt={mentor.description || "mentor"}
                         className="w-3/5 md:w-2/3 rounded-md object-cover"
                         loading="lazy"
                       />
                       <p className="mt-5 text-[13px] md:text-[14px] text-gray-900 text-center">
-                        {mentor.designation || "No description available"}
+                        {mentor.description || "No description available"}
                       </p>
                     </div>
                   ))

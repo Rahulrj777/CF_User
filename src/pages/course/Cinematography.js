@@ -278,7 +278,7 @@ const Cinematography = () => {
                     loading="lazy"
                   />
                   <p className="mt-5 text-center text-gray-900 text-[13px] md:text-[14px]">
-                    {mentor.designation}
+                    {mentor.description}
                   </p>
                 </div>
               ))}

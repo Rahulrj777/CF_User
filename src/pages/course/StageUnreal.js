@@ -13,7 +13,6 @@ const StageUnreal = () => {
   const [mentors, setMentors] = useState([]);
   const [banners, setBanners] = useState([]);
   const [contents, setContents] = useState([]);
-  const [Courses, setCourses] = useState([]);
   const [globalPdf, setGlobalPdf] = useState(null);
   const [items, setItems] = useState([]);
 
@@ -57,26 +56,33 @@ const StageUnreal = () => {
     fetchBanners();
   }, []);
 
-  // Fetch mentors
+  // ------------------- Fetch Diploma -------------------
   useEffect(() => {
-    axios
-      .get(`${API_URL}/stageunrealdiploma`)
-      .then((res) => {
+    const fetchDiploma = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/stageunrealdiploma`);
         const diplomaData = res.data?.stageunreal?.diploma || [];
-        setMentors(Array.isArray(diplomaData) ? diplomaData : []);
-      })
-      .catch((err) => console.error("Error fetching diploma:", err));
+        setContents(Array.isArray(diplomaData) ? diplomaData : []);
+        setGlobalPdf(res.data?.stageunreal?.pdf || null);
+      } catch (err) {
+        console.error("Error fetching diploma:", err);
+      }
+    };
+    fetchDiploma();
   }, []);
 
-  // Fetch mentors
+  // ------------------- Fetch Mentors -------------------
   useEffect(() => {
-    axios
-      .get(`${API_URL}/stageunrealmentor`)
-      .then((res) => {
+    const fetchMentors = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/stageunrealmentor`);
         const mentorData = res.data?.stageunreal?.mentor || [];
         setMentors(Array.isArray(mentorData) ? mentorData : []);
-      })
-      .catch((err) => console.error("Error fetching mentors:", err));
+      } catch (err) {
+        console.error("Error fetching mentors:", err);
+      }
+    };
+    fetchMentors();
   }, []);
 
   const setting = {
@@ -214,7 +220,7 @@ const StageUnreal = () => {
         <section className="border-t-4 border-orange-500 pt-10 pb-16 md:pt-20 md:pb-20 bg-gray-950 -mt-6">
           <div className="flex flex-col gap-y-20">
             <div className="w-full px-4 md:w-[80%] mx-auto">
-              {/* Heading with images */}
+              {/* Heading */}
               <div className="flex flex-col gap-y-2 justify-center items-center mb-6 md:mb-12">
                 <div className="flex items-center gap-x-10 md:gap-x-20 mb-4">
                   <img
@@ -260,12 +266,12 @@ const StageUnreal = () => {
                           </h3>
                           <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-2 text-gray-400">
                             {Array.isArray(month.children) &&
-                              month.children.map((children, idx) => (
+                              month.children.map((child, idx) => (
                                 <li
                                   key={idx}
                                   className="flex items-center gap-x-2"
                                 >
-                                  {children}
+                                  {child}
                                 </li>
                               ))}
                           </ul>
@@ -305,7 +311,7 @@ const StageUnreal = () => {
         </section>
 
         {/* ------------------ Mentors ------------------ */}
-
+        
         <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
           <div className="px-4 w-full md:w-[80%] mx-auto font-kumbh">
             <div className="flex items-center justify-center mb-6 md:mb-10">

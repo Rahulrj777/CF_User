@@ -245,7 +245,7 @@ const StillPhotography = () => {
                       className="w-3/5 md:w-2/3 rounded-md object-cover"
                     />
                     <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                      {mentor.designation}
+                      {mentor.description}
                     </p>
                   </div>
                 ))

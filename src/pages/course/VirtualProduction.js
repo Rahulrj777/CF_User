@@ -192,7 +192,7 @@ const VirtualProduction = () => {
                       className="w-3/5 md:w-2/3 rounded-md object-cover"
                     />
                     <p className="mt-4 text-center text-gray-800">
-                      {mentor.designation}
+                      {mentor.description}
                     </p>
                   </div>
                 ))}

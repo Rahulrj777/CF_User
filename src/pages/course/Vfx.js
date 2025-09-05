@@ -316,7 +316,7 @@ const fetchmentor = async () => {
                       <div className="flex flex-col gap-y-5 items-center justify-center mt-5">
                         <div className="w-full md:w-[70%] mx-auto">
                           <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                            {mentor.designation || "No description available"}
+                            {mentor.description || "No description available"}
                           </p>
                         </div>
                       </div>
