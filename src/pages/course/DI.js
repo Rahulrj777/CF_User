@@ -27,7 +27,7 @@ const DI = () => {
 
         // Mentors
         const mentorRes = await axios.get(`${API_URL}/dimentor`);
-        setMentors(mentorRes.data.items || []);
+        setMentors(mentorRes.data.photography?.mentor || []);
 
         // Highlights
         const highlightsRes = await axios.get(`${API_URL}/dihighlights`);
@@ -258,31 +258,28 @@ const DI = () => {
             <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase md:tracking-[2px] mb-6 md:mb-10">
               FilmMaker As Mentor
             </h2>
-            <div className="flex justify-center items-center">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-                {Array.isArray(mentors) && mentors.length > 0 ? (
-                  mentors.map((mentor) => (
-                    <div
-                      key={mentor._id || mentor.id}
-                      className="flex flex-col items-center"
-                    >
-                      <img
-                        src={mentor.imageUrl}
-                        alt={mentor.description || "mentor"}
-                        className="w-3/5 md:w-2/3 rounded-md object-cover"
-                        loading="lazy"
-                      />
-                      <p className="mt-5 text-[13px] md:text-[14px] text-gray-900 text-center">
-                        {mentor.description || "No description available"}
-                      </p>
-                    </div>
-                  ))
-                ) : (
-                  <p className="col-span-full text-center text-gray-500">
-                    No mentors available
-                  </p>
-                )}
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
+              {mentors.length > 0 ? (
+                mentors.map((mentor, idx) => (
+                  <div
+                    key={mentor.id || idx}
+                    className="flex flex-col items-center gap-y-5"
+                  >
+                    <img
+                      src={mentor.imageUrl}
+                      alt="mentor"
+                      className="w-3/5 md:w-2/3 rounded-md object-cover"
+                    />
+                    <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
+                      {mentor.description}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <p className="text-center text-gray-400 col-span-full">
+                  No mentors available
+                </p>
+              )}
             </div>
           </div>
         </section>
