@@ -26,8 +26,9 @@ const DI = () => {
         setGlobalPdf(diplomaRes.data.pdf || null);
 
         // Mentors
-        const mentorRes = await axios.get(`${API_URL}/dimentor`);
-        setMentors(mentorRes.data.di?.mentor || []);
+        const mentorRes = await axios.get(`${API_URL}/photographymentor`);
+        console.log("Mentor API response:", mentorRes.data);
+        setMentors(mentorRes.data.items || []);
 
         // Highlights
         const highlightsRes = await axios.get(`${API_URL}/dihighlights`);
@@ -260,18 +261,19 @@ const DI = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
               {mentors.length > 0 ? (
-                mentors.map((mentor, idx) => (
+                mentors.map((mentor) => (
                   <div
-                    key={mentor.id || idx}
+                    key={mentor._id}
                     className="flex flex-col items-center gap-y-5"
                   >
                     <img
                       src={mentor.imageUrl}
-                      alt="mentor"
+                      alt={mentor.description || "mentor"}
                       className="w-3/5 md:w-2/3 rounded-md object-cover"
+                      loading="lazy"
                     />
                     <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                      {mentor.description}
+                      {mentor.description || "No description available"}
                     </p>
                   </div>
                 ))
