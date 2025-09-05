@@ -17,75 +17,37 @@ const DI = () => {
   const [contents, setContents] = useState([]);
   const [globalPdf, setGlobalPdf] = useState(null);
 
-  // Fetch course content
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchAll = async () => {
       try {
-        const res = await axios.get(`${API_URL}/didiploma`);
-        setContents(res.data.items || res.data);
-        setGlobalPdf(res.data.pdf || null);
-      } catch (err) {
-        console.error("fetchData error:", err);
-      }
-    };
-    fetchData();
-  }, []);
+        // Diploma
+        const diplomaRes = await axios.get(`${API_URL}/didiploma`);
+        setContents(diplomaRes.data.items || []);
+        setGlobalPdf(diplomaRes.data.pdf || null);
 
-  // Fetch mentors
-  useEffect(() => {
-    const fetchMentors = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/dimentor`);
-        console.log("Fetched mentors:", res.data); // check console to see array
-        setMentors(Array.isArray(res.data) ? res.data : []);
-      } catch (err) {
-        console.error("Error fetching mentors:", err);
-        setMentors([]);
-      }
-    };
-    fetchMentors();
-  }, []);
+        // Mentors
+        const mentorRes = await axios.get(`${API_URL}/dimentor`);
+        setMentors(mentorRes.data.di?.mentor || []);
 
-  // Fetch banners
-  useEffect(() => {
-    const fetchBanners = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/dibanner`);
-        setBanners(Array.isArray(res.data) ? res.data : []);
-      } catch (err) {
-        console.error("Error fetching banners:", err);
-        setBanners([]);
-      }
-    };
-    fetchBanners();
-  }, []);
+        // highlights
+        const highlightsRes = await axios.get(`${API_URL}/dihighlights`);
+        setMentors(highlightsRes.data.di?.highlights || []);
 
-  // Fetch highlights
-  useEffect(() => {
-    const fetchHighlights = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/dihighlights`);
-        setHighlights(Array.isArray(res.data) ? res.data : []);
-      } catch (err) {
-        console.error("Error fetching highlights:", err);
-        setHighlights([]);
-      }
-    };
-    fetchHighlights();
-  }, []);
+        // Filmography (if needed)
+        const filmographyRes = await axios.get(
+          `${API_URL}/difilmography`
+        );
+        setItems(Array.isArray(filmographyRes.data) ? filmographyRes.data : []);
 
-  // Fetch filmography
-  useEffect(() => {
-    const fetchFilmography = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/difilmography`);
-        setItems(Array.isArray(res.data) ? res.data : []);
+        // Banners
+        const bannerRes = await axios.get(`${API_URL}/dibanner`);
+        setBanners(Array.isArray(bannerRes.data) ? bannerRes.data : []);
       } catch (err) {
-        console.error("Error fetching filmography:", err);
-        setItems([]);
+        console.error("Error fetching di data:", err);
       }
     };
-    fetchFilmography();
+
+    fetchAll();
   }, []);
 
   const bannerSliderSettings = {

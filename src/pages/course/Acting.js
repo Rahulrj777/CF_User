@@ -11,49 +11,31 @@ import { RiWhatsappLine } from "react-icons/ri";
 
 const Acting = () => {
   const [banners, setBanners] = useState([]);
-  const [mentor, setMentor] = useState([]);
+  const [mentors, setMentors] = useState([]);
   const [contents, setContents] = useState([]);
   const [globalPdf, setGlobalPdf] = useState(null);
 
-  // Fetch syllabus/content
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchAll = async () => {
       try {
-        const res = await axios.get(`${API_URL}/actingdiploma`);
-        setContents(res.data.items || res.data); // support both formats
-        setGlobalPdf(res.data.pdf || null);
-      } catch (err) {
-        console.error("Error fetching acting syllabus:", err);
-      }
-    };
-    fetchData();
-  }, []);
+        // Diploma
+        const diplomaRes = await axios.get(`${API_URL}/actingdiploma`);
+        setContents(diplomaRes.data.items || []);
+        setGlobalPdf(diplomaRes.data.pdf || null);
 
-  // Fetch mentor
-  useEffect(() => {
-    const fetchmentor = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/actingmentor`);
-        const mentorData = res.data?.acting?.mentor || [];
-        setMentor(Array.isArray(mentorData) ? mentorData : []);
-      } catch (err) {
-        console.error("Error fetching mentor:", err);
-      }
-    };
-    fetchmentor();
-  }, []);
+        // Mentors
+        const mentorRes = await axios.get(`${API_URL}/actingmentor`);
+        setMentors(mentorRes.data.acting?.mentor || []);
 
-  // Fetch banners
-  useEffect(() => {
-    const fetchBanners = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/actingbanner`);
-        setBanners(Array.isArray(res.data) ? res.data : []);
+        // Banners
+        const bannerRes = await axios.get(`${API_URL}/actingbanner`);
+        setBanners(Array.isArray(bannerRes.data) ? bannerRes.data : []);
       } catch (err) {
-        console.error("Error fetching banners:", err);
+        console.error("Error fetching acting data:", err);
       }
     };
-    fetchBanners();
+
+    fetchAll();
   }, []);
 
   const bannerSettings = {
@@ -196,19 +178,19 @@ const Acting = () => {
               FilmMaker As Mentor
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-              {mentor.length > 0 ? (
-                mentor.map((mentor, idx) => (
+              {mentors.length > 0 ? (
+                mentors.map((mentors, idx) => (
                   <div
-                    key={mentor.id || idx}
+                    key={mentors.id || idx}
                     className="flex flex-col items-center gap-y-5"
                   >
                     <img
-                      src={mentor.imageUrl || ""}
-                      alt="mentor"
+                      src={mentors.imageUrl || ""}
+                      alt="mentors"
                       className="w-3/5 md:w-2/3 rounded-md object-cover"
                     />
                     <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                      {mentor.description}
+                      {mentors.description}
                     </p>
                   </div>
                 ))
