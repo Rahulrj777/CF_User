@@ -11,65 +11,36 @@ import API_URL from "../../config.js";
 const CFA = () => {
   const [banners, setBanners] = useState([]);
   const [contents, setContents] = useState([]);
-  const [Courses, setCourses] = useState([]);
-
   const [globalPdf, setGlobalPdf] = useState(null);
   const [mentors, setMentors] = useState([]);
   const [items, setItems] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/cfafilmography`)
-      .then((res) => setItems(res.data))
-      .catch((err) => console.error("Error fetching filmography:", err));
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
+useEffect(() => {
+  const fetchAll = async () => {
     try {
-      const res = await axios.get(API_URL);
-      setContents(res.data.items || res.data); // support both formats
-      setGlobalPdf(res.data.pdf || null);
+      // Diploma
+      const diplomaRes = await axios.get(`${API_URL}/cfadiploma`);
+      setContents(diplomaRes.data.items || []);
+      setGlobalPdf(diplomaRes.data.pdf || null);
+
+      // Mentors
+      const mentorRes = await axios.get(`${API_URL}/cfamentor`);
+      setMentors(mentorRes.data.cfa?.mentor || []);
+
+      // Filmography (if needed)
+      const filmographyRes = await axios.get(`${API_URL}/cfafilmography`);
+      setItems(Array.isArray(filmographyRes.data) ? filmographyRes.data : []);
+
+      // Banners
+      const bannerRes = await axios.get(`${API_URL}/cfabanner`);
+      setBanners(Array.isArray(bannerRes.data) ? bannerRes.data : []);
     } catch (err) {
-      console.error("fetchData error:", err);
+      console.error("Error fetching cfa data:", err);
     }
   };
 
-  // Fetch courses
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/cfadiploma`)
-      .then((res) => {
-        const diplomaData = res.data?.virtualProduction?.diploma?.images || [];
-        setCourses(Array.isArray(diplomaData) ? diplomaData : []);
-      })
-      .catch((err) => console.error("Error fetching courses:", err));
-  }, []);
-
-  // Fetch mentors
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/cfamentor`)
-      .then((res) => {
-        const mentorData = res.data?.virtualProduction?.mentor || [];
-        setMentors(Array.isArray(mentorData) ? mentorData : []);
-      })
-      .catch((err) => console.error("Error fetching mentors:", err));
-  }, []);
-
-  function topPage() {
-    window.scroll(0, 0);
-  }
-
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/cfabanner`)
-      .then((res) => setBanners(res.data))
-      .catch((err) => console.log("Error fetching banners:", err));
-  }, []);
+  fetchAll();
+}, []);
 
   const setting = {
     dots: false,
@@ -318,7 +289,7 @@ const CFA = () => {
                     <div key={item.id} className="px-2">
                       <div>
                         <img
-                          src={`http://localhost:5000${item.image}`}
+                          src={item.imageUrl}
                           className="w-full object-cover"
                           alt="mentor work"
                           loading="lazy"
