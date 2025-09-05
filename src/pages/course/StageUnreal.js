@@ -321,31 +321,37 @@ const StageUnreal = () => {
 
             <div className="flex justify-center items-center">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-                {mentors.map((mentor) => (
-                  <div
-                    key={mentor.id}
-                    className="flex flex-col items-center justify-center"
-                  >
-                    <div className="flex justify-center items-center">
-                      <img
-                        src={mentor.imageUrl}
-                        className="w-3/5 md:w-2/3 rounded-md object-cover"
-                        alt="mentor"
-                        title="Learn cinematography Courses"
-                        loading="lazy"
-                        fetchpriority="auto"
-                      />
-                    </div>
+                {Array.isArray(mentors) && mentors.length > 0 ? (
+                  mentors.map((mentor) => (
+                    <div
+                      key={mentor.id || mentor._id}
+                      className="flex flex-col items-center justify-center"
+                    >
+                      <div className="flex justify-center items-center">
+                        <img
+                          src={mentor.imageUrl}
+                          className="w-3/5 md:w-2/3 rounded-md object-cover"
+                          alt="mentor"
+                          title="Learn cinematography Courses"
+                          loading="lazy"
+                          fetchpriority="auto"
+                        />
+                      </div>
 
-                    <div className="flex flex-col gap-y-5 items-center justify-center mt-5">
-                      <div className="w-full md:w-[70%] mx-auto">
-                        <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
-                          {mentor.description}
-                        </p>
+                      <div className="flex flex-col gap-y-5 items-center justify-center mt-5">
+                        <div className="w-full md:w-[70%] mx-auto">
+                          <p className="text-[13px] md:text-[14px] text-gray-900 text-center">
+                            {mentor.description}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p className="text-gray-500 col-span-full text-center">
+                    No mentors found.
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -362,10 +368,10 @@ const StageUnreal = () => {
             </div>
 
             <div className="slider-container">
-              <Slider {...settings}>
-                {items.length > 0 ? (
-                  items.map((item) => (
-                    <div key={item.id} className="px-2">
+              {Array.isArray(items) && items.length > 0 ? (
+                <Slider {...settings}>
+                  {items.map((item) => (
+                    <div key={item.id || item._id} className="px-2">
                       <div>
                         <img
                           src={`http://localhost:5000${item.image}`}
@@ -376,13 +382,13 @@ const StageUnreal = () => {
                         />
                       </div>
                     </div>
-                  ))
-                ) : (
-                  <p className="text-white text-center">
-                    No filmography uploaded yet.
-                  </p>
-                )}
-              </Slider>
+                  ))}
+                </Slider>
+              ) : (
+                <p className="text-white text-center">
+                  No filmography uploaded yet.
+                </p>
+              )}
             </div>
           </div>
         </section>
