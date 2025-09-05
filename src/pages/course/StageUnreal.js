@@ -31,37 +31,54 @@ const StageUnreal = () => {
     }
   };
 
+  // Fetch filmography
   useEffect(() => {
-    axios
-      .get(`${API_URL}/stageunrealfilmography`)
-      .then((res) => setItems(res.data))
-      .catch((err) => console.error("Error fetching filmography:", err));
+    const fetchFilmography = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/stageunrealfilmography`);
+        setItems(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        console.error("Error fetching filmography:", err);
+      }
+    };
+    fetchFilmography();
   }, []);
 
+  // Fetch banners
   useEffect(() => {
-    axios
-      .get(`${API_URL}/stageunrealbanner`)
-      .then((res) => setBanners(res.data))
-      .catch((err) => console.log("Error fetching banners:", err));
+    const fetchBanners = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/stageunrealbanner`);
+        setBanners(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        console.error("Error fetching banners:", err);
+      }
+    };
+    fetchBanners();
   }, []);
 
-    // Fetch courses
+  // Fetch main diploma data
   useEffect(() => {
-    axios
-      .get(`${API_URL}/virtualproductiondiploma`)
-      .then((res) => {
-        const diplomaData = res.data?.virtualProduction?.diploma?.images || [];
-        setCourses(Array.isArray(diplomaData) ? diplomaData : []);
-      })
-      .catch((err) => console.error("Error fetching courses:", err));
+    const fetchDiplomas = async () => {
+      try {
+        const res = await axios.get(API_URL);
+        // Ensure contents is always an array
+        const diplomas = Array.isArray(res.data.items) ? res.data.items : [];
+        setContents(diplomas);
+        setGlobalPdf(res.data.pdf || null);
+      } catch (err) {
+        console.error("Error fetching diplomas:", err);
+      }
+    };
+    fetchDiplomas();
   }, []);
 
   // Fetch mentors
   useEffect(() => {
     axios
-      .get(`${API_URL}/virtualproductionmentor`)
+      .get(`${API_URL}/stageunrealmentor`)
       .then((res) => {
-        const mentorData = res.data?.virtualProduction?.mentor || [];
+        const mentorData = res.data?.stageunreal?.mentor || [];
         setMentors(Array.isArray(mentorData) ? mentorData : []);
       })
       .catch((err) => console.error("Error fetching mentors:", err));
@@ -205,29 +222,18 @@ const StageUnreal = () => {
               {/* Heading with images */}
               <div className="flex flex-col gap-y-2 justify-center items-center mb-6 md:mb-12">
                 <div className="flex items-center gap-x-10 md:gap-x-20 mb-4">
-                  <div>
-                    <img
-                      src={cflogo} // your first image
-                      className="w-20 md:w-24 object-cover"
-                      alt="logo"
-                      title="best institute Color Grading"
-                      loading="lazy"
-                      fetchpriority="auto"
-                    />
-                  </div>
+                  <img
+                    src={cflogo}
+                    className="w-20 md:w-24 object-cover"
+                    alt="logo"
+                  />
                   <div className="border-2 border-white h-20"></div>
-                  <div>
-                    <img
-                      src={unreal} // second image e.g. Davinci Resolve or grading icon
-                      className="w-24 md:w-28 object-cover"
-                      alt="logo"
-                      title="best institute Color Grading"
-                      loading="lazy"
-                      fetchpriority="auto"
-                    />
-                  </div>
+                  <img
+                    src={unreal}
+                    className="w-24 md:w-28 object-cover"
+                    alt="logo"
+                  />
                 </div>
-
                 <p className="font-bold text-center text-[24px] md:text-[34px] text-white uppercase">
                   COLOR GRADING
                 </p>
@@ -247,34 +253,42 @@ const StageUnreal = () => {
                   <h2 className="text-[18px] md:text-[26px] font-semibold text-white text-center mb-6 md:mb-10">
                     Course Overview
                   </h2>
-
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 md:gap-y-10 gap-x-4 md:gap-x-20">
-                    {contents.map((month, index) => (
-                      <div key={month.id} className="flex flex-col gap-y-3">
-                        <h3 className="font-semibold text-[16px] md:text-[20px] text-gray-200">
-                          {month.title || `Month ${index + 1}`}
-                        </h3>
-                        <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-2 text-gray-400">
-                          {month.children?.map((child, idx) => (
-                            <li key={idx} className="flex items-center gap-x-2">
-                              {child}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
+                    {Array.isArray(contents) && contents.length > 0 ? (
+                      contents.map((month, index) => (
+                        <div
+                          key={month._id || index}
+                          className="flex flex-col gap-y-3"
+                        >
+                          <h3 className="font-semibold text-[16px] md:text-[20px] text-gray-200">
+                            {month.title || `Month ${index + 1}`}
+                          </h3>
+                          <ul className="text-[13px] md:text-[14px] font-[roboto] flex flex-col gap-y-2 text-gray-400">
+                            {Array.isArray(month.children) &&
+                              month.children.map((child, idx) => (
+                                <li
+                                  key={idx}
+                                  className="flex items-center gap-x-2"
+                                >
+                                  {child}
+                                </li>
+                              ))}
+                          </ul>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-gray-400 col-span-full text-center">
+                        No course content available.
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
 
-              {/* Global PDF link OR WhatsApp fallback */}
+              {/* Global PDF link */}
               <div className="flex justify-center items-center mt-8 md:mt-16 font-[poppins]">
                 {globalPdf ? (
-                  <a
-                    href={globalPdf}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={globalPdf} target="_blank" rel="noopener noreferrer">
                     <button className="uppercase hover:scale-105 group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]">
                       View Detailed Syllabus
                     </button>
@@ -294,7 +308,7 @@ const StageUnreal = () => {
             </div>
           </div>
         </section>
-
+        
         {/* ------------------ Mentors ------------------ */}
 
         <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
