@@ -57,20 +57,15 @@ const StageUnreal = () => {
     fetchBanners();
   }, []);
 
-  // Fetch main diploma data
+  // Fetch mentors
   useEffect(() => {
-    const fetchDiplomas = async () => {
-      try {
-        const res = await axios.get(API_URL);
-        // Ensure contents is always an array
-        const diplomas = Array.isArray(res.data.items) ? res.data.items : [];
-        setContents(diplomas);
-        setGlobalPdf(res.data.pdf || null);
-      } catch (err) {
-        console.error("Error fetching diplomas:", err);
-      }
-    };
-    fetchDiplomas();
+    axios
+      .get(`${API_URL}/stageunrealdiploma`)
+      .then((res) => {
+        const diplomaData = res.data?.stageunreal?.diploma || [];
+        setMentors(Array.isArray(diplomaData) ? diplomaData : []);
+      })
+      .catch((err) => console.error("Error fetching diploma:", err));
   }, []);
 
   // Fetch mentors
@@ -198,7 +193,7 @@ const StageUnreal = () => {
                 {banners.map((banner) => (
                   <div key={banner.id || banner.fileName}>
                     <video
-                      src={banner.url}
+                      src={banner.videoUrl}
                       className="w-full h-[500px] object-cover" // taller height
                       autoPlay
                       loop
@@ -308,7 +303,7 @@ const StageUnreal = () => {
             </div>
           </div>
         </section>
-        
+
         {/* ------------------ Mentors ------------------ */}
 
         <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
@@ -374,7 +369,7 @@ const StageUnreal = () => {
                     <div key={item.id || item._id} className="px-2">
                       <div>
                         <img
-                          src={`http://localhost:5000${item.image}`}
+                          src={item.imageUrl}
                           className="w-full object-cover"
                           alt="mentor work"
                           loading="lazy"
