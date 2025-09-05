@@ -27,16 +27,14 @@ const DI = () => {
 
         // Mentors
         const mentorRes = await axios.get(`${API_URL}/dimentor`);
-        setMentors(mentorRes.data.di?.mentor || []);
+        setMentors(mentorRes.data.items || []);
 
-        // highlights
+        // Highlights
         const highlightsRes = await axios.get(`${API_URL}/dihighlights`);
-        setHighlights(highlightsRes.data.di?.highlights || []);
+        setHighlights(highlightsRes.data.items || []);
 
         // Filmography (if needed)
-        const filmographyRes = await axios.get(
-          `${API_URL}/difilmography`
-        );
+        const filmographyRes = await axios.get(`${API_URL}/difilmography`);
         setItems(Array.isArray(filmographyRes.data) ? filmographyRes.data : []);
 
         // Banners
@@ -157,7 +155,7 @@ const DI = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-x-3 md:gap-x-16 gap-y-8 md:gap-y-14 mt-1 font-kumbh">
                 {Array.isArray(highlights) && highlights.length > 0 ? (
                   highlights.map((item) => (
-                    <div key={item.id || item._id}>
+                    <div key={item._id || item.id}>
                       <div className="flex flex-col items-center gap-y-3">
                         <img
                           src={item.imageUrl}
@@ -262,10 +260,10 @@ const DI = () => {
             </h2>
             <div className="flex justify-center items-center">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-                {mentors.length > 0 ? (
+                {Array.isArray(mentors) && mentors.length > 0 ? (
                   mentors.map((mentor) => (
                     <div
-                      key={mentor.publicId}
+                      key={mentor._id || mentor.id}
                       className="flex flex-col items-center"
                     >
                       <img
