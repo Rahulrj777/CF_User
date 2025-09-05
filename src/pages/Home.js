@@ -10,7 +10,7 @@ import "aos/dist/aos.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import axios from "axios";
-import video from "../../public/vfx.mp4"
+import video from "../images/videos/vfx.mp4"
 
 import Clients from "../components/Clients";
 import stop from "../images/stop.jpg";
