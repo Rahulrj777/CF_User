@@ -16,74 +16,32 @@ const StageUnreal = () => {
   const [globalPdf, setGlobalPdf] = useState(null);
   const [items, setItems] = useState([]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
+useEffect(() => {
+  const fetchAll = async () => {
     try {
-      const res = await axios.get(API_URL);
-      setContents(res.data.items || res.data); // support both formats
-      setGlobalPdf(res.data.pdf || null);
+      // Diploma
+      const diplomaRes = await axios.get(`${API_URL}/stageunrealdiploma`);
+      setContents(diplomaRes.data.items || []);
+      setGlobalPdf(diplomaRes.data.pdf || null);
+
+      // Mentors
+      const mentorRes = await axios.get(`${API_URL}/stageunrealmentor`);
+      setMentors(mentorRes.data.stageunreal?.mentor || []);
+
+      // Filmography (if needed)
+      const filmographyRes = await axios.get(`${API_URL}/stageunrealfilmography`);
+      setItems(Array.isArray(filmographyRes.data) ? filmographyRes.data : []);
+
+      // Banners
+      const bannerRes = await axios.get(`${API_URL}/stageunrealbanner`);
+      setBanners(Array.isArray(bannerRes.data) ? bannerRes.data : []);
     } catch (err) {
-      console.error("fetchData error:", err);
+      console.error("Error fetching StageUnreal data:", err);
     }
   };
 
-  // Fetch filmography
-  useEffect(() => {
-    const fetchFilmography = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/stageunrealfilmography`);
-        setItems(Array.isArray(res.data) ? res.data : []);
-      } catch (err) {
-        console.error("Error fetching filmography:", err);
-      }
-    };
-    fetchFilmography();
-  }, []);
-
-  // Fetch banners
-  useEffect(() => {
-    const fetchBanners = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/stageunrealbanner`);
-        setBanners(Array.isArray(res.data) ? res.data : []);
-      } catch (err) {
-        console.error("Error fetching banners:", err);
-      }
-    };
-    fetchBanners();
-  }, []);
-
-  // ------------------- Fetch Diploma -------------------
-  useEffect(() => {
-    const fetchDiploma = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/stageunrealdiploma`);
-        const diplomaData = res.data?.stageunreal?.diploma || [];
-        setContents(Array.isArray(diplomaData) ? diplomaData : []);
-        setGlobalPdf(res.data?.stageunreal?.pdf || null);
-      } catch (err) {
-        console.error("Error fetching diploma:", err);
-      }
-    };
-    fetchDiploma();
-  }, []);
-
-  // ------------------- Fetch Mentors -------------------
-  useEffect(() => {
-    const fetchMentors = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/stageunrealmentor`);
-        const mentorData = res.data?.stageunreal?.mentor || [];
-        setMentors(Array.isArray(mentorData) ? mentorData : []);
-      } catch (err) {
-        console.error("Error fetching mentors:", err);
-      }
-    };
-    fetchMentors();
-  }, []);
+  fetchAll();
+}, []);
 
   const setting = {
     dots: false,
@@ -95,19 +53,6 @@ const StageUnreal = () => {
     autoplaySpeed: 5000, // time each slide is shown
     cssEase: "ease-in-out",
     pauseOnHover: false,
-  };
-
-  useEffect(() => {
-    fetchMentors();
-  }, []);
-
-  const fetchMentors = async () => {
-    try {
-      const res = await axios.get(API_URL);
-      setMentors(res.data);
-    } catch (err) {
-      console.error("Error fetching mentors:", err);
-    }
   };
 
   function topPage() {
@@ -311,7 +256,7 @@ const StageUnreal = () => {
         </section>
 
         {/* ------------------ Mentors ------------------ */}
-        
+
         <section className="pt-10 md:pt-20 pb-10 md:pb-20 bg-white">
           <div className="px-4 w-full md:w-[80%] mx-auto font-kumbh">
             <div className="flex items-center justify-center mb-6 md:mb-10">
