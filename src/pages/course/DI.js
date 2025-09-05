@@ -258,11 +258,12 @@ const DI = () => {
             <h2 className="font-bold text-black text-[20px] md:text-[40px] text-center uppercase md:tracking-[2px] mb-10">
               FilmMaker As Mentor
             </h2>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 md:gap-y-16 gap-x-20">
-              {mentors.length > 0 ? (
+              {mentors && mentors.length > 0 ? (
                 mentors.map((mentor) => (
                   <div
-                    key={mentor._id || mentor.id}
+                    key={mentor._id}
                     className="flex flex-col items-center gap-y-5"
                   >
                     <img

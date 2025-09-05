@@ -10,6 +10,7 @@ import "aos/dist/aos.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import axios from "axios";
+import video from "../../public/vfx.mp4"
 
 import Clients from "../components/Clients";
 import stop from "../images/stop.jpg";
@@ -316,7 +317,7 @@ const settings = {
               playsInline
               controls
             >
-              <source src="/vfx.mp4" type="video/mp4" />
+              <source src={video} type="video/mp4" />
             </video>
           </div>
         </section>
