@@ -145,7 +145,7 @@ useEffect(() => {
                   <div key={banner.id || banner.fileName}>
                     <video
                       src={banner.videoUrl}
-                      className="w-full h-[500px] object-cover" // taller height
+                      className="w-full object-cover" // taller height
                       autoPlay
                       loop
                       muted
