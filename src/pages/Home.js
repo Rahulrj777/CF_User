@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./text.css";
 import AOS from "aos";
@@ -10,7 +10,7 @@ import "aos/dist/aos.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import axios from "axios";
-import video from "../images/videos/vfx.mp4"
+import video from "../images/videos/vfx.mp4";
 
 import Clients from "../components/Clients";
 import stop from "../images/stop.jpg";
@@ -40,35 +40,35 @@ const Home = () => {
   const [banners, setBanners] = useState([]);
   const [exclusive, setExclusive] = useState([]);
 
-useEffect(() => {
-  axios
-    .get(`${API_BASE}/homebanner`)
-    .then((res) => {
-      console.log("Banners API response:", res.data);
-      // if backend sends { banners: [] } use that
-      if (Array.isArray(res.data)) {
-        setBanners(res.data);
-      } else if (Array.isArray(res.data.banners)) {
-        setBanners(res.data.banners);
-      } else {
-        setBanners([]); // fallback
-      }
-    })
-    .catch((err) => console.log("Error fetching banners:", err));
-}, []);
+  useEffect(() => {
+    axios
+      .get(`${API_BASE}/homebanner`)
+      .then((res) => {
+        console.log("Banners API response:", res.data);
+        // if backend sends { banners: [] } use that
+        if (Array.isArray(res.data)) {
+          setBanners(res.data);
+        } else if (Array.isArray(res.data.banners)) {
+          setBanners(res.data.banners);
+        } else {
+          setBanners([]); // fallback
+        }
+      })
+      .catch((err) => console.log("Error fetching banners:", err));
+  }, []);
 
-const settings = {
-  dots: true,
-  infinite: banners.length > 1,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  autoplay: true,          // ✅ force autoplay
-  autoplaySpeed: 4000,     // 3s interval
-  speed: 1000,             // slide animation speed
-  cssEase: "ease-in-out",
-  pauseOnHover: false,
-  arrows: false            // ✅ optional, hides prev/next arrows
-};
+  const settings = {
+    dots: true,
+    infinite: banners.length > 1,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true, // ✅ force autoplay
+    autoplaySpeed: 4000, // 3s interval
+    speed: 1000, // slide animation speed
+    cssEase: "ease-in-out",
+    pauseOnHover: false,
+    arrows: false, // ✅ optional, hides prev/next arrows
+  };
 
   useEffect(() => {
     axios

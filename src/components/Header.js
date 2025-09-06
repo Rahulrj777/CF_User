@@ -9,6 +9,11 @@ import black from "../images/footer_logo-1.png";
 const Header = () => {
   const [nav, setNav] = useState(false);
   const [navbarBg, setNavbarBg] = useState("bg-black/90");
+  const [showCourses, setShowCourses] = useState(false);
+
+  const toggleCourses = () => {
+    setShowCourses((prev) => !prev);
+  };
 
   const handleNav = () => setNav(!nav);
 
@@ -33,7 +38,7 @@ const Header = () => {
       {/* Top Info Bar */}
       <div className="bg-[#ffA500] h-8 md:h-10 flex items-center">
         {/* Phone */}
-        <div className="w-[40%] md:w-[20%] bg-[#fc4141] flex justify-center items-center py-1 md:py-2">
+        <div className="w-[40%] md:w-[20%] bg-[#fc4141] flex justify-center items-center py-2 md:py-3">
           <a
             href="tel:+919884683888"
             target="_blank"
@@ -76,9 +81,7 @@ const Header = () => {
           <ul className="hidden lg:flex items-center gap-6 xl:gap-12 font-semibold text-white text-sm">
             <li>
               <Link to="/" onClick={topPage}>
-                <button className="hover:text-white/60 transition">
-                  Home
-                </button>
+                <button className="hover:text-white/60 transition">Home</button>
               </Link>
             </li>
 
@@ -87,7 +90,7 @@ const Header = () => {
                 Courses
               </button>
               {/* Dropdown */}
-              <div className="absolute left-0 mt-2 w-56 bg-white rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
+              <div className="absolute left-0 mt-0 w-56 bg-white rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300">
                 {[
                   "Direction",
                   "Cinematography",
@@ -120,7 +123,7 @@ const Header = () => {
           </ul>
 
           {/* Apply Button */}
-          <div className="hidden sm:flex">
+          <div className="hidden lg:flex">
             <Link to="/apply" onClick={topPage}>
               <button className="bg-[#ff0000] text-white text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2 rounded hover:bg-red-600 transition uppercase">
                 Apply Now
@@ -146,56 +149,90 @@ const Header = () => {
         >
           <div className="p-5">
             {/* Mobile Logo */}
-            <Link to="/" onClick={() => { topPage(); handleNav(); }}>
+            <Link
+              to="/"
+              onClick={() => {
+                topPage();
+                handleNav();
+              }}
+            >
               <img src={black} alt="CF Logo" className="w-32 mb-6" />
             </Link>
 
             {/* Mobile Menu Items */}
             <ul className="flex flex-col gap-4 text-gray-700 font-semibold text-sm">
               <li>
-                <Link to="/" onClick={() => { topPage(); handleNav(); }}>
+                <Link
+                  to="/"
+                  onClick={() => {
+                    topPage();
+                    handleNav();
+                  }}
+                >
                   Home
                 </Link>
               </li>
 
               <li>
-                <details className="group">
-                  <summary className="cursor-pointer">
+                <div>
+                  <span
+                    className="cursor-pointer flex justify-between items-center"
+                    onClick={toggleCourses}
+                  >
                     Courses
-                  </summary>
-                  <ul className="pl-4 mt-2 flex flex-col gap-2 text-gray-600">
-                    {[
-                      "Direction",
-                      "Cinematography",
-                      "Editing",
-                      "Visual Effects",
-                      "Virtual Production",
-                      "Acting",
-                      "Photography",
-                      "DI",
-                    ].map((course, idx) => (
-                      <li key={idx}>
-                        <Link
-                          to={course.toLowerCase().replace(/\s+/g, "_")}
-                          onClick={() => { topPage(); handleNav(); }}
-                          className="hover:text-red-600"
-                        >
-                          {course}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
+                    <span>{showCourses ? "▲" : "▼"}</span>
+                  </span>
+
+                  {showCourses && (
+                    <ul className="pl-4 mt-2 flex flex-col gap-2 text-gray-600">
+                      {[
+                        "Direction",
+                        "Cinematography",
+                        "Editing",
+                        "Visual Effects",
+                        "Virtual Production",
+                        "Acting",
+                        "Photography",
+                        "DI",
+                      ].map((course, idx) => (
+                        <li key={idx}>
+                          <Link
+                            to={course.toLowerCase().replace(/\s+/g, "_")}
+                            onClick={() => {
+                              topPage();
+                              handleNav();
+                            }}
+                            className="hover:text-red-600"
+                          >
+                            {course}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
               </li>
 
               <li>
-                <Link to="contact" onClick={() => { topPage(); handleNav(); }}>
+                <Link
+                  to="contact"
+                  onClick={() => {
+                    topPage();
+                    handleNav();
+                  }}
+                >
                   Contact Us
                 </Link>
               </li>
 
               <li>
-                <Link to="/apply" onClick={() => { topPage(); handleNav(); }}>
+                <Link
+                  to="/apply"
+                  onClick={() => {
+                    topPage();
+                    handleNav();
+                  }}
+                >
                   <button className="bg-[#ff0000] text-white px-4 py-2 rounded hover:bg-red-600 transition uppercase text-xs">
                     Apply Now
                   </button>

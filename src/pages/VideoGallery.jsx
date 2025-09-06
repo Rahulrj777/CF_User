@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import API_BASE from "../config.js";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 const VideoGallery = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(6);
+
+  const showMore = () => setVisibleCount((v) => v + 6);
+  const showLess = () => setVisibleCount(6);
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -67,8 +72,8 @@ const VideoGallery = () => {
         ) : (
           <>
             {/* Video Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-              {videos.map((video) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              {videos.slice(0, visibleCount).map((video) => (
                 <div
                   key={video._id}
                   className="bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105"
@@ -84,10 +89,7 @@ const VideoGallery = () => {
                         e.target.nextSibling.style.display = "flex";
                       }}
                     >
-                      <source
-                        src={video.videoUrl} // fixed capitalization
-                        type="video/mp4"
-                      />
+                      <source src={video.videoUrl} type="video/mp4" />
                     </video>
 
                     {/* Fallback */}
@@ -130,6 +132,31 @@ const VideoGallery = () => {
                 </div>
               ))}
             </div>
+
+            {/* See More / See Less */}
+            {videos.length > visibleCount && (
+              <div className="flex justify-center">
+                <button
+                  onClick={showMore}
+                  className="flex items-center gap-2 text-purple-500 hover:text-purple-700 font-semibold"
+                >
+                  See More
+                  <MdKeyboardArrowDown size={24} />
+                </button>
+              </div>
+            )}
+
+            {visibleCount > 6 && (
+              <div className="flex justify-center mt-4">
+                <button
+                  onClick={showLess}
+                  className="flex items-center gap-2 text-purple-500 hover:text-purple-700 font-semibold"
+                >
+                  See Less
+                  <MdKeyboardArrowUp size={24} />
+                </button>
+              </div>
+            )}
 
             {/* Video Modal */}
             {selectedVideo && (
