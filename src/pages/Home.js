@@ -522,13 +522,18 @@ const Home = () => {
           </div>
         </section>
 
-        <section className=" bg-gradient-to-r from-orange-600 to-indigo-400  font-[Prata] ">
-          <div className=" top-0 z-[-2]  bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
+        <section className="bg-gradient-to-r from-orange-600 to-indigo-400 font-[Prata]">
+          <div className="top-0 z-[-2] bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
             <div className="relative">
               <div>
                 <img
                   src={stop}
-                  className="w-full h-[6rem] md:h-auto object-cover"
+                  className="
+            w-full 
+            h-[100px] sm:h-[100px] md:h-[200px] lg:h-[300px] 
+            object-cover 
+            scale-110 md:scale-100
+          "
                   alt="contact banner"
                   title="Filmmaking Academy In India"
                   loading="lazy"
@@ -536,11 +541,11 @@ const Home = () => {
                 />
               </div>
 
-              <div className="absolute bottom-2 md:bottom-8 w-full flex justify-center items-center  ">
+              <div className="absolute bottom-4 md:bottom-8 w-full flex justify-center items-center">
                 <Link to="apply" onClick={topPage}>
-                  <button className="hover:animate-bounce group font-[poppins] relative font-semibold inline-flex h-6 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000]/30 px-3 md:px-10  border border-white uppercase  text-white">
+                  <button className="hover:animate-bounce group font-[poppins] relative font-semibold inline-flex h-6 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000]/30 px-3 md:px-10 border border-white uppercase text-white">
                     <span className="absolute md:h-56 w-full rounded-full bg-[#ff0000] group-hover:scale-105 transition-all duration-300 group-hover:size-0"></span>
-                    <span className="relative text-[8px] md:text-[14px]  md:tracking-[1px]">
+                    <span className="relative text-[8px] md:text-[14px] md:tracking-[1px]">
                       Apply Now
                     </span>
                   </button>
