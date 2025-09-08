@@ -74,15 +74,6 @@ const Cinematography = () => {
       .then((res) => setHighlights(Array.isArray(res.data) ? res.data : []))
       .catch((err) => console.error("Error fetching highlights:", err));
 
-    // Fetch diploma
-    axios
-      .get(`${API_URL}/Cinematographydiploma`)
-      .then((res) => {
-        const diplomaData = res.data.Cinematography?.diploma?.[0] || null;
-        setDiplomas(diplomaData);
-      })
-      .catch((err) => console.error("Error fetching diplomas:", err));
-
     // Fetch mentors
     axios
       .get(`${API_URL}/cinematographymentor`)
@@ -97,11 +88,22 @@ const Cinematography = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  // Fetch diploma data
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/directiondiploma`)
+      .then((res) => {
+        const diplomaData = res.data.direction?.diploma?.[0] || null;
+        setDiplomas(diplomaData);
+      })
+      .catch((err) => console.error("Error fetching diplomas:", err));
+  }, []);
+
   // Function to view PDF from MongoDB
   const handleViewPdf = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}/Cinematographydiploma/pdf/view`,
+        `${API_URL}/directiondiploma/pdf/view`,
         { responseType: "blob" } // important: treat response as a Blob
       );
       const url = window.URL.createObjectURL(
@@ -113,7 +115,6 @@ const Cinematography = () => {
       alert("Failed to open PDF.");
     }
   };
-
   if (loading)
     return <p className="text-white text-center mt-20">Loading...</p>;
 
