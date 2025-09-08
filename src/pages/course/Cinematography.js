@@ -76,9 +76,9 @@ const Cinematography = () => {
 
     // Fetch diploma
     axios
-      .get(`${API_URL}/cinematographydiploma`)
+      .get(`${API_URL}/Cinematographydiploma`)
       .then((res) => {
-        const diplomaData = res.data.cinematography?.diploma?.[0] || null;
+        const diplomaData = res.data.Cinematography?.diploma?.[0] || null;
         setDiplomas(diplomaData);
       })
       .catch((err) => console.error("Error fetching diplomas:", err));
@@ -96,6 +96,23 @@ const Cinematography = () => {
       .catch((err) => console.error("Error fetching filmography:", err))
       .finally(() => setLoading(false));
   }, []);
+
+  // Function to view PDF from MongoDB
+  const handleViewPdf = async () => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/Cinematographydiploma/pdf/view`,
+        { responseType: "blob" } // important: treat response as a Blob
+      );
+      const url = window.URL.createObjectURL(
+        new Blob([response.data], { type: "application/pdf" })
+      );
+      window.open(url, "_blank");
+    } catch (err) {
+      console.error("Error viewing PDF:", err);
+      alert("Failed to open PDF.");
+    }
+  };
 
   if (loading)
     return <p className="text-white text-center mt-20">Loading...</p>;
@@ -191,7 +208,7 @@ const Cinematography = () => {
                   1 Year Diploma
                 </h3>
                 <p className="font-semibold text-[18px] md:text-[24px] text-[#ff0000] font-[roboto] uppercase tracking-[1px]">
-                  in Cinematography
+                  in Cinematography & Screenplay
                 </p>
               </div>
 
@@ -245,17 +262,14 @@ const Cinematography = () => {
               </div>
 
               {/* PDF Button */}
-              {diplomas.pdfUrl && (
+              {diplomas?.pdfData && (
                 <div className="mt-10 flex justify-center">
-                  <a
-                    href={diplomas.pdfUrl} // Use the full Cloudinary URL
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={handleViewPdf}
+                    className="uppercase group relative inline-flex h-10 text-[14px] items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-10 font-medium text-neutral-200 duration-500 hover:bg-red-700"
                   >
-                    <button className="uppercase group relative inline-flex h-10 text-[14px] items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-10 font-medium text-neutral-200 duration-500 hover:bg-red-700">
-                      View Detailed Syllabus
-                    </button>
-                  </a>
+                    View Detailed Syllabus
+                  </button>
                 </div>
               )}
             </div>
