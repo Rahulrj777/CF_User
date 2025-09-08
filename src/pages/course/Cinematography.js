@@ -91,9 +91,9 @@ const Cinematography = () => {
   // Fetch diploma data
   useEffect(() => {
     axios
-      .get(`${API_URL}/directiondiploma`)
+      .get(`${API_URL}/cinematographydiploma`)
       .then((res) => {
-        const diplomaData = res.data.direction?.diploma?.[0] || null;
+        const diplomaData = res.data.cinematography?.diploma?.[0] || null;
         setDiplomas(diplomaData);
       })
       .catch((err) => console.error("Error fetching diplomas:", err));
@@ -103,7 +103,7 @@ const Cinematography = () => {
   const handleViewPdf = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}/directiondiploma/pdf/view`,
+        `${API_URL}/cinematographydiploma/pdf/view`,
         { responseType: "blob" } // important: treat response as a Blob
       );
       const url = window.URL.createObjectURL(
