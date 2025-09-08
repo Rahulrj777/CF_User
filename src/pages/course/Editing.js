@@ -21,12 +21,12 @@ const Editing = () => {
       try {
         const res = await axios.get(`${API_URL}/editingdiploma`);
         setDiploma({
-          months: res.data.diploma || [], // map backend `diploma` to `months`
-          pdf: res.data.diplomaPdf?.url || "", // map backend `diplomaPdf` to `pdf`
+          months: res.data.diploma || [], // the syllabus structure
+          pdf: res.data.diplomaPdf?.url || "", // the main syllabus PDF URL
         });
       } catch (err) {
         console.error("Error fetching diploma data:", err);
-        setDiploma({ months: [], pdf: "" }); // fallback if error occurs
+        setDiploma({ months: [], pdf: "" });
       }
     };
 
@@ -272,14 +272,10 @@ const Editing = () => {
               )}
             </div>
 
-            {/* PDF Button */}
+            {/* Main Diploma PDF */}
             {diploma.pdf && (
               <div className="mt-10 flex justify-center">
-                <a
-                  href={diploma.pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={diploma.pdf} target="_blank" rel="noopener noreferrer">
                   <button className="uppercase group relative inline-flex h-10 text-[14px] items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-10 font-medium text-neutral-200 duration-500 hover:bg-red-700">
                     View Detailed Syllabus
                   </button>
