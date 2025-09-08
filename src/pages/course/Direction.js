@@ -38,28 +38,45 @@ const Direction = () => {
       .catch((err) => console.error("Error fetching highlights:", err));
   }, []);
 
-  // Fetch diplomas
+  // Fetch diploma data
   useEffect(() => {
     axios
       .get(`${API_URL}/directiondiploma`)
       .then((res) => {
         const diplomaData = res.data.direction?.diploma?.[0] || null;
-        setDiplomas(diplomaData); // save the first diploma object directly
+        setDiplomas(diplomaData);
       })
       .catch((err) => console.error("Error fetching diplomas:", err));
   }, []);
 
-// Fetch mentors
-useEffect(() => {
-  axios
-    .get(`${API_URL}/directionmentor`)
-    .then((res) => {
-      console.log("Mentor API response:", res.data); // 👈 add this
-      const mentorData = res.data?.direction?.mentor || [];
-      setMentors(Array.isArray(mentorData) ? mentorData : []);
-    })
-    .catch((err) => console.error("Error fetching mentors:", err));
-}, []);
+  // Function to view PDF from MongoDB
+  const handleViewPdf = async () => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/directiondiploma/pdf/view`,
+        { responseType: "blob" } // important: treat response as a Blob
+      );
+      const url = window.URL.createObjectURL(
+        new Blob([response.data], { type: "application/pdf" })
+      );
+      window.open(url, "_blank");
+    } catch (err) {
+      console.error("Error viewing PDF:", err);
+      alert("Failed to open PDF.");
+    }
+  };
+
+  // Fetch mentors
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/directionmentor`)
+      .then((res) => {
+        console.log("Mentor API response:", res.data); // 👈 add this
+        const mentorData = res.data?.direction?.mentor || [];
+        setMentors(Array.isArray(mentorData) ? mentorData : []);
+      })
+      .catch((err) => console.error("Error fetching mentors:", err));
+  }, []);
 
   // Fetch filmography
   useEffect(() => {
@@ -240,17 +257,14 @@ useEffect(() => {
               </div>
 
               {/* PDF Button */}
-              {diplomas.pdfUrl && (
+              {diplomas?.pdfData && (
                 <div className="mt-10 flex justify-center">
-                  <a
-                    href={diplomas.pdfUrl} // Use the full Cloudinary URL
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={handleViewPdf}
+                    className="uppercase group relative inline-flex h-10 text-[14px] items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-10 font-medium text-neutral-200 duration-500 hover:bg-red-700"
                   >
-                    <button className="uppercase group relative inline-flex h-10 text-[14px] items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-10 font-medium text-neutral-200 duration-500 hover:bg-red-700">
-                      View Detailed Syllabus
-                    </button>
-                  </a>
+                    View Detailed Syllabus
+                  </button>
                 </div>
               )}
             </div>
