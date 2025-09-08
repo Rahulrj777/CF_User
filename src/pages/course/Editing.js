@@ -17,12 +17,15 @@ const Editing = () => {
   const [diploma, setDiploma] = useState({ months: [] });
 
   useEffect(() => {
+    // CHANGE: Update PDF fetching to work with MongoDB storage instead of Cloudinary
     const fetchDiploma = async () => {
       try {
         const res = await axios.get(`${API_URL}/editingdiploma`);
         setDiploma({
           months: res.data.diploma || [], // the syllabus structure
-          pdf: res.data.diplomaPdf?.url || "", // the main syllabus PDF URL
+          pdf: res.data.diplomaPdf?.pdfName
+            ? `${API_URL}/editingdiploma/pdf/view`
+            : "", // MongoDB PDF endpoint
         });
       } catch (err) {
         console.error("Error fetching diploma data:", err);
