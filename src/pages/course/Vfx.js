@@ -24,25 +24,27 @@ const Vfx = () => {
     fetchmentor();
   }, []);
 
-const fetchmentor = async () => {
-  try {
-    const res = await axios.get(`${API_URL}/vfxmentor`);
-    const mentorData = res.data?.vfx?.mentor || []; // ✅ match backend
-    setmentor(Array.isArray(mentorData) ? mentorData : []);
-  } catch (err) {
-    console.error("Error fetching mentor:", err);
-    setmentor([]);
-  }
-};
+  const fetchmentor = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/vfxmentor`);
+      const mentorData = res.data?.vfx?.mentor || []; // ✅ match backend
+      setmentor(Array.isArray(mentorData) ? mentorData : []);
+    } catch (err) {
+      console.error("Error fetching mentor:", err);
+      setmentor([]);
+    }
+  };
 
   const fetchData = async () => {
     try {
       const res = await axios.get(`${API_URL}/vfxdiploma`);
       const data = res.data;
-
-      // Expecting { images: [...], pdf: {...} }
       setImages(Array.isArray(data.images) ? data.images : []);
-      setPdf(data.pdf || null);
+      setPdf(
+        data.diplomaPdf?.pdfName
+          ? { pdfUrl: `${API_URL}/vfxdiploma/pdf/view` }
+          : null
+      );
     } catch (err) {
       console.error("Error fetching diploma files", err);
       setImages([]);
@@ -267,19 +269,27 @@ const fetchmentor = async () => {
               </div>
             </div>
 
-            {/* CTA Button (PDF Download) */}
+            {/* CTA Button (PDF Download or WhatsApp) */}
             {pdf ? (
               <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
                 <a href={pdf.pdfUrl} target="_blank" rel="noopener noreferrer">
-                  <button className="uppercase hover:scale-105 group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]">
+                  <button className="uppercase hover:scale-105 inline-flex h-10 md:h-12 items-center justify-center rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]">
                     Download Detailed Syllabus
                   </button>
                 </a>
               </div>
             ) : (
-              <p className="text-center text-gray-400 mt-8 md:mt-20">
-                No syllabus PDF uploaded yet.
-              </p>
+              <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
+                <a
+                  href="https://api.whatsapp.com/send?phone=919884683888"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="uppercase hover:scale-105 inline-flex h-10 md:h-12 items-center justify-center rounded-md bg-green-600 border border-white px-6 md:px-10 font-medium text-white duration-500 text-[14px] md:text-[16px]">
+                    Request Detailed Syllabus via WhatsApp
+                  </button>
+                </a>
+              </div>
             )}
           </div>
         </section>
@@ -299,7 +309,7 @@ const fetchmentor = async () => {
                 {Array.isArray(mentor) && mentor.length > 0 ? (
                   mentor.map((mentor) => (
                     <div
-                      key={mentor.id || mentor._id} // use _id if id is missing
+                      key={mentor.id || mentor._id}
                       className="flex flex-col items-center justify-center"
                     >
                       <div className="flex justify-center items-center">
