@@ -102,8 +102,11 @@ const Header = () => {
                   "DI",
                 ].map((course, idx) => (
                   <Link
-                    key={idx}
-                    to={course.toLowerCase().replace(/\s+/g, "_")}
+                    to={
+                      course === "Visual Effects"
+                        ? "/vfx"
+                        : `/${course.toLowerCase().replace(/\s+/g, "_")}`
+                    }
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-900 hover:text-white"
                     onClick={topPage}
                   >
