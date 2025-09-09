@@ -15,32 +15,36 @@ const CFA = () => {
   const [mentors, setMentors] = useState([]);
   const [items, setItems] = useState([]);
 
-useEffect(() => {
-  const fetchAll = async () => {
-    try {
-      // Diploma
-      const diplomaRes = await axios.get(`${API_URL}/cfadiploma`);
-      setContents(diplomaRes.data.items || []);
-      setGlobalPdf(diplomaRes.data.pdf || null);
+  useEffect(() => {
+    const fetchAll = async () => {
+      try {
+        // Diploma
+        const diplomaRes = await axios.get(`${API_URL}/cfadiploma`);
+        setContents(diplomaRes.data.items || []);
+        setGlobalPdf(
+          diplomaRes.data.diplomaPdf?.pdfName
+            ? `${API_URL}/cfadiploma/pdf/view`
+            : null
+        );
 
-      // Mentors
-      const mentorRes = await axios.get(`${API_URL}/cfamentor`);
-      setMentors(mentorRes.data.cfa?.mentor || []);
+        // Mentors
+        const mentorRes = await axios.get(`${API_URL}/cfamentor`);
+        setMentors(mentorRes.data.cfa?.mentor || []);
 
-      // Filmography (if needed)
-      const filmographyRes = await axios.get(`${API_URL}/cfafilmography`);
-      setItems(Array.isArray(filmographyRes.data) ? filmographyRes.data : []);
+        // Filmography (if needed)
+        const filmographyRes = await axios.get(`${API_URL}/cfafilmography`);
+        setItems(Array.isArray(filmographyRes.data) ? filmographyRes.data : []);
 
-      // Banners
-      const bannerRes = await axios.get(`${API_URL}/cfabanner`);
-      setBanners(Array.isArray(bannerRes.data) ? bannerRes.data : []);
-    } catch (err) {
-      console.error("Error fetching cfa data:", err);
-    }
-  };
+        // Banners
+        const bannerRes = await axios.get(`${API_URL}/cfabanner`);
+        setBanners(Array.isArray(bannerRes.data) ? bannerRes.data : []);
+      } catch (err) {
+        console.error("Error fetching cfa data:", err);
+      }
+    };
 
-  fetchAll();
-}, []);
+    fetchAll();
+  }, []);
 
   const setting = {
     dots: false,
@@ -208,20 +212,20 @@ useEffect(() => {
             </div>
 
             {/* Global PDF link OR WhatsApp fallback */}
-            <div className="flex justify-center items-center mt-8 md:mt-20 font-[poppins]">
+            <div className="flex justify-center items-center mt-8 md:mt-16 font-[poppins]">
               {globalPdf ? (
                 <a href={globalPdf} target="_blank" rel="noopener noreferrer">
-                  <button className="uppercase hover:scale-105 group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]">
+                  <button className="uppercase hover:scale-105 inline-flex h-10 md:h-12 items-center justify-center rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 text-[14px] md:text-[16px]">
                     View Detailed Syllabus
                   </button>
                 </a>
               ) : (
                 <a
-                  href="https://api.whatsapp.com/send?phone=9884683888"
+                  href="https://api.whatsapp.com/send?phone=919884683888"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <button className="uppercase hover:scale-105 group relative inline-flex h-10 md:h-12 items-center justify-center overflow-hidden rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 duration-500 text-[14px] md:text-[16px]">
+                  <button className="uppercase hover:scale-105 inline-flex h-10 md:h-12 items-center justify-center rounded-md bg-[#ff0000] border border-white px-6 md:px-10 font-medium text-neutral-200 text-[14px] md:text-[16px]">
                     Request Detailed Syllabus
                   </button>
                 </a>
