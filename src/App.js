@@ -5,8 +5,7 @@ import Home from "./pages/Home";
 import AllCourse from "./pages/AllCourse";
 import Footer from "./components/Footer";
 import Progressbar from "./components/Progressbar";
-
-import { ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -17,7 +16,6 @@ import Editing from "./pages/course/Editing";
 import Acting from "./pages/course/Acting";
 import Vfx from "./pages/course/Vfx";
 import StillPhotography from "./pages/course/StillPhotography";
-
 import VirtualProduction from "./pages/course/VirtualProduction";
 import UserDetail from "./components/mentors/UserDetails";
 import PaymentPage from "./pages/PaymentPage";
@@ -32,6 +30,12 @@ import Refund from "./pages/Refund";
 import BlogMain from "./pages/blog/BlogMain";
 import Whatsapp from "./components/Whatsapp";
 import LiveChat from "./components/LiveChat";
+import VideoGallery from "./pages/VideoGallery";
+import GuestLecture from "./Gallery/GuestLecture";
+import Highlights from "./Gallery/Highlights";
+import NewLaunches from "./Gallery/NewLaunches";
+import Review from "./Gallery/Review";
+import StudentWorks from "./Gallery/StudentWorks";
 
 const App = () => {
   return (
@@ -85,7 +89,15 @@ const App = () => {
 
               <Route path="/payment" element={<PaymentPage />} />
 
-              {/* <Route path="/admin/*" element={<Admin />} /> */}
+              {/* VideoGallery */}
+
+              <Route path="/video-gallery" element={<VideoGallery />} />
+
+              <Route path="/videos/guest-lecture" element={<GuestLecture />} />
+              <Route path="/videos/highlights" element={<Highlights />} />
+              <Route path="/videos/new-launches" element={<NewLaunches />} />
+              <Route path="/videos/review" element={<Review />} />
+              <Route path="/videos/student-works" element={<StudentWorks />} />
             </Routes>
 
             <Footer />
