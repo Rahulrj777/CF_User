@@ -4,6 +4,8 @@ import API_BASE from "../../config.js";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 const Highlights = () => {
+  const category = "highlights";
+
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,7 +20,7 @@ const Highlights = () => {
       try {
         setLoading(true);
         // 👇 hardcode guestLecture category here
-        const res = await axios.get(`${API_BASE}/videos?category=highlights`);
+        const res = await axios.get(`${API_BASE}/videos/${category}`);
         setVideos(res.data);
         setError(null);
       } catch (err) {

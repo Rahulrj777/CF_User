@@ -10,27 +10,27 @@ const categories = [
   {
     name: "Guest Lecture",
     slug: "guest-lecture",
-    thumb: {img1},
+    thumb: img1,
   },
   {
     name: "Highlights",
     slug: "highlights",
-    thumb: {img3},
+    thumb: img3,
   },
   {
     name: "New Launches",
     slug: "new-launches",
-    thumb: {img2},
+    thumb: img2,
   },
   {
     name: "Review",
     slug: "review",
-    thumb: {img5},
+    thumb: img5,
   },
   {
     name: "Student Works",
     slug: "student-works",
-    thumb: {img4},
+    thumb: img4,
   },
 ];
 
