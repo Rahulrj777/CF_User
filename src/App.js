@@ -31,11 +31,12 @@ import BlogMain from "./pages/blog/BlogMain";
 import Whatsapp from "./components/Whatsapp";
 import LiveChat from "./components/LiveChat";
 import VideoGallery from "./pages/VideoGallery";
-import GuestLecture from "./Gallery/GuestLecture";
-import Highlights from "./Gallery/Highlights";
-import NewLaunches from "./Gallery/NewLaunches";
-import Review from "./Gallery/Review";
-import StudentWorks from "./Gallery/StudentWorks";
+
+import GuestLecture from "./pages/Gallery/GuestLecture";
+import Highlights from "./pages/Gallery/Highlights";
+import NewLaunches from "./pages/Gallery/NewLaunches";
+import Review from "./pages/Gallery/Review";
+import StudentWorks from "./pages/Gallery/StudentWorks";
 
 const App = () => {
   return (
