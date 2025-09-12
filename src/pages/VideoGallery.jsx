@@ -58,8 +58,8 @@ const VideoGallery = () => {
           {videos.map((video) => {
             const isExpanded = expandedDescriptions[video._id];
             const descriptionPreview =
-              video.description.length > 30
-                ? video.description.slice(0, 30) + "..."
+              video.description.length > 35
+                ? video.description.slice(0, 35) + "..."
                 : video.description;
 
             return (
@@ -98,7 +98,7 @@ const VideoGallery = () => {
                 <div className="bg-white text-black p-4">
                   <p className="text-sm">
                     {isExpanded ? video.description : descriptionPreview}
-                    {video.description.length > 30 && (
+                    {video.description.length > 35 && (
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
