@@ -76,7 +76,7 @@ const Review = () => {
         ) : (
           <>
             {/* Video Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
               {videos.slice(0, visibleCount).map((video) => (
                 <div
                   key={video._id}
