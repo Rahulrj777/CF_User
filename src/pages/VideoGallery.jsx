@@ -44,7 +44,7 @@ const VideoGallery = () => {
 
   return (
     <div className="min-h-screen bg-black text-white p-8">
-      <h1 className="text-4xl font-bold text-center mb-8">🎬 Video Gallery</h1>
+      <h1 className="text-4xl font-bold text-center mb-12">🎬 Video Gallery</h1>
 
       {categories.map((cat) => (
         <div key={cat.slug} className="mb-12">
@@ -55,26 +55,24 @@ const VideoGallery = () => {
               {videos[cat.slug].map((video) => (
                 <div
                   key={video._id}
-                  className="bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                  className="relative bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
                 >
                   <video
                     src={video.videoUrl}
-                    className="w-full h-80 object-cover"
+                    className="w-full h-48 md:h-64 lg:h-48 object-cover"
                     controls
                     preload="metadata"
                   />
-                  <div className="p-4">
-                    <h3 className="font-semibold text-lg mb-1">
+                  <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
+                    <span className="text-white text-lg font-semibold text-center px-2">
                       {video.title || "Untitled Video"}
-                    </h3>
+                    </span>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-gray-400">
-              No videos available in this category.
-            </p>
+            <p className="text-gray-400">No videos available in this category.</p>
           )}
         </div>
       ))}
