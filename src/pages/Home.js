@@ -10,8 +10,6 @@ import "aos/dist/aos.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import axios from "axios";
-const video =
-    "https://res.cloudinary.com/dshnmht7c/video/upload/v1757654272/vfx_x7ly8b.mp4";
 
 import Clients from "../components/Clients";
 import stop from "../images/stop.jpg";
@@ -40,6 +38,8 @@ import API_BASE from "../config.js";
 const Home = () => {
   const [banners, setBanners] = useState([]);
   const [exclusive, setExclusive] = useState([]);
+  const video =
+    "https://res.cloudinary.com/dshnmht7c/video/upload/v1757654272/vfx_x7ly8b.mp4";
 
   useEffect(() => {
     axios
