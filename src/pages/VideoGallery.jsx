@@ -81,7 +81,7 @@ const VideoGallery = () => {
                   }
                   className="relative"
                 >
-                  <div className="absolute bottom-30 left-0 w-full bg-black bg-opacity-50 text-center py-2">
+                  <div className="absolute bottom-10 left-0 w-full bg-black bg-opacity-50 text-center py-2">
                     <span className="text-white font-semibold text-lg">
                       {video.title || video.category}
                     </span>
