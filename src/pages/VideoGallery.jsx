@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import  API_BASE  from "../config.js";
+import API_BASE from "../config.js";
 
 const categories = [
   { name: "Guest Lecture", slug: "guest-lecture" },
@@ -13,16 +13,16 @@ const categories = [
 ];
 
 const VideoGallery = () => {
-  const [categoryVideos, setCategoryVideos] = useState({}); // store videos per category
+  const [categoryVideos, setCategoryVideos] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchVideos = async () => {
       try {
         const allVideos = {};
-        for (let cat of categories) {
+        for (const cat of categories) {
           const res = await axios.get(`${API_BASE}/videogallerybanner/${cat.slug}`);
-          allVideos[cat.slug] = res.data; // array of videos in that category
+          allVideos[cat.slug] = res.data; // Array of videos per category
         }
         setCategoryVideos(allVideos);
         setLoading(false);
@@ -37,8 +37,8 @@ const VideoGallery = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center text-white">
-        <p>Loading videos...</p>
+      <div className="min-h-screen flex items-center justify-center bg-black text-white">
+        Loading videos...
       </div>
     );
   }
@@ -50,7 +50,7 @@ const VideoGallery = () => {
       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
         {categories.map((cat) => {
           const videos = categoryVideos[cat.slug] || [];
-          const thumbVideo = videos[0]?.videoUrl || "/videos/placeholder.mp4"; // fallback placeholder
+          const thumbVideo = videos[0]?.videoUrl || "/videos/placeholder.mp4";
           const title = videos[0]?.title || cat.name;
 
           return (
