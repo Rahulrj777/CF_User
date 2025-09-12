@@ -1,13 +1,13 @@
 // pages/VideoGallery.jsx
 import { Link } from "react-router-dom";
-const categories = [
-  { name: "Guest Lecture", slug: "guest-lecture", thumb: "/public/videos/guest-lecture.mp4" },
-  { name: "Highlights", slug: "highlights", thumb: "/public/videos/highlights.mp4" },
-  { name: "New Launches", slug: "new-launches", thumb: "/public/videos/new-launches.mp4" },
-  { name: "Review", slug: "review", thumb: "/public/videos/review.mp4" },
-  { name: "Student Works", slug: "student-works", thumb: "/public/videos/student-works.mp4" },
-];
 
+const categories = [
+  { name: "Guest Lecture", slug: "guest-lecture", thumb: "/videos/guest-lecture.mp4" },
+  { name: "Highlights", slug: "highlights", thumb: "/videos/highlights.mp4" },
+  { name: "New Launches", slug: "new-launches", thumb: "/videos/new-launches.mp4" },
+  { name: "Review", slug: "review", thumb: "/videos/review.mp4" },
+  { name: "Student Works", slug: "student-works", thumb: "/videos/student-works.mp4" },
+];
 
 const VideoGallery = () => {
   return (
