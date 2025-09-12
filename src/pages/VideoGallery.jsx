@@ -1,81 +1,81 @@
-// pages/VideoGallery.jsx
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import API_BASE from "../config.js";
+import { API_BASE } from "../../Utils/Api.js";
 
 const categories = [
-  { name: "Guest Lecture", slug: "guest-lecture" },
-  { name: "Highlights", slug: "highlights" },
-  { name: "New Launches", slug: "new-launches" },
-  { name: "Review", slug: "review" },
-  { name: "Student Works", slug: "student-works" },
+  { label: "Guest Lecture", slug: "guest-lecture" },
+  { label: "Highlights", slug: "highlights" },
+  { label: "New Launches", slug: "new-launches" },
+  { label: "Review", slug: "review" },
+  { label: "Student Works", slug: "student-works" },
 ];
 
 const VideoGallery = () => {
-  const [categoryVideos, setCategoryVideos] = useState({});
+  const [videos, setVideos] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchVideos = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(`${API_BASE}/videogallerybanner/all`);
+      // Group videos by category
+      const grouped = res.data.reduce((acc, video) => {
+        acc[video.category] = acc[video.category] || [];
+        acc[video.category].push(video);
+        return acc;
+      }, {});
+      setVideos(grouped);
+      setError(null);
+    } catch (err) {
+      console.error("Error fetching videos:", err);
+      setError("Failed to load videos.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        const allVideos = {};
-        for (const cat of categories) {
-          const res = await axios.get(`${API_BASE}/videogallerybanner/${cat.slug}`);
-          allVideos[cat.slug] = res.data; // Array of videos per category
-        }
-        setCategoryVideos(allVideos);
-        setLoading(false);
-      } catch (err) {
-        console.error("Error fetching videos:", err);
-        setLoading(false);
-      }
-    };
-
     fetchVideos();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-black text-white">
-        Loading videos...
-      </div>
-    );
-  }
+  if (loading) return <p className="text-center mt-8">Loading videos...</p>;
+  if (error) return <p className="text-center mt-8 text-red-500">{error}</p>;
 
   return (
     <div className="min-h-screen bg-black text-white p-8">
       <h1 className="text-4xl font-bold text-center mb-8">🎬 Video Gallery</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
-        {categories.map((cat) => {
-          const videos = categoryVideos[cat.slug] || [];
-          const thumbVideo = videos[0]?.videoUrl || "/videos/placeholder.mp4";
-          const title = videos[0]?.title || cat.name;
+      {categories.map((cat) => (
+        <div key={cat.slug} className="mb-12">
+          <h2 className="text-2xl font-semibold mb-4">{cat.label}</h2>
 
-          return (
-            <Link
-              to={`/videos/${cat.slug}`}
-              key={cat.slug}
-              className="bg-gray-900 rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105"
-            >
-              <div className="relative">
-                <video
-                  src={thumbVideo}
-                  className="w-full h-80 object-cover"
-                  muted
-                  autoPlay
-                  loop
-                  playsInline
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                  <span className="text-white text-xl font-semibold">{title}</span>
+          {videos[cat.slug] && videos[cat.slug].length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {videos[cat.slug].map((video) => (
+                <div
+                  key={video._id}
+                  className="bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                >
+                  <video
+                    src={video.videoUrl}
+                    className="w-full h-64 object-cover"
+                    controls
+                    preload="metadata"
+                  />
+                  <div className="p-4">
+                    <h3 className="font-semibold text-lg mb-1">
+                      {video.title || "Untitled Video"}
+                    </h3>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-400">No videos available in this category.</p>
+          )}
+        </div>
+      ))}
     </div>
   );
 };
