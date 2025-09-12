@@ -49,7 +49,7 @@ const VideoGallery = () => {
 
   return (
     <div className="min-h-screen bg-black text-white p-8">
-      <h1 className="text-4xl font-bold text-center mb-8">🎬 Video Gallery</h1>
+      <h1 className="text-4xl font-bold text-center mb-12">🎬 Video Gallery</h1>
 
       {videos.length === 0 ? (
         <p className="text-gray-400 text-center">No videos available.</p>
