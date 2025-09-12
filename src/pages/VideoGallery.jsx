@@ -65,7 +65,7 @@ const VideoGallery = () => {
             return (
               <div
                 key={video._id}
-                className={`relative rounded-xl overflow-hidden cursor-pointer shadow-lg transition-all duration-300 ${
+                className={`rounded-xl overflow-hidden cursor-pointer shadow-lg transition-all duration-300 ${
                   hoveredId === video._id
                     ? "scale-110 z-10"
                     : hoveredId
@@ -82,13 +82,13 @@ const VideoGallery = () => {
                 >
                   <video
                     src={video.videoUrl}
-                    className="w-full h-64 md:h-80 object-cover"
+                    className="relative w-full h-64 md:h-80 object-cover"
                     muted
                     autoPlay
                     loop
                     playsInline
                   />
-                  <div className="absolute bottom-30 left-0 w-full bg-black bg-opacity-50 text-center py-2">
+                  <div className="absolute bottom-10 left-0 w-full bg-black bg-opacity-50 text-center py-2">
                     <span className="text-white font-semibold text-lg">
                       {video.title || video.category}
                     </span>
