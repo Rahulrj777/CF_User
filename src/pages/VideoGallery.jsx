@@ -81,10 +81,10 @@ const VideoGallery = () => {
                   }
                   className="relative"
                 >
-                  <div className="absolute top-4 left-4 z-20 bg-black bg-opacity-70 text-white rounded px-3 py-1">
-                    <h3 className="text-lg font-semibold">
+                  <div className="absolute bottom-30 left-0 w-full bg-black bg-opacity-50 text-center py-2">
+                    <span className="text-white font-semibold text-lg">
                       {video.title || video.category}
-                    </h3>
+                    </span>
                   </div>
 
                   <video
