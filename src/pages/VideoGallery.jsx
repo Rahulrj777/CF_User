@@ -95,21 +95,26 @@ const VideoGallery = () => {
                   </div>
                 </div>
 
-                <div className="bg-white text-black p-4">
-                  <p className="text-sm">
+                <div className="bg-white text-black p-4 rounded-b-xl">
+                  <p
+                    className={`text-sm transition-all duration-300 overflow-hidden ${
+                      isExpanded ? "max-h-96" : "max-h-16"
+                    }`}
+                  >
                     {isExpanded ? video.description : descriptionPreview}
-                    {video.description.length > 35 && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleDescription(video._id);
-                        }}
-                        className="ml-2 text-blue-600 underline"
-                      >
-                        {isExpanded ? "less" : "more"}
-                      </button>
-                    )}
                   </p>
+
+                  {video.description.length > 35 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleDescription(video._id);
+                      }}
+                      className="mt-2 text-blue-600 underline"
+                    >
+                      {isExpanded ? "less" : "more"}
+                    </button>
+                  )}
                 </div>
               </div>
             );
