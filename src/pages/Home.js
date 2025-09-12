@@ -10,7 +10,8 @@ import "aos/dist/aos.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import axios from "axios";
-import video from "../images/videos/vfx.mp4";
+const video =
+    "https://res.cloudinary.com/dshnmht7c/video/upload/v1757654272/vfx_x7ly8b.mp4";
 
 import Clients from "../components/Clients";
 import stop from "../images/stop.jpg";
@@ -307,10 +308,10 @@ const Home = () => {
 
         {/* video banner */}
 
-        <section className="bg-black">
-          <div>
+        <section className="bg-black py-12">
+          <div className="flex justify-center">
             <video
-              className=" w-[90%] md:w-[60%] mx-auto object-cover"
+              className="w-[90%] md:w-[60%] rounded-xl shadow-lg object-cover"
               autoPlay
               muted
               loop
