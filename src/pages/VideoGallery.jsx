@@ -16,6 +16,7 @@ const VideoGallery = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [expandedDescriptions, setExpandedDescriptions] = useState({});
+  const [hoveredId, setHoveredId] = useState(null);
   const navigate = useNavigate();
 
   const fetchVideos = async () => {
@@ -64,7 +65,15 @@ const VideoGallery = () => {
             return (
               <div
                 key={video._id}
-                className="relative rounded-xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
+                className={`relative rounded-xl overflow-hidden cursor-pointer shadow-lg transition-all duration-300 ${
+                  hoveredId === video._id
+                    ? "scale-110 z-10"
+                    : hoveredId
+                    ? "scale-90 opacity-80"
+                    : "scale-100"
+                }`}
+                onMouseEnter={() => setHoveredId(video._id)}
+                onMouseLeave={() => setHoveredId(null)}
               >
                 <div
                   onClick={() =>
@@ -79,7 +88,7 @@ const VideoGallery = () => {
                     loop
                     playsInline
                   />
-                  <div className="absolute bottom-5 left-0 w-full bg-black bg-opacity-50 text-center py-2">
+                  <div className="absolute bottom-20 left-0 w-full bg-black bg-opacity-50 text-center py-2">
                     <span className="text-white font-semibold text-lg">
                       {video.title || video.category}
                     </span>
@@ -92,7 +101,7 @@ const VideoGallery = () => {
                     {video.description.length > 30 && (
                       <button
                         onClick={(e) => {
-                          e.stopPropagation(); // Prevent navigation
+                          e.stopPropagation();
                           toggleDescription(video._id);
                         }}
                         className="ml-2 text-blue-600 underline"
