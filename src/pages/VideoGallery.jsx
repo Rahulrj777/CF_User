@@ -51,7 +51,7 @@ const VideoGallery = () => {
           <h2 className="text-2xl font-semibold mb-4">{cat.label}</h2>
 
           {videos[cat.slug] && videos[cat.slug].length > 0 ? (
-            <div className="grid lg:grid-cols-5 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
               {videos[cat.slug].map((video) => (
                 <div
                   key={video._id}
@@ -72,7 +72,9 @@ const VideoGallery = () => {
               ))}
             </div>
           ) : (
-            <p className="text-gray-400">No videos available in this category.</p>
+            <p className="text-gray-400">
+              No videos available in this category.
+            </p>
           )}
         </div>
       ))}
