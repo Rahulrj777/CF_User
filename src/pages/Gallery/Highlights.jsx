@@ -61,7 +61,7 @@ const Highlights = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">🎬 Highlights Gallery</h1>
+          <h1 className="font-bold  text-[24px] md:text-[40px] mb-2">🎬 Highlights Gallery</h1>
           <p className="text-gray-400">Watch and enjoy our video collection</p>
         </div>
 
