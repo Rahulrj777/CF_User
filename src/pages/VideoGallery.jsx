@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_BASE } from "../../Utils/Api.js";
+import API_BASE from "../config.js";
 
 const categories = [
   { label: "Guest Lecture", slug: "guest-lecture" },
