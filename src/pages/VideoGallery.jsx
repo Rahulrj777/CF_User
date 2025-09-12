@@ -64,7 +64,7 @@ const VideoGalleryBanner = () => {
   };
 
   const handleDelete = async (_id) => {
-    if (!confirm("Are you sure you want to delete this video?")) return;
+    if (!window.confirm("Are you sure you want to delete this video?")) return;
 
     try {
       await axios.delete(`${API_BASE}/videogallerybanner/${_id}`);
