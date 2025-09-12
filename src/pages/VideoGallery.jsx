@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import API_BASE from "../config.js";
 
@@ -19,7 +20,6 @@ const VideoGallery = () => {
     setLoading(true);
     try {
       const res = await axios.get(`${API_BASE}/videogallerybanner/all`);
-      // Group videos by category
       const grouped = res.data.reduce((acc, video) => {
         acc[video.category] = acc[video.category] || [];
         acc[video.category].push(video);
@@ -39,43 +39,38 @@ const VideoGallery = () => {
     fetchVideos();
   }, []);
 
-  if (loading) return <p className="text-center mt-8">Loading videos...</p>;
+  if (loading) return <p className="text-center mt-8 text-white">Loading videos...</p>;
   if (error) return <p className="text-center mt-8 text-red-500">{error}</p>;
 
   return (
     <div className="min-h-screen bg-black text-white p-8">
       <h1 className="text-4xl font-bold text-center mb-8">🎬 Video Gallery</h1>
 
-      {categories.map((cat) => (
-        <div key={cat.slug} className="mb-12">
-          <h2 className="text-2xl font-semibold mb-4">{cat.label}</h2>
-
-          {videos[cat.slug] && videos[cat.slug].length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {videos[cat.slug].map((video) => (
-                <div
-                  key={video._id}
-                  className="bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
-                >
-                  <video
-                    src={video.videoUrl}
-                    className="w-full h-64 object-cover"
-                    controls
-                    preload="metadata"
-                  />
-                  <div className="p-4">
-                    <h3 className="font-semibold text-lg mb-1">
-                      {video.title || "Untitled Video"}
-                    </h3>
-                  </div>
-                </div>
-              ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+        {categories.map((cat) => (
+          <Link
+            to={`/videos/${cat.slug}`}
+            key={cat.slug}
+            className="bg-gray-900 rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105"
+          >
+            <div className="relative">
+              <img
+                src={
+                  videos[cat.slug]?.[0]?.videoUrl ||
+                  `/videos/${cat.slug}.jpg` // fallback image
+                }
+                alt={cat.label}
+                className="w-full h-48 object-cover"
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                <span className="text-white text-xl font-semibold">
+                  {cat.label}
+                </span>
+              </div>
             </div>
-          ) : (
-            <p className="text-gray-400">No videos available in this category.</p>
-          )}
-        </div>
-      ))}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };
