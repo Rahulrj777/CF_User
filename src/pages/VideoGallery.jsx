@@ -75,18 +75,21 @@ const VideoGallery = () => {
                 onMouseEnter={() => setHoveredId(video._id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
-                <h3 className="text-white text-xl font-semibold text-center mb-10">
-                  {video.title || video.category}
-                </h3>
-
                 <div
                   onClick={() =>
                     navigate(categoryRoutes[video.category] || "/videos")
                   }
+                  className="relative"
                 >
+                  <div className="absolute top-4 left-4 z-20 bg-black bg-opacity-70 text-white rounded px-3 py-1">
+                    <h3 className="text-lg font-semibold">
+                      {video.title || video.category}
+                    </h3>
+                  </div>
+
                   <video
                     src={video.videoUrl}
-                    className="relative w-full h-64 md:h-80 object-cover"
+                    className="w-full h-64 md:h-80 object-cover"
                     muted
                     autoPlay
                     loop
