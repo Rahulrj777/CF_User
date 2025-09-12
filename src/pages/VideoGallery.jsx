@@ -39,7 +39,7 @@ const VideoGallery = () => {
     <div className="min-h-screen bg-black text-white p-8">
       <h1 className="text-4xl font-bold text-center mb-8">🎬 Video Gallery</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
         {categories.map((cat) => (
           <Link
             to={`/videos/${cat.slug}`}
@@ -50,7 +50,7 @@ const VideoGallery = () => {
               <img
                 src={cat.thumb}
                 alt={cat.name}
-                className="w-full h-48 object-cover"
+                className="w-full h-80 object-cover"
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
                 <span className="text-white text-xl font-semibold">

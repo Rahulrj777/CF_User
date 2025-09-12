@@ -60,7 +60,7 @@ const Review = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">🎬 Video Gallery</h1>
+          <h1 className="text-4xl font-bold mb-2">🎬 Student's Review Video Gallery</h1>
           <p className="text-gray-400">Watch and enjoy our video collection</p>
         </div>
 
