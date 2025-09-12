@@ -104,19 +104,18 @@ const VideoGallery = () => {
                     }`}
                   >
                     {isExpanded ? video.description : descriptionPreview}
+                    {video.description.length > 35 && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleDescription(video._id);
+                        }}
+                        className="ml-2 text-blue-600 underline inline"
+                      >
+                        {isExpanded ? "less" : "more"}
+                      </button>
+                    )}
                   </p>
-
-                  {video.description.length > 35 && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleDescription(video._id);
-                      }}
-                      className="mt-2 text-blue-600 underline"
-                    >
-                      {isExpanded ? "less" : "more"}
-                    </button>
-                  )}
                 </div>
               </div>
             );
