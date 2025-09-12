@@ -75,6 +75,10 @@ const VideoGallery = () => {
                 onMouseEnter={() => setHoveredId(video._id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
+                <h3 className="text-white text-xl font-semibold text-center mb-10">
+                  {video.title || video.category}
+                </h3>
+
                 <div
                   onClick={() =>
                     navigate(categoryRoutes[video.category] || "/videos")
@@ -88,11 +92,6 @@ const VideoGallery = () => {
                     loop
                     playsInline
                   />
-                  <div className="absolute bottom-30 left-0 w-full bg-black bg-opacity-50 text-center py-2">
-                    <span className="text-white font-semibold text-lg">
-                      {video.title || video.category}
-                    </span>
-                  </div>
                 </div>
 
                 <div className="bg-white text-black p-4 rounded-b-xl">
