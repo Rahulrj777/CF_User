@@ -75,7 +75,7 @@ const StudentWorks = () => {
         ) : (
           <>
             {/* Video Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
               {videos.slice(0, visibleCount).map((video) => (
                 <div
                   key={video._id}
@@ -84,7 +84,7 @@ const StudentWorks = () => {
                 >
                   <div className="relative bg-gray-800">
                     <video
-                      className="w-full h-48 object-cover"
+                      className="w-full h-80 object-cover"
                       preload="metadata"
                       muted
                       onError={(e) => {
