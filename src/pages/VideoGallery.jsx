@@ -19,7 +19,6 @@ const VideoGallery = () => {
     setLoading(true);
     try {
       const res = await axios.get(`${API_BASE}/videogallerybanner/all`);
-      // Group videos by category
       const grouped = res.data.reduce((acc, video) => {
         acc[video.category] = acc[video.category] || [];
         acc[video.category].push(video);
@@ -55,18 +54,18 @@ const VideoGallery = () => {
               {videos[cat.slug].map((video) => (
                 <div
                   key={video._id}
-                  className="relative bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                  className="bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 w-full min-w-0"
                 >
                   <video
                     src={video.videoUrl}
-                    className="w-full h-48 md:h-64 lg:h-48 object-cover"
+                    className="w-full h-48 md:h-56 lg:h-48 object-cover"
                     controls
                     preload="metadata"
                   />
-                  <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
-                    <span className="text-white text-lg font-semibold text-center px-2">
+                  <div className="p-3">
+                    <h3 className="font-semibold text-lg">
                       {video.title || "Untitled Video"}
-                    </span>
+                    </h3>
                   </div>
                 </div>
               ))}
