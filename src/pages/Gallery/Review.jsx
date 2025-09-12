@@ -16,6 +16,7 @@ const Review = () => {
   const showLess = () => setVisibleCount(6);
 
   useEffect(() => {
+    window.scrollTo(0, 0); 
     const fetchVideos = async () => {
       try {
         setLoading(true);
