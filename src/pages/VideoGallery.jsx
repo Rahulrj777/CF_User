@@ -15,6 +15,7 @@ const VideoGallery = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [expandedDescriptions, setExpandedDescriptions] = useState({});
   const navigate = useNavigate();
 
   const fetchVideos = async () => {
@@ -35,6 +36,13 @@ const VideoGallery = () => {
     fetchVideos();
   }, []);
 
+  const toggleDescription = (id) => {
+    setExpandedDescriptions((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
   if (loading) return <p className="text-center mt-8">Loading videos...</p>;
   if (error) return <p className="text-center mt-8 text-red-500">{error}</p>;
 
@@ -46,29 +54,57 @@ const VideoGallery = () => {
         <p className="text-gray-400 text-center">No videos available.</p>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
-          {videos.map((video) => (
-            <div
-              key={video._id}
-              className="relative rounded-xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
-              onClick={() =>
-                navigate(categoryRoutes[video.category] || "/videos")
-              }
-            >
-              <video
-                src={video.videoUrl}
-                className="w-full h-64 md:h-80 object-cover"
-                muted
-                autoPlay
-                loop
-                playsInline
-              />
-              <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-center py-2">
-                <span className="text-white font-semibold text-lg">
-                  {video.title || video.category}
-                </span>
+          {videos.map((video) => {
+            const isExpanded = expandedDescriptions[video._id];
+            const descriptionPreview =
+              video.description.length > 30
+                ? video.description.slice(0, 30) + "..."
+                : video.description;
+
+            return (
+              <div
+                key={video._id}
+                className="relative rounded-xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
+              >
+                <div
+                  onClick={() =>
+                    navigate(categoryRoutes[video.category] || "/videos")
+                  }
+                >
+                  <video
+                    src={video.videoUrl}
+                    className="w-full h-64 md:h-80 object-cover"
+                    muted
+                    autoPlay
+                    loop
+                    playsInline
+                  />
+                  <div className="absolute bottom-5 left-0 w-full bg-black bg-opacity-50 text-center py-2">
+                    <span className="text-white font-semibold text-lg">
+                      {video.title || video.category}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="bg-white text-black p-4">
+                  <p className="text-sm">
+                    {isExpanded ? video.description : descriptionPreview}
+                    {video.description.length > 30 && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation(); // Prevent navigation
+                          toggleDescription(video._id);
+                        }}
+                        className="ml-2 text-blue-600 underline"
+                      >
+                        {isExpanded ? "less" : "more"}
+                      </button>
+                    )}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
