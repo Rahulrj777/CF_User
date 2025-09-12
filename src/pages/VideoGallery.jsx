@@ -1,18 +1,13 @@
 // pages/VideoGallery.jsx
 import { Link } from "react-router-dom";
-import vid1 from "../images/Video/🎬 Learn Screenplay & Direction from Master Filmmaker P.S. VinothrajInternationally Acclaimed Di.mp4";
-import vid2 from "../images/Video/🎬 Cinema Factory Academy – Special Session✨ Showcasing Flex Bot 2.0 – Motion Control Robotic Ar.mp4";
-import vid3 from "../images/Video/Cyber Gaffing in India for Virtual Production🎬 Cyber Gaffer – Virtual Production Module at Stag.mp4";
-import vid4 from "../images/Video/“Vehicle Rigging – A Unique Training at Cinema Factory Academy”At CFA, students learn vehicle ri.mp4";
-import vid5 from "../images/Video/Spot frame composition and shot design. with Flexbot 2.0 robotic arm and red komodo 🎥🔥Shot des.mp4";
-
 const categories = [
-  { name: "Guest Lecture", slug: "guest-lecture", thumb: vid1 },
-  { name: "Highlights", slug: "highlights", thumb: vid3 },
-  { name: "New Launches", slug: "new-launches", thumb: vid2 },
-  { name: "Review", slug: "review", thumb: vid5 },
-  { name: "Student Works", slug: "student-works", thumb: vid4 },
+  { name: "Guest Lecture", slug: "guest-lecture", thumb: "/public/videos/guest-lecture.mp4" },
+  { name: "Highlights", slug: "highlights", thumb: "/public/videos/highlights.mp4" },
+  { name: "New Launches", slug: "new-launches", thumb: "/public/videos/new-launches.mp4" },
+  { name: "Review", slug: "review", thumb: "/public/videos/review.mp4" },
+  { name: "Student Works", slug: "student-works", thumb: "/public/videos/student-works.mp4" },
 ];
+
 
 const VideoGallery = () => {
   return (
