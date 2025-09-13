@@ -261,13 +261,6 @@ const GuestLecture = () => {
                     <div className="flex items-center justify-center py-3 relative">
                       {/* Drag handle */}
                       <div className="w-12 h-1.5 rounded-full bg-gray-600"></div>
-                      {/* Close button */}
-                      <button
-                        onClick={() => setShowPanel(false)}
-                        className="absolute top-2 right-4 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white"
-                        aria-label="Close description"
-                      >
-                      </button>
                     </div>
 
                     <div className="px-4 pb-6">
