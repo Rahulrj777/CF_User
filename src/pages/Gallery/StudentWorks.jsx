@@ -161,12 +161,12 @@ const StudentWorks = () => {
                   <div className="w-96 bg-gray-800 p-6 flex flex-col overflow-y-auto transition-transform duration-300">
                     {/* Close button */}
                     <div className="flex justify-end mb-4">
-                      <button
+                      <butxton
                         onClick={() => setSelectedVideo(null)}
-                        className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
+                        className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full transition-colors fixed"
                       >
                         ×
-                      </button>
+                      </butxton>
                     </div>
 
                     {/* Video title */}

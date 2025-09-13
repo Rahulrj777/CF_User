@@ -163,7 +163,7 @@ const Review = () => {
                     <div className="flex justify-end mb-4">
                       <button
                         onClick={() => setSelectedVideo(null)}
-                        className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
+                        className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full fixed transition-colors"
                       >
                         ×
                       </button>
