@@ -181,13 +181,14 @@ const GuestLecture = () => {
                   </div>
 
                   {/* Right: Side panel */}
+                  {/* Right: Side panel */}
                   <div
                     className={`
-          w-96 bg-gray-800 p-6 flex flex-col overflow-y-auto
-          transition-transform duration-300
-          ${showPanel ? "translate-x-0" : "translate-x-full"}
-          fixed top-0 right-0 h-full z-40
-        `}
+    bg-gray-800 p-6 flex flex-col overflow-y-auto transition-transform duration-300
+    ${showPanel ? "translate-x-0" : "translate-x-full"}
+    fixed top-0 right-0 h-full z-40
+    hidden md:flex w-96
+  `}
                   >
                     {/* Video title */}
                     <h3 className="text-xl font-semibold break-words mb-4">
@@ -201,6 +202,29 @@ const GuestLecture = () => {
                       </p>
                     )}
                   </div>
+
+                  {/* Mobile: Bottom panel */}
+                  {showPanel && (
+                    <div className="md:hidden bg-gray-800 p-6 w-full max-h-[40vh] overflow-y-auto fixed bottom-0 left-0 rounded-t-2xl z-40">
+                      {/* ArrowRight close button (top center) */}
+                      <button
+                        onClick={() => setShowPanel(false)}
+                        className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1.5 rounded-full bg-gray-600"
+                      ></button>
+
+                      {/* Video title */}
+                      <h3 className="text-lg font-semibold break-words mb-2 text-center">
+                        {selectedVideo.title || "Unknown Video"}
+                      </h3>
+
+                      {/* Video description */}
+                      {selectedVideo.description && (
+                        <p className="mt-2 text-gray-300 text-sm text-center">
+                          {selectedVideo.description}
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             )}
