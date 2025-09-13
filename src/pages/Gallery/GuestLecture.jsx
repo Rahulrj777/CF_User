@@ -137,9 +137,9 @@ const GuestLecture = () => {
             {/* Video Modal */}
             {selectedVideo && (
               <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4">
-                <div className="bg-gray-900 rounded-xl max-w-6xl w-full h-[80vh] flex overflow-hidden shadow-2xl">
+                <div className="bg-gray-900 rounded-xl max-w-6xl w-full h-[80vh] flex overflow-hidden shadow-2xl relative">
                   {/* Left: Video */}
-                  <div className="flex-1 flex items-center justify-center p-4">
+                  <div className="flex-1 flex items-center justify-center p-4 relative">
                     <video
                       className="w-full h-full rounded-lg shadow-lg object-contain"
                       controls
@@ -155,15 +155,39 @@ const GuestLecture = () => {
                       <source src={selectedVideo.videoUrl} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
+
+                    {/* Close video modal */}
+                    <button
+                      onClick={() => setSelectedVideo(null)}
+                      className="absolute top-2 left-2 text-white text-3xl font-bold w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-gray-600 transition-colors"
+                    >
+                      ×
+                    </button>
+
+                    {/* Mobile: Show panel button */}
+                    <button
+                      onClick={() => setShowPanel(true)}
+                      className="absolute top-2 right-2 text-white text-2xl font-bold w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-gray-600 transition-colors md:hidden"
+                    >
+                      ⋮
+                    </button>
                   </div>
 
                   {/* Right: Side panel */}
-                  <div className="w-96 bg-gray-800 p-6 flex flex-col overflow-y-auto transition-transform duration-300">
-                    {/* Close button */}
-                    <div className="flex justify-end mb-4">
+                  <div
+                    className={`
+          w-96 bg-gray-800 p-6 flex flex-col overflow-y-auto
+          transition-transform duration-300
+          ${showPanel ? "translate-x-0" : "translate-x-full"}
+          md:translate-x-0 md:flex
+          absolute md:relative top-0 right-0 h-full
+        `}
+                  >
+                    {/* Close panel button (mobile only) */}
+                    <div className="flex justify-end mb-4 md:hidden">
                       <button
-                        onClick={() => setSelectedVideo(null)}
-                        className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 fixed transition-colors"
+                        onClick={() => setShowPanel(false)}
+                        className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
                       >
                         ×
                       </button>
@@ -173,6 +197,13 @@ const GuestLecture = () => {
                     <h3 className="text-xl font-semibold break-words">
                       {selectedVideo.title || "Unknown Video"}
                     </h3>
+
+                    {/* Optional: description */}
+                    {selectedVideo.description && (
+                      <p className="mt-4 text-gray-300">
+                        {selectedVideo.description}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
