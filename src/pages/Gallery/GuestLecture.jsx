@@ -162,11 +162,19 @@ const GuestLecture = () => {
                     {/* Close video modal */}
                     <button
                       onClick={() => setSelectedVideo(null)}
-                      className="absolute top-2 left-2 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-2xl transition-colors"
+                      className="absolute top-2 left-2 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-2xl transition-colors z-50"
                     >
                       ×
                     </button>
                   </div>
+
+                  {/* Panel toggle button (always visible) */}
+                  <button
+                    onClick={() => setShowPanel(!showPanel)}
+                    className="absolute top-1/2 -translate-y-1/2 right-96 md:right-96 lg:right-96 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-xl transition-colors z-50"
+                  >
+                    {showPanel ? <FaArrowRight /> : <FaArrowLeft />}
+                  </button>
 
                   {/* Right: Side panel */}
                   <div
@@ -175,16 +183,9 @@ const GuestLecture = () => {
           transition-transform duration-300
           ${showPanel ? "translate-x-0" : "translate-x-full"}
           absolute top-0 right-0 h-full
+          z-40
         `}
                   >
-                    {/* Panel toggle button (vertically centered, desktop & mobile) */}
-                    <button
-                      onClick={() => setShowPanel(!showPanel)}
-                      className="absolute top-1/2 -translate-y-1/2 left-[-40px] md:left-[-40px] flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-xl transition-colors z-50"
-                    >
-                      {showPanel ? <FaArrowRight /> : <FaArrowLeft />}
-                    </button>
-
                     {/* Video title */}
                     <h3 className="text-xl font-semibold break-words mb-4">
                       {selectedVideo.title || "Unknown Video"}
