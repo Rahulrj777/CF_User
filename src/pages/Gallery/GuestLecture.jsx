@@ -9,7 +9,7 @@ const GuestLecture = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
-const [showPanel, setShowPanel] = useState(false);
+  const [showPanel, setShowPanel] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
