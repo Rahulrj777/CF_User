@@ -9,7 +9,6 @@ const GuestLecture = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(6);
 
   const toggleDescription = (id) => {
     setExpandedDescriptions((prev) => ({
@@ -82,7 +81,7 @@ const GuestLecture = () => {
           <>
             {/* Video Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
-              {videos.slice(0, visibleCount).map((video) => {
+              {videos.map((video) => {
                 const isExpanded = expandedDescriptions[video._id];
                 const descriptionPreview =
                   video.description?.length > 50
