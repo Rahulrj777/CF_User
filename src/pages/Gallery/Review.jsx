@@ -137,31 +137,6 @@ const Review = () => {
               ))}
             </div>
 
-            {/* See More / See Less */}
-            {videos.length > visibleCount && (
-              <div className="flex justify-center">
-                <button
-                  onClick={showMore}
-                  className="flex items-center gap-2 text-purple-500 hover:text-purple-700 font-semibold"
-                >
-                  See More
-                  <MdKeyboardArrowDown size={24} />
-                </button>
-              </div>
-            )}
-
-            {visibleCount > 6 && (
-              <div className="flex justify-center mt-4">
-                <button
-                  onClick={showLess}
-                  className="flex items-center gap-2 text-purple-500 hover:text-purple-700 font-semibold"
-                >
-                  See Less
-                  <MdKeyboardArrowUp size={24} />
-                </button>
-              </div>
-            )}
-
             {/* Video Modal */}
             {selectedVideo && (
               <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4">

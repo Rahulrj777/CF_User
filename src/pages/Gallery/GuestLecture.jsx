@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import API_BASE from "../../config.js";
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 const GuestLecture = () => {
   const category = "guestLecture";
-
+  const [expandedDescriptions, setExpandedDescriptions] = useState({});
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [visibleCount, setVisibleCount] = useState(6);
 
-  const showMore = () => setVisibleCount((v) => v + 6);
-  const showLess = () => setVisibleCount(6);
+  const toggleDescription = (id) => {
+    setExpandedDescriptions((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
   useEffect(() => {
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
     const fetchVideos = async () => {
       try {
         setLoading(true);
@@ -61,7 +64,9 @@ const GuestLecture = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="font-bold  text-[24px] md:text-[40px] mb-2">🎬 Guest Lecture Video Gallery</h1>
+          <h1 className="font-bold  text-[24px] md:text-[40px] mb-2">
+            🎬 Guest Lecture Video Gallery
+          </h1>
           <p className="text-gray-400">Watch and enjoy our video collection</p>
         </div>
 
@@ -77,90 +82,87 @@ const GuestLecture = () => {
           <>
             {/* Video Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
-              {videos.slice(0, visibleCount).map((video) => (
-                <div
-                  key={video._id}
-                  className="bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105"
-                  onClick={() => setSelectedVideo(video)}
-                >
-                  <div className="relative bg-gray-800">
-                    <video
-                      className="w-full h-80 object-cover"
-                      preload="metadata"
-                      muted
-                      onError={(e) => {
-                        e.target.style.display = "none";
-                        e.target.nextSibling.style.display = "flex";
-                      }}
-                    >
-                      <source src={video.videoUrl} type="video/mp4" />
-                    </video>
+              {videos.slice(0, visibleCount).map((video) => {
+                const isExpanded = expandedDescriptions[video._id];
+                const descriptionPreview =
+                  video.description?.length > 50
+                    ? video.description.slice(0, 50) + "..."
+                    : video.description;
 
-                    {/* Fallback */}
-                    <div
-                      className="absolute inset-0 bg-gray-700 flex items-center justify-center"
-                      style={{ display: "none" }}
-                    >
-                      <div className="text-center">
-                        <div className="text-4xl mb-2">🎥</div>
-                        <p className="text-gray-300 text-sm">Video Preview</p>
+                return (
+                  <div
+                    key={video._id}
+                    className="bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105"
+                    onClick={() => setSelectedVideo(video)}
+                  >
+                    <div className="relative bg-gray-800">
+                      {/* video */}
+                      <video
+                        className="w-full h-80 object-cover"
+                        preload="metadata"
+                        muted
+                        onError={(e) => {
+                          e.target.style.display = "none";
+                          e.target.nextSibling.style.display = "flex";
+                        }}
+                      >
+                        <source src={video.videoUrl} type="video/mp4" />
+                      </video>
+
+                      {/* fallback */}
+                      <div
+                        className="absolute inset-0 bg-gray-700 flex items-center justify-center"
+                        style={{ display: "none" }}
+                      >
+                        <div className="text-center">
+                          <div className="text-4xl mb-2">🎥</div>
+                          <p className="text-gray-300 text-sm">Video Preview</p>
+                        </div>
+                      </div>
+
+                      {/* overlay */}
+                      <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                        <div className="bg-white rounded-full p-4 shadow-lg">
+                          <svg
+                            className="w-8 h-8 text-black"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Play overlay */}
-                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                      <div className="bg-white rounded-full p-4 shadow-lg">
-                        <svg
-                          className="w-8 h-8 text-black"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </div>
+                    <div className="p-4">
+                      <h3 className="font-semibold truncate text-lg">
+                        {video.title || "Unknown Video"}
+                      </h3>
+
+                      {/* ✨ description with more/less */}
+                      <p className="text-gray-400 text-sm mt-1">
+                        {isExpanded ? video.description : descriptionPreview}
+                        {video.description?.length > 50 && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleDescription(video._id);
+                            }}
+                            className="ml-2 text-blue-400 underline inline"
+                          >
+                            {isExpanded ? "less" : "more"}
+                          </button>
+                        )}
+                      </p>
                     </div>
                   </div>
-
-                  <div className="p-4">
-                    <h3 className="font-semibold truncate text-lg">
-                      {video.title || "Unknown Video"}
-                    </h3>
-                    <p className="text-gray-400 text-sm mt-1">
-                      Click to watch full video
-                    </p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
-
-            {/* See More / See Less */}
-            {videos.length > visibleCount && (
-              <div className="flex justify-center">
-                <button
-                  onClick={showMore}
-                  className="flex items-center gap-2 text-purple-500 hover:text-purple-700 font-semibold"
-                >
-                  See More
-                  <MdKeyboardArrowDown size={24} />
-                </button>
-              </div>
-            )}
-
-            {visibleCount > 6 && (
-              <div className="flex justify-center mt-4">
-                <button
-                  onClick={showLess}
-                  className="flex items-center gap-2 text-purple-500 hover:text-purple-700 font-semibold"
-                >
-                  See Less
-                  <MdKeyboardArrowUp size={24} />
-                </button>
-              </div>
-            )}
 
             {/* Video Modal */}
             {selectedVideo && (
