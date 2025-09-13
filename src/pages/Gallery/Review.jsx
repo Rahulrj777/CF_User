@@ -82,11 +82,12 @@ const Review = () => {
             {/* Video Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
               {videos.map((video) => {
-                const isExpanded = expandedDescriptions[video._id];
-                const descriptionPreview =
-                  video.description?.length > 50
-                    ? video.description.slice(0, 50) + "..."
-                    : video.description;
+                const isTitleExpanded =
+                  expandedDescriptions[`title-${video._id}`];
+                const titlePreview =
+                  video.title?.length > 30
+                    ? video.title.slice(0, 30) + "..."
+                    : video.title;
 
                 return (
                   <div
@@ -138,8 +139,19 @@ const Review = () => {
                     </div>
 
                     <div className="p-4">
-                      <h3 className="font-semibold truncate text-lg">
-                        {video.title || "Unknown Video"}
+                      <h3 className="font-semibold text-lg leading-snug break-words">
+                        {isTitleExpanded ? video.title : titlePreview}
+                        {video.title?.length > 30 && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleDescription(`title-${video._id}`);
+                            }}
+                            className="ml-2 text-blue-400 underline text-sm"
+                          >
+                            {isTitleExpanded ? "less" : "more"}
+                          </button>
+                        )}
                       </h3>
 
                       {/* ✨ description with more/less */}
@@ -167,35 +179,27 @@ const Review = () => {
             {selectedVideo && (
               <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4">
                 <div className="bg-gray-900 rounded-xl max-w-5xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
-                  <div className="flex justify-between items-center p-6 border-b border-gray-700">
-                    <h3 className="text-xl font-semibold">
+                  <div className="p-6 text-center">
+                    <h3 className="text-2xl font-bold mb-4 break-words">
                       {selectedVideo.title || "Unknown Video"}
                     </h3>
-                    <button
-                      onClick={() => setSelectedVideo(null)}
-                      className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
-                    >
-                      ×
-                    </button>
-                  </div>
-
-                  <div className="p-6">
                     <video
                       className="w-full max-h-[70vh] rounded-lg shadow-lg"
                       controls
                       autoPlay
                       controlsList="nodownload"
-                      onError={(e) => {
-                        console.error("Video playback error:", e);
-                        alert(
-                          "Error playing video. Please try again or contact admin."
-                        );
-                      }}
                     >
                       <source src={selectedVideo.videoUrl} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   </div>
+
+                  <button
+                    onClick={() => setSelectedVideo(null)}
+                    className="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
+                  >
+                    ×
+                  </button>
                 </div>
               </div>
             )}
