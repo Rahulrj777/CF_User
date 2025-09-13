@@ -86,14 +86,22 @@ const VideoGallery = () => {
                   {/* Animated overlay */}
                   <div
                     className="
-      absolute bottom-3 left-0 w-full 
-      bg-black/50 text-center py-2
-      translate-y-4 opacity-0
-      group-hover:translate-y-0 group-hover:opacity-100
-      transition-all duration-500
-    "
+    absolute bottom-3 left-0 w-full 
+    bg-black/50 text-center py-2
+    translate-y-4 opacity-0
+    group-hover:translate-y-0 group-hover:opacity-100
+    transition-all duration-500
+    overflow-hidden
+  "
                   >
-                    <span className="text-white font-semibold text-lg tracking-wide">
+                    <span
+                      className="
+      inline-block whitespace-nowrap
+      text-white font-semibold text-lg tracking-wide
+      lg:group-hover:animate-marquee  /* fade+scroll on large screens */
+      sm:animate-marquee md:animate-marquee  /* always scroll on small/medium */
+    "
+                    >
                       {video.title || video.category}
                     </span>
                   </div>
