@@ -1,47 +1,50 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
-import API_BASE from "../../config.js"
-import { X, ArrowLeft, ArrowRight } from "lucide-react"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import API_BASE from "../../config.js";
+import { X, ArrowLeft, ArrowRight } from "lucide-react";
 
 const GuestLecture = () => {
-  const category = "guestLecture"
+  const category = "guestLecture";
 
-  const [videos, setVideos] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [selectedVideo, setSelectedVideo] = useState(null)
-  const [showPanel, setShowPanel] = useState(false)
+  const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [showPanel, setShowPanel] = useState(false);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     const fetchVideos = async () => {
       try {
-        setLoading(true)
-        console.log("[v0] Fetching videos from:", `${API_BASE}/videos/${category}`)
-        const res = await axios.get(`${API_BASE}/videos/${category}`)
-        console.log("[v0] API response:", res.data)
+        setLoading(true);
+        console.log(
+          "[v0] Fetching videos from:",
+          `${API_BASE}/videos/${category}`
+        );
+        const res = await axios.get(`${API_BASE}/videos/${category}`);
+        console.log("[v0] API response:", res.data);
 
         if (Array.isArray(res.data)) {
-          setVideos(res.data)
+          setVideos(res.data);
         } else if (res.data && Array.isArray(res.data.videos)) {
-          setVideos(res.data.videos)
+          setVideos(res.data.videos);
         } else if (res.data && Array.isArray(res.data.data)) {
-          setVideos(res.data.data)
+          setVideos(res.data.data);
         } else {
-          console.warn("[v0] Unexpected API response structure:", res.data)
-          setVideos([])
+          console.warn("[v0] Unexpected API response structure:", res.data);
+          setVideos([]);
         }
-        setError(null)
+        setError(null);
       } catch (err) {
-        console.error("[v0] Error fetching videos:", err)
-        setError("Failed to load videos")
-        setVideos([])
+        console.error("[v0] Error fetching videos:", err);
+        setError("Failed to load videos");
+        setVideos([]);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
-    fetchVideos()
-  }, [])
+    };
+    fetchVideos();
+  }, []);
 
   if (loading) {
     return (
@@ -51,7 +54,7 @@ const GuestLecture = () => {
           <p className="text-gray-300">Loading videos...</p>
         </div>
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -62,7 +65,7 @@ const GuestLecture = () => {
           <p className="text-red-400 text-lg">{error}</p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -70,7 +73,9 @@ const GuestLecture = () => {
       <div className="max-w-7xl mx-auto px-4 py-6">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="font-bold text-2xl md:text-4xl mb-2">🎬 Guest Lecture Video Gallery</h1>
+          <h1 className="font-bold text-2xl md:text-4xl mb-2">
+            🎬 Guest Lecture Video Gallery
+          </h1>
           <p className="text-gray-400">Watch and enjoy our video collection</p>
         </div>
 
@@ -78,7 +83,9 @@ const GuestLecture = () => {
           <div className="bg-gray-900 rounded-xl shadow-lg p-12 text-center">
             <div className="text-6xl mb-4">📹</div>
             <h2 className="text-2xl font-semibold mb-2">No Videos Available</h2>
-            <p className="text-gray-400">Videos will appear here once uploaded by admin</p>
+            <p className="text-gray-400">
+              Videos will appear here once uploaded by admin
+            </p>
           </div>
         ) : (
           <>
@@ -96,8 +103,8 @@ const GuestLecture = () => {
                         preload="metadata"
                         muted
                         onError={(e) => {
-                          e.target.style.display = "none"
-                          e.target.nextSibling.style.display = "flex"
+                          e.target.style.display = "none";
+                          e.target.nextSibling.style.display = "flex";
                         }}
                       >
                         <source src={video.videoUrl} type="video/mp4" />
@@ -117,7 +124,11 @@ const GuestLecture = () => {
                       {/* Play overlay */}
                       <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
                         <div className="bg-white rounded-full p-3 md:p-4 shadow-lg">
-                          <svg className="w-6 h-6 md:w-8 md:h-8 text-black" fill="currentColor" viewBox="0 0 20 20">
+                          <svg
+                            className="w-6 h-6 md:w-8 md:h-8 text-black"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
                             <path
                               fillRule="evenodd"
                               d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
@@ -129,8 +140,12 @@ const GuestLecture = () => {
                     </div>
 
                     <div className="p-3 md:p-4">
-                      <h3 className="font-semibold truncate text-sm md:text-lg">{video.title || "Unknown Video"}</h3>
-                      <p className="text-gray-400 text-xs md:text-sm mt-1">Click to watch full video</p>
+                      <h3 className="font-semibold truncate text-sm md:text-lg">
+                        {video.title || "Unknown Video"}
+                      </h3>
+                      <p className="text-gray-400 text-xs md:text-sm mt-1">
+                        Click to watch full video
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -138,95 +153,133 @@ const GuestLecture = () => {
 
             {selectedVideo && (
               <div className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50">
-                <div className="w-full h-full flex flex-col md:flex-row overflow-hidden">
-                  <div className="flex-1 flex items-center justify-center bg-black relative">
-                    <video
-                      className="w-full h-full max-h-[60vh] md:max-h-full object-contain"
-                      controls
-                      autoPlay
-                      controlsList="nodownload"
-                      onError={(e) => {
-                        console.error("Video playback error:", e)
-                        alert("Error playing video. Please try again or contact admin.")
-                      }}
-                    >
-                      <source src={selectedVideo.videoUrl} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-
-                    <div className="hidden md:flex absolute top-6 right-6 gap-3 z-50">
+                <div className="w-full h-full flex flex-col md:max-w-7xl md:max-h-[90vh] md:rounded-xl md:overflow-hidden md:shadow-2xl bg-gray-900">
+                  {/* --- Mobile Header --- */}
+                  <div className="flex items-center justify-between p-4 bg-gray-800 border-b border-gray-700 md:hidden">
+                    <h3 className="text-lg font-semibold text-white flex-1 mr-4 line-clamp-2 leading-tight">
+                      {selectedVideo.title || "Unknown Video"}
+                    </h3>
+                    <div className="flex gap-2 flex-shrink-0">
+                      {/* Toggle Description */}
                       <button
                         onClick={() => setShowPanel(!showPanel)}
-                        className="flex items-center justify-center w-14 h-14 rounded-full bg-black/60 hover:bg-black/80 text-white transition-all backdrop-blur-sm border border-gray-600"
+                        className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition-colors"
                         aria-label="Toggle info panel"
                       >
-                        {showPanel ? <ArrowRight className="w-6 h-6" /> : <ArrowLeft className="w-6 h-6" />}
+                        {showPanel ? (
+                          <ArrowRight className="w-5 h-5" />
+                        ) : (
+                          <ArrowLeft className="w-5 h-5" />
+                        )}
                       </button>
+                      {/* Close */}
                       <button
                         onClick={() => setSelectedVideo(null)}
-                        className="flex items-center justify-center w-14 h-14 rounded-full bg-black/60 hover:bg-black/80 text-white transition-all backdrop-blur-sm border border-gray-600"
+                        className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition-colors"
                         aria-label="Close video"
                       >
-                        <X className="w-6 h-6" />
+                        <X className="w-5 h-5" />
                       </button>
                     </div>
                   </div>
 
-                  <div
-                    className={`
-                      hidden md:flex flex-col bg-gray-800 border-l border-gray-700 transition-all duration-300 ease-in-out overflow-hidden
-                      ${showPanel ? "w-96 opacity-100" : "w-0 opacity-0"}
-                    `}
-                  >
-                    <div className="p-6 overflow-y-auto">
-                      <h3 className="text-2xl font-bold text-white mb-6 leading-tight">
-                        {selectedVideo.title || "Unknown Video"}
-                      </h3>
+                  {/* --- Video Section --- */}
+                  <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+                    <div className="flex-1 flex items-center justify-center bg-black relative">
+                      <video
+                        className="w-full h-full max-h-[60vh] md:max-h-full object-contain"
+                        controls
+                        autoPlay
+                        controlsList="nodownload"
+                        onError={(e) => {
+                          console.error("Video playback error:", e);
+                          alert(
+                            "Error playing video. Please try again or contact admin."
+                          );
+                        }}
+                      >
+                        <source src={selectedVideo.videoUrl} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
 
-                      {selectedVideo.description && (
-                        <div className="space-y-4">
-                          <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Description</h4>
-                          <p className="text-gray-300 leading-relaxed text-base">{selectedVideo.description}</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="md:hidden bg-gray-800 border-t border-gray-700">
-                  <div className="px-4 py-4">
-                    {selectedVideo.description && (
-                      <div className="space-y-3">
-                        <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Description</h4>
-                        <p className="text-gray-300 leading-relaxed text-sm">{selectedVideo.description}</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {showPanel && (
-                  <div className="md:hidden bg-gray-900 border-t border-gray-700 max-h-[30vh] overflow-y-auto">
-                    <div className="flex justify-center py-3">
-                      <div className="w-12 h-1.5 rounded-full bg-gray-600"></div>
-                    </div>
-
-                    <div className="px-4 pb-6">
-                      <div className="space-y-4">
-                        <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
-                          Additional Information
-                        </h4>
-                        <p className="text-gray-400 text-sm">More details can be added here in future updates.</p>
+                      {/* Desktop Action Buttons */}
+                      <div className="hidden md:flex absolute top-6 right-6 gap-3 z-50">
+                        <button
+                          onClick={() => setShowPanel(!showPanel)}
+                          className="flex items-center justify-center w-14 h-14 rounded-full bg-black/60 hover:bg-black/80 text-white transition-all backdrop-blur-sm border border-gray-600"
+                          aria-label="Toggle info panel"
+                        >
+                          {showPanel ? (
+                            <ArrowRight className="w-6 h-6" />
+                          ) : (
+                            <ArrowLeft className="w-6 h-6" />
+                          )}
+                        </button>
+                        <button
+                          onClick={() => setSelectedVideo(null)}
+                          className="flex items-center justify-center w-14 h-14 rounded-full bg-black/60 hover:bg-black/80 text-white transition-all backdrop-blur-sm border border-gray-600"
+                          aria-label="Close video"
+                        >
+                          <X className="w-6 h-6" />
+                        </button>
                       </div>
                     </div>
+
+                    {/* --- Desktop Side Panel --- */}
+                    <div
+                      className={`
+            hidden md:flex flex-col bg-gray-800 border-l border-gray-700 transition-all duration-300 ease-in-out overflow-hidden
+            ${showPanel ? "w-96 opacity-100" : "w-0 opacity-0"}
+          `}
+                    >
+                      <div className="p-6 overflow-y-auto">
+                        <h3 className="text-2xl font-bold text-white mb-6 leading-tight">
+                          {selectedVideo.title || "Unknown Video"}
+                        </h3>
+
+                        {selectedVideo.description && (
+                          <div className="space-y-4">
+                            <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
+                              Description
+                            </h4>
+                            <p className="text-gray-300 leading-relaxed text-base">
+                              {selectedVideo.description}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                )}
+
+                  {/* --- Mobile Bottom Panel --- */}
+                  {showPanel && (
+                    <div className="md:hidden bg-gray-800 border-t border-gray-700 max-h-[40vh] overflow-y-auto rounded-t-2xl">
+                      <div className="flex justify-center py-3">
+                        <div className="w-12 h-1.5 rounded-full bg-gray-600"></div>
+                      </div>
+
+                      <div className="px-4 pb-6">
+                        {selectedVideo.description && (
+                          <div className="space-y-4">
+                            <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
+                              Description
+                            </h4>
+                            <p className="text-gray-300 leading-relaxed text-sm">
+                              {selectedVideo.description}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </>
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default GuestLecture
+export default GuestLecture;
