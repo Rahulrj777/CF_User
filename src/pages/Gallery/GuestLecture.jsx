@@ -82,6 +82,7 @@ const GuestLecture = () => {
             {/* Video Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
               {videos.map((video) => {
+                // title handling
                 const isTitleExpanded =
                   expandedDescriptions[`title-${video._id}`];
                 const titlePreview =
@@ -89,87 +90,47 @@ const GuestLecture = () => {
                     ? video.title.slice(0, 30) + "..."
                     : video.title;
 
+                // description handling
+                const isDescriptionExpanded =
+                  expandedDescriptions[`desc-${video._id}`];
+                const descriptionPreview =
+                  video.description?.length > 50
+                    ? video.description.slice(0, 50) + "..."
+                    : video.description;
+
                 return (
-                  <div
-                    key={video._id}
-                    className="bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105"
-                    onClick={() => setSelectedVideo(video)}
-                  >
-                    <div className="relative bg-gray-800">
-                      {/* video */}
-                      <video
-                        className="w-full h-80 object-cover"
-                        preload="metadata"
-                        muted
-                        onError={(e) => {
-                          e.target.style.display = "none";
-                          e.target.nextSibling.style.display = "flex";
-                        }}
-                      >
-                        <source src={video.videoUrl} type="video/mp4" />
-                      </video>
-
-                      {/* fallback */}
-                      <div
-                        className="absolute inset-0 bg-gray-700 flex items-center justify-center"
-                        style={{ display: "none" }}
-                      >
-                        <div className="text-center">
-                          <div className="text-4xl mb-2">🎥</div>
-                          <p className="text-gray-300 text-sm">Video Preview</p>
-                        </div>
-                      </div>
-
-                      {/* overlay */}
-                      <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                        <div className="bg-white rounded-full p-4 shadow-lg">
-                          <svg
-                            className="w-8 h-8 text-black"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="p-4">
-                      <h3 className="font-semibold text-lg leading-snug break-words">
-                        {isTitleExpanded ? video.title : titlePreview}
-                        {video.title?.length > 30 && (
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              toggleDescription(`title-${video._id}`);
-                            }}
-                            className="ml-2 text-blue-400 underline text-sm"
-                          >
-                            {isTitleExpanded ? "less" : "more"}
-                          </button>
-                        )}
-                      </h3>
-
-                      {/* ✨ description with more/less */}
-                      <p className="text-gray-400 text-sm mt-1">
-                        {isExpanded ? video.description : descriptionPreview}
-                        {video.description?.length > 50 && (
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              toggleDescription(video._id);
-                            }}
-                            className="ml-2 text-blue-400 underline inline"
-                          >
-                            {isExpanded ? "less" : "more"}
-                          </button>
-                        )}
-                      </p>
-                    </div>
+                  <div key={video._id}>
+                    …
+                    <h3 className="font-semibold text-lg leading-snug break-words">
+                      {isTitleExpanded ? video.title : titlePreview}
+                      {video.title?.length > 30 && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleDescription(`title-${video._id}`);
+                          }}
+                          className="ml-2 text-blue-400 underline text-sm"
+                        >
+                          {isTitleExpanded ? "less" : "more"}
+                        </button>
+                      )}
+                    </h3>
+                    <p className="text-gray-400 text-sm mt-1">
+                      {isDescriptionExpanded
+                        ? video.description
+                        : descriptionPreview}
+                      {video.description?.length > 50 && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleDescription(`desc-${video._id}`);
+                          }}
+                          className="ml-2 text-blue-400 underline inline"
+                        >
+                          {isDescriptionExpanded ? "less" : "more"}
+                        </button>
+                      )}
+                    </p>
                   </div>
                 );
               })}
