@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import API_BASE from "../../config.js";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const GuestLecture = () => {
   const category = "guestLecture";
@@ -136,6 +137,7 @@ const GuestLecture = () => {
             </div>
 
             {/* Video Modal */}
+
             {selectedVideo && (
               <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4">
                 <div className="bg-gray-900 rounded-xl max-w-6xl w-full h-[80vh] flex overflow-hidden shadow-2xl relative">
@@ -160,17 +162,17 @@ const GuestLecture = () => {
                     {/* Close video modal */}
                     <button
                       onClick={() => setSelectedVideo(null)}
-                      className="absolute top-2 left-2 text-white text-3xl font-bold w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-gray-600 transition-colors"
+                      className="absolute top-2 left-2 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-2xl transition-colors"
                     >
                       ×
                     </button>
 
-                    {/* Panel toggle button (all screens) */}
+                    {/* Panel toggle button */}
                     <button
                       onClick={() => setShowPanel(!showPanel)}
-                      className="absolute top-2 right-2 text-white text-2xl font-bold w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-gray-600 transition-colors"
+                      className="absolute top-2 right-2 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-xl transition-colors"
                     >
-                      {showPanel ? "←" : "→"}
+                      {showPanel ? <FaArrowLeft /> : <FaArrowRight />}
                     </button>
                   </div>
 
@@ -183,8 +185,8 @@ const GuestLecture = () => {
           absolute top-0 right-0 h-full
         `}
                   >
-                    {/* Optional: close panel button inside panel (redundant with top-right) */}
-                    <div className="flex justify-end mb-4">
+                    {/* Close panel button inside panel (optional) */}
+                    <div className="flex justify-end mb-4 md:hidden">
                       <button
                         onClick={() => setShowPanel(false)}
                         className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
@@ -194,13 +196,13 @@ const GuestLecture = () => {
                     </div>
 
                     {/* Video title */}
-                    <h3 className="text-xl font-semibold break-words">
+                    <h3 className="text-xl font-semibold break-words mb-4">
                       {selectedVideo.title || "Unknown Video"}
                     </h3>
 
-                    {/* Optional: description */}
+                    {/* Video description */}
                     {selectedVideo.description && (
-                      <p className="mt-4 text-gray-300">
+                      <p className="mt-2 text-gray-300">
                         {selectedVideo.description}
                       </p>
                     )}

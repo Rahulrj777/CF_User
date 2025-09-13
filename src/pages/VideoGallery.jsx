@@ -86,10 +86,9 @@ const VideoGallery = () => {
                   {/* Animated overlay */}
                   <div
                     className="
-      absolute bottom-0 left-0 w-full 
+      absolute bottom-3 left-0 w-full 
       bg-black/50 text-center py-2
-      translate-y-4 opacity-0
-      group-hover:translate-y-0 group-hover:opacity-100
+      lg:translate-y-4 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100
       transition-all duration-1000
     "
                   >
