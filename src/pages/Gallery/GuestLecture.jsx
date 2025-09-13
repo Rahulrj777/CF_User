@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import API_BASE from "../../config.js";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { X, FaArrowLeft, FaArrowRight } from "lucide-react";
 
 const GuestLecture = () => {
   const category = "guestLecture";
@@ -159,36 +159,37 @@ const GuestLecture = () => {
                       Your browser does not support the video tag.
                     </video>
 
-                    {/* Close button */}
+                    {/* Close (X) button */}
                     <button
                       onClick={() => setSelectedVideo(null)}
-                      className="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-lg font-bold transition-colors z-50"
+                      className="absolute top-4 right-16 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition-colors z-50"
                     >
-                      ×
+                      <X className="w-5 h-5" />
+                    </button>
+
+                    {/* Arrow toggle button */}
+                    <button
+                      onClick={() => setShowPanel(!showPanel)}
+                      className="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-xl transition-colors z-50"
+                    >
+                      {showPanel ? <FaArrowRight /> : <FaArrowLeft />}
                     </button>
                   </div>
-
-                  {/* Panel toggle button */}
-                  <button
-                    onClick={() => setShowPanel(!showPanel)}
-                    className="absolute top-4 right-16 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-xl transition-colors z-50"
-                  >
-                    {showPanel ? <FaArrowRight /> : <FaArrowLeft />}
-                  </button>
 
                   {/* Right: Side panel */}
                   <div
                     className={`
-    w-96 bg-gray-800 p-6 flex flex-col overflow-y-auto
-    transition-transform duration-300
-    ${showPanel ? "translate-x-0" : "translate-x-full"}
-    fixed top-0 right-0 h-full z-40
-  `}
+          w-96 bg-gray-800 p-6 flex flex-col overflow-y-auto
+          transition-transform duration-300
+          ${showPanel ? "translate-x-0" : "translate-x-full"}
+          fixed top-0 right-0 h-full z-40
+        `}
                   >
                     {/* Video title */}
                     <h3 className="text-xl font-semibold break-words mb-4">
                       {selectedVideo.title || "Unknown Video"}
                     </h3>
+
                     {/* Video description */}
                     {selectedVideo.description && (
                       <p className="mt-2 text-gray-300">
