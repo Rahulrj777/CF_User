@@ -18,9 +18,17 @@ module.exports = {
           '0%': { transform: 'translateX(100%)' },
           '100%': { transform: 'translateX(-100%)' },
         },
+        gradientMove: { // <— NEW keyframes for gradient text
+          '0%': { backgroundPosition: '0% 50%' },
+          '100%': { backgroundPosition: '100% 50%' },
+        },
       },
       animation: {
         marquee: 'marquee 35s linear infinite',
+        gradientMove: 'gradientMove 3s linear infinite', // <— NEW animation
+      },
+      backgroundSize: { // <— lets the gradient animate nicely
+        '200%': '200% 200%',
       },
     },
   },
