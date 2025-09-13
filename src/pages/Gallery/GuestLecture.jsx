@@ -137,20 +137,11 @@ const GuestLecture = () => {
             {/* Video Modal */}
             {selectedVideo && (
               <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4">
-                <div className="bg-gray-900 rounded-xl max-w-5xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
-                  {/* Top bar with just close button */}
-                  <div className="flex justify-end items-center p-4 border-b border-gray-700">
-                    <button
-                      onClick={() => setSelectedVideo(null)}
-                      className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
-                    >
-                      ×
-                    </button>
-                  </div>
-
-                  <div className="p-6 flex flex-col items-center">
+                <div className="bg-gray-900 rounded-xl max-w-6xl w-full h-[80vh] flex overflow-hidden shadow-2xl">
+                  {/* Left: Video */}
+                  <div className="flex-1 flex items-center justify-center p-4">
                     <video
-                      className="w-full max-h-[70vh] rounded-lg shadow-lg"
+                      className="w-full h-full rounded-lg shadow-lg object-contain"
                       controls
                       autoPlay
                       controlsList="nodownload"
@@ -164,11 +155,30 @@ const GuestLecture = () => {
                       <source src={selectedVideo.videoUrl} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
+                  </div>
 
-                    {/* Title below video */}
-                    <h3 className="text-xl font-semibold text-center mt-4 break-words">
+                  {/* Right: Side panel */}
+                  <div className="w-96 bg-gray-800 p-6 flex flex-col overflow-y-auto transition-transform duration-300">
+                    {/* Close button */}
+                    <div className="flex justify-end mb-4">
+                      <button
+                        onClick={() => setSelectedVideo(null)}
+                        className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
+                      >
+                        ×
+                      </button>
+                    </div>
+
+                    {/* Video title */}
+                    <h3 className="text-xl font-semibold break-words">
                       {selectedVideo.title || "Unknown Video"}
                     </h3>
+
+                    {/* Optional: more details */}
+                    <p className="mt-4 text-gray-300">
+                      {/* You can put description, date, etc. */}
+                      {selectedVideo.description || "No description available."}
+                    </p>
                   </div>
                 </div>
               </div>
