@@ -162,7 +162,7 @@ const GuestLecture = () => {
                     {/* Close (X) button */}
                     <button
                       onClick={() => setSelectedVideo(null)}
-                      className="absolute top-4 right-16 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition-colors z-50"
+                      className="absolute top-4 left-4 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition-colors z-50"
                     >
                       <X className="w-5 h-5" />
                     </button>
@@ -170,7 +170,7 @@ const GuestLecture = () => {
                     {/* Panel toggle button */}
                     <button
                       onClick={() => setShowPanel(!showPanel)}
-                      className="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition-colors z-50"
+                      className="absolute top-4 left-16 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition-colors z-50"
                     >
                       {showPanel ? (
                         <ArrowRight className="w-5 h-5" />
