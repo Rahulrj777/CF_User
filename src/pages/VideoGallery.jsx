@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import API_BASE from "../config.js";
+import { motion } from "framer-motion";
 
 const categoryRoutes = {
   "guest-lecture": "/videos/guest-lecture",
@@ -77,33 +78,35 @@ const VideoGallery = () => {
                 onMouseEnter={() => setHoveredId(video._id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
-                <div
+                <motion.div
                   onClick={() =>
                     navigate(categoryRoutes[video.category] || "/videos")
                   }
-                  className="relative group cursor-pointer overflow-hidden"
+                  className="relative cursor-pointer overflow-hidden"
+                  whileHover={{ scale: 1.03 }}
                 >
-                  {/* Overlay */}
-                  <div
-                    className="absolute bottom-0 left-0 w-full bg-black/40 text-center py-2 
-                  opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 
-                  transition-all duration-500 ease-out"
+                  <motion.div
+                    className="absolute bottom-0 left-0 w-full bg-black/40 text-center py-2"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileHover={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
                   >
                     <span className="text-white font-semibold text-lg tracking-wide">
                       {video.title || video.category}
                     </span>
-                  </div>
+                  </motion.div>
 
-                  {/* Video */}
-                  <video
+                  <motion.video
                     src={video.videoUrl}
-                    className="w-full h-64 md:h-80 object-cover scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="w-full h-64 md:h-80 object-cover"
                     muted
                     autoPlay
                     loop
                     playsInline
+                    animate={{ scale: [1, 1.02, 1] }}
+                    transition={{ repeat: Infinity, duration: 6 }}
                   />
-                </div>
+                </motion.div>
 
                 <div className="bg-white text-black p-4 rounded-b-xl">
                   <p
