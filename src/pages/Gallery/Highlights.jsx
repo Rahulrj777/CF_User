@@ -234,7 +234,7 @@ const Highlight = () => {
           `}
                     >
                       <div className="p-6 overflow-y-auto">
-                        <h3 className="text-2xl font-bold text-white mb-6 leading-tight">
+                        <h3 className="text-2xl text-white mb-6 leading-tight">
                           {selectedVideo.title || "Unknown Video"}
                         </h3>
 

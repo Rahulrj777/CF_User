@@ -234,7 +234,7 @@ const StudentWorks = () => {
           `}
                     >
                       <div className="p-6 overflow-y-auto">
-                        <h3 className="text-2xl font-bold text-white mb-6 leading-tight">
+                        <h3 className="text-2xl text-white mb-6 leading-tight">
                           {selectedVideo.title || "Unknown Video"}
                         </h3>
 
@@ -261,7 +261,6 @@ const StudentWorks = () => {
                     <div className="flex items-center justify-center py-3 relative">
                       {/* Drag handle */}
                       <div className="w-12 h-1.5 rounded-full bg-gray-600"></div>
-
                     </div>
 
                     <div className="px-4 pb-6">
