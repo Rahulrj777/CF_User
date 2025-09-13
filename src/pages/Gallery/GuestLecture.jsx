@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import API_BASE from "../../config.js";
-import { X, FaArrowLeft, FaArrowRight } from "lucide-react";
+import { X, ArrowLeft, ArrowRight } from "lucide-react";
 
 const GuestLecture = () => {
   const category = "guestLecture";
@@ -167,12 +167,16 @@ const GuestLecture = () => {
                       <X className="w-5 h-5" />
                     </button>
 
-                    {/* Arrow toggle button */}
+                    {/* Panel toggle button */}
                     <button
                       onClick={() => setShowPanel(!showPanel)}
-                      className="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-xl transition-colors z-50"
+                      className="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition-colors z-50"
                     >
-                      {showPanel ? <FaArrowRight /> : <FaArrowLeft />}
+                      {showPanel ? (
+                        <ArrowRight className="w-5 h-5" />
+                      ) : (
+                        <ArrowLeft className="w-5 h-5" />
+                      )}
                     </button>
                   </div>
 
