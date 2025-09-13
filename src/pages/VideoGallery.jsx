@@ -49,7 +49,9 @@ const VideoGallery = () => {
 
   return (
     <div className="min-h-screen bg-black text-white p-8">
-      <h1 className="font-bold text-[24px] md:text-[40px] text-center mb-12">🎬 Video Gallery</h1>
+      <h1 className="font-bold text-[24px] md:text-[40px] text-center mb-12">
+        🎬 Video Gallery
+      </h1>
 
       {videos.length === 0 ? (
         <p className="text-gray-400 text-center">No videos available.</p>
@@ -79,17 +81,23 @@ const VideoGallery = () => {
                   onClick={() =>
                     navigate(categoryRoutes[video.category] || "/videos")
                   }
-                  className="relative"
+                  className="relative group cursor-pointer overflow-hidden"
                 >
-                  <div className="absolute bottom-3 left-0 w-full bg-black bg-opacity-50 text-center py-2">
-                    <span className="text-white font-semibold text-lg">
+                  {/* Overlay */}
+                  <div
+                    className="absolute bottom-0 left-0 w-full bg-black/40 text-center py-2 
+                  opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 
+                  transition-all duration-500 ease-out"
+                  >
+                    <span className="text-white font-semibold text-lg tracking-wide">
                       {video.title || video.category}
                     </span>
                   </div>
 
+                  {/* Video */}
                   <video
                     src={video.videoUrl}
-                    className="w-full h-64 md:h-80 object-cover"
+                    className="w-full h-64 md:h-80 object-cover scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
                     muted
                     autoPlay
                     loop
