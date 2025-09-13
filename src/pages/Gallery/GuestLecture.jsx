@@ -171,7 +171,7 @@ const GuestLecture = () => {
                   {/* Panel toggle button (always visible) */}
                   <button
                     onClick={() => setShowPanel(!showPanel)}
-                    className="absolute top-1/2 -translate-y-1/2 right-96 md:right-96 lg:right-96 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-xl transition-colors z-50"
+                    className="absolute top-2 right-12 md:right-12 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-xl transition-colors z-50"
                   >
                     {showPanel ? <FaArrowRight /> : <FaArrowLeft />}
                   </button>
@@ -179,18 +179,16 @@ const GuestLecture = () => {
                   {/* Right: Side panel */}
                   <div
                     className={`
-          w-96 bg-gray-800 p-6 flex flex-col overflow-y-auto
-          transition-transform duration-300
-          ${showPanel ? "translate-x-0" : "translate-x-full"}
-          absolute top-0 right-0 h-full
-          z-40
-        `}
+    w-96 bg-gray-800 p-6 flex flex-col overflow-y-auto
+    transition-transform duration-300
+    ${showPanel ? "translate-x-0" : "translate-x-full"}
+    fixed top-0 right-0 h-full z-40
+  `}
                   >
                     {/* Video title */}
                     <h3 className="text-xl font-semibold break-words mb-4">
                       {selectedVideo.title || "Unknown Video"}
                     </h3>
-
                     {/* Video description */}
                     {selectedVideo.description && (
                       <p className="mt-2 text-gray-300">
