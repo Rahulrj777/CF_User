@@ -267,7 +267,6 @@ const GuestLecture = () => {
                         className="absolute top-2 right-4 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white"
                         aria-label="Close description"
                       >
-                        <ArrowDown className="w-5 h-5" />
                       </button>
                     </div>
 
