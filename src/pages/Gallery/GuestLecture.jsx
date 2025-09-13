@@ -159,19 +159,19 @@ const GuestLecture = () => {
                       Your browser does not support the video tag.
                     </video>
 
-                    {/* Close video modal */}
+                    {/* Close button */}
                     <button
                       onClick={() => setSelectedVideo(null)}
-                      className="absolute top-2 left-2 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-2xl transition-colors z-50"
+                      className="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-lg font-bold transition-colors z-50"
                     >
                       ×
                     </button>
                   </div>
 
-                  {/* Panel toggle button (always visible) */}
+                  {/* Panel toggle button */}
                   <button
                     onClick={() => setShowPanel(!showPanel)}
-                    className="absolute top-2 right-12 md:right-12 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-xl transition-colors z-50"
+                    className="absolute top-4 right-16 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white text-xl transition-colors z-50"
                   >
                     {showPanel ? <FaArrowRight /> : <FaArrowLeft />}
                   </button>
