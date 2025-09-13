@@ -81,18 +81,19 @@ const VideoGallery = () => {
                   onClick={() =>
                     navigate(categoryRoutes[video.category] || "/videos")
                   }
-                  className="relative"
+                  className="relative group"
                 >
-                  <div className="absolute bottom-0 left-0 w-full bg-black/50 text-center py-2">
-                    <span
-                      className="
-    text-lg font-semibold
-    bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400
-    bg-[length:200%_200%]     // ✅ arbitrary value
-    bg-clip-text text-transparent
-    animate-gradientMove      // ✅ animation from config
-  "
-                    >
+                  {/* Animated overlay */}
+                  <div
+                    className="
+      absolute bottom-3 left-0 w-full 
+      bg-black/50 text-center py-2
+      translate-y-4 opacity-0
+      group-hover:translate-y-0 group-hover:opacity-100
+      transition-all duration-500
+    "
+                  >
+                    <span className="text-white font-semibold text-lg tracking-wide">
                       {video.title || video.category}
                     </span>
                   </div>
