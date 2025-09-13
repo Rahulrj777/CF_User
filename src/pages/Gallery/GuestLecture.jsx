@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import API_BASE from "../../config.js";
-import { X, ArrowLeft, ArrowRight } from "lucide-react";
+import { X, ArrowLeft, ArrowRight, ArrowUp, ArrowDown } from "lucide-react";
 
 const GuestLecture = () => {
   const category = "guestLecture";
@@ -154,25 +154,25 @@ const GuestLecture = () => {
             {selectedVideo && (
               <div className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50">
                 <div className="w-full h-full flex flex-col md:max-w-7xl md:max-h-[90vh] md:rounded-xl md:overflow-hidden md:shadow-2xl bg-gray-900">
-                  {/* --- Mobile Header --- */}
+                  {/* Mobile header */}
                   <div className="flex items-center justify-between p-4 bg-gray-800 border-b border-gray-700 md:hidden">
                     <h3 className="text-lg font-semibold text-white flex-1 mr-4 line-clamp-2 leading-tight">
                       {selectedVideo.title || "Unknown Video"}
                     </h3>
                     <div className="flex gap-2 flex-shrink-0">
-                      {/* Toggle Description */}
+                      {/* Toggle info panel (bottom sheet) */}
                       <button
                         onClick={() => setShowPanel(!showPanel)}
                         className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition-colors"
                         aria-label="Toggle info panel"
                       >
                         {showPanel ? (
-                          <ArrowRight className="w-5 h-5" />
+                          <ArrowDown className="w-5 h-5" />
                         ) : (
-                          <ArrowLeft className="w-5 h-5" />
+                          <ArrowUp className="w-5 h-5" />
                         )}
                       </button>
-                      {/* Close */}
+                      {/* Close video */}
                       <button
                         onClick={() => setSelectedVideo(null)}
                         className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition-colors"
@@ -183,8 +183,9 @@ const GuestLecture = () => {
                     </div>
                   </div>
 
-                  {/* --- Video Section --- */}
+                  {/* Main content */}
                   <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+                    {/* Video player */}
                     <div className="flex-1 flex items-center justify-center bg-black relative">
                       <video
                         className="w-full h-full max-h-[60vh] md:max-h-full object-contain"
@@ -202,7 +203,7 @@ const GuestLecture = () => {
                         Your browser does not support the video tag.
                       </video>
 
-                      {/* Desktop Action Buttons */}
+                      {/* Desktop controls (top-right) */}
                       <div className="hidden md:flex absolute top-6 right-6 gap-3 z-50">
                         <button
                           onClick={() => setShowPanel(!showPanel)}
@@ -225,7 +226,7 @@ const GuestLecture = () => {
                       </div>
                     </div>
 
-                    {/* --- Desktop Side Panel --- */}
+                    {/* Desktop side panel */}
                     <div
                       className={`
             hidden md:flex flex-col bg-gray-800 border-l border-gray-700 transition-all duration-300 ease-in-out overflow-hidden
@@ -251,27 +252,41 @@ const GuestLecture = () => {
                     </div>
                   </div>
 
-                  {/* --- Mobile Bottom Panel --- */}
-                  {showPanel && (
-                    <div className="md:hidden bg-gray-800 border-t border-gray-700 max-h-[40vh] overflow-y-auto rounded-t-2xl">
-                      <div className="flex justify-center py-3">
-                        <div className="w-12 h-1.5 rounded-full bg-gray-600"></div>
-                      </div>
-
-                      <div className="px-4 pb-6">
-                        {selectedVideo.description && (
-                          <div className="space-y-4">
-                            <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
-                              Description
-                            </h4>
-                            <p className="text-gray-300 leading-relaxed text-sm">
-                              {selectedVideo.description}
-                            </p>
-                          </div>
-                        )}
-                      </div>
+                  {/* Mobile bottom sheet */}
+                  <div
+                    className={`md:hidden fixed bottom-0 left-0 right-0 bg-gray-800 border-t border-gray-700 rounded-t-2xl max-h-[60vh] overflow-y-auto transform transition-transform duration-300 ease-in-out ${
+                      showPanel ? "translate-y-0" : "translate-y-full"
+                    }`}
+                  >
+                    <div className="flex items-center justify-center py-3 relative">
+                      {/* Drag handle */}
+                      <div className="w-12 h-1.5 rounded-full bg-gray-600"></div>
+                      {/* Close button */}
+                      <button
+                        onClick={() => setShowPanel(false)}
+                        className="absolute top-2 right-4 flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 text-white"
+                        aria-label="Close description"
+                      >
+                        <ArrowDown className="w-5 h-5" />
+                      </button>
                     </div>
-                  )}
+
+                    <div className="px-4 pb-6">
+                      <h3 className="text-lg font-semibold text-white mb-4">
+                        {selectedVideo.title || "Unknown Video"}
+                      </h3>
+                      {selectedVideo.description && (
+                        <div className="space-y-4">
+                          <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
+                            Description
+                          </h4>
+                          <p className="text-gray-300 leading-relaxed">
+                            {selectedVideo.description}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
