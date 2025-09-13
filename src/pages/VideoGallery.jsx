@@ -60,8 +60,8 @@ const VideoGallery = () => {
           {videos.map((video) => {
             const isExpanded = expandedDescriptions[video._id];
             const descriptionPreview =
-              video.description.length > 50
-                ? video.description.slice(0, 50) + "..."
+              video.description.length > 35
+                ? video.description.slice(0, 35) + "..."
                 : video.description;
 
             return (
@@ -86,22 +86,14 @@ const VideoGallery = () => {
                   {/* Animated overlay */}
                   <div
                     className="
-    absolute bottom-3 left-0 w-full 
-    bg-black/50 text-center py-2
-    translate-y-4 opacity-0
-    group-hover:translate-y-0 group-hover:opacity-100
-    transition-all duration-1000
-    overflow-hidden
-  "
-                  >
-                    <span
-                      className="
-      inline-block whitespace-nowrap
-      text-white font-semibold text-lg tracking-wide
-      lg:group-hover:animate-marquee  /* fade+scroll on large screens */
-      sm:animate-marquee md:animate-marquee  /* always scroll on small/medium */
+      absolute bottom-0 left-0 w-full 
+      bg-black/50 text-center py-2
+      translate-y-4 opacity-0
+      group-hover:translate-y-0 group-hover:opacity-100
+      transition-all duration-500
     "
-                    >
+                  >
+                    <span className="text-white font-semibold text-lg tracking-wide">
                       {video.title || video.category}
                     </span>
                   </div>
@@ -123,7 +115,7 @@ const VideoGallery = () => {
                     }`}
                   >
                     {isExpanded ? video.description : descriptionPreview}
-                    {video.description.length > 50 && (
+                    {video.description.length > 35 && (
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
