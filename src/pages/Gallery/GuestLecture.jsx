@@ -11,7 +11,7 @@ const GuestLecture = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
     const fetchVideos = async () => {
       try {
         setLoading(true);
@@ -56,7 +56,9 @@ const GuestLecture = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="font-bold  text-[24px] md:text-[40px] mb-2">🎬 Guest Lecture Video Gallery</h1>
+          <h1 className="font-bold  text-[24px] md:text-[40px] mb-2">
+            🎬 Guest Lecture Video Gallery
+          </h1>
           <p className="text-gray-400">Watch and enjoy our video collection</p>
         </div>
 
@@ -136,10 +138,8 @@ const GuestLecture = () => {
             {selectedVideo && (
               <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4">
                 <div className="bg-gray-900 rounded-xl max-w-5xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
-                  <div className="flex justify-between items-center p-6 border-b border-gray-700">
-                    <h3 className="text-xl font-semibold">
-                      {selectedVideo.title || "Unknown Video"}
-                    </h3>
+                  {/* Top bar with just close button */}
+                  <div className="flex justify-end items-center p-4 border-b border-gray-700">
                     <button
                       onClick={() => setSelectedVideo(null)}
                       className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
@@ -148,7 +148,7 @@ const GuestLecture = () => {
                     </button>
                   </div>
 
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col items-center">
                     <video
                       className="w-full max-h-[70vh] rounded-lg shadow-lg"
                       controls
@@ -164,6 +164,11 @@ const GuestLecture = () => {
                       <source src={selectedVideo.videoUrl} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
+
+                    {/* Title below video */}
+                    <h3 className="text-xl font-semibold text-center mt-4 break-words">
+                      {selectedVideo.title || "Unknown Video"}
+                    </h3>
                   </div>
                 </div>
               </div>
