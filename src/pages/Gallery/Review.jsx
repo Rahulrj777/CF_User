@@ -11,7 +11,7 @@ const Review = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
     const fetchVideos = async () => {
       try {
         setLoading(true);
@@ -56,7 +56,9 @@ const Review = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="font-bold  text-[24px] md:text-[40px] mb-2">🎬 Student's Review Video Gallery</h1>
+          <h1 className="font-bold  text-[24px] md:text-[40px] mb-2">
+            🎬 Student's Review Video Gallery
+          </h1>
           <p className="text-gray-400">Watch and enjoy our video collection</p>
         </div>
 
@@ -135,22 +137,11 @@ const Review = () => {
             {/* Video Modal */}
             {selectedVideo && (
               <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4">
-                <div className="bg-gray-900 rounded-xl max-w-5xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
-                  <div className="flex justify-between items-center p-6 border-b border-gray-700">
-                    <h3 className="text-xl font-semibold">
-                      {selectedVideo.title || "Unknown Video"}
-                    </h3>
-                    <button
-                      onClick={() => setSelectedVideo(null)}
-                      className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
-                    >
-                      ×
-                    </button>
-                  </div>
-
-                  <div className="p-6">
+                <div className="bg-gray-900 rounded-xl max-w-6xl w-full h-[80vh] flex overflow-hidden shadow-2xl">
+                  {/* Left: Video */}
+                  <div className="flex-1 flex items-center justify-center p-4">
                     <video
-                      className="w-full max-h-[70vh] rounded-lg shadow-lg"
+                      className="w-full h-full rounded-lg shadow-lg object-contain"
                       controls
                       autoPlay
                       controlsList="nodownload"
@@ -164,6 +155,24 @@ const Review = () => {
                       <source src={selectedVideo.videoUrl} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
+                  </div>
+
+                  {/* Right: Side panel */}
+                  <div className="w-96 bg-gray-800 p-6 flex flex-col overflow-y-auto transition-transform duration-300">
+                    {/* Close button */}
+                    <div className="flex justify-end mb-4">
+                      <button
+                        onClick={() => setSelectedVideo(null)}
+                        className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
+                      >
+                        ×
+                      </button>
+                    </div>
+
+                    {/* Video title */}
+                    <h3 className="text-xl font-semibold break-words">
+                      {selectedVideo.title || "Unknown Video"}
+                    </h3>
                   </div>
                 </div>
               </div>

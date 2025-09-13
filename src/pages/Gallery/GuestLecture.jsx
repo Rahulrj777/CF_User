@@ -173,12 +173,6 @@ const GuestLecture = () => {
                     <h3 className="text-xl font-semibold break-words">
                       {selectedVideo.title || "Unknown Video"}
                     </h3>
-
-                    {/* Optional: more details */}
-                    <p className="mt-4 text-gray-300">
-                      {/* You can put description, date, etc. */}
-                      {selectedVideo.description || "No description available."}
-                    </p>
                   </div>
                 </div>
               </div>
