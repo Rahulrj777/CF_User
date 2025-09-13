@@ -163,7 +163,7 @@ const StudentWorks = () => {
                     <div className="flex justify-end mb-4">
                       <butxton
                         onClick={() => setSelectedVideo(null)}
-                        className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full transition-colors fixed"
+                        className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 transition-colors fixed"
                       >
                         ×
                       </butxton>
