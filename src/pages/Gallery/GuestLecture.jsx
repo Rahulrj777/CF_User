@@ -165,12 +165,12 @@ const GuestLecture = () => {
                       ×
                     </button>
 
-                    {/* Mobile: Show panel button */}
+                    {/* Panel toggle button (all screens) */}
                     <button
-                      onClick={() => setShowPanel(true)}
-                      className="absolute top-2 right-2 text-white text-2xl font-bold w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-gray-600 transition-colors md:hidden"
+                      onClick={() => setShowPanel(!showPanel)}
+                      className="absolute top-2 right-2 text-white text-2xl font-bold w-8 h-8 flex items-center justify-center rounded-full bg-gray-700 hover:bg-gray-600 transition-colors"
                     >
-                      ⋮
+                      {showPanel ? "←" : "→"}
                     </button>
                   </div>
 
@@ -180,12 +180,11 @@ const GuestLecture = () => {
           w-96 bg-gray-800 p-6 flex flex-col overflow-y-auto
           transition-transform duration-300
           ${showPanel ? "translate-x-0" : "translate-x-full"}
-          md:translate-x-0 md:flex
-          absolute md:relative top-0 right-0 h-full
+          absolute top-0 right-0 h-full
         `}
                   >
-                    {/* Close panel button (mobile only) */}
-                    <div className="flex justify-end mb-4 md:hidden">
+                    {/* Optional: close panel button inside panel (redundant with top-right) */}
+                    <div className="flex justify-end mb-4">
                       <button
                         onClick={() => setShowPanel(false)}
                         className="text-gray-400 hover:text-white text-3xl font-light w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
