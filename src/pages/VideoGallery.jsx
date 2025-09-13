@@ -86,11 +86,12 @@ const VideoGallery = () => {
                   <div className="absolute bottom-0 left-0 w-full bg-black/50 text-center py-2">
                     <span
                       className="
-        text-lg font-semibold 
-        bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400
-        bg-clip-text text-transparent 
-        animate-[gradientMove_3s_linear_infinite]
-      "
+    text-lg font-semibold
+    bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400
+    bg-[length:200%_200%]     // ✅ arbitrary value
+    bg-clip-text text-transparent
+    animate-gradientMove      // ✅ animation from config
+  "
                     >
                       {video.title || video.category}
                     </span>
