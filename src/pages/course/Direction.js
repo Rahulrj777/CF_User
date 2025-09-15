@@ -140,12 +140,196 @@ const Direction = () => {
     <>
       <div className="font-kumbh overflow-hidden">
         <Helmet>
-          <title>Top Direction & Screenplay Courses | Cinema Factory</title>
+          {/* Title & Description */}
+          <title>
+            Best Film Direction Course in chennai - Cinema Factory Academy
+          </title>
           <meta
             name="description"
-            content="Master direction & screenplay at Cinema Factory Academy. Learn from experts with hands-on training."
+            content="Cinema Factory Academy offers a Best Film Direction Course in Chennai designed for aspiring directors. Learn filmmaking, screenwriting, and visual storytelling with experienced industry mentors in Chennai."
           />
+
+          {/* Robots */}
+          <meta
+            name="robots"
+            content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+          />
+
+          {/* Canonical URL */}
+          <link
+            rel="canonical"
+            href="https://cinemafactoryacademy.com/direction"
+          />
+
+          {/* Viewport */}
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+          {/* Open Graph Tags */}
+          <meta
+            property="og:title"
+            content="Film Direction Course in Chennai - Cinema Factory Academy"
+          />
+          <meta
+            property="og:description"
+            content="Enroll in Cinema Factory Academy’s Film Direction Course in Chennai. Learn directing, screenwriting, and storytelling from experienced film mentors."
+          />
+          <meta
+            property="og:image"
+            content="https://cinemafactoryacademy.com/static/media/Direction_banner.a6c4098540b62b7058b4.png"
+          />
+          <meta
+            property="og:url"
+            content="https://cinemafactoryacademy.com/direction"
+          />
+          <meta property="og:type" content="website" />
+
+          {/* Twitter Card Tags */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="Film Direction Course in Chennai - Cinema Factory Academy"
+          />
+          <meta
+            name="twitter:description"
+            content="Join the Best Film Direction Course at Cinema Factory Academy in Chennai. Hands-on training in directing, storytelling, and filmmaking."
+          />
+          <meta
+            name="twitter:image"
+            content="https://cinemafactoryacademy.com/static/media/Direction_banner.a6c4098540b62b7058b4.png"
+          />
+
+          {/* Schema Markup */}
+          <script type="application/ld+json">
+            {`
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Film Direction Course | Diploma in Direction & Screenplay",
+    "description": "Cinema Factory Academy offers a professional Film Direction Course. Learn filmmaking, scriptwriting, visual storytelling, and direction with expert mentors.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Cinema Factory Academy",
+      "url": "https://cinemafactoryacademy.com"
+    },
+    "educationalCredentialAwarded": "Diploma in Direction & Screenplay",
+    "url": "https://cinemafactoryacademy.com/direction",
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": "Offline",
+      "instructor": [
+        {
+          "@type": "Person",
+          "name": "Aranthai Maniyan"
+        },
+        {
+          "@type": "Person",
+          "name": "PS Vinoth Raj"
+        },
+        {
+          "@type": "Person",
+          "name": "A Rajdeep"
+        }
+      ]
+    }
+  }
+  `}
+          </script>
         </Helmet>
+
+        {/* Course Images */}
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Direction_banner.a6c4098540b62b7058b4.png"
+          alt="Film Direction Course Banner at Cinema Factory Academy"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Aranthai_maniyan.f9f6ca6842acfb8085fb.jpg"
+          alt="Aranthai Maniyan - Mentor for Film Direction Course"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/ps_vinoth_raj.c15e3773c86cb48f2f0d.png"
+          alt="PS Vinoth Raj - Mentor for Film Direction Course"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/a_rajdeep.c19ba09de7d6ac250e4d.jpg"
+          alt="A Rajdeep - Mentor for Film Direction Course"
+        />
+
+        <h1>Film Direction Course | Diploma in Direction & Screenplay</h1>
+
+        <h2>About the Film Direction Course</h2>
+        <p>
+          At <strong>Cinema Factory Academy</strong> in Chennai, our{" "}
+          <strong>Film Direction Course</strong> is designed for aspiring
+          filmmakers who want to bring stories to life through the power of
+          cinema. Directing is more than calling the shots — it’s about shaping
+          vision, guiding creativity, and leading a team to deliver meaningful
+          storytelling on screen.
+        </p>
+
+        <h2>What You’ll Learn</h2>
+        <p>
+          This program combines{" "}
+          <strong>artistic insight with technical expertise</strong>. Students
+          are trained in screenplay development, script interpretation,
+          storyboarding, production design, and crew management. The curriculum
+          also covers directing actors, visual storytelling, and understanding
+          the collaboration between the director and every department in
+          filmmaking.
+        </p>
+
+        <h3>Core Skills Covered</h3>
+        <ul>
+          <li>Screenplay Development & Scriptwriting</li>
+          <li>Storyboarding & Visual Storytelling</li>
+          <li>Directing Actors & Performance Guidance</li>
+          <li>Production Design & Crew Management</li>
+          <li>On-Set Leadership & Filmmaking Techniques</li>
+        </ul>
+
+        <h2>Hands-On Training & Projects</h2>
+        <p>
+          What sets this course apart is our emphasis on{" "}
+          <strong>practical, project-based learning</strong>. From studio
+          workshops and short film projects to live set experiences, every
+          student gains exposure to real filmmaking environments. Guided by
+          experienced mentors and working professionals, you will learn how to
+          transform concepts into compelling cinematic narratives.
+        </p>
+
+        <h2>Learn from Industry Mentors</h2>
+        <p>
+          Our program is guided by acclaimed filmmakers including{" "}
+          <strong>Aranthai Maniyan</strong>, <strong>PS Vinoth Raj</strong>, and{" "}
+          <strong>A Rajdeep</strong>. With their real-world insights and
+          industry experience, students receive mentorship that bridges
+          classroom learning with professional practice.
+        </p>
+
+        <h2>Career Opportunities</h2>
+        <p>
+          The <strong>Film Direction Course</strong> is offered as a diploma
+          program, providing students with the foundation needed for careers in
+          feature films, television, advertising, and digital content. With
+          equal focus on creativity, discipline, and industry relevance, it
+          prepares you to step confidently into the world of cinema.
+        </p>
+        <p>
+          Our alumni have gone on to contribute to film productions, ad
+          campaigns, and OTT projects — showcasing the practical strength of
+          this program.
+        </p>
+
+        <h2>Explore Related Courses</h2>
+        <p>
+          Along with mastering direction, many students also expand their
+          learning by joining our
+          <a href="/cinematography">Cinematography Course</a> to strengthen
+          visual storytelling,
+          <a href="/editing">Video Editing Course</a> for post-production
+          expertise, and
+          <a href="/acting">Acting Course</a> to better understand performance
+          on screen.
+        </p>
 
         {/* Banner Slider */}
         {banners.length > 0 && (

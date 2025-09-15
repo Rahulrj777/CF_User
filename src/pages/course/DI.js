@@ -141,20 +141,159 @@ const DI = () => {
     <>
       <div className="font-kumbh overflow-hidden">
         <Helmet>
+          {/* Title & Description */}
           <title>
-            Color Grading Courses India | Color Grading Institute India
+            Color Grading Course in chennai | Cinema Factory Academy
           </title>
           <meta
             name="description"
-            content="Transform your visuals with our 3-month color grading course. Learn color correction, mood creation, and effects integration with hands-on training from industry experts"
+            content="Cinema Factory Academy offers the best Color Grading Course in Chennai, India with hands-on training in DI, DaVinci Resolve, HDR workflows, LUTs, and advanced post-production techniques for aspiring filmmakers and editors."
+          />
+
+          {/* Robots (Enhanced for SEO) */}
+          <meta
+            name="robots"
+            content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+          />
+
+          {/* Canonical URL */}
+          <link rel="canonical" href="https://cinemafactoryacademy.com/di" />
+
+          {/* Viewport */}
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+          {/* Open Graph Tags */}
+          <meta
+            property="og:title"
+            content="Color Grading Course in chennai | Cinema Factory Academy"
           />
           <meta
-            name="keywords"
-            content="Digital Imaging courses | Color Grading courses | Best Digital Imaging courses | Best Color Grading courses | Digital Imaging Institute | Color Grading Institute | Film editing Courses | film institute in india"
+            property="og:description"
+            content="Join Cinema Factory Academy’s Color Grading Course in Chennai, India. Learn DI workflows, DaVinci Resolve, HDR grading, LUT creation, and professional post-production techniques with expert mentors."
           />
-          <meta name="author" content="Cinema Factory Academy" />
-          <meta charSet="utf-8" />
+          <meta
+            property="og:url"
+            content="https://cinemafactoryacademy.com/di"
+          />
+          <meta
+            property="og:image"
+            content="https://cinemafactoryacademy.com/static/media/di.0f92caeb607f66b03f8e.png"
+          />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:type" content="website" />
+
+          {/* Twitter Card Tags */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="Color Grading Course in chennai | Cinema Factory Academy"
+          />
+          <meta
+            name="twitter:description"
+            content="Learn DI, DaVinci Resolve, HDR workflows, LUTs, and professional color correction in the Color Grading Course at Cinema Factory Academy."
+          />
+          <meta
+            name="twitter:image"
+            content="https://cinemafactoryacademy.com/static/media/di.0f92caeb607f66b03f8e.png"
+          />
+          <meta name="twitter:site" content="@CF_academy2024" />
+
+          {/* Schema Markup */}
+          <script type="application/ld+json">
+            {`
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Color Grading Course",
+      "description": "Cinema Factory Academy offers the best Color Grading Course in chennai, India with hands-on training in DI, DaVinci Resolve, LUTs, HDR workflows, and advanced post-production techniques to build a career as a professional colorist.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Cinema Factory Academy",
+        "url": "https://cinemafactoryacademy.com",
+        "sameAs": [
+          "https://www.facebook.com/cinemafactoryacademy",
+          "https://www.instagram.com/cinemafactoryacademy",
+          "https://twitter.com/CF_academy2024",
+          "https://www.youtube.com/@cinemafactoryacademy"
+        ]
+      },
+      "courseMode": "Offline",
+      "educationalCredentialAwarded": "Certification in Color Grading & DI",
+      "url": "https://cinemafactoryacademy.com/di",
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "instructor": {
+          "@type": "Person",
+          "name": "Antony Bebin",
+          "jobTitle": "Color Grading Mentor"
+        }
+      }
+    }
+  `}
+          </script>
         </Helmet>
+
+        {/* Optimized Images with unique alt text */}
+        <img
+          src="https://cinemafactoryacademy.com/static/media/di.0f92caeb607f66b03f8e.png"
+          alt="Color Grading Course at Cinema Factory Academy using DaVinci Resolve and DI workflows"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Antony_bebin.db3223c46e26b0939c60.jpg"
+          alt="Mentor for Color Grading Course"
+        />
+
+        {/* Content Section */}
+        <h1>Color Grading Course in India</h1>
+        <h2>Master the Art of Professional Color Grading</h2>
+
+        <p>
+          At <strong>Cinema Factory Academy</strong>, our{" "}
+          <strong>Color Grading Course</strong> is designed for aspiring
+          colorists, filmmakers, and editors who want to master the art of
+          visual storytelling through color. Color grading goes beyond
+          correction—it defines the mood, tone, and emotional impact of every
+          frame. This course blends creative and technical expertise, giving
+          students the skills to transform raw footage into cinematic visuals.
+        </p>
+
+        <p>
+          The program covers{" "}
+          <strong>
+            DI workflows, DaVinci Resolve, color correction, HDR grading, LUT
+            creation, tone mapping, and advanced post-production techniques
+          </strong>
+          . Students work with industry-standard tools and real footage to
+          understand how color influences storytelling. From commercials and web
+          content to feature films, learners develop the ability to enhance
+          visuals across all types of media.
+        </p>
+
+        <p>
+          Our <strong>hands-on training approach</strong> ensures every student
+          gains practical experience. Through live projects, workshops, and
+          guided sessions, students learn how to apply techniques in real-world
+          scenarios. With mentorship from industry experts like{" "}
+          <strong>Antony Bebin</strong>, learners build both technical mastery
+          and creative confidence. Many also combine this with our{" "}
+          <a href="/cinematography">Cinematography Course</a>,{" "}
+          <a href="/vfx">VFX Course</a>, or{" "}
+          <a href="/editing">Editing Course</a> to gain a complete filmmaking
+          skillset. Students interested in the latest technology-driven
+          workflows also explore our <a href="/vp">Virtual Production Course</a>{" "}
+          to understand how real-time engines and LED wall production integrate
+          with color grading.
+        </p>
+
+        <p>
+          The <strong>Color Grading Course</strong> at Cinema Factory Academy
+          prepares graduates for careers as professional colorists, DI artists,
+          and post-production specialists in film, television, advertising, and
+          digital media. If you want to build a rewarding career in
+          post-production, this course is your first step toward becoming an
+          industry-ready professional.
+        </p>
 
         {/* Background banner */}
         <img

@@ -18,7 +18,6 @@ const Acting = () => {
   useEffect(() => {
     const fetchAll = async () => {
       try {
-
         // Diploma
         const diplomaRes = await axios.get(`${API_URL}/actingdiploma`);
         setContents(diplomaRes.data.items || []);
@@ -63,17 +62,89 @@ const Acting = () => {
     <>
       <div className="font-kumbh overflow-hidden">
         <Helmet>
-          <title>Learn Acting Courses In India | Acting Institute India</title>
+          {/* Title & Description */}
+          <title>Acting Course in India - Cinema Factory Academy</title>
           <meta
             name="description"
-            content="Step into acting with our 6-month course. Learn from experts, gain hands-on experience, and build a professional portfolio. Apply now to start your acting career"
+            content="Join Cinema Factory Academy's Acting Course to learn voice control, body language, improvisation, and on-camera performance. Expert mentors Chandra & Nassar."
+          />
+
+          {/* Robots */}
+          <meta
+            name="robots"
+            content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+          />
+
+          {/* Canonical */}
+          <link
+            rel="canonical"
+            href="https://cinemafactoryacademy.com/acting"
+          />
+
+          {/* Viewport */}
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+          {/* Open Graph */}
+          <meta
+            property="og:title"
+            content="Acting Course | Cinema Factory Academy"
           />
           <meta
-            name="keywords"
-            content="Acting Institute in India | Diploma in Acting | Acting Diploma Courses | Certification in Acting Courses | Acting Courses In India | Best institute for Acting | Acting Courses | Acting Training Institute | best Acting Training Institute | leading Acting Training Institute |  best Acting Institute | leading Acting Institute | Career in Acting | Jobs in Acting | Acting Jobs | Film Acting Institute in India| Film Acting Courses | Film Acting institute | Diploma in Film Acting | Salary for film Acting"
+            property="og:description"
+            content="Professional Acting Course to train in voice, body language, improvisation, and on-camera performance."
           />
-          <meta name="author" content="Cinema Factory Academy" />
-          <meta charSet="utf-8" />
+          <meta
+            property="og:image"
+            content="https://cinemafactoryacademy.com/static/media/acting.9572f777927f421571fc.png"
+          />
+          <meta
+            property="og:url"
+            content="https://cinemafactoryacademy.com/acting"
+          />
+          <meta property="og:type" content="website" />
+
+          {/* Twitter Cards */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="Acting Course | Cinema Factory Academy"
+          />
+          <meta
+            name="twitter:description"
+            content="Learn acting from professional mentors with hands-on training at Cinema Factory Academy."
+          />
+          <meta
+            name="twitter:image"
+            content="https://cinemafactoryacademy.com/static/media/acting.9572f777927f421571fc.png"
+          />
+          <meta name="twitter:site" content="@CF_academy2024" />
+
+          {/* Schema Markup */}
+          <script type="application/ld+json">
+            {`
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Acting Course",
+      "description": "Professional Acting Course to train in voice, body language, improvisation, and on-camera performance.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Cinema Factory Academy",
+        "url": "https://cinemafactoryacademy.com",
+        "sameAs": [
+          "https://www.facebook.com/cinemafactoryacademy",
+          "https://www.instagram.com/cinemafactoryacademy",
+          "https://twitter.com/CF_academy2024",
+          "https://www.youtube.com/@cinemafactoryacademy"
+        ]
+      },
+      "courseMode": "Offline",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalCredentialAwarded": "Diploma in Acting",
+      "url": "https://cinemafactoryacademy.com/acting"
+    }
+    `}
+          </script>
         </Helmet>
 
         {/* ---------- Background Banner ---------- */}
