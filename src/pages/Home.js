@@ -308,10 +308,20 @@ const Home = () => {
                 </h2>
               </div>
               <p className="text-center text-[11px] md:text-[16px] text-gray-100 mt-2 md:mt-4 font-[roboto] w-full md:w-[60%] mx-auto">
-                Our academy offers one-year diploma courses, workshops,
-                seminars, webinars, and various courses, each tailored for
-                comprehensive knowledge and practical skills. Click below for
-                more info.
+                Dreaming of a career in the film industry?{" "}
+                <strong>Cinema Factory Academy</strong> in Chennai is one of the
+                top film schools in India, dedicated to guiding aspiring artists
+                and technicians. Whether your passion lies in{" "}
+                <a href="/acting">acting</a>,{" "}
+                <a href="/direction">film direction</a>,{" "}
+                <a href="/cinematography">cinematography</a>,{" "}
+                <a href="/editing">video editing</a>,{" "}
+                <a href="/photography">photography</a>,{" "}
+                <a href="/vfx">visual effects (VFX)</a>,{" "}
+                <a href="/virtual_production">virtual production</a>, or{" "}
+                <a href="/di">color grading</a>, we provide hands-on training to
+                help you succeed in today’s film and media industry. Click below
+                for more info.
               </p>
             </div>
 
