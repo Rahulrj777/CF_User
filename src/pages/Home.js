@@ -308,21 +308,10 @@ const Home = () => {
                 </h2>
               </div>
               <p className="text-center text-[11px] md:text-[16px] text-gray-100 mt-2 md:mt-4 font-[roboto] w-full md:w-[60%] mx-auto">
-                At Cinema Factory Academy, we offer{" "}
-                <strong>diploma and certification programs</strong> tailored to
-                industry requirements. - Explore our{" "}
-                <a href="/acting">Acting Course</a> to develop on-screen
-                performance skills. - Learn storytelling and production
-                techniques in the <a href="/direction">Film Direction Course</a>
-                . - Gain expertise in cameras, lighting, and visual language
-                through our <a href="/cinematography">Cinematography Course</a>.
-                - Specialize in post-production with our{" "}
-                <a href="/editing">Video Editing Course</a> and{" "}
-                <a href="/di">Color Grading Course</a>. - Stay ahead in
-                technology with <a href="/vfx">VFX Training</a> and our{" "}
-                <a href="/virtual_production">Virtual Production Course</a>,
-                designed for next-generation filmmakers. . Click below for more
-                info.
+                Our academy offers one-year diploma courses, workshops,
+                seminars, webinars, and various courses, each tailored for
+                comprehensive knowledge and practical skills. Click below for
+                more info.
               </p>
             </div>
 
