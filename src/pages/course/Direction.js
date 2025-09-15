@@ -167,7 +167,7 @@ const Direction = () => {
           {/* Open Graph Tags */}
           <meta
             property="og:title"
-            content="Film Direction Course in Chennai - Cinema Factory Academy"
+            content="Best Film Direction Course in chennai - Cinema Factory Academy"
           />
           <meta
             property="og:description"
@@ -187,7 +187,7 @@ const Direction = () => {
           <meta name="twitter:card" content="summary_large_image" />
           <meta
             name="twitter:title"
-            content="Film Direction Course in Chennai - Cinema Factory Academy"
+            content="Best Film Direction Course in chennai - Cinema Factory Academy"
           />
           <meta
             name="twitter:description"
@@ -204,7 +204,7 @@ const Direction = () => {
   {
     "@context": "https://schema.org",
     "@type": "Course",
-    "name": "Film Direction Course | Diploma in Direction & Screenplay",
+    "name": "Best Film Direction Course in chennai - Cinema Factory Academy",
     "description": "Cinema Factory Academy offers a professional Film Direction Course. Learn filmmaking, scriptwriting, visual storytelling, and direction with expert mentors.",
     "provider": {
       "@type": "Organization",
@@ -254,7 +254,7 @@ const Direction = () => {
           alt="A Rajdeep - Mentor for Film Direction Course"
         />
 
-        <h1>Film Direction Course | Diploma in Direction & Screenplay</h1>
+        <h1>Best Film Direction Course in chennai </h1>
 
         <h2>About the Film Direction Course</h2>
         <p>

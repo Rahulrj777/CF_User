@@ -120,21 +120,152 @@ const CFA = () => {
     <>
       <div className="font-kumbh overflow-hidden ">
         <Helmet>
+          {/* Title & Description */}
           <title>
-            Virtual Production Courses | Virtual Production Institute
+            Virtual Production Course – Advanced Training | Cinema Factory
+            Academy
           </title>
           <meta
             name="description"
-            content="Explore our Virtual Production courses. Master Unreal Engine, blend real and digital worlds, and gain hands-on experience with industry experts for a stellar career."
+            content="Join the Advanced Virtual Production Course at Cinema Factory Academy, Chennai. Master Unreal Engine, LED walls, motion capture, and in-camera VFX with real-time filmmaking projects."
+          />
+
+          {/* Robots */}
+          <meta
+            name="robots"
+            content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+          />
+
+          {/* Canonical URL */}
+          <link
+            rel="canonical"
+            href="https://cinemafactoryacademy.com/virtual_production/stage_unreal"
+          />
+
+          {/* Viewport */}
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+          {/* Open Graph Tags */}
+          <meta
+            property="og:title"
+            content="Virtual Production Course – Advanced Training | Cinema Factory Academy"
           />
           <meta
-            name="keywords"
-            content="Learn Virtual production courses | Best Virtual production courses | Virtual production training | Virtual productiontraining institute | Virtual production institute | Best Virtual production institute | Virtual production courses | Virtual production courses online | best Virtual production courses | learn diploma Virtual production courses in India | want to study Virtual production courses | Virtual production course fees | Jobs in Virtual production| career in Virtual production | Virtual production institute near me | Virtual production training near me | best institute to learn Virtual production | best institute to study Virtual production | best institute for Virtual production certification courses"
+            property="og:description"
+            content="Cinema Factory Academy offers an Advanced Virtual Production Course with hands-on training in Unreal Engine, LED workflows, in-camera VFX & motion capture for future-ready careers."
           />
-          <meta name="author" content="Cinema Factory Academy" />
-          <meta charSet="utf-8" />
-          {/* Add other meta tags here if needed */}
+          <meta
+            property="og:image"
+            content="https://cinemafactoryacademy.com/static/media/VP_2.bcc8203deebc79e8c0bc.png"
+          />
+          <meta
+            property="og:url"
+            content="https://cinemafactoryacademy.com/virtual_production/stage_unreal"
+          />
+          <meta property="og:type" content="website" />
+
+          {/* Twitter Card Tags */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="Virtual Production Course – Advanced Training | Cinema Factory Academy"
+          />
+          <meta
+            name="twitter:description"
+            content="Join the Advanced Virtual Production Course at Cinema Factory Academy. Learn Unreal Engine, LED walls, real-time rendering & immersive filmmaking techniques."
+          />
+          <meta
+            name="twitter:image"
+            content="https://cinemafactoryacademy.com/static/media/VP_2.bcc8203deebc79e8c0bc.png"
+          />
+          <meta name="twitter:site" content="@CF_academy2024" />
+
+          {/* Schema Markup */}
+          <script type="application/ld+json">
+            {`
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Advanced Virtual Production Course",
+    "description": "Cinema Factory Academy offers an Advanced Virtual Production Course with hands-on training in Unreal Engine, LED walls, motion capture, in-camera VFX, and real-time filmmaking for future-ready careers.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Cinema Factory Academy",
+      "url": "https://cinemafactoryacademy.com"
+    },
+    "educationalCredentialAwarded": "Diploma in Advanced Virtual Production",
+    "courseMode": "Offline",
+    "url": "https://cinemafactoryacademy.com/virtual_production/stage_unreal",
+  }
+  `}
+          </script>
         </Helmet>
+
+        {/* Course Images */}
+        <img
+          src="https://cinemafactoryacademy.com/static/media/VP_2.bcc8203deebc79e8c0bc.png"
+          alt="Advanced Virtual Production Course training in Unreal Engine, LED walls, and real-time filmmaking"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Aravind.3fa132f903ab7b6145c4.jpg"
+          alt="Aravind - Mentor for Advanced Virtual Production at Cinema Factory Academy"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/shiv.20cb06d42babe5f2aa0c.png"
+          alt="Shiv - Mentor for Virtual Production Training at Cinema Factory Academy"
+        />
+
+        {/* Page Content */}
+        <h1>Virtual Production Course – Advanced Training</h1>
+        <h2>Learn the Future of Filmmaking with Virtual Production</h2>
+        <p>
+          Cinema Factory Academy offers an{" "}
+          <strong>Advanced Virtual Production Course</strong> for filmmakers,
+          VFX artists, and storytellers who want to master the next generation
+          of filmmaking. Virtual production is transforming the global media
+          industry by combining{" "}
+          <strong>
+            Unreal Engine, LED walls, motion capture, and in-camera VFX
+          </strong>{" "}
+          to create immersive worlds in real-time. This course is designed to
+          equip you with both the technical expertise and creative vision needed
+          to succeed in this evolving field.
+        </p>
+        <p>
+          The program provides comprehensive training in{" "}
+          <strong>
+            real-time rendering, digital set creation, camera tracking, and CGI
+            integration
+          </strong>
+          . Students gain hands-on experience using industry-standard tools
+          while working on live projects, production simulations, and
+          collaborative assignments. From pre-visualization to final output, you
+          will learn how to design, plan, and execute cinematic scenes that
+          rival modern Hollywood productions.
+        </p>
+        <p>
+          Our <strong>project-based learning</strong> approach ensures that
+          students don’t just study theory but apply their knowledge in
+          practical scenarios. Guided by industry experts and professional
+          mentors, learners develop confidence in managing cutting-edge virtual
+          production pipelines while also refining their storytelling skills.
+          This unique combination of technical mastery and artistic creativity
+          prepares graduates for the competitive demands of today’s
+          entertainment industry.
+        </p>
+        <p>
+          The <strong>Diploma in Advanced Virtual Production</strong> opens
+          exciting career opportunities in film, television, advertising,
+          gaming, and OTT content creation. If you are passionate about shaping
+          the future of visual storytelling, enrolling in the{" "}
+          <strong>Advanced Virtual Production Course</strong> at Cinema Factory
+          Academy is your first step toward a future-ready career in cinema and
+          digital media. This program works best when paired with our{" "}
+          <a href="/cinematography">Cinematography Course</a> for camera
+          mastery, <a href="/vfx">VFX Course</a> for effects integration, and{" "}
+          <a href="/editing">Video Editing Course</a> to complete the end-to-end
+          production pipeline.
+        </p>
 
         <div className="  ">
           <img

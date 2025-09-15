@@ -63,19 +63,19 @@ const Acting = () => {
       <div className="font-kumbh overflow-hidden">
         <Helmet>
           {/* Title & Description */}
-          <title>Acting Course in India - Cinema Factory Academy</title>
+          <title>Acting Course in chennai- Cinema Factory Academy</title>
           <meta
             name="description"
-            content="Join Cinema Factory Academy's Acting Course to learn voice control, body language, improvisation, and on-camera performance. Expert mentors Chandra & Nassar."
+            content="Join Cinema Factory Academy's Acting Course and train in voice, body language, improvisation, character building, and on-camera performance under expert mentors Chandra Mohan and Nassar."
           />
 
-          {/* Robots */}
+          {/* Robots (Enhanced) */}
           <meta
             name="robots"
             content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
           />
 
-          {/* Canonical */}
+          {/* Canonical URL */}
           <link
             rel="canonical"
             href="https://cinemafactoryacademy.com/acting"
@@ -84,14 +84,14 @@ const Acting = () => {
           {/* Viewport */}
           <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-          {/* Open Graph */}
+          {/* Open Graph Tags */}
           <meta
             property="og:title"
             content="Acting Course | Cinema Factory Academy"
           />
           <meta
             property="og:description"
-            content="Professional Acting Course to train in voice, body language, improvisation, and on-camera performance."
+            content="Cinema Factory Academy offers a professional Acting Course with training in voice, body language, improvisation, character building, and on-camera performance for aspiring actors."
           />
           <meta
             property="og:image"
@@ -102,8 +102,10 @@ const Acting = () => {
             content="https://cinemafactoryacademy.com/acting"
           />
           <meta property="og:type" content="website" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
 
-          {/* Twitter Cards */}
+          {/* Twitter Card Tags */}
           <meta name="twitter:card" content="summary_large_image" />
           <meta
             name="twitter:title"
@@ -111,7 +113,7 @@ const Acting = () => {
           />
           <meta
             name="twitter:description"
-            content="Learn acting from professional mentors with hands-on training at Cinema Factory Academy."
+            content="Train in professional acting at Cinema Factory Academy with expert guidance from mentors Chandra Mohan and Nassar in voice, body movement, and on-camera techniques."
           />
           <meta
             name="twitter:image"
@@ -126,7 +128,7 @@ const Acting = () => {
       "@context": "https://schema.org",
       "@type": "Course",
       "name": "Acting Course",
-      "description": "Professional Acting Course to train in voice, body language, improvisation, and on-camera performance.",
+      "description": "Cinema Factory Academy offers a professional Acting Course with training in voice, body language, improvisation, character building, and on-camera performance for aspiring actors.",
       "provider": {
         "@type": "Organization",
         "name": "Cinema Factory Academy",
@@ -141,11 +143,98 @@ const Acting = () => {
       "courseMode": "Offline",
       "educationalLevel": "Beginner to Advanced",
       "educationalCredentialAwarded": "Diploma in Acting",
-      "url": "https://cinemafactoryacademy.com/acting"
+      "url": "https://cinemafactoryacademy.com/acting",
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "instructor": [
+          {
+            "@type": "Person",
+            "name": "Chandra",
+            "jobTitle": "Acting Mentor"
+          },
+          {
+            "@type": "Person",
+            "name": "Nassar",
+            "jobTitle": "Acting Mentor"
+          }
+        ]
+      }
     }
-    `}
+  `}
           </script>
         </Helmet>
+
+        {/* Optimized Images */}
+        <img
+          src="https://cinemafactoryacademy.com/static/media/acting.9572f777927f421571fc.png"
+          alt="Cinema Factory Academy Acting Course promotional banner"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/chandra.fd6b84e4d171b0760423.jpg"
+          alt="Mentor Chandra Mohan guiding students in the Acting Course at Cinema Factory Academy"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/nassar.ddd50a1e162bce02118a.png"
+          alt="Mentor Nassar mentoring Acting Course students at Cinema Factory Academy"
+        />
+
+        {/* Content Section */}
+        <h1>Acting Course</h1>
+        <h2>Step Into the World of Acting</h2>
+
+        <p>
+          At <strong>Cinema Factory Academy</strong>, our{" "}
+          <strong>Acting Course</strong> is designed to help aspiring actors
+          unlock their true potential and develop the confidence needed to
+          perform on stage and screen. Acting is more than just memorizing
+          dialogues—it’s about connecting with emotions, portraying characters
+          with depth, and engaging audiences through authentic expression.
+        </p>
+
+        <h3>Core Training Modules</h3>
+        <p>
+          The program provides structured training in{" "}
+          <strong>
+            voice control, body movement, improvisation, emotional expression,
+            character building, and camera acting techniques
+          </strong>
+          . Students are encouraged to explore different acting styles while
+          mastering the fundamentals that shape powerful performances. From
+          theatre-based exercises to on-camera practice, the course ensures a
+          well-rounded learning experience.
+        </p>
+
+        <h3>Practical Learning Experience</h3>
+        <p>
+          One of the highlights of this course is its{" "}
+          <strong>practical approach</strong>. Learners participate in stage
+          rehearsals, script readings, and recorded performances that prepare
+          them for real industry challenges. With mentorship from professional
+          actors like <strong>Chandra Mohan</strong> and <strong>Nassar</strong>
+          , students gain insights into both the artistic and technical aspects
+          of acting.
+        </p>
+
+        <h3>Career Opportunities</h3>
+        <p>
+          By the end of the course, students are equipped to pursue
+          opportunities in films, television, web series, theatre, and
+          advertising. The <strong>Acting Course</strong> not only sharpens
+          performance skills but also builds discipline, confidence, and
+          versatility—qualities that every successful actor must have. To gain a
+          deeper understanding of filmmaking, acting students frequently explore
+          our <a href="/direction">Film Direction Course</a> to learn about
+          storytelling, <a href="/cinematography">Cinematography Course</a> to
+          understand camera dynamics, and{" "}
+          <a href="/editing">Video Editing Course</a> to experience how
+          performances are shaped in post-production.
+        </p>
+
+        <p>
+          If you’re passionate about acting and ready to transform your talent
+          into a career, <strong>Cinema Factory Academy</strong> is the right
+          platform to begin your journey in the world of performance.
+        </p>
 
         {/* ---------- Background Banner ---------- */}
         <div>

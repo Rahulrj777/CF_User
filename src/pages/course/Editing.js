@@ -136,20 +136,135 @@ const Editing = () => {
       <div className="font-kumbh overflow-hidden ">
         <Helmet>
           <title>
-            Top Film Editing Courses | Best Editing Institute In India
+            Best Video Editing Course in Chennai | Cinema Factory Academy
           </title>
           <meta
             name="description"
-            content="Master film editing with our 1-Year Diploma. Learn Avid, Final Cut Pro, and gain real-world experience through a 6-month internship. Start your editing career today"
+            content="Cinema Factory Academy offers the Best Video Editing Course in Chennai with practical training in non-linear editing, VFX, sound design, and post-production. Gain hands-on experience with industry-standard tools and real projects to build your career in film and media editing."
           />
           <meta
-            name="keywords"
-            content="Editing Institute in India | Diploma in Editing | Editing Diploma Courses | Diploma in Editing Courses | Editing Courses In India | Best institute for Editing |Editing Courses | Editing Training Institute | best Editing Training Institute | leading Editing Training Institute |  best Editing Institute | leading Editing Institute | Career in Editing | Jobs in Editing | Editing Jobs | Film Editing In"
+            name="robots"
+            content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
           />
-          <meta name="author" content="Cinema Factory Academy" />
-          <meta charSet="utf-8" />
-          {/* Add other meta tags here if needed */}
+          <link
+            rel="canonical"
+            href="https://cinemafactoryacademy.com/editing"
+          />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+          <meta
+            property="og:title"
+            content="Best Video Editing Course in Chennai | Cinema Factory Academy"
+          />
+          <meta
+            property="og:description"
+            content="Cinema Factory Academy offers the Best Video Editing Course in Chennai with hands-on training in editing, VFX, color correction, and post-production. Build a successful career with real industry exposure."
+          />
+          <meta
+            property="og:image"
+            content="https://cinemafactoryacademy.com/static/media/Editing_Cover.46bd2ee641314580f9b0.png"
+          />
+          <meta
+            property="og:url"
+            content="https://cinemafactoryacademy.com/editing"
+          />
+          <meta property="og:type" content="website" />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="Best Video Editing Course in Chennai | Cinema Factory Academy"
+          />
+          <meta
+            name="twitter:description"
+            content="Join the Best Video Editing Course in Chennai at Cinema Factory Academy. Learn editing, VFX, and post-production with expert mentors and real-world projects."
+          />
+          <meta
+            name="twitter:image"
+            content="https://cinemafactoryacademy.com/static/media/Editing_Cover.46bd2ee641314580f9b0.png"
+          />
+          <meta name="twitter:site" content="@CF_academy2024" />
+
+          <script type="application/ld+json">
+            {`
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Best Video Editing Course in Chennai",
+      "description": "Cinema Factory Academy offers the Best Video Editing Course in Chennai with expert training in editing software, VFX, and post-production. Students gain hands-on experience with real projects and industry-standard tools to build a career in media editing.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Cinema Factory Academy",
+        "url": "https://cinemafactoryacademy.com"
+      },
+      "courseMode": "Offline",
+      "educationalCredentialAwarded": "Diploma in Video Editing",
+      "url": "https://cinemafactoryacademy.com/editing"
+    }
+    `}
+          </script>
         </Helmet>
+
+        {/* Optimized Images */}
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Editing_Cover.46bd2ee641314580f9b0.png"
+          alt="Best Video Editing Course in Chennai cover at Cinema Factory Academy"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Raja_mohhamed.741c4466e226abd4a33d.jpg"
+          alt="Mentor Raja Mohhamed teaching Video Editing at Cinema Factory Academy in Chennai"
+        />
+
+        <h1>Best Video Editing Course in Chennai</h1>
+        <h2>Learn Video Editing with Professional Training</h2>
+        <p>
+          Cinema Factory Academy offers the{" "}
+          <strong>Best Video Editing Course in Chennai</strong> for aspiring
+          editors and filmmakers who want to master the craft of storytelling
+          through visuals. Our program blends creativity with technical
+          expertise, giving students the ability to shape raw footage into
+          impactful cinematic experiences. Recognized as one of the top film
+          academies in India, we provide an ideal learning environment where
+          theory is combined with hands-on practice.
+        </p>
+
+        <p>
+          The course covers every essential aspect of editing, including{" "}
+          <strong>
+            non-linear editing, sound design, color correction, visual effects
+            integration, motion graphics, and post-production workflows
+          </strong>
+          . Students gain practical knowledge by working with industry-standard
+          editing software and engaging in projects that mirror real-world media
+          environments. From short films and advertisements to music videos and
+          digital content, each assignment helps learners refine their artistic
+          judgment and technical skills.
+        </p>
+
+        <p>
+          A key strength of our program is its{" "}
+          <strong>practical, project-based approach</strong>. Students
+          participate in workshops, collaborative editing sessions, and live
+          projects where they work alongside peers and industry mentors. This
+          hands-on experience ensures that learners graduate with both technical
+          mastery and creative confidence, ready to meet the fast-paced demands
+          of the film and media industry.
+        </p>
+
+        <p>
+          The <strong>Diploma in Video Editing</strong> at Cinema Factory
+          Academy prepares graduates for careers as professional editors,
+          post-production specialists, and content creators across films,
+          television, OTT platforms, advertising, and digital media. If you are
+          passionate about filmmaking, enrolling in the{" "}
+          <strong>Best Video Editing Course</strong> at Cinema Factory Academy
+          is your first step toward a successful and rewarding career in
+          post-production. To gain a complete filmmaking foundation, students
+          combine editing with our{" "}
+          <a href="/direction">Film Direction Course</a>,{" "}
+          <a href="/vfx">VFX Course</a>, and{" "}
+          <a href="/color_grading">Color Grading Course</a>.
+        </p>
 
         <section className="slider-container -top-8">
           <Slider {...bannerSliderSettings}>

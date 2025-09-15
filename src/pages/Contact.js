@@ -21,12 +21,12 @@ const Contact = () => {
             rel="canonical"
             href="https://cinemafactoryacademy.com/contact"
           />
-
           <meta
             name="robots"
             content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
           />
 
+          {/* Open Graph */}
           <meta
             property="og:title"
             content="Contact Cinema Factory Academy | Top Film Academy in Chennai, India"
@@ -45,6 +45,7 @@ const Contact = () => {
           />
           <meta property="og:type" content="website" />
 
+          {/* Twitter */}
           <meta name="twitter:card" content="summary_large_image" />
           <meta
             name="twitter:title"
@@ -60,6 +61,7 @@ const Contact = () => {
           />
           <meta name="twitter:site" content="@CF_academy2024" />
 
+          {/* Schema Markup */}
           <script type="application/ld+json">
             {`
     {
@@ -101,6 +103,11 @@ const Contact = () => {
     `}
           </script>
         </Helmet>
+
+        <img
+          src="https://cinemafactoryacademy.com/static/media/contact.c3dc5bdfd1c9b62b4727.png"
+          alt="Contact page illustration of Cinema Factory Academy Chennai"
+        />
 
         {/* contact form */}
 

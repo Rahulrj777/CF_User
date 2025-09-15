@@ -122,20 +122,172 @@ const Cinematography = () => {
     <>
       <div className="font-kumbh overflow-hidden">
         <Helmet>
+          {/* Title & Description */}
           <title>
-            Cinematography Courses | Best Cinematography Institute In India!
+            Diploma in Cinematography | Cinema Factory Academy, chennai
           </title>
           <meta
             name="description"
-            content="Master cinematography with our 1-Year Diploma. Learn from experts, gain hands-on experience, and secure your career in film with 100% placement assistance."
+            content="Enroll in the Diploma in Cinematography at Cinema Factory Academy, Chennai. Learn lighting, framing, and camera techniques with real filmmaking exposure."
+          />
+
+          {/* Robots */}
+          <meta
+            name="robots"
+            content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+          />
+
+          {/* Canonical URL */}
+          <link
+            rel="canonical"
+            href="https://cinemafactoryacademy.com/cinematography"
+          />
+
+          {/* Viewport */}
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+          {/* Open Graph Tags */}
+          <meta
+            property="og:title"
+            content="Diploma in Cinematography | Cinema Factory Academy, chennai"
           />
           <meta
-            name="keywords"
-            content="Cinematography Institute in India | Diploma in Cinematography | Cinematography Diploma Courses | Diploma in Cinematography Courses | Cinematography Courses In India | Best institute for cinematography | Cinematography Courses | Cinematography Training Institute | best Cinematography Training Institute | leading Cinematography Training Institute |  best Cinematography Institute | leading Cinematography Institute | Career in Cinematography| Jobs in Cinematography"
+            property="og:description"
+            content="Cinema Factory Academy offers the Diploma in Cinematography with expert training in lighting, framing, and camera techniques. Gain real industry exposure and filmmaking experience."
           />
-          <meta name="author" content="Cinema Factory Academy" />
-          <meta charSet="utf-8" />
+          <meta
+            property="og:image"
+            content="https://cinemafactoryacademy.com/static/media/cinematography.272b87a219bf86244016.png"
+          />
+          <meta
+            property="og:url"
+            content="https://cinemafactoryacademy.com/cinematography"
+          />
+          <meta property="og:type" content="website" />
+
+          {/* Twitter Card Tags */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="Diploma in Cinematography | Cinema Factory Academy, chennai"
+          />
+          <meta
+            name="twitter:description"
+            content="Enroll in the Diploma in Cinematography at Cinema Factory Academy, Chennai. Learn camera operation, lighting, framing, and storytelling with hands-on industry projects."
+          />
+          <meta
+            name="twitter:image"
+            content="https://cinemafactoryacademy.com/static/media/cinematography.272b87a219bf86244016.png"
+          />
+
+          {/* Schema Markup */}
+          <script type="application/ld+json">
+            {`
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Diploma in Cinematography",
+    "description": "Cinema Factory Academy offers the Diploma in Cinematography with expert training in lighting, framing, and camera techniques, providing aspiring filmmakers professional learning with real industry exposure.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Cinema Factory Academy",
+      "url": "https://cinemafactoryacademy.com"
+    },
+    "educationalCredentialAwarded": "Diploma in Cinematography",
+    "courseMode": "Offline",
+    "url": "https://cinemafactoryacademy.com/cinematography",
+  }
+  `}
+          </script>
         </Helmet>
+
+        {/* Course Images */}
+        <img
+          src="https://cinemafactoryacademy.com/static/media/cinematography.272b87a219bf86244016.png"
+          alt="Diploma in Cinematography Course Banner at Cinema Factory Academy"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Manoj_Paramahamsa.9e8d373ba49a575d3c7a.jpg"
+          alt="Manoj Paramahamsa - Mentor for Cinematography Course"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Madhu_ambat.8f56a7c812b4a8af5fa3.jpg"
+          alt="Madhu Ambat - Mentor for Cinematography Course"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/CJ_rajkumar.cdc1c375858e4b304f0f.jpg"
+          alt="CJ Rajkumar - Mentor for Cinematography Course"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Rameshkumar.88baec53cc3b09128c45.jpg"
+          alt="Ramesh Kumar - Mentor for Cinematography Course"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/pra.0fd4e2cd4b6d60d16d49.jpg"
+          alt="Prasanna Venkatesh - Mentor for Cinematography Course"
+        />
+
+        {/* Page Content */}
+        <h1>Diploma in Cinematography in Chennai</h1>
+
+        <h2>Learn Cinematography with Professional Training</h2>
+        <p>
+          At <strong>Cinema Factory Academy</strong>, Chennai, our{" "}
+          <strong>Diploma in Cinematography</strong> is designed for aspiring
+          filmmakers who want to master the art of visual storytelling. The
+          program blends creativity with technical expertise, training students
+          to transform concepts into powerful cinematic visuals. Recognized as
+          one of the <strong>best film academies in India</strong>, we provide
+          an ideal learning environment where theory meets hands-on practice.
+        </p>
+
+        <h2>What You’ll Learn in the Cinematography Course</h2>
+        <p>
+          The course covers every essential aspect of cinematography, including{" "}
+          <strong>
+            camera operation, lighting techniques, framing, composition, lens
+            selection, color theory, and cinematic movement
+          </strong>
+          . Students gain practical knowledge by working with professional
+          equipment and learning how to shape mood, tone, and emotion through
+          the camera. From studio setups to outdoor shoots, every training
+          module is designed to give learners real production exposure.
+        </p>
+
+        <h3>Core Skills Covered</h3>
+        <ul>
+          <li>Camera Operation & Lens Selection</li>
+          <li>Lighting Techniques for Film & TV</li>
+          <li>Framing & Composition</li>
+          <li>Color Theory & Cinematic Mood</li>
+          <li>Camera Movement & Visual Storytelling</li>
+        </ul>
+
+        <h2>Hands-On Projects & Industry Exposure</h2>
+        <p>
+          A key strength of this program is its{" "}
+          <strong>practical, project-based learning</strong>. Students
+          participate in workshops, short film projects, and live shooting
+          sessions, collaborating with peers and industry mentors. This ensures
+          that by the end of the program, learners are not only confident in
+          their technical abilities but also well-prepared for the fast-paced
+          demands of the film and television industry.
+        </p>
+
+        <h2>Career Opportunities After Cinematography</h2>
+        <p>
+          Graduates of the <strong>Diploma in Cinematography</strong> at Cinema
+          Factory Academy are prepared for careers as cinematographers, camera
+          operators, lighting directors, and visual storytellers across feature
+          films, television, advertising, and digital media platforms.
+        </p>
+        <p>
+          Many students also expand their skill set by enrolling in our{" "}
+          <a href="/direction">Film Direction Course</a>,{" "}
+          <a href="/editing">Video Editing Course</a>, and{" "}
+          <a href="/acting">Acting Course</a>, ensuring a strong balance of
+          visual, technical, and performance knowledge.
+        </p>
 
         <div className="  ">
           <img

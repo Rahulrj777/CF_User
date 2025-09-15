@@ -136,21 +136,147 @@ const Vfx = () => {
     <>
       <div className="font-kumbh overflow-hidden ">
         <Helmet>
-          <title>
-            Top VFX Courses in India | Best Visual Effects Institute
-          </title>
+          {/* Title & Description */}
+          <title>VFX Course in chennai | Cinema Factory Academy</title>
           <meta
             name="description"
-            content="Join our top-rated VFX courses. Learn from experts, gain hands-on experience with industry-standard software, and build a successful career in visual effects"
+            content="Join the VFX Course at Cinema Factory Academy, Chennai. Learn compositing, rotoscoping, motion graphics, 3D, and CGI with hands-on training for careers in films, gaming, and digital media."
+          />
+
+          {/* Robots */}
+          <meta
+            name="robots"
+            content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+          />
+
+          {/* Canonical URL */}
+          <link rel="canonical" href="https://cinemafactoryacademy.com/vfx" />
+
+          {/* Viewport */}
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+          {/* Open Graph Tags */}
+          <meta
+            property="og:title"
+            content="VFX Course in chennai | Cinema Factory Academy"
           />
           <meta
-            name="keywords"
-            content="Learn VFX courses | Best VFX courses |VFX training | VFX training institute | VFX institute | Best VFX institute | VFX courses | VFX courses online | best VFX courses | learn diploma VFX courses in India | want to study VFX courses | VFX course fees | Jobs in VFX | career in VFX | VFX institute near me | VFX training near me | best institute to learn VFX | best institute to study VFX | best institute for VFX certification courses | best institute to study diploma VFX Courses | study VFX courses in India | VFX course fees | Jobs in VFX | career in Visual effects | Visual effects institute near me | Visual effects training near me "
+            property="og:description"
+            content="Cinema Factory Academy offers a professional VFX Course with training in compositing, rotoscoping, motion graphics, 3D, and CGI. Build industry-ready skills for a successful career in visual effects."
           />
-          <meta name="author" content="Cinema Factory Academy" />
-          <meta charSet="utf-8" />
-          {/* Add other meta tags here if needed */}
+          <meta
+            property="og:image"
+            content="https://cinemafactoryacademy.com/static/media/vfx.8218d3c030b0afb96145.jpg"
+          />
+          <meta
+            property="og:url"
+            content="https://cinemafactoryacademy.com/vfx"
+          />
+          <meta property="og:type" content="website" />
+
+          {/* Twitter Card Tags */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="VFX Course in chennai | Cinema Factory Academy"
+          />
+          <meta
+            name="twitter:description"
+            content="Join the VFX Course at Cinema Factory Academy. Learn compositing, motion graphics, CGI & more with hands-on training for careers in visual effects."
+          />
+          <meta
+            name="twitter:image"
+            content="https://cinemafactoryacademy.com/static/media/vfx.8218d3c030b0afb96145.jpg"
+          />
+          <meta name="twitter:site" content="@CF_academy2024" />
+
+          {/* Schema Markup */}
+          <script type="application/ld+json">
+            {`
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "VFX Course in chennai",
+    "description": "Cinema Factory Academy offers a professional VFX Course with hands-on training in compositing, rotoscoping, motion graphics, 3D, and CGI. Students gain practical experience with industry-standard tools to build a successful career in visual effects.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Cinema Factory Academy",
+      "url": "https://cinemafactoryacademy.com"
+    },
+    "educationalCredentialAwarded": "Diploma in Visual Effects",
+    "courseMode": "Offline",
+    "url": "https://cinemafactoryacademy.com/vfx",
+    
+  }
+  `}
+          </script>
         </Helmet>
+
+        {/* Course Images */}
+        <img
+          src="https://cinemafactoryacademy.com/static/media/vfx.8218d3c030b0afb96145.jpg"
+          alt="VFX Course Diploma in Visual Effects Training at Cinema Factory Academy Chennai"
+          loading="lazy"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Aravind.3fa132f903ab7b6145c4.jpg"
+          alt="Aravind - Mentor for VFX Course at Cinema Factory Academy"
+          loading="lazy"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/shiv.20cb06d42babe5f2aa0c.png"
+          alt="Shiv - Mentor for Visual Effects Training at Cinema Factory Academy"
+          loading="lazy"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/muniraj.3fabc87312c52f08bcb7.jpg"
+          alt="Muniraj - VFX Faculty at Cinema Factory Academy"
+          loading="lazy"
+        />
+
+        {/* Page Content */}
+        <h1>VFX Course – Visual Effects Training at Cinema Factory Academy</h1>
+        <h2>Master the Art of Visual Effects</h2>
+        <p>
+          Cinema Factory Academy offers a professional{" "}
+          <strong>VFX Course</strong> designed for students passionate about
+          creating stunning visual effects for films, television, and digital
+          media. Visual effects play a vital role in modern storytelling,
+          blending imagination with technology to bring impossible scenes to
+          life. Our course provides the perfect platform to gain both creative
+          and technical expertise in this high-demand field.
+        </p>
+        <p>
+          The <strong>Visual Effects Course</strong> covers every essential
+          aspect of VFX production, including compositing, rotoscoping, motion
+          graphics, 3D modeling, animation, match moving, and CGI integration.
+          Students learn how to use industry-standard software and tools to
+          produce realistic effects that enhance storytelling. With a balance of
+          theory and practice, the program ensures that learners are prepared
+          for professional post-production environments.
+        </p>
+        <p>
+          At Cinema Factory Academy, we believe in learning by doing. Students
+          gain hands-on experience through real-world projects, workshops, and
+          studio simulations. Guided by experienced mentors and industry
+          professionals, you will develop practical skills while also nurturing
+          your artistic vision. This approach ensures that graduates leave with
+          both technical confidence and a creative edge.
+        </p>
+        <p>
+          Our <strong>Diploma in Visual Effects</strong> prepares students for
+          careers as VFX artists, compositors, motion graphics designers, and 3D
+          specialists in films, advertising, gaming, and OTT platforms. With the
+          growing demand for high-quality visual effects in global
+          entertainment, completing the <strong>VFX Course</strong> at Cinema
+          Factory Academy opens the door to exciting and rewarding career
+          opportunities. Many VFX learners also pursue our{" "}
+          <a href="/virtual_production">Virtual Production Course</a> to explore
+          real-time workflows, <a href="/editing">Video Editing Course</a> to
+          sharpen storytelling, and{" "}
+          <a href="/photography">Photography Course</a> to strengthen their
+          creative eye.
+        </p>
 
         <Slider {...bannerSliderSettings}>
           {Array.isArray(banners) && banners.length > 0 ? (

@@ -99,20 +99,185 @@ const VirtualProduction = () => {
     <>
       <div className="font-kumbh overflow-hidden">
         <Helmet>
+          {/* Title & Description */}
           <title>
-            Virtual Production Courses | Virtual Production Institute
+            Virtual Production Course in Chennai | Cinema Factory Academy
           </title>
+
           <meta
             name="description"
-            content="Explore our Virtual Production courses. Master Unreal Engine, blend real and digital worlds, and gain hands-on experience with industry experts for a stellar career."
+            content="Master Virtual Production at Cinema Factory Academy with hands-on training in Unreal Engine, LED walls, in-camera VFX, and motion capture. Learn from industry experts."
+          />
+
+          {/* Robots (Enhanced for SEO Previews) */}
+          <meta
+            name="robots"
+            content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+          />
+
+          {/* Canonical URL */}
+          <link
+            rel="canonical"
+            href="https://cinemafactoryacademy.com/virtual_production"
+          />
+
+          {/* Viewport */}
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+          {/* Open Graph Tags */}
+          <meta
+            property="og:title"
+            content="Virtual Production Course in Chennai | Cinema Factory Academy"
           />
           <meta
-            name="keywords"
-            content="Virtual Production courses, Unreal Engine, VFX, film production courses, best virtual production institute"
+            property="og:description"
+            content="Cinema Factory Academy offers hands-on Virtual Production training in Unreal Engine, LED walls, in-camera VFX, and motion capture."
           />
-          <meta name="author" content="Cinema Factory Academy" />
-          <meta charSet="utf-8" />
+          <meta
+            property="og:image"
+            content="https://cinemafactoryacademy.com/static/media/VP_1.5413c33daec8ab52245f.png"
+          />
+          <meta
+            property="og:url"
+            content="https://cinemafactoryacademy.com/virtual_production"
+          />
+          <meta property="og:type" content="website" />
+
+          {/* Twitter Card Tags */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="Virtual Production Course in Chennai | Cinema Factory Academy"
+          />
+          <meta
+            name="twitter:description"
+            content="Join the Virtual Production Course at Cinema Factory Academy and master Unreal Engine, LED walls, in-camera VFX, and motion capture."
+          />
+          <meta
+            name="twitter:image"
+            content="https://cinemafactoryacademy.com/static/media/VP_1.5413c33daec8ab52245f.png"
+          />
+          <meta name="twitter:site" content="@CF_academy2024" />
+
+          {/* Schema Markup */}
+          <script type="application/ld+json">
+            {`
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Virtual Production Course",
+      "description": "Cinema Factory Academy offers a professional Virtual Production Course with hands-on training in LED walls, Unreal Engine, in-camera VFX, motion capture, and real-time filmmaking.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Cinema Factory Academy",
+        "url": "https://cinemafactoryacademy.com",
+        "sameAs": [
+          "https://www.facebook.com/cinemafactoryacademy",
+          "https://www.instagram.com/cinemafactoryacademy",
+          "https://twitter.com/CF_academy2024",
+          "https://www.youtube.com/@cinemafactoryacademy"
+        ]
+      },
+      "courseMode": "Offline",
+      "educationalLevel": "Beginner to Advanced",
+      "educationalCredentialAwarded": "Diploma in Virtual Production",
+      "url": "https://cinemafactoryacademy.com/virtual_production",
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "Offline",
+        "instructor": [
+          {
+            "@type": "Person",
+            "name": "Manoj Paramahamsa",
+            "jobTitle": "Cinematographer & Mentor"
+          },
+          {
+            "@type": "Person",
+            "name": "Aravind Naga",
+            "jobTitle": "Virtual Production Mentor"
+          },
+          {
+            "@type": "Person",
+            "name": "Shiv Sankar",
+            "jobTitle": "Virtual Production Mentor"
+          }
+        ]
+      }
+    }
+  `}
+          </script>
         </Helmet>
+
+        {/* Optimized Images with Unique Alt Tags */}
+        <img
+          src="https://cinemafactoryacademy.com/static/media/VP_1.5413c33daec8ab52245f.png"
+          alt="LED wall training in Virtual Production at Cinema Factory Academy"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Manoj_Paramahamsa.9e8d373ba49a575d3c7a.jpg"
+          alt="Mentor Manoj Paramahamsa guiding Virtual Production students"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Aravind.3fa132f903ab7b6145c4.jpg"
+          alt="Mentor Aravind Naga guiding Virtual Production students"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/shiv.20cb06d42babe5f2aa0c.png"
+          alt="Mentor Shiv Sankar guiding Virtual Production students"
+        />
+
+        {/* Content Section */}
+        <h1>Virtual Production Course in Chennai</h1>
+        <h2>Learn Real-Time Filmmaking with Professional Training</h2>
+
+        <p>
+          Cinema Factory Academy offers a professional{" "}
+          <strong>Virtual Production Course</strong> designed for aspiring
+          filmmakers who want to master the future of cinema. Virtual production
+          combines real-time rendering, LED walls, and in-camera VFX to create
+          immersive storytelling environments where imagination meets
+          technology. This course equips students with both the creative vision
+          and technical expertise required to excel in modern filmmaking.
+        </p>
+
+        <h3>Modules Covered</h3>
+        <p>
+          The curriculum covers key areas such as{" "}
+          <strong>
+            Unreal Engine, LED volume operation, in-camera VFX, motion capture,
+            green screen workflows, and real-time rendering
+          </strong>
+          . Students learn how to integrate live-action footage with
+          computer-generated environments, opening endless possibilities in
+          filmmaking, advertising, and digital content creation. Every module is
+          structured to provide a balance of theoretical knowledge and hands-on
+          application.
+        </p>
+
+        <h3>Hands-On Training</h3>
+        <p>
+          At Cinema Factory Academy, learning happens through{" "}
+          <strong>project-based training</strong>. Students gain real-world
+          exposure by working on live studio projects, motion capture shoots,
+          and LED wall simulations. Guided by industry professionals and
+          experienced mentors, learners acquire not only technical skills but
+          also the creative problem-solving mindset needed to work in high-end
+          production environments.
+        </p>
+
+        <h3>Career Opportunities</h3>
+        <p>
+          The <strong>Diploma in Virtual Production</strong> prepares graduates
+          for careers as virtual production specialists, Unreal Engine artists,
+          motion capture technicians, and VFX supervisors. With the
+          entertainment industry rapidly adopting virtual production for films,
+          OTT platforms, advertising, and gaming, this course provides students
+          with a strong foundation. This program works best when paired with our{" "}
+          <a href="/cinematography">Cinematography Course</a> for camera
+          mastery, <a href="/vfx">VFX Course</a> for effects integration, and{" "}
+          <a href="/editing">Video Editing Course</a> to complete the end-to-end
+          production pipeline.
+        </p>
 
         {/* ---------- Banner Slider ---------- */}
         <section>
@@ -202,7 +367,7 @@ const VirtualProduction = () => {
         )}
 
         {/* ---------- Filmography Slider ---------- */}
-        
+
         <section className="bg-black overflow-hidden flex justify-center items-center pt-8 md:pt-14 pb-6 md:pb-10">
           <div className="w-full mx-auto">
             <h3 className="font-bold uppercase text-[20px] md:text-[28px] text-white mb-8 md:mb-12 text-center">

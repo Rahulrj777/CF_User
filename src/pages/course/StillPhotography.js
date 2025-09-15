@@ -103,19 +103,98 @@ const StillPhotography = () => {
       <div className="font-kumbh overflow-hidden">
         <Helmet>
           <title>
-            Learn Photography Courses In India | Photography Institute India
+            Professional Photography Course in Chennai | Cinema Factory Academy
           </title>
           <meta
             name="description"
-            content="Elevate your photography skills with our 3-month course. Learn from industry experts, gain hands-on experience, and develop a professional portfolio. Enroll today!"
+            content="Join the Professional Photography Course in Chennai at Cinema Factory Academy. Learn photography with expert training in lighting, composition, editing, and camera techniques. Build a successful career in media, fashion, and creative industries."
+          />
+
+          <meta
+            name="robots"
+            content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+          />
+          <link
+            rel="canonical"
+            href="https://cinemafactoryacademy.com/photography"
+          />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+          <meta
+            property="og:title"
+            content="Professional Photography Course in Chennai | Cinema Factory Academy"
           />
           <meta
-            name="keywords"
-            content="Learn Photography Courses | Photography certification Courses | Professional Photography courses | Portrait Photographer training | Wedding Photographer training  | Fashion Photographer training | Commercial training  | Photographer training  | Photojournalist training  | Event Photographer training | Landscape Photographer training | Fine Art Photographer training | Best photography training | Photography Courses"
+            property="og:description"
+            content="Cinema Factory Academy offers a Professional Photography Course in Chennai with hands-on training in camera techniques, lighting, composition, and editing."
           />
-          <meta name="author" content="Cinema Factory Academy" />
-          <meta charSet="utf-8" />
+          <meta
+            property="og:image"
+            content="https://cinemafactoryacademy.com/static/media/still.9a1ac95f5e86ad30a2b7.png"
+          />
+          <meta
+            property="og:url"
+            content="https://cinemafactoryacademy.com/photography"
+          />
+          <meta property="og:type" content="website" />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="Professional Photography Course in Chennai | Cinema Factory Academy"
+          />
+          <meta
+            name="twitter:description"
+            content="Join the Professional Photography Course in Chennai at Cinema Factory Academy."
+          />
+          <meta
+            name="twitter:image"
+            content="https://cinemafactoryacademy.com/static/media/still.9a1ac95f5e86ad30a2b7.png"
+          />
+          <meta name="twitter:site" content="@CF_academy2024" />
+
+          <script type="application/ld+json">
+            {`
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Professional Photography Course in Chennai",
+      "description": "Cinema Factory Academy offers a Professional Photography Course in Chennai with expert training in camera operation, lighting, composition, and editing.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Cinema Factory Academy",
+        "url": "https://cinemafactoryacademy.com"
+      },
+      "courseMode": "Offline",
+      "educationalCredentialAwarded": "Professional Certification in Photography",
+      "url": "https://cinemafactoryacademy.com/photography"
+    }
+    `}
+          </script>
         </Helmet>
+
+        {/* Page Content */}
+        <img
+          src="https://cinemafactoryacademy.com/static/media/still.9a1ac95f5e86ad30a2b7.png"
+          alt="Professional Photography Course in Chennai - Camera and Lighting Training"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/pra.0fd4e2cd4b6d60d16d49.jpg"
+          alt="Prasanna Venkatesh - Mentor for Photography Course"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/CJ_rajkumar.cdc1c375858e4b304f0f.jpg"
+          alt="CJ Rajkumar - Mentor for Photography Course"
+        />
+
+        <h1>Professional Photography Course</h1>
+        <h2>Master the Art of Photography with Expert Training</h2>
+        <p>
+          At <strong>Cinema Factory Academy</strong>, our{" "}
+          <strong>Professional Photography Course</strong> is designed for
+          individuals who want to transform their passion for photography into a
+          career...
+        </p>
 
         {/* Banner Slider */}
         <section className="font-playfair relative w-full -top-8">

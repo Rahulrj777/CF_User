@@ -133,18 +133,223 @@ const Home = () => {
         </div>
 
         <Helmet>
-          <title>Filmmaking, Virtual Production And VFX Courses In India</title>
+          {/* Title & Description */}
+          <title>Cinema Factory Academy | Film Academy in Chennai, India</title>
           <meta
             name="description"
-            content="Join Cinema Factory Academy for top courses in direction, cinematography, editing, and VFX. Learn from experts, experience, and secure your Media career."
+            content="Cinema Factory Academy in Chennai offers professional courses in acting, direction, cinematography, editing, photography, VFX & virtual production. Learn from industry experts and build your career in films."
+          />
+
+          {/* Robots */}
+          <meta
+            name="robots"
+            content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+          />
+
+          {/* Canonical URL */}
+          <link rel="canonical" href="https://cinemafactoryacademy.com" />
+
+          {/* Viewport */}
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+          {/* Open Graph Tags */}
+          <meta
+            property="og:title"
+            content="Cinema Factory Academy | Film Academy in Chennai, India"
           />
           <meta
-            name="keywords"
-            content="VFX training courses | VFX Courses | VFX Careers | Virtual Production courses | Virtual production training Institute | Direction courses | Acting institute | Acting Courses | Direction Training Institute | Photography courses | Learn photography | Photography Training institute | Acting Training Institute | Cinematography courses | cinematography training institute | learn Editing Courses | Editing Training Institute | Visual effects courses | Visual effects training institute | Learn Visual effects | Best VFX institute | Learn VFX |  Visual effects institute"
+            property="og:description"
+            content="Join professional courses in Acting, Direction, Cinematography, VFX & Virtual Production at Cinema Factory Academy, Chennai."
           />
-          <meta name="author" content="Cinema Factory Academy" />
-          <meta charSet="utf-8" />
+          <meta
+            property="og:image"
+            content="https://cinemafactoryacademy.com/images/og-image.jpg"
+          />
+          <meta property="og:url" content="https://cinemafactoryacademy.com/" />
+          <meta property="og:type" content="website" />
+
+          {/* Twitter Card Tags */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="Cinema Factory Academy | Film Academy in Chennai, India"
+          />
+          <meta
+            name="twitter:description"
+            content="Professional film courses in Acting, Direction, Cinematography, VFX & Virtual Production."
+          />
+          <meta
+            name="twitter:image"
+            content="https://cinemafactoryacademy.com/images/og-image.jpg"
+          />
+
+          {/* Schema Markup (JSON-LD) */}
+          <script type="application/ld+json">
+            {`
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Cinema Factory Academy",
+      "url": "https://cinemafactoryacademy.com",
+      "logo": "https://cinemafactoryacademy.com/images/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Your Street Address",
+        "addressLocality": "Chennai",
+        "addressRegion": "Tamil Nadu",
+        "postalCode": "6000xx",
+        "addressCountry": "India"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61559751436051",
+        "https://www.instagram.com/cinema_factory_academy/",
+        "https://www.linkedin.com/in/cinema-factory-academy/",
+        "https://www.youtube.com/channel/@CinemafactoryFilmAcademy"
+      ],
+      "offers": [
+        {
+          "@type": "Course",
+          "name": "Acting Course",
+          "description": "Professional acting classes for aspiring film and theatre actors in Chennai."
+        },
+        {
+          "@type": "Course",
+          "name": "Direction Course",
+          "description": "Learn film direction and storytelling techniques from industry experts."
+        },
+        {
+          "@type": "Course",
+          "name": "Cinematography Course",
+          "description": "Master camera techniques and visual storytelling."
+        },
+        {
+          "@type": "Course",
+          "name": "VFX & Virtual Production Course",
+          "description": "Training in modern filmmaking technology including VFX and LED virtual production."
+        }
+      ]
+    }
+  `}
+          </script>
         </Helmet>
+
+        {/* Example Image Alt Text Fix */}
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Manoj_Paramahamsa.jpg"
+          alt="Cinematographer Manoj Paramahamsa – Mentor at Cinema Factory Academy, Chennai"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Madhu_ambat.jpg"
+          alt="Cinematographer Madhu Ambat – Guest Faculty at Cinema Factory Academy, chennai"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/nassar.png"
+          alt="Actor Nassar – Mentor at Cinema Factory Academy, chennai"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Aranthai_maniyan.f9f6ca6842acfb8085fb.jpg"
+          alt="Director Aranthai_maniyan - Principal at Cinema Factory Academy, chennai "
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/ps_vinoth_raj.c15e3773c86cb48f2f0d.png"
+          alt="Director ps_vinoth_raj - Mentor at Cinema Factory Academy, Chennai"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/a_rajdeep.c19ba09de7d6ac250e4d.jpg"
+          alt="a_rajdeep - Mentor at Cinema Factory Academy, chennai"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/CJ_rajkumar.cdc1c375858e4b304f0f.jpg"
+          alt="Cinematographer CJ_rajkumar- HOD & Mentor at Cinema Factory Academy, Chennai"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Rameshkumar.88baec53cc3b09128c45.jpg"
+          alt="Cinematographer Rameshkumar - Mentor at Cinema Factory Academy, Chennai"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/pra.0fd4e2cd4b6d60d16d49.jpg"
+          alt="Photographer preassana venkatesh - Mentor at Cinema Factory Academy, Chennai"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Raja_mohhamed.741c4466e226abd4a33d.jpg"
+          alt="Editor Raja_mohhamed - HOD & Mentor at Cinema Factory Academy, Chennai"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Aravind.3fa132f903ab7b6145c4.jpg"
+          alt="VFX Supervisor Aravind - HOD & Mentor at Cinema Factory Academy, Chennai"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/shiv.20cb06d42babe5f2aa0c.png"
+          alt=" VFX & Unreal Engine artist shiv - Mentor at Cinema Factory Academy, Chennai"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/muniraj.3fabc87312c52f08bcb7.jpg"
+          alt="creative technologist muniraj - Mentor at Cinema Factory Academy, Chennai"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/chandra.fd6b84e4d171b0760423.jpg"
+          alt="chandra Mohan - Mentor at Cinema Factory Academy, Chennai"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/Antony_bebin.db3223c46e26b0939c60.jpg"
+          alt="Color Specialist Antony Bebin - Mentor at Cinema Factory Academy, Chennai"
+        />
+        <img
+          src="https://cinemafactoryacademy.com/static/media/daimond_babu.046828b1f9dff223b205.jpg"
+          alt="daimond_babu - Media Director at Cinema Factory Academy, Chennai"
+        />
+
+        <h1>Cinema Factory Academy – Leading Film Academy in Chennai, India</h1>
+        <h2>Welcome to Cinema Factory Academy</h2>
+        <p>
+          Dreaming of a career in the film industry?{" "}
+          <strong>Cinema Factory Academy</strong> in Chennai is one of the top
+          film schools in India, dedicated to guiding aspiring artists and
+          technicians. Whether your passion lies in <a href="/acting">acting</a>
+          , <a href="/direction">film direction</a>,{" "}
+          <a href="/cinematography">cinematography</a>,{" "}
+          <a href="/editing">video editing</a>,{" "}
+          <a href="/photography">photography</a>,{" "}
+          <a href="/vfx">visual effects (VFX)</a>,{" "}
+          <a href="/virtual_production">virtual production</a>, or{" "}
+          <a href="/di">color grading</a>, we provide hands-on training to help
+          you succeed in today’s film and media industry.
+        </p>
+        <h2>Our Film Courses</h2>
+        <p>
+          At Cinema Factory Academy, we offer{" "}
+          <strong>diploma and certification programs</strong> tailored to
+          industry requirements. - Explore our{" "}
+          <a href="/acting">Acting Course</a> to develop on-screen performance
+          skills. - Learn storytelling and production techniques in the{" "}
+          <a href="/direction">Film Direction Course</a>. - Gain expertise in
+          cameras, lighting, and visual language through our{" "}
+          <a href="/cinematography">Cinematography Course</a>. - Specialize in
+          post-production with our <a href="/editing">Video Editing Course</a>{" "}
+          and <a href="/di">Color Grading Course</a>. - Stay ahead in technology
+          with <a href="/vfx">VFX Training</a> and our{" "}
+          <a href="/virtual_production">Virtual Production Course</a>, designed
+          for next-generation filmmakers.
+        </p>
+        <h2>Why Choose Cinema Factory Academy</h2>
+        <p>
+          Unlike traditional institutes, our training is designed to be{" "}
+          <strong>practical and industry-oriented</strong>. Students gain
+          real-world experience through studio workshops, live projects, and
+          film set exposure. With mentorship from{" "}
+          <strong>
+            award-winning filmmakers, cinematographers, and actors
+          </strong>
+          , you will master both the creative and technical aspects of
+          filmmaking.
+        </p>
+        <h2>Start Your Film Journey Today</h2>
+        <p>
+          If you aspire to work in films, television, advertising, or digital
+          media, <strong>Cinema Factory Academy in Chennai</strong> is the right
+          place to begin. Build your skills, connect with industry
+          professionals, and launch your career in the world of entertainment.
+        </p>
 
         <div className="">
           <img
