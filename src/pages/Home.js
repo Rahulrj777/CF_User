@@ -308,20 +308,21 @@ const Home = () => {
                 </h2>
               </div>
               <p className="text-center text-[11px] md:text-[16px] text-gray-100 mt-2 md:mt-4 font-[roboto] w-full md:w-[60%] mx-auto">
-                Dreaming of a career in the film industry?{" "}
-                <strong>Cinema Factory Academy</strong> in Chennai is one of the
-                top film schools in India, dedicated to guiding aspiring artists
-                and technicians. Whether your passion lies in{" "}
-                <a href="/acting">acting</a>,{" "}
-                <a href="/direction">film direction</a>,{" "}
-                <a href="/cinematography">cinematography</a>,{" "}
-                <a href="/editing">video editing</a>,{" "}
-                <a href="/photography">photography</a>,{" "}
-                <a href="/vfx">visual effects (VFX)</a>,{" "}
-                <a href="/virtual_production">virtual production</a>, or{" "}
-                <a href="/di">color grading</a>, we provide hands-on training to
-                help you succeed in today’s film and media industry. Click below
-                for more info.
+                At Cinema Factory Academy, we offer{" "}
+                <strong>diploma and certification programs</strong> tailored to
+                industry requirements. - Explore our{" "}
+                <a href="/acting">Acting Course</a> to develop on-screen
+                performance skills. - Learn storytelling and production
+                techniques in the <a href="/direction">Film Direction Course</a>
+                . - Gain expertise in cameras, lighting, and visual language
+                through our <a href="/cinematography">Cinematography Course</a>.
+                - Specialize in post-production with our{" "}
+                <a href="/editing">Video Editing Course</a> and{" "}
+                <a href="/di">Color Grading Course</a>. - Stay ahead in
+                technology with <a href="/vfx">VFX Training</a> and our{" "}
+                <a href="/virtual_production">Virtual Production Course</a>,
+                designed for next-generation filmmakers. . Click below for more
+                info.
               </p>
             </div>
 
