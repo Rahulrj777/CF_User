@@ -156,7 +156,7 @@ const StudentWorks = () => {
                 <div className="w-full h-full flex flex-col md:max-w-7xl md:max-h-[90vh] md:rounded-xl md:overflow-hidden md:shadow-2xl bg-gray-900">
                   {/* Mobile header */}
                   <div className="flex items-center justify-between p-4 bg-gray-800 border-b border-gray-700 md:hidden">
-                    <h3 className="text-sm text-white flex-1 mr-4 line-clamp-2 leading-tight">
+                    <h3 className="text-sm text-white flex-1 mr-4 line-clamp-2 leading-tight text-justify">
                       {selectedVideo.title || "Unknown Video"}
                     </h3>
                     <div className="flex gap-2 flex-shrink-0">
@@ -234,7 +234,7 @@ const StudentWorks = () => {
           `}
                     >
                       <div className="p-6 overflow-y-auto">
-                        <h3 className="text-sm text-white mb-6 leading-tight">
+                        <h3 className="text-sm text-white mb-6 leading-tight text-justify">
                           {selectedVideo.title || "Unknown Video"}
                         </h3>
                       </div>
@@ -253,7 +253,7 @@ const StudentWorks = () => {
                     </div>
 
                     <div className="px-4 pb-6">
-                      <h3 className="text-sm text-white mb-4">
+                      <h3 className="text-sm text-white mb-4 text-justify">
                         {selectedVideo.title || "Unknown Video"}
                       </h3>
                     </div>
