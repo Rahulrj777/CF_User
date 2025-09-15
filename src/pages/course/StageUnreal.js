@@ -208,64 +208,6 @@ const StageUnreal = () => {
           </script>
         </Helmet>
 
-        {/* Course Images */}
-        <img
-          src="https://cinemafactoryacademy.com/static/media/Manoj_Paramahamsa.9e8d373ba49a575d3c7a.jpg"
-          alt="Manoj Paramahamsa teaching Virtual Production with Unreal Engine at Cinema Factory Academy"
-        />
-        <img
-          src="https://cinemafactoryacademy.com/static/media/Aravind.3fa132f903ab7b6145c4.jpg"
-          alt="Aravind naga - mentor for Unreal Engine Virtual Production Course"
-        />
-        <img
-          src="https://cinemafactoryacademy.com/static/media/shiv.20cb06d42babe5f2aa0c.png"
-          alt="Shiv - mentor for Virtual Production Course at Cinema Factory Academy"
-        />
-
-        {/* Page Content */}
-        <h1>Virtual Production Course with Unreal Engine</h1>
-        <h2>Master Real-Time Filmmaking with Unreal Engine</h2>
-        <p>
-          Cinema Factory Academy offers a professional{" "}
-          <strong>Virtual Production Course with Unreal Engine</strong> designed
-          for aspiring filmmakers and visual storytellers who want to explore
-          the future of cinema. Virtual production is transforming the film
-          industry by combining advanced software with LED walls, in-camera VFX,
-          and motion capture to create immersive environments in real-time. This
-          course provides the perfect platform to develop both creative and
-          technical expertise in this cutting-edge field.
-        </p>
-        <p>
-          Our curriculum covers every essential aspect of{" "}
-          <strong>Unreal Engine-based virtual production</strong>, including
-          real-time rendering, LED stage workflows, digital set design, camera
-          tracking, and VFX integration. Students gain hands-on training with
-          industry-standard tools, learning how to design and execute cinematic
-          shots that bring imagination to life on screen. From pre-visualization
-          to final output, the program prepares learners for real-world
-          production challenges.
-        </p>
-        <p>
-          At Cinema Factory Academy, we believe in learning through practice.
-          Students work on live projects, collaborate in studio workshops, and
-          gain direct mentorship from industry professionals. This practical
-          approach ensures that graduates are equipped with both technical
-          skills and artistic vision, ready to succeed in the fast-growing world
-          of virtual production.
-        </p>
-        <p>
-          The <strong>Diploma in Virtual Production with Unreal Engine</strong>{" "}
-          opens doors to careers in film, television, advertising, gaming, and
-          OTT content creation. If you are passionate about filmmaking and eager
-          to master the latest production technologies, enrolling in this course
-          is your first step toward a successful and future-ready career. This
-          program works best when paired with our{" "}
-          <a href="/cinematography">Cinematography Course</a> for camera
-          mastery, <a href="/vfx">VFX Course</a> for effects integration, and{" "}
-          <a href="/editing">Video Editing Course</a> to complete the end-to-end
-          production pipeline.
-        </p>
-
         <section>
           <div className="font-playfair relative w-full">
             <div className="slider-container">

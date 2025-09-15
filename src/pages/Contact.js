@@ -104,11 +104,6 @@ const Contact = () => {
           </script>
         </Helmet>
 
-        <img
-          src="https://cinemafactoryacademy.com/static/media/contact.c3dc5bdfd1c9b62b4727.png"
-          alt="Contact page illustration of Cinema Factory Academy Chennai"
-        />
-
         {/* contact form */}
 
         <section>

@@ -173,29 +173,6 @@ const StillPhotography = () => {
           </script>
         </Helmet>
 
-        {/* Page Content */}
-        <img
-          src="https://cinemafactoryacademy.com/static/media/still.9a1ac95f5e86ad30a2b7.png"
-          alt="Professional Photography Course in Chennai - Camera and Lighting Training"
-        />
-        <img
-          src="https://cinemafactoryacademy.com/static/media/pra.0fd4e2cd4b6d60d16d49.jpg"
-          alt="Prasanna Venkatesh - Mentor for Photography Course"
-        />
-        <img
-          src="https://cinemafactoryacademy.com/static/media/CJ_rajkumar.cdc1c375858e4b304f0f.jpg"
-          alt="CJ Rajkumar - Mentor for Photography Course"
-        />
-
-        <h1>Professional Photography Course</h1>
-        <h2>Master the Art of Photography with Expert Training</h2>
-        <p>
-          At <strong>Cinema Factory Academy</strong>, our{" "}
-          <strong>Professional Photography Course</strong> is designed for
-          individuals who want to transform their passion for photography into a
-          career...
-        </p>
-
         {/* Banner Slider */}
         <section className="font-playfair relative w-full -top-8">
           <div className="slider-container">
