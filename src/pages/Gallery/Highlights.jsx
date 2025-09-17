@@ -3,7 +3,7 @@ import axios from "axios";
 import API_BASE from "../../config.js";
 import { X, ArrowLeft, ArrowRight, ArrowUp, ArrowDown } from "lucide-react";
 
-const Highlight = () => {
+const Highlights = () => {
   const category = "highlight";
 
   const [videos, setVideos] = useState([]);
@@ -156,7 +156,7 @@ const Highlight = () => {
                 <div className="w-full h-full flex flex-col md:max-w-7xl md:max-h-[90vh] md:rounded-xl md:overflow-hidden md:shadow-2xl bg-gray-900">
                   {/* Mobile header */}
                   <div className="flex items-center justify-between p-4 bg-gray-800 border-b border-gray-700 md:hidden">
-                    <h3 className="text-sm text-white flex-1 mr-4 line-clamp-2 leading-tight text-justify">
+                    <h3 className="text-sm text-justify text-white flex-1 mr-4 line-clamp-2 leading-tight">
                       {selectedVideo.title || "Unknown Video"}
                     </h3>
                     <div className="flex gap-2 flex-shrink-0">
@@ -234,7 +234,7 @@ const Highlight = () => {
           `}
                     >
                       <div className="p-6 overflow-y-auto">
-                        <h3 className="text-sm text-white mb-6 leading-tight text-justify">
+                        <h3 className="text-sm text-justify text-white mb-6 leading-tight">
                           {selectedVideo.title || "Unknown Video"}
                         </h3>
                       </div>
@@ -250,7 +250,6 @@ const Highlight = () => {
                     <div className="flex items-center justify-center py-3 relative">
                       {/* Drag handle */}
                       <div className="w-12 h-1.5 rounded-full bg-gray-600"></div>
-
                     </div>
 
                     <div className="px-4 pb-6">
@@ -269,4 +268,4 @@ const Highlight = () => {
   );
 };
 
-export default Highlight;
+export default Highlights;
