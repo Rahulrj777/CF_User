@@ -47,91 +47,90 @@ const VideoGallery = () => {
   if (loading) return <p className="text-center mt-8">Loading videos...</p>;
   if (error) return <p className="text-center mt-8 text-red-500">{error}</p>;
 
+  // ✅ If no videos, render nothing at all
+  if (videos.length === 0) return null;
+
   return (
-    <div className="min-h-screen bg-black text-white p-8">
-      {videos.length > 0 && (
-        <>
-          <h1 className="font-bold text-[24px] md:text-[40px] text-center mb-12">
-            🎬 Video Gallery
-          </h1>
+    <div className="bg-black text-white p-8">
+      <h1 className="font-bold text-[24px] md:text-[40px] text-center mb-12">
+        🎬 Video Gallery
+      </h1>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
-            {videos.map((video) => {
-              const isExpanded = expandedDescriptions[video._id];
-              const descriptionPreview =
-                video.description.length > 35
-                  ? video.description.slice(0, 35) + "..."
-                  : video.description;
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
+        {videos.map((video) => {
+          const isExpanded = expandedDescriptions[video._id];
+          const descriptionPreview =
+            video.description.length > 35
+              ? video.description.slice(0, 35) + "..."
+              : video.description;
 
-              return (
+          return (
+            <div
+              key={video._id}
+              className={`rounded-xl overflow-hidden cursor-pointer shadow-lg transition-all duration-300 ${
+                hoveredId === video._id
+                  ? "scale-110 z-10"
+                  : hoveredId
+                  ? "scale-90 opacity-80"
+                  : "scale-100"
+              }`}
+              onMouseEnter={() => setHoveredId(video._id)}
+              onMouseLeave={() => setHoveredId(null)}
+            >
+              <div
+                onClick={() =>
+                  navigate(categoryRoutes[video.category] || "/videos")
+                }
+                className="relative group"
+              >
+                {/* Animated overlay */}
                 <div
-                  key={video._id}
-                  className={`rounded-xl overflow-hidden cursor-pointer shadow-lg transition-all duration-300 ${
-                    hoveredId === video._id
-                      ? "scale-110 z-10"
-                      : hoveredId
-                      ? "scale-90 opacity-80"
-                      : "scale-100"
-                  }`}
-                  onMouseEnter={() => setHoveredId(video._id)}
-                  onMouseLeave={() => setHoveredId(null)}
+                  className="
+                  absolute bottom-3 left-0 w-full 
+                  bg-black/50 text-center py-2
+                  lg:translate-y-4 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100
+                  transition-all duration-1000
+                "
                 >
-                  <div
-                    onClick={() =>
-                      navigate(categoryRoutes[video.category] || "/videos")
-                    }
-                    className="relative group"
-                  >
-                    {/* Animated overlay */}
-                    <div
-                      className="
-                      absolute bottom-3 left-0 w-full 
-                      bg-black/50 text-center py-2
-                      lg:translate-y-4 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100
-                      transition-all duration-1000
-                    "
-                    >
-                      <span className="text-white font-semibold text-lg tracking-wide">
-                        {video.title || video.category}
-                      </span>
-                    </div>
-
-                    <video
-                      src={video.videoUrl}
-                      className="w-full h-64 md:h-80 object-cover"
-                      muted
-                      autoPlay
-                      loop
-                      playsInline
-                    />
-                  </div>
-
-                  <div className="bg-white text-black p-4 rounded-b-xl">
-                    <p
-                      className={`text-sm transition-all duration-300 overflow-hidden ${
-                        isExpanded ? "max-h-96" : "max-h-16"
-                      }`}
-                    >
-                      {isExpanded ? video.description : descriptionPreview}
-                      {video.description.length > 35 && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toggleDescription(video._id);
-                          }}
-                          className="ml-2 text-blue-600 underline inline"
-                        >
-                          {isExpanded ? "less" : "more"}
-                        </button>
-                      )}
-                    </p>
-                  </div>
+                  <span className="text-white font-semibold text-lg tracking-wide">
+                    {video.title || video.category}
+                  </span>
                 </div>
-              );
-            })}
-          </div>
-        </>
-      )}
+
+                <video
+                  src={video.videoUrl}
+                  className="w-full h-64 md:h-80 object-cover"
+                  muted
+                  autoPlay
+                  loop
+                  playsInline
+                />
+              </div>
+
+              <div className="bg-white text-black p-4 rounded-b-xl">
+                <p
+                  className={`text-sm transition-all duration-300 overflow-hidden ${
+                    isExpanded ? "max-h-96" : "max-h-16"
+                  }`}
+                >
+                  {isExpanded ? video.description : descriptionPreview}
+                  {video.description.length > 35 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleDescription(video._id);
+                      }}
+                      className="ml-2 text-blue-600 underline inline"
+                    >
+                      {isExpanded ? "less" : "more"}
+                    </button>
+                  )}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
