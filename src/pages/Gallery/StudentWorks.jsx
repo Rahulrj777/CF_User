@@ -74,7 +74,7 @@ const StudentWorks = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="font-bold text-2xl md:text-4xl mb-2">
-            🎬 Guest Lecture Video Gallery
+            🎬 Student Work Video Gallery
           </h1>
           <p className="text-gray-400">Watch and enjoy our video collection</p>
         </div>
