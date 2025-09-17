@@ -4,7 +4,7 @@ import API_BASE from "../../config.js";
 import { X, ArrowLeft, ArrowRight, ArrowUp, ArrowDown } from "lucide-react";
 
 const Highlights = () => {
-  const category = "highlight";
+  const category = "highlights";
 
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
