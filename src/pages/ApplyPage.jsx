@@ -29,8 +29,31 @@ const ApplyPage = () => {
     const params = new URLSearchParams(window.location.search);
     const payment = params.get("payment"); // success or failed
     if (payment) {
-      setPaymentStatus(payment); // update state
-      setCurrentStep(3); // go to last step
+      setPaymentStatus(payment);
+      setCurrentStep(3);
+
+      if (payment === "success") {
+        // reset form on success
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          fatherName: "",
+          fatherPhone: "",
+          age: "",
+          gender: "",
+          dob: "",
+          address: "",
+          city: "",
+          state: "",
+          country: "",
+          courses: [],
+        });
+      }
+
+      // 🔑 remove query param so it won’t show again on refresh
+      params.delete("payment");
+      window.history.replaceState({}, "", `${window.location.pathname}`);
     }
   }, []);
 
