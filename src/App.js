@@ -21,7 +21,7 @@ import UserDetail from "./components/mentors/UserDetails";
 import PaymentPage from "./pages/PaymentPage";
 import StageUnreal from "./pages/course/StageUnreal";
 import CFA from "./pages/course/CFA";
-import MultiStepForm from "./pages/form/MultiStepForm";
+import ApplyPage from "./pages/ApplyPage";
 import DI from "./pages/course/DI";
 import Workshop from "./pages/Workshop";
 import Terms from "./pages/Terms";
@@ -57,7 +57,7 @@ const App = () => {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/admission" element={<Admission />} />
-              <Route path="/apply" element={<MultiStepForm />} />
+              <Route path="/apply" element={<ApplyPage />} />
               <Route path="/workshops" element={<Workshop />} />
               <Route path="/cinema_factory_blog" element={<BlogMain />} />
               <Route path="/terms&conditions" element={<Terms />} />
