@@ -26,12 +26,12 @@ const ApplyPage = () => {
   });
 
   useEffect(() => {
-    // Read payment status from URL on page load
     const params = new URLSearchParams(window.location.search);
-    const payment = params.get("payment"); // success or failed
+    const payment = params.get("payment");
     if (payment) {
-      setPaymentStatus(payment); // update state
-      setCurrentStep(3); // go to CourseDetails step
+      setPaymentStatus(payment); // success / failed
+      setCurrentStep(3); // move to Course/Payment step
+      window.history.replaceState({}, document.title, "/apply"); // remove query
     }
   }, []);
 
