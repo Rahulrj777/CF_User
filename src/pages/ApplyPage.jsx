@@ -25,14 +25,13 @@ const ApplyPage = () => {
     courses: [],
   });
 
-  // Read payment status from URL after returning from PayPhi
-  // In MultiStepForm component
   useEffect(() => {
+    // Read payment status from URL on page load
     const params = new URLSearchParams(window.location.search);
-    const payment = params.get("payment");
+    const payment = params.get("payment"); // success or failed
     if (payment) {
-      setPaymentStatus(payment);
-      setCurrentStep(3); // index of CourseDetails
+      setPaymentStatus(payment); // update state
+      setCurrentStep(3); // go to CourseDetails step
     }
   }, []);
 
@@ -260,12 +259,12 @@ const ApplyPage = () => {
         </button>
       </div>
       {paymentStatus === "success" && (
-        <p className="text-green-600 mt-2">
+        <p className="text-green-600">
           Payment Successful! You can now submit.
         </p>
       )}
       {paymentStatus === "failed" && (
-        <p className="text-red-600 mt-2">Payment Failed. Please try again.</p>
+        <p className="text-red-600">Payment Failed. Please try again.</p>
       )}
 
       {/* Submit */}
