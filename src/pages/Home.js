@@ -45,7 +45,6 @@ const Home = () => {
     axios
       .get(`${API_BASE}/homebanner`)
       .then((res) => {
-        console.log("Banners API response:", res.data);
         // if backend sends { banners: [] } use that
         if (Array.isArray(res.data)) {
           setBanners(res.data);
