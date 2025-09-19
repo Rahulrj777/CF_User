@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const CourseDetails = ({ formData, setFormData }) => {
   const [paymentStatus, setPaymentStatus] = useState(null); // null, 'success', 'failed'
@@ -10,22 +10,22 @@ const CourseDetails = ({ formData, setFormData }) => {
   };
 
   const courses = [
-    'Direction & Screenplay',
-    'Cinematography',
-    'Editing',
-    'Visual Effects',
-    'Virtual Production',
-    'Acting',
-    'Photography'
+    "Direction & Screenplay",
+    "Cinematography",
+    "Editing",
+    "Visual Effects",
+    "Virtual Production",
+    "Acting",
+    "Photography",
   ];
 
   // After PayPhi redirect back, check URL params for success
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    if (params.get('payment') === 'success') {
-      setPaymentStatus('success');
-    } else if (params.get('payment') === 'failed') {
-      setPaymentStatus('failed');
+    if (params.get("payment") === "success") {
+      setPaymentStatus("success");
+    } else if (params.get("payment") === "failed") {
+      setPaymentStatus("failed");
     }
   }, []);
 
@@ -33,12 +33,15 @@ const CourseDetails = ({ formData, setFormData }) => {
     try {
       setLoading(true);
       // call your backend to initiate PayPhi sale
-      const res = await axios.post('/api/payphi/initiate', { amount }); 
+      const res = await axios.post(
+        "https://cf-server-tr24.onrender.com/api/payphi/initiate",
+        { amount }
+      );
       // backend returns redirectURL+tranCtx
       window.location.href = `${res.data.redirectURI}?tranCtx=${res.data.tranCtx}`;
     } catch (err) {
       console.error(err);
-      alert('Payment init failed');
+      alert("Payment init failed");
     } finally {
       setLoading(false);
     }
@@ -81,17 +84,23 @@ const CourseDetails = ({ formData, setFormData }) => {
         </button>
       </div>
 
-      {paymentStatus === 'success' && (
-        <p className="text-green-600">Payment Successful! You can now submit.</p>
+      {paymentStatus === "success" && (
+        <p className="text-green-600">
+          Payment Successful! You can now submit.
+        </p>
       )}
-      {paymentStatus === 'failed' && (
+      {paymentStatus === "failed" && (
         <p className="text-red-600">Payment Failed. Please try again.</p>
       )}
 
       <button
         type="submit"
-        disabled={paymentStatus !== 'success'}
-        className={`mt-4 px-4 py-2 rounded ${paymentStatus === 'success' ? 'bg-indigo-600 text-white' : 'bg-gray-400 text-gray-700 cursor-not-allowed'}`}
+        disabled={paymentStatus !== "success"}
+        className={`mt-4 px-4 py-2 rounded ${
+          paymentStatus === "success"
+            ? "bg-indigo-600 text-white"
+            : "bg-gray-400 text-gray-700 cursor-not-allowed"
+        }`}
       >
         Submit Form
       </button>
