@@ -24,11 +24,13 @@ const ApplyPage = () => {
   });
 
   // Read payment status from URL after returning from PayPhi
+  // In MultiStepForm component
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const payment = params.get("payment");
-    if (payment === "success" || payment === "failed") {
+    if (payment) {
       setPaymentStatus(payment);
+      setCurrentStep(3); // index of CourseDetails
     }
   }, []);
 
