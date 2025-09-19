@@ -54,7 +54,7 @@ const ApplyPage = () => {
       // 🔑 remove query param so it won’t show again on refresh
       params.delete("payment");
       window.history.replaceState({}, "", `${window.location.pathname}`);
-    }
+    } 
   }, []);
 
   const handleCheckboxChange = (course) => {
