@@ -44,7 +44,7 @@ const ApplyPage = () => {
         { amount }
       );
       // Redirect to PayPhi; after payment, your server should redirect to /apply?payment=success
-      window.location.href = `${data.redirectURI}?tranCtx=${data.tranCtx}`;
+      window.location.href = `${data.redirectURI}?tranCtx=${data.tranCtx}&returnUrl=/apply`;
     } catch (err) {
       console.error(err);
       alert("Payment init failed");
@@ -213,7 +213,9 @@ const ApplyPage = () => {
           type="text"
           placeholder="Country*"
           value={formData.country}
-          onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, country: e.target.value })
+          }
           className="border p-2 rounded w-full"
         />
       </div>
@@ -259,9 +261,7 @@ const ApplyPage = () => {
         </p>
       )}
       {paymentStatus === "failed" && (
-        <p className="text-red-600 mt-2">
-          Payment Failed. Please try again.
-        </p>
+        <p className="text-red-600 mt-2">Payment Failed. Please try again.</p>
       )}
 
       {/* Submit */}
