@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Stepper from "./Stepper";
 import PersonalDetails from "./PersonalDetails";
 import AdditionalDetails from "./AdditionalDetails";
@@ -10,6 +10,9 @@ import AddressDetails from "./AddressDetails";
 import CourseDetails from "./CourseDetails";
 
 const MultiStepForm = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [currentStep, setCurrentStep] = useState(0);
   const [paymentStatus, setPaymentStatus] = useState(null);
 
@@ -29,12 +32,20 @@ const MultiStepForm = () => {
     zip: "",
     courses: [],
   });
-  const navigate = useNavigate(); // Hook for navigation
+
+  // Set step & payment status from URL params (after PayPhi redirect)
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const step = parseInt(params.get("step"));
+    const payment = params.get("payment");
+
+    if (!isNaN(step)) setCurrentStep(step);
+    if (payment === "success") setPaymentStatus("success");
+    else if (payment === "failed") setPaymentStatus("failed");
+  }, [location.search]);
 
   const handleNext = () => {
-    if (validateFields()) {
-      setCurrentStep((prev) => prev + 1);
-    }
+    if (validateFields()) setCurrentStep((prev) => prev + 1);
   };
 
   const handlePrev = () => setCurrentStep((prev) => prev - 1);
@@ -44,35 +55,21 @@ const MultiStepForm = () => {
       const url =
         "https://script.google.com/macros/s/AKfycbyvkT7blpr9eG_vnrMkr7OYOzHxoeStAp7ds5cZoYL2ASZLMCzaYVzOm4qqy7JpcpKJ/exec";
 
-      // Filter out empty fields from formData
       const filteredFormData = Object.fromEntries(
         Object.entries(formData).filter(([key, value]) => {
-          // Handle empty arrays (for courses)
-          if (Array.isArray(value)) {
-            return value.length > 0;
-          }
-          return value !== ""; // Keep fields that are not empty
+          if (Array.isArray(value)) return value.length > 0;
+          return value !== "";
         })
       );
 
       fetch(url, {
         method: "POST",
         mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(filteredFormData), // Send filtered data
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(filteredFormData),
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(
-              "Network response was not ok " + response.statusText
-            );
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log("Success:", data);
+        .then(() => {
+          toast.success("Form submitted successfully!");
           setFormData({
             name: "",
             email: "",
@@ -89,11 +86,11 @@ const MultiStepForm = () => {
             zip: "",
             courses: [],
           });
-          navigate("/payment");
+          navigate("/apply"); // back to first page if needed
         })
-        .catch((error) => {
-          console.error("Error:", error);
-          navigate("/payment");
+        .catch((err) => {
+          console.error(err);
+          toast.error("Submission failed, please try again.");
         });
     }
   };
@@ -125,29 +122,12 @@ const MultiStepForm = () => {
       <div className="flex justify-center items-center pt-10 md:pt-20 pb-10 md:pb-20">
         <Helmet>
           <title>Apply Now</title>
-          <meta
-            name="description"
-            content="Enhance your skills in direction, cinematography, editing, and VFX with our expert-led workshops. Hands-on training for aspiring professionals. Join now!"
-          />
-          <meta
-            name="keywords"
-            content="Filmmaking, Virtual Production, VFX Courses, Direction, Cinematography, Editing, Media Career, Cinema Factory Academy"
-          />
-          <meta name="author" content="Cinema Factory Academy" />
-          <meta charSet="utf-8" />
-          {/* Add other meta tags here if needed */}
         </Helmet>
 
         <div className="w-full px-4 md:w-[60%] mx-auto">
-          <div className="flex justify-center items-center w-full">
-            <div className="w-full mx-auto">
-              <Stepper currentStep={currentStep} />
-            </div>
-          </div>
+          <Stepper currentStep={currentStep} />
 
-          <div>
-            <div className="mt-2 md:mt-8">{steps[currentStep]}</div>
-          </div>
+          <div className="mt-2 md:mt-8">{steps[currentStep]}</div>
 
           <div className="mt-3 md:mt-8 flex justify-between font-[poppins]">
             {currentStep > 0 && (
@@ -158,10 +138,11 @@ const MultiStepForm = () => {
                 Previous
               </button>
             )}
+
             {currentStep === steps.length - 1 ? (
               <button
                 onClick={handleSubmit}
-                disabled={paymentStatus !== "success"} // 🚀 only enable after success
+                disabled={paymentStatus !== "success"}
                 className={`px-8 py-2 text-[12px] md:text-[14px] font-semibold uppercase rounded ${
                   paymentStatus === "success"
                     ? "bg-green-500 text-white"

@@ -1,13 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
-const CourseDetails = ({
-  formData,
-  setFormData,
-  paymentStatus,
-  setPaymentStatus,
-}) => {
+const CourseDetails = ({ formData, setFormData, paymentStatus, setPaymentStatus }) => {
   const [loading, setLoading] = useState(false);
+
   const handleCheckboxChange = (course) => {
     setFormData({ ...formData, courses: [course] });
   };
@@ -22,42 +18,6 @@ const CourseDetails = ({
     "Photography",
   ];
 
-  // After PayPhi redirect back, check URL params for success/fail
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("payment") === "success") {
-      if (window.opener) {
-        window.opener.postMessage(
-          { type: "PAYMENT_STATUS", status: "success" },
-          "*"
-        );
-        window.close();
-      } else {
-        setPaymentStatus("success");
-      }
-    } else if (params.get("payment") === "failed") {
-      if (window.opener) {
-        window.opener.postMessage(
-          { type: "PAYMENT_STATUS", status: "failed" },
-          "*"
-        );
-        window.close();
-      } else {
-        setPaymentStatus("failed");
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    function handleMessage(event) {
-      if (event.data.type === "PAYMENT_STATUS") {
-        setPaymentStatus(event.data.status);
-      }
-    }
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, []);
-
   const handlePayment = async (amount) => {
     try {
       setLoading(true);
@@ -65,8 +25,9 @@ const CourseDetails = ({
         "https://cf-server-tr24.onrender.com/api/payphi/initiate",
         { amount }
       );
-      // Directly redirect the page instead of opening popup
-      window.location.href = `${data.redirectURI}?tranCtx=${data.tranCtx}`;
+
+      // Redirect with step query (last step = 3)
+      window.location.href = `${data.redirectURI}?tranCtx=${data.tranCtx}&step=3`;
     } catch (err) {
       console.error(err);
       alert("Payment init failed");
@@ -112,14 +73,8 @@ const CourseDetails = ({
         </button>
       </div>
 
-      {paymentStatus === "success" && (
-        <p className="text-green-600">
-          Payment Successful! You can now submit.
-        </p>
-      )}
-      {paymentStatus === "failed" && (
-        <p className="text-red-600">Payment Failed. Please try again.</p>
-      )}
+      {paymentStatus === "success" && <p className="text-green-600">Payment Successful! You can now submit.</p>}
+      {paymentStatus === "failed" && <p className="text-red-600">Payment Failed. Please try again.</p>}
     </div>
   );
 };
