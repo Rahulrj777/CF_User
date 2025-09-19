@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const CourseDetails = ({
@@ -7,7 +7,6 @@ const CourseDetails = ({
   paymentStatus,
   setPaymentStatus,
 }) => {
-  const [paymentStatus, setPaymentStatus] = useState(null); // null, 'success', 'failed'
   const [loading, setLoading] = useState(false);
   const handleCheckboxChange = (course) => {
     setFormData({ ...formData, courses: [course] });
@@ -63,14 +62,13 @@ const CourseDetails = ({
     try {
       setLoading(true);
       // call your backend to initiate PayPhi sale
-      const res = await axios.post(
+      const { data } = await axios.post(
         "https://cf-server-tr24.onrender.com/api/payphi/initiate",
         { amount }
       );
-      // open PayPhi payment page in a new tab instead of current window
-      // inside handlePayment
-      const popup = window.open(
-        `${res.data.redirectURI}?tranCtx=${res.data.tranCtx}`,
+
+      window.open(
+        `${data.redirectURI}?tranCtx=${data.tranCtx}`,
         "payphiWindow",
         "width=600,height=700"
       );
