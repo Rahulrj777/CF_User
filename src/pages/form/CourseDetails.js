@@ -19,7 +19,7 @@ const CourseDetails = ({ formData, setFormData }) => {
     "Photography",
   ];
 
-  // After PayPhi redirect back, check URL params for success
+  // After PayPhi redirect back, check URL params for success/fail
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("payment") === "success") {
@@ -37,8 +37,11 @@ const CourseDetails = ({ formData, setFormData }) => {
         "https://cf-server-tr24.onrender.com/api/payphi/initiate",
         { amount }
       );
-      // backend returns redirectURL+tranCtx
-      window.location.href = `${res.data.redirectURI}?tranCtx=${res.data.tranCtx}`;
+      // open PayPhi payment page in a new tab instead of current window
+      window.open(
+        `${res.data.redirectURI}?tranCtx=${res.data.tranCtx}`,
+        "_blank"
+      );
     } catch (err) {
       console.error(err);
       alert("Payment init failed");
