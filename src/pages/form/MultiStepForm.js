@@ -11,6 +11,8 @@ import CourseDetails from "./CourseDetails";
 
 const MultiStepForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [paymentStatus, setPaymentStatus] = useState(null);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -109,7 +111,12 @@ const MultiStepForm = () => {
     <PersonalDetails formData={formData} setFormData={setFormData} />,
     <AdditionalDetails formData={formData} setFormData={setFormData} />,
     <AddressDetails formData={formData} setFormData={setFormData} />,
-    <CourseDetails formData={formData} setFormData={setFormData} />,
+    <CourseDetails
+      formData={formData}
+      setFormData={setFormData}
+      paymentStatus={paymentStatus}
+      setPaymentStatus={setPaymentStatus}
+    />,
   ];
 
   return (
@@ -154,7 +161,12 @@ const MultiStepForm = () => {
             {currentStep === steps.length - 1 ? (
               <button
                 onClick={handleSubmit}
-                className="bg-green-500 text-white px-8 py-2 text-[12px] md:text-[14px] font-semibold uppercase rounded"
+                disabled={paymentStatus !== "success"} // 🚀 only enable after success
+                className={`px-8 py-2 text-[12px] md:text-[14px] font-semibold uppercase rounded ${
+                  paymentStatus === "success"
+                    ? "bg-green-500 text-white"
+                    : "bg-gray-400 text-gray-700 cursor-not-allowed"
+                }`}
               >
                 Submit
               </button>

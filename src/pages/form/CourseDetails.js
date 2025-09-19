@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const CourseDetails = ({ formData, setFormData }) => {
+const CourseDetails = ({
+  formData,
+  setFormData,
+  paymentStatus,
+  setPaymentStatus,
+}) => {
   const [paymentStatus, setPaymentStatus] = useState(null); // null, 'success', 'failed'
   const [loading, setLoading] = useState(false);
-
   const handleCheckboxChange = (course) => {
     setFormData({ ...formData, courses: [course] });
   };
@@ -23,13 +27,12 @@ const CourseDetails = ({ formData, setFormData }) => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("payment") === "success") {
-      // notify opener if in a popup
       if (window.opener) {
         window.opener.postMessage(
           { type: "PAYMENT_STATUS", status: "success" },
           "*"
         );
-        window.close(); // close popup itself
+        window.close();
       } else {
         setPaymentStatus("success");
       }
@@ -124,7 +127,7 @@ const CourseDetails = ({ formData, setFormData }) => {
       {paymentStatus === "failed" && (
         <p className="text-red-600">Payment Failed. Please try again.</p>
       )}
-      
+
       <button
         type="submit"
         disabled={paymentStatus !== "success"}
