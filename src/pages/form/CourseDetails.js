@@ -61,17 +61,12 @@ const CourseDetails = ({
   const handlePayment = async (amount) => {
     try {
       setLoading(true);
-      // call your backend to initiate PayPhi sale
       const { data } = await axios.post(
         "https://cf-server-tr24.onrender.com/api/payphi/initiate",
         { amount }
       );
-
-      window.open(
-        `${data.redirectURI}?tranCtx=${data.tranCtx}`,
-        "payphiWindow",
-        "width=600,height=700"
-      );
+      // Directly redirect the page instead of opening popup
+      window.location.href = `${data.redirectURI}?tranCtx=${data.tranCtx}`;
     } catch (err) {
       console.error(err);
       alert("Payment init failed");
@@ -125,18 +120,6 @@ const CourseDetails = ({
       {paymentStatus === "failed" && (
         <p className="text-red-600">Payment Failed. Please try again.</p>
       )}
-
-      <button
-        type="submit"
-        disabled={paymentStatus !== "success"}
-        className={`mt-4 px-4 py-2 rounded ${
-          paymentStatus === "success"
-            ? "bg-indigo-600 text-white"
-            : "bg-gray-400 text-gray-700 cursor-not-allowed"
-        }`}
-      >
-        Submit Form
-      </button>
     </div>
   );
 };
