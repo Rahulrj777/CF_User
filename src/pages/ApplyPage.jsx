@@ -7,6 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 const ApplyPage = () => {
   const [loading, setLoading] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState(null);
+  const [currentStep, setCurrentStep] = useState(0); // ✅ must be declared
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
