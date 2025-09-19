@@ -27,11 +27,10 @@ const ApplyPage = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const payment = params.get("payment");
+    const payment = params.get("payment"); // success or failed
     if (payment) {
-      setPaymentStatus(payment); // success / failed
-      setCurrentStep(3); // move to Course/Payment step
-      window.history.replaceState({}, document.title, "/apply"); // remove query
+      setPaymentStatus(payment); // update state
+      setCurrentStep(3); // go to last step
     }
   }, []);
 
@@ -270,7 +269,7 @@ const ApplyPage = () => {
       {/* Submit */}
       <button
         onClick={handleSubmit}
-        disabled={paymentStatus !== "success"}
+        disabled={paymentStatus !== "success"} // only enabled if success
         className={`mt-6 px-6 py-2 rounded ${
           paymentStatus === "success"
             ? "bg-black text-white"
