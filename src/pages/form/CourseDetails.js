@@ -23,10 +23,37 @@ const CourseDetails = ({ formData, setFormData }) => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("payment") === "success") {
-      setPaymentStatus("success");
+      // notify opener if in a popup
+      if (window.opener) {
+        window.opener.postMessage(
+          { type: "PAYMENT_STATUS", status: "success" },
+          "*"
+        );
+        window.close(); // close popup itself
+      } else {
+        setPaymentStatus("success");
+      }
     } else if (params.get("payment") === "failed") {
-      setPaymentStatus("failed");
+      if (window.opener) {
+        window.opener.postMessage(
+          { type: "PAYMENT_STATUS", status: "failed" },
+          "*"
+        );
+        window.close();
+      } else {
+        setPaymentStatus("failed");
+      }
     }
+  }, []);
+
+  useEffect(() => {
+    function handleMessage(event) {
+      if (event.data.type === "PAYMENT_STATUS") {
+        setPaymentStatus(event.data.status);
+      }
+    }
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
   }, []);
 
   const handlePayment = async (amount) => {
@@ -38,9 +65,11 @@ const CourseDetails = ({ formData, setFormData }) => {
         { amount }
       );
       // open PayPhi payment page in a new tab instead of current window
-      window.open(
+      // inside handlePayment
+      const popup = window.open(
         `${res.data.redirectURI}?tranCtx=${res.data.tranCtx}`,
-        "_blank"
+        "payphiWindow",
+        "width=600,height=700"
       );
     } catch (err) {
       console.error(err);
@@ -95,7 +124,7 @@ const CourseDetails = ({ formData, setFormData }) => {
       {paymentStatus === "failed" && (
         <p className="text-red-600">Payment Failed. Please try again.</p>
       )}
-
+      
       <button
         type="submit"
         disabled={paymentStatus !== "success"}
