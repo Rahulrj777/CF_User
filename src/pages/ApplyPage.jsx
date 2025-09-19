@@ -27,14 +27,10 @@ const ApplyPage = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    let payment = params.get("payment"); // "success" or "failed"
-
-    // Force test mode to success if needed
-    if (payment === "TEST") payment = "success";
-
+    const payment = params.get("payment"); // success or failed
     if (payment) {
       setPaymentStatus(payment); // update state
-      setCurrentStep(3); // go directly to CourseDetails step
+      setCurrentStep(3); // go to last step
     }
   }, []);
 
@@ -273,7 +269,7 @@ const ApplyPage = () => {
       {/* Submit */}
       <button
         onClick={handleSubmit}
-        disabled={paymentStatus !== "success"} // 🚀 enabled only on success
+        disabled={paymentStatus !== "success"} // only enabled if success
         className={`mt-6 px-6 py-2 rounded ${
           paymentStatus === "success"
             ? "bg-black text-white"
